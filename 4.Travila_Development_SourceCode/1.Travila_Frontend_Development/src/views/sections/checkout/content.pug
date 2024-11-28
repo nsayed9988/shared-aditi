@@ -1,0 +1,109 @@
+section.section-box.box-become-video.background-body
+    .container        
+        .text-center                
+            h2.mt-15.mb-15.neutral-1000.wow.fadeInUp Checkout
+        .row 
+            .col-12 
+                h5.mb-30.neutral-1000 Billing Details
+        .row
+            .col-lg-7.col-md-12                 
+                form.p-5.border.rounded-2(action="#")
+                    .form-contact 
+                        .row 
+                            .col-lg-6
+                                .form-group 
+                                    label.text-sm-medium.neutral-1000 First Name
+                                    input.form-control.username(type="text", placeholder="First Name")
+                            .col-lg-6
+                                .form-group 
+                                    label.text-sm-medium.neutral-1000 Last Name
+                                    input.form-control.username(type="text", placeholder="Last Name")
+                            .col-lg-6
+                                .form-group 
+                                    label.text-sm-medium.neutral-1000 Email Adress
+                                    input.form-control.email(type="email", placeholder="email@domain.com")
+                            .col-lg-6
+                                .form-group 
+                                    label.text-sm-medium.neutral-1000 Phone Number
+                                    input.form-control.phone(type="text", placeholder="Phone number")
+                            .col-lg-12
+                                .form-group 
+                                    label.text-sm-medium.neutral-1000 Address *
+                                    input.form-control.address(type="text", placeholder="123 Maple Street, Apartment 5B, New York, NY 10001, USA")
+                            .col-lg-12
+                                .form-group 
+                                    label.text-sm-medium.neutral-1000 Address 2 *
+                                    input.form-control.address(type="text", placeholder="...")
+                            .col-lg-6
+                                .form-group 
+                                    label.text-sm-medium.neutral-1000 City *
+                                    input.form-control.address(type="text", placeholder="New York")
+                            .col-lg-6
+                                .form-group 
+                                    label.text-sm-medium.neutral-1000 Zip code *
+                                    input.form-control.zipcode(type="text", placeholder="6700")
+                            .col-lg-12
+                                .form-group 
+                                    label.text-sm-medium.neutral-1000 Your Message
+                                    textarea.form-control(rows="6", placeholder="Leave us a message...")
+                            .box-payment-method.mt-20.pt-20.border-top.border-bottom.mb-20.pb-20.neutral-1000
+                                p.text-lg.fw-bold.mb-15   
+                                    | Payment Method
+                                .form-check
+                                    input#flexRadioDefault1.form-check-input(type='radio' name='flexRadioDefault')
+                                    label.form-check-label(for='flexRadioDefault1')
+                                        | Book Now Pay Later
+                                .form-check
+                                    input#flexRadioDefault2.form-check-input(type='radio' name='flexRadioDefault' checked='')
+                                    label.form-check-label(for='flexRadioDefault2')
+                                        | Paypal
+                                .form-check
+                                    input#flexRadioDefault2.form-check-input(type='radio' name='flexRadioDefault' checked='')
+                                    label.form-check-label(for='flexRadioDefault2')
+                                        | Direct Bank Transfer
+                                .form-check
+                                    input#flexRadioDefault2.form-check-input(type='radio' name='flexRadioDefault' checked='')
+                                    label.form-check-label(for='flexRadioDefault2')
+                                        | Check Payments
+                            .box-remember-forgot.pt-30    
+                                .form-group 
+                                    .remeber-me
+                                        label.text-sm-medium.neutral-500 
+                                            input.cb-remember(type="checkbox")
+                                            | Check the box to confirm you've read and agree 
+                                            a.text-sm-bold(href="term.html") Terms of service 
+                                            | and 
+                                            a.text-sm-bold(href="privacy.html") Privacy Policy
+                            .col-lg-12 
+                                button.btn.btn-book Send message
+                                    svg(width='17', height='16', viewbox='0 0 17 16', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                        path(d='M8.5 15L15.5 8L8.5 1M15.5 8L1.5 8', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+            .col-lg-5.col-md-12
+                .pl-30.pl-sm-0
+                    .p-5.border.rounded-2.neutral-1000
+                        h6.mb-20.text-start.neutral-1000 Booking Summary
+                        .background-3.p-3.rounded-2.mb-30 
+                            p.mb-10.fw-bold California Sunset/Twilight Boat Cruise
+                            p.mb-10.text-sm-medium.neutral-400 7 days 6 nights - Small group
+                            p.mb-10.text-sm-medium.neutral-400 Trip code: Travila-2024-985EN
+                        .mt-15.pb-15.border-bottom 
+                            .d-flex.w-100.justify-content-between 
+                                p 02 Adult
+                                p $3000
+                        .mt-15.pb-15.border-bottom
+                            .d-flex.w-100.justify-content-between  
+                                p 02 Adult
+                                p $3000
+                        .mt-15.pb-15.border-bottom
+                            .d-flex.w-100.justify-content-between 
+                                p 02 Adult
+                                p $3000
+                        .mt-15
+                            p.fw-bold.text-lg.text-end Subtotal: $5200
+                        .mt-15.pb-15 
+                            p.fw-bold.text-lg.text-end Sale discount: -$500
+                        .border-top.mt-15.pt-20 
+                            p.fw-bold.text-lg.text-end Total Payable: $4700
+
+
+

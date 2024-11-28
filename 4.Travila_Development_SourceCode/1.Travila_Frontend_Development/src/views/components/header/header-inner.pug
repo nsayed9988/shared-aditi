@@ -1,0 +1,59 @@
+.top-bar 
+    .container-fluid 
+        .text-header 
+            .text-unlock.text-sm-bold Unlock the Magic of Travel with Travila - Your Gateway to Extraordinary Experiences
+            a.link-secondary-2(href="#") Get This Now 
+                svg(xmlns='http://www.w3.org/2000/svg', width='16', height='16', viewbox='0 0 16 16', fill='none')
+                    path(d='M7.99992 12.6666L12.6666 7.99992L7.99992 3.33325M12.6666 7.99992L3.33325 7.99992', stroke='white', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+
+.container-fluid.background-body
+    .main-header
+        .header-left
+            .header-logo
+                a.d-flex(href='index.html')
+                    img.light-mode(alt='Travila', src='assets/imgs/template/logo.svg')
+                    img.dark-mode(alt='Travila', src='assets/imgs/template/logo-w.svg')
+            .header-nav
+                include ../../components/main-menu.pug
+        .header-right
+            .d-none.d-xxl-inline-block.box-dropdown-cart.align-middle.mr-15
+                span.text-14-medium.icon-list.icon-account.icon-lang
+                    span.text-14-medium.arrow-down EN
+                .dropdown-account
+                    ul
+                        li
+                            a.text-sm-medium(href='#')
+                                | English
+                        li
+                            a.text-sm-medium(href='#')
+                                | French
+                        li
+                            a.text-sm-medium(href='#')
+                                | Chiness
+
+            .d-none.d-xxl-inline-block.box-dropdown-cart.align-middle.mr-15
+                span.text-14-medium.icon-list.icon-cart
+                    span.text-14-medium.arrow-down USD
+                .dropdown-cart
+                    ul
+                        li
+                            a.text-sm-medium(href='#')
+                                | USD
+                        li
+                            a.text-sm-medium(href='#')
+                                | EUR
+                        li
+                            a.text-sm-medium(href='#')
+                                | SGP
+            .d-none.d-xxl-inline-block.align-middle.mr-15
+                a.btn.btn-mode.change-mode.mr-15(href="#", data-bs-theme-value="dark") 
+                    img.light-mode(src="assets/imgs/template/icons/light.svg", alt="Travila")
+                    img.dark-mode(src="assets/imgs/template/icons/light-w.svg", alt="Travila")
+                a.btn.btn-default.btn-signin(href="#") Signin
+            
+            .burger-icon-2.burger-icon-white
+                img(src="assets/imgs/template/icons/menu.svg", alt="Travila")
+            .burger-icon.burger-icon-white
+                span.burger-icon-top
+                span.burger-icon-mid
+                span.burger-icon-bottom

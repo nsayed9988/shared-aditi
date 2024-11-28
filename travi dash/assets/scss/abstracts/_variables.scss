@@ -1,0 +1,158 @@
+//1.FONT
+@import url(https://fonts.bunny.net/css?family=manrope:400,500,700,800|merienda-one:400);
+$font-heading: 'Manrope', sans-serif;
+$font-text: 'Manrope', sans-serif;
+$font-text: 'Manrope', sans-serif;
+$font-manrope: 'Manrope', sans-serif;
+$font-3xs: 10px;
+$font-xxs: 10px;
+$font-xs: 12px;
+$font-sm: 14px;
+$font-md: 16px;
+$font-md-2: 15px;
+$font-lg: 18px;
+$font-xl: 20px;
+$font-2xl: 22px;
+$font-3xl: 56px;
+//2.COLOR
+$color-brand: #000000;
+$color-brand-2: #f09814;
+$color-white: #ffffff;
+$color-green: #85FF83;
+$color-text-paragraph: #4F5E64;
+$color-text-paragraph-2: #66789C;
+$color-text-mutted: #A0ABB8;
+$color-border-1: #B4C0E0;
+$color-border-2: #E0E6F7;
+$color-border-3: #EFF2FB;
+$color-gray: #EAF2FF;
+$color-black-1: #253D4E;
+$color-red: #E45959;
+$brand-primary: #000000;
+$brand-secondary: #FEFA17;
+$neutral-0: #FFFFFF;
+$neutral-50: #FBFBFB;
+$neutral-100: #F2F4F6;
+$neutral-200: #E4E6E8;
+$neutral-300: #D6D7D8;
+$neutral-400: #8E8E8E;
+$neutral-500: #737373;
+$neutral-600: #575756;
+$neutral-700: #4D4D4D;
+$neutral-800: #454545;
+$neutral-900: #313131;
+$neutral-1000: #000000;
+$button-bg: #000000;
+$button-bg-2: #F2F4F6;
+$button-text: #F2F4F6;
+$button-text-2: #000000;
+$button-bg-dark: #313131;
+$button-bg-2-dark: #222222;
+$button-text-dark: #EDEDED;
+$button-text-2-dark: #AFAFAF;
+$neutral-0-dark: #000000;
+$neutral-50-dark: #1E1E1E;
+$neutral-100-dark: #313131;
+$neutral-200-dark: #454545;
+$neutral-300-dark: #4D4D4D;
+$neutral-400-dark: #575756;
+$neutral-500-dark: #737373;
+$neutral-600-dark: #8E8E8E;
+$neutral-700-dark: #D6D7D8;
+$neutral-800-dark: #E4E6E8;
+$neutral-900-dark: #f2f4f6;
+$neutral-1000-dark: #f2f2f2;
+$brand-primary-dark: #ffffff;
+$brand-secondary-dark: #FEFA17;
+$warning: #F09814;
+$success: #3DC262;
+$danger: #D63E29;
+$border: #E4E6E8;
+$border-dark: #313131;
+$brand-1: #8ACFFF;
+$color-grey: #AFAFAF;
+$color-1: #22D1EE;
+$color-2: #C5FF41;
+$color-grey-2: #F0F0F0;
+$color-black: #000000;
+$neutral-950: #1E1E1E;
+$brand-1-1: #52B8AA;
+$brand-2: #9761DC;
+$brand-3: #52B8AA;
+$brand-4: #C5FF41;
+$brand-5: #3B4725;
+//3.Boxshadow
+$box-shadow-1: 0px 18px 40px rgba(25, 15, 9, 0.1);
+// JB
+$box-shadow-2: 0px 10px 20px -5px rgba(10, 42, 105, 0.06);
+$box-shadow-3: 0px 37px 60px -15px rgba(50, 59, 79, 0.1);
+$box-shadow-4: 0px 10px 20px -5px rgba(6, 36, 92, 0.06);
+// JB
+$drop-shadow: 0px 2px 4px -5px rgba(10, 42, 105, 1);
+//4. Border
+$border-color: #E0E6F6;
+$border-color-1-hover: #B4C0E0;
+$border-color-1: rgba(6, 18, 36, 0.1);
+$border-color-3: rgba(26, 15, 9, 0.1);
+$border-color-4: rgba(26, 15, 9, 0.1);
+$border-color-5: rgba(165, 165, 165, 1);
+//5. Background
+$background-white: #ffffff;
+$background-body: #ffffff;
+$background-1: #FFF0EC;
+$background-2: #E4F9F9;
+$background-3: #E3F0FF;
+$background-4: #EFEFEB;
+$background-bg-1:#FFF0EC;
+$background-5: #FFEC88;
+$background-6: #9DD3FB;
+$background-7: #FCF2FA;
+$background-8: #F6F3FC;
+$background-9: #FCFCF3;
+$background-10: #A8BAF9;
+$background-11: #D4F6C0;
+$background-12: #A8E2EF;
+$background-13: #8CD8E9;
+$background-14: #ECFDF3;
+$background-15: #FDF9EC;
+$background-16: #FDEFEC;
+$background-card: #FFFFFF;
+$background-card-dark: #191919;
+$background-body-dark: #171717;
+$background-1-dark: #242120;
+$background-2-dark: #111515;
+$background-3-dark: #1d2024;
+$background-4-dark: #242226;
+$background-5-dark: #FFDC88;
+$background-6-dark: #93DCED;
+$background-7-dark: #1E1C1D;
+$background-8-dark: #121D20;
+$background-9-dark: #212114;
+$background-14-dark: #303D35;
+$background-15-dark: #494431;
+$background-16-dark: #413633;
+$background-green: #3AAB67;
+$background-orange: #F58A3C;
+$background-pink: #D159E4;
+$background-urgent: #FFF6F1;
+$background-17: #F2F4FA;
+$background-brand: #9777fa;
+$background-head-single: #FFF9F3;
+$background-blue-light-2: #E9F7FF;
+$background-primary-trans: rgba(81, 146, 255, 0.3);
+$background-primary: rgba(81, 146, 255, 1);
+$background-grey: rgba(186, 186, 186, 0.3);
+$background-success: #00c070;
+// 6. text-shadow
+$text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+// 7. breakpoints
+$grid-breakpoints: (
+    xs: 0,
+    xxs: 375px,
+    xsm: 485px,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
+);

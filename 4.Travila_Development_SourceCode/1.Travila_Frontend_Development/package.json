@@ -1,0 +1,24 @@
+{
+  "name": "travila-development",
+  "version": "1.0.0",
+  "description": "Gulp development tasks",
+  "author": "alithemes.com",
+  "license": "ISC",
+  "scripts": {
+    "dev": "gulp serve",
+    "build": "gulp"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.29.3",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-pug": "^5.0.0",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.62.1"
+  },
+  "dependencies": {
+    "gulp-cached": "^1.1.1"
+  }
+}

@@ -1,0 +1,45 @@
+section.section-box.box-login-page
+    .container
+        h5.neutral-1000.mb-30 Create New Account
+        .row 
+            .col-lg-5 
+                .box-button-logins 
+                    a.btn.btn-login.btn-google.mr-10(href="#")
+                        img(src="assets/imgs/page/profile/google.svg", alt="Travila")
+                        span.text-sm-bold Sign up with Google
+                    a.btn.btn-login.mr-10(href="#")
+                        img(src="assets/imgs/page/profile/facebook.svg", alt="Travila")
+                    a.btn.btn-login(href="#")
+                        img(src="assets/imgs/page/profile/apple.svg", alt="Travila")
+                .form-login 
+                    form(action="#")
+                        .form-group 
+                            label.text-sm-medium Username *
+                            input.form-control.username(type="text", placeholder="Email / Username")
+                        .form-group 
+                            label.text-sm-medium Your email *
+                            input.form-control.email(type="text", placeholder="Email / Username")
+                        .row 
+                            .col-sm-6
+                                .form-group 
+                                    label.text-sm-medium Password *
+                                    input.form-control.password(type="password", placeholder="***********")
+                            .col-sm-6
+                                .form-group 
+                                    label.text-sm-medium Confirm Password *
+                                    input.form-control.password(type="password", placeholder="***********")
+                        .form-group 
+                            .box-remember-forgot    
+                                .remeber-me
+                                    .text-xs-medium.neutral-500 
+                                        input.cb-remember(type="checkbox")
+                                        | I agree to term and conditions
+                        .form-group.mt-45.mb-30 
+                            a.btn.btn-black-lg(href="#") Create New Account 
+                                svg(width='16', height='16', viewbox='0 0 16 16', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                    path(d='M8 15L15 8L8 1M15 8L1 8', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                        p.text-sm-medium.neutral-500 Already have an account  
+                            a.neutral-1000.btn-signin(href="login.html") Login Here !
+            .col-lg-7.text-center.text-lg-end 
+                img(src="assets/imgs/page/profile/register.png", alt="Travilla") 
+                

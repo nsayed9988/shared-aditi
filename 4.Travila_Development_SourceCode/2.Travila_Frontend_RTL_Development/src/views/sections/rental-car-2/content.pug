@@ -1,0 +1,166 @@
+section.box-section.block-content-tourlist.background-body
+    .container 
+        .box-content-main.pt-40
+            .content-right
+                include ../../elements/box-filters.pug
+
+                .box-grid-tours.wow.fadeIn
+                    .row
+                        -
+                            const recentLists = [
+                                {
+                                    image: "assets/imgs/page/car/car.png",
+                                    title: 'California Sunset/Twilight Boat Cruise ',
+                                    location: 'Manchester, England',
+                                    price: '$48.25',
+                                    link: 'rental-detail.html'
+
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car2.png",
+                                    title: 'NYC: Food Tastings and Culture Tour',
+                                    location: 'Manchester, England',
+                                    price: '$17.32',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car3.png",
+                                    title: 'Grand Canyon Horseshoe Bend  2 days',
+                                    location: 'Manchester, England',
+                                    price: '$15.63',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car4.png",
+                                    title: 'California Sunset/Twilight Boat Cruise ',
+                                    location: 'Manchester, England',
+                                    price: '$48.25',
+                                    link: 'rental-detail.html'
+
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car5.png",
+                                    title: 'NYC: Food Tastings and Culture Tour',
+                                    location: 'Manchester, England',
+                                    price: '$17.32',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car6.png",
+                                    title: 'Grand Canyon Horseshoe Bend  2 days',
+                                    location: 'Manchester, England',
+                                    price: '$15.63',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car7.png",
+                                    title: 'California Sunset/Twilight Boat Cruise ',
+                                    location: 'Manchester, England',
+                                    price: '$48.25',
+                                    link: 'rental-detail.html'
+
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car8.png",
+                                    title: 'NYC: Food Tastings and Culture Tour',
+                                    location: 'Manchester, England',
+                                    price: '$17.32',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car9.png",
+                                    title: 'Grand Canyon Horseshoe Bend  2 days',
+                                    location: 'Manchester, England',
+                                    price: '$15.63',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car10.png",
+                                    title: 'California Sunset/Twilight Boat Cruise ',
+                                    location: 'Manchester, England',
+                                    price: '$48.25',
+                                    link: 'rental-detail.html'
+
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car11.png",
+                                    title: 'NYC: Food Tastings and Culture Tour',
+                                    location: 'Manchester, England',
+                                    price: '$17.32',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car12.png",
+                                    title: 'Grand Canyon Horseshoe Bend  2 days',
+                                    location: 'Manchester, England',
+                                    price: '$15.63',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car12.png",
+                                    title: 'Grand Canyon Horseshoe Bend  2 days',
+                                    location: 'Manchester, England',
+                                    price: '$15.63',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car10.png",
+                                    title: 'California Sunset/Twilight Boat Cruise ',
+                                    location: 'Manchester, England',
+                                    price: '$48.25',
+                                    link: 'rental-detail.html'
+
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car11.png",
+                                    title: 'NYC: Food Tastings and Culture Tour',
+                                    location: 'Manchester, England',
+                                    price: '$17.32',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/car/car12.png",
+                                    title: 'Grand Canyon Horseshoe Bend  2 days',
+                                    location: 'Manchester, England',
+                                    price: '$15.63',
+                                    link: 'rental-detail.html'
+                                }
+                            ]
+                        each item in recentLists
+                            .col-lg-3.col-md-6.wow.fadeInUp  
+                                .card-journey-small.card-grid-car.background-card 
+                                    .card-image 
+                                        a.wish(href="#")
+                                            svg(width='20', height='18', viewbox='0 0 20 18', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                path(d='M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                                        a(href= item.link)
+                                            img(src= item.image, alt="Travila")
+                                    .card-info 
+                                        .card-rating 
+                                            .card-left 
+                                            .card-right 
+                                                span.rating 4.96 
+                                                    span.text-sm-medium.neutral-500 (672 reviews)
+
+                                        .card-title 
+                                            a.text-lg-bold.neutral-1000(href= item.link)= item.title 
+                                        .card-program 
+                                            .card-location 
+                                                p.text-location.text-sm-medium.neutral-500= item.location
+                                            .card-facilities 
+                                                .item-facilities 
+                                                    p.speed.text-md-medium.neutral-1000 25,100 miles
+                                                .item-facilities 
+                                                    p.gear.text-md-medium.neutral-1000 Automatic
+                                                .item-facilities 
+                                                    p.fuel.text-md-medium.neutral-1000 Diesel
+                                                .item-facilities 
+                                                    p.seats.text-md-medium.neutral-1000 7 seats
+                                            .endtime 
+                                                .card-price 
+                                                    h6.heading-6.neutral-1000= item.price
+                                                    p.text-md-medium.neutral-500.ml-10 / day
+                                                .card-button 
+                                                    a.btn.btn-gray(href="rental-detail.html") Book Now
+
+                include ../../elements/pagination.pug

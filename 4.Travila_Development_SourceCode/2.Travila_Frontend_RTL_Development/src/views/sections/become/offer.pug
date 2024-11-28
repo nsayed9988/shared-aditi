@@ -1,0 +1,78 @@
+section.box-section.box-what-offer.background-body
+    .container 
+        h3 What we offer?
+        p.text-xl-medium.neutral-500 Just 4 easy and quick steps
+        .box-list-offers.mt-35.wow.fadeInUp
+            .row
+                -
+                    const itemSecuLists1 = [
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/pages/earth.png",
+                            title: 'Attractions & Tours',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/pages/tour.png",
+                            title: 'Group Tours',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+                        },
+                        {
+                            index: "3",
+                            image: "assets/imgs/page/pages/custom.png",
+                            title: 'Custom Trips',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+
+                        },
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/pages/car.png",
+                            title: 'Car Rentals',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/pages/local.png",
+                            title: 'Local Guides',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+                        },
+                        {
+                            index: "3",
+                            image: "assets/imgs/page/pages/themed.png",
+                            title: 'Themed Tours',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+
+                        },
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/pages/ride.png",
+                            title: 'Ride hailing',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/pages/visas.png",
+                            title: 'Visas',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+                        }
+                    ]
+                each item in itemSecuLists1
+                    .col-lg-3.col-md-6
+                        .card-why-travel.card-business.background-card.wow.fadeInUp
+                            .card-image 
+                                img(src= item.image, alt="Travila")
+                            .card-info 
+                                a.text-xl-bold.card-title(href= item.link)= item.title
+                                p.text-sm-medium.neutral-500.card-desc= item.desc
+                                a.text-sm-medium.card-link(href= item.link) Learn More 
+                                    svg(width='11', height='10', viewbox='0 0 11 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                        path(d='M5.50011 9.08347L9.58347 5.00011L5.50011 0.916748M9.58347 5.00011L1.41675 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')

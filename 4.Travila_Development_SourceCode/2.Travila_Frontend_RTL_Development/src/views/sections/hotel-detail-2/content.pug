@@ -1,0 +1,95 @@
+section.box-section.block-content-tourlist.background-body
+    .container 
+        .box-content-main-detail
+            .box-grid-hotels.box-list-hotels-detail.wow.fadeIn
+                -
+                    const itemLists = [
+                        {
+                            index: 1,
+                            image: "assets/imgs/page/hotel/hotelRoom.png",
+                            title: 'Deluxe Room - Ocean View',
+                            location: 'Suite 756 031 Ines Riverway, Rhiannonchester',
+                            price: '$48.25',
+                            link: 'room-detail.html'
+
+                        },
+                        {
+                            index: 2,
+                            image: "assets/imgs/page/hotel/hotelRoom2.png",
+                            title: 'Luxury Double Room',
+                            location: '09 Arnulfo Crossing, Botsfordborough',
+                            price: '$17.32',
+                            link: 'room-detail-2.html'
+                        },
+                        {
+                            index: 3,
+                            image: "assets/imgs/page/hotel/hotelRoom3.png",
+                            title: 'Luxury Single Room ',
+                            location: '74C Aaliyah River ,Bayerhaven',
+                            price: '$15.63',
+                            link: 'room-detail.html'
+                        },
+                        {
+                            index: 4,
+                            image: "assets/imgs/page/hotel/hotelRoom4.png",
+                            title: 'Luxury Honeymoon Room',
+                            location: '3 Bauch Nook, Howefort',
+                            price: '$35.62',
+                            link: 'room-detail-2.html'
+
+                        },
+                        {
+                            index: 5,
+                            image: "assets/imgs/page/hotel/hotelRoom5.png",
+                            title: 'Luxury Family Room ',
+                            location: '0 / 77 Purdy Crescent, West Arthur',
+                            price: '$17.32',
+                            link: 'room-detail.html'
+                        }
+                    ]
+                each item in itemLists
+                    .card-flight.card-hotel.background-card 
+                        .card-image 
+                            a.wish(href="#")
+                                svg(width='20', height='18', viewbox='0 0 20 18', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                    path(d='M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                            a(href= item.link)
+                                img(src= item.image, alt="Travila")
+                        .card-info 
+                            label.sale-lbl -25%
+                            .tour-rate 
+                                .rate-element
+                                    span.rating 4.96 
+                                        span.text-sm-medium.neutral-500 (672 reviews)
+                            .card-title 
+                                a.heading-6.neutral-1000(href= item.link)= item.title
+                            .card-hotel-2-col
+                                .card-program 
+                                    .card-tags 
+                                        a.btn.btn-tag-border(href="#") Air Dryer
+                                        a.btn.btn-tag-border(href="#") Air conditioning
+                                        a.btn.btn-tag-border(href="#") See view
+                                        a.btn.btn-tag-border(href="#") Pool
+                                    .card-facilities 
+                                        ul.list-tick-green 
+                                            li King Size Bed
+                                            li Safety Box
+                                            li Balcony
+                                            li 48 Inch TV
+                                            li Disable Access
+                                            li Pet Allowed
+                                    .card-hotel-desc 
+                                        p.text-md-medium.neutral-500 The dark wood paneling and furnishings, deluxe red-draped four-poster bed, and magnificent black stone bathroom. The intimate scale and finish give the room a distinctly personal feel.
+                                        
+                                .card-hotel-price 
+                                    .box-hotel-price 
+                                        p.price-throught.text-20-medium.neutral-500 $250
+                                        h4.price-main.neutral-1000 $195
+                                        p.text-md-medium.neutral-500 Per Night
+                                        .card-button 
+                                            a.btn.btn-gray(href="#") Book Now 
+                                                svg(width='16', height='16', viewbox='0 0 16 16', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                    path(d='M8 15L15 8L8 1M15 8L1 8', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+
+                .mb-70
+                include ../../elements/pagination.pug

@@ -1,0 +1,178 @@
+.section-box
+    .container 
+        .row 
+            .col-lg-7
+                .box-form-add 
+                    h5.neutral-1000.mb-12 General
+                    .box-border-bottom
+                        .row 
+                            .col-lg-12
+                                .form-group 
+                                    input.form-control(type="text", placeholder="Tour Name")
+                            .col-lg-4
+                                .form-group 
+                                    input.form-control(type="text", placeholder="Tour Type")
+                            .col-lg-4
+                                .form-group 
+                                    input.form-control(type="text", placeholder="Tour Activities")
+                            .col-lg-4
+                                .form-group 
+                                    input.form-control(type="text", placeholder="Tour Experience")
+                            .col-lg-12
+                                .form-group 
+                                    input.form-control(type="text", placeholder="Keywords")
+                            .col-lg-12
+                                .form-group 
+                                    textarea.form-control(placeholder="Your comment", rows="6")
+                            .col-lg-12
+                                .list-image-upload 
+                                    .box-upload-image
+                                        .item-upload-image 
+                                            input(type="file", name="file")
+                                            .upload-info
+                                                .icon-upload 
+                                                    svg(width='22', height='23', viewbox='0 0 22 23', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                        path(d='M8 10.25C6.48 10.25 5.25 9.02 5.25 7.5C5.25 5.98 6.48 4.75 8 4.75C9.52 4.75 10.75 5.98 10.75 7.5C10.75 9.02 9.52 10.25 8 10.25ZM8 6.25C7.31 6.25 6.75 6.81 6.75 7.5C6.75 8.19 7.31 8.75 8 8.75C8.69 8.75 9.25 8.19 9.25 7.5C9.25 6.81 8.69 6.25 8 6.25Z', fill='')
+                                                        path(d='M14 22.25H8C2.57 22.25 0.25 19.93 0.25 14.5V8.5C0.25 3.07 2.57 0.75 8 0.75H12C12.41 0.75 12.75 1.09 12.75 1.5C12.75 1.91 12.41 2.25 12 2.25H8C3.39 2.25 1.75 3.89 1.75 8.5V14.5C1.75 19.11 3.39 20.75 8 20.75H14C18.61 20.75 20.25 19.11 20.25 14.5V9.5C20.25 9.09 20.59 8.75 21 8.75C21.41 8.75 21.75 9.09 21.75 9.5V14.5C21.75 19.93 19.43 22.25 14 22.25Z', fill='')
+                                                        path(d='M17 8.24994C16.59 8.24994 16.25 7.90994 16.25 7.49994V1.49994C16.25 1.19994 16.43 0.919939 16.71 0.809939C16.99 0.699939 17.31 0.759939 17.53 0.969939L19.53 2.96994C19.82 3.25994 19.82 3.73994 19.53 4.02994C19.24 4.31994 18.76 4.31994 18.47 4.02994L17.75 3.30994V7.49994C17.75 7.90994 17.41 8.24994 17 8.24994Z', fill='')
+                                                        path(d='M14.9999 4.24994C14.8099 4.24994 14.6199 4.17994 14.4699 4.02994C14.1799 3.73994 14.1799 3.25994 14.4699 2.96994L16.4699 0.969941C16.7599 0.679941 17.2399 0.679941 17.5299 0.969941C17.8199 1.25994 17.8199 1.73994 17.5299 2.02994L15.5299 4.02994C15.3799 4.17994 15.1899 4.24994 14.9999 4.24994Z', fill='')
+                                                        path(d='M1.6698 19.2001C1.4298 19.2001 1.1898 19.0801 1.0498 18.8701C0.819805 18.5301 0.909805 18.0601 1.2498 17.8301L6.1798 14.5201C7.2598 13.8001 8.7498 13.8801 9.7298 14.7101L10.0598 15.0001C10.5598 15.4301 11.4098 15.4301 11.8998 15.0001L16.0598 11.4301C17.1198 10.5201 18.7898 10.5201 19.8598 11.4301L21.4898 12.8301C21.7998 13.1001 21.8398 13.5701 21.5698 13.8901C21.2998 14.2001 20.8198 14.2401 20.5098 13.9701L18.8798 12.5701C18.3798 12.1401 17.5398 12.1401 17.0398 12.5701L12.8798 16.1401C11.8198 17.0501 10.1498 17.0501 9.0798 16.1401L8.7498 15.8501C8.2898 15.4601 7.52981 15.4201 7.01981 15.7701L2.0998 19.0801C1.9598 19.1601 1.8098 19.2001 1.6698 19.2001Z', fill='')
+                                                .text-upload 
+                                                    p.text-sm-medium.neutral-500 Upload Image
+                                    .preview-images 
+                                        .list-preview
+                                            .image-preview 
+                                                .box-image-preview
+                                                    img(src="assets/imgs/page/add-tour/tour.png", alt="Travilla")
+                                                    a.btn-delete-image(href="#") 
+                                                        svg(width='16', height='16', viewbox='0 0 16 16', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                            path(d='M9.3335 7.33333V11.3333', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M6.6665 7.33333V11.3333', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M4 4.66667V12.6667C4 13.403 4.59695 14 5.33333 14H10.6667C11.403 14 12 13.403 12 12.6667V4.66667', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M2.6665 4.66667H13.3332', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M4.6665 4.66667L5.99984 2H9.99984L11.3332 4.66667', stroke='', stroke-linecap='round', stroke-linejoin='round') 
+                                            .image-preview 
+                                                .box-image-preview
+                                                    img(src="assets/imgs/page/add-tour/tour2.png", alt="Travilla")
+                                                    a.btn-delete-image(href="#") 
+                                                        svg(width='16', height='16', viewbox='0 0 16 16', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                            path(d='M9.3335 7.33333V11.3333', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M6.6665 7.33333V11.3333', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M4 4.66667V12.6667C4 13.403 4.59695 14 5.33333 14H10.6667C11.403 14 12 13.403 12 12.6667V4.66667', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M2.6665 4.66667H13.3332', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M4.6665 4.66667L5.99984 2H9.99984L11.3332 4.66667', stroke='', stroke-linecap='round', stroke-linejoin='round') 
+                                            .image-preview 
+                                                .box-image-preview
+                                                    img(src="assets/imgs/page/add-tour/tour3.png", alt="Travilla")
+                                                    a.btn-delete-image(href="#") 
+                                                        svg(width='16', height='16', viewbox='0 0 16 16', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                            path(d='M9.3335 7.33333V11.3333', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M6.6665 7.33333V11.3333', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M4 4.66667V12.6667C4 13.403 4.59695 14 5.33333 14H10.6667C11.403 14 12 13.403 12 12.6667V4.66667', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M2.6665 4.66667H13.3332', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                                            path(d='M4.6665 4.66667L5.99984 2H9.99984L11.3332 4.66667', stroke='', stroke-linecap='round', stroke-linejoin='round') 
+                    h5.neutral-1000.mb-12 Location
+                    .box-border-bottom
+                        .row 
+                            .col-lg-12
+                                .form-group 
+                                    input.form-control(type="text", placeholder="Country")
+                            .col-lg-4
+                                .form-group 
+                                    input.form-control(type="text", placeholder="Country")
+                            .col-lg-4
+                                .form-group 
+                                    input.form-control(type="text", placeholder="State")
+                            .col-lg-4
+                                .form-group 
+                                    input.form-control(type="text", placeholder="City")
+                            .col-lg-12
+                                .form-group 
+                                    input.form-control(type="text", placeholder="Address")
+                            .col-lg-12
+                                .form-group 
+                                    input.form-control(type="text", placeholder="Address 2")
+                            .col-lg-12
+                                .form-group 
+                                    .map-tour 
+                                        iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120835.65146929219!2d2.5873635107259836!3d47.992147406516835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5878d50e09eab%3A0x40b82c3688c4a20!2s77460%20Souppes-sur-Loing%2C%20Ph%C3%A1p!5e0!3m2!1svi!2s!4v1715095452879!5m2!1svi!2s', width='100%', height='363', style='border:0;', allowfullscreen='', loading='lazy', referrerpolicy='no-referrer-when-downgrade')
+                    .box-button-save 
+                        button.btn.btn-black Save Changes
+            .col-lg-5
+                .box-form-add 
+                    h5.neutral-1000.mb-12 Included/Excluded
+                    .row 
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Entry tickets
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Visit the Sung
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Entry tickets
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Swimming
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Tour guide
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Dinner
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Sunset party
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Breakfast
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Red wine, tea, fruit
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Alcohol drinks
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | French fries
+                        .col-lg-6 
+                            label.lbl-checkbox.text-md-medium.neutral-500 
+                                input(type="checkbox")
+                                | Massage & Spa
+                    .box-button-save.mt-15 
+                        button.btn.btn-gray Save Changes
+                .box-form-add 
+                    h5.neutral-1000.mb-12 Pricing
+                    .row 
+                        .col-lg-12
+                            .form-group 
+                                input.form-control(type="text", placeholder="Tour price ($)")
+                    p.text-md-bold.neutral-1000.mb-12 Extra Services
+                    .box-extra-services 
+                        .item-extra-service 
+                            .item-extra-1 
+                                input.form-control(type="text", placeholder="Service title 1")
+                            .item-extra-2 
+                                input.form-control(type="text", placeholder="Price ($)")
+                            .item-extra-3
+                                a.btn-remove(href="#")
+                                    svg(width='22', height='22', viewbox='0 0 22 22', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                        path(d='M12.7778 10.1111V15.4444', stroke='', stroke-width='1.33333', stroke-linecap='round', stroke-linejoin='round')
+                                        path(d='M9.22217 10.1111V15.4444', stroke='', stroke-width='1.33333', stroke-linecap='round', stroke-linejoin='round')
+                                        path(d='M5.66699 6.55556V17.2222C5.66699 18.2041 6.46293 19 7.44477 19H14.5559C15.5377 19 16.3337 18.2041 16.3337 17.2222V6.55556', stroke='', stroke-width='1.33333', stroke-linecap='round', stroke-linejoin='round')
+                                        path(d='M3.88916 6.55556H18.1114', stroke='', stroke-width='1.33333', stroke-linecap='round', stroke-linejoin='round')
+                                        path(d='M6.55566 6.55556L8.33344 3H13.6668L15.4446 6.55556', stroke='', stroke-width='1.33333', stroke-linecap='round', stroke-linejoin='round')
+                    a.btn.btn-addmore(href="#") Add More
+                    .box-button-save.mt-35 
+                        button.btn.btn-gray Save Changes

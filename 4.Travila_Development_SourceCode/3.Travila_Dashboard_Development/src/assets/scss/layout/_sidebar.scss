@@ -1,0 +1,39 @@
+
+.sidebar-border-bg {
+    border: 1px solid $color-border-2;
+    padding: 30px 40px 260px 40px;
+    border-radius: 4px;
+    margin-bottom: 40px;
+    .text-grey {
+        color: $color-border-1;
+        font-size: 24px;
+        line-height: 37px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: block;
+    }
+    .text-hiring {
+        color: $color-text-paragraph-2;
+        font-size: 36px;
+        font-weight: 800;
+        line-height: 57px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-top: -15px;
+    }
+}
+
+.nav {
+    display: inline-block !important;
+}
+.btn-expanded {
+    background: $background-white url(../imgs/template/icons/burger.svg) no-repeat center;
+    height: 42px;
+    width: 42px;
+    position: relative;
+    padding: 0px;
+}
+.btn-collapsed {
+    background: $background-white url(../imgs/template/icons/burger.svg) no-repeat center;
+}

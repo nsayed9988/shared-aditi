@@ -1,0 +1,109 @@
+section.section-box.box-recommended-for-you.background-body
+    .container
+        .text-center.wow.fadeInUp 
+            h2.neutral-1000 Recommended For You
+            p.text-xl-medium.neutral-500.mb-60 The best booking platform you can trust
+        .box-list-featured.wow.fadeIn
+            .row
+                -
+                    const itemLists = [
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/homepage1/journey2.png",
+                            title: 'California Sunset/Twilight Boat Cruise ',
+                            duration: '2 days 3 nights',
+                            passenger: '4-6 guest',
+                            price: '$48.25',
+                            link: 'tour-detail-3.html'
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/homepage1/journey3.png",
+                            title: 'NYC: Food Tastings and Culture Tour',
+                            duration: '3 days 3 nights',
+                            passenger: '4-6 guest',
+                            price: '$17.32',
+                            link: 'tour-detail-3.html'
+                        },
+                        {
+                            index: "3",
+                            image: "assets/imgs/page/homepage1/journey4.png",
+                            title: 'Grand Canyon Horseshoe Bend  2 days',
+                            duration: '7 days 6 nights',
+                            passenger: '4-6 guest',
+                            price: '$15.63',
+                            link: 'tour-detail-3.html'
+                        },
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/homepage1/journey2.png",
+                            title: 'California Sunset/Twilight Boat Cruise ',
+                            duration: '2 days 3 nights',
+                            passenger: '4-6 guest',
+                            price: '$48.25',
+                            link: 'tour-detail-3.html'
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/homepage1/journey3.png",
+                            title: 'NYC: Food Tastings and Culture Tour',
+                            duration: '3 days 3 nights',
+                            passenger: '4-6 guest',
+                            price: '$17.32',
+                            link: 'tour-detail-3.html'
+                        },
+                        {
+                            index: "3",
+                            image: "assets/imgs/page/homepage1/journey4.png",
+                            title: 'Grand Canyon Horseshoe Bend  2 days',
+                            duration: '7 days 6 nights',
+                            passenger: '4-6 guest',
+                            price: '$15.63',
+                            link: 'tour-detail-3.html'
+                        }
+                    ]
+                each item in itemLists
+                    .col-lg-4.col-md-6
+                        .card-journey-small.background-card 
+                            .card-image 
+                                if item.index == "1"
+                                    a.label(href="#") Top Rated
+                                else if item.index == "2"
+                                    a.label.bestsale(href="#") Best Sale
+                                else 
+                                    a.label.saleoff(href="#") 25% Off
+                                a.wish(href="#")
+                                    svg(width='20', height='18', viewbox='0 0 20 18', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                        path(d='M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                                img(src= item.image, alt="Travila")
+                            .card-info.background-card 
+                                .card-rating 
+                                    .card-left 
+                                    .card-right 
+                                        span.rating 4.96 
+                                            span.text-sm-medium.neutral-500 (672 reviews)
+                                .card-title 
+                                    a.heading-6.neutral-1000(href= item.link)= item.title 
+                                .card-program 
+                                    .card-duration-tour 
+                                        p.icon-duration.text-md-medium.neutral-500= item.duration
+                                        p.icon-guest.text-md-medium.neutral-500= item.passenger
+                                    .endtime 
+                                        .card-price 
+                                            h6.heading-6.neutral-1000= item.price
+                                            p.text-md-medium.neutral-500 / person
+                                        .card-button 
+                                            a.btn.btn-gray(href="tour-detail-3.html") Book Now
+                .d-flex.justify-content-center
+                    a.btn.btn-black-lg(href="tour-grid-2.html") 
+                        svg.first(width='25', height='24', viewbox='0 0 25 24', fill='none', xmlns='http://www.w3.org/2000/svg')
+                            path(d='M4.5 4H6.5V6H4.5V4Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M4.5 18H6.5V20H4.5V18Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M18.5 4H20.5V6H18.5V4Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M18.5 11H20.5V13H18.5V11Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M11.5 11H13.5V13H11.5V11Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M4.5 11H6.5V13H4.5V11Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M11.5 4H13.5V6H11.5V4Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M11.5 18H13.5V20H11.5V18Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                            path(d='M18.5 18H20.5V20H18.5V18Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                        | Load More Tours

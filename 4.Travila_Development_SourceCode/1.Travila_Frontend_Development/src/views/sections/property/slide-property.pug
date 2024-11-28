@@ -1,0 +1,63 @@
+section.section-box.box-slide-property.background-body
+    .container-fluid 
+        .box-slide-property-inner
+            .box-swiper
+                .swiper-container.swiper-group-6
+                    .swiper-wrapper
+                        -
+                            const item2Lists = [
+                                {
+                                    image: "assets/imgs/page/homepage6/destination.png",
+                                    title: 'Condominiums',
+                                    link: 'rental-property-2.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/homepage6/destination2.png",
+                                    title: 'Townhouses',
+                                    link: 'rental-property-2.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/homepage6/destination3.png",
+                                    title: 'Office Spaces',
+                                    link: 'rental-property-2.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/homepage6/destination4.png",
+                                    title: 'A-Frames',
+                                    link: 'rental-property-2.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/homepage6/destination5.png",
+                                    title: 'Campers',
+                                    link: 'rental-property-2.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/homepage6/destination6.png",
+                                    title: 'Treehouses',
+                                    link: 'rental-property-2.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/homepage6/destination7.png",
+                                    title: 'Apartment',
+                                    link: 'rental-property-2.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/homepage6/destination8.png",
+                                    title: 'Townhouses',
+                                    link: 'rental-property-2.html'
+                                }
+                            ]
+                        each item2 in item2Lists
+                            .swiper-slide
+                                .card-popular.card-top-destination.background-card.wow.fadeInUp 
+                                    .card-image 
+                                        img(src= item2.image, alt="Travila")
+                                    .card-info 
+                                        a.card-title(href= item2.link)= item2.title
+                                        .card-meta 
+                                            .meta-links 
+                                                a.text-property(href="rental-property-2.html") 35 Properties
+                                            .card-button 
+                                                a(href= item2.link) 
+                                                    svg(width='10', height='10', viewbox='0 0 10 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                        path(d='M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')

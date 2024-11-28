@@ -1,0 +1,80 @@
+section.section-box.box-filter-search.background-body
+    .container
+        .block-filter-search 
+            .filter-left
+                form.form-search-filter(action="#")
+                    input.form-control(type="text", name="key", placeholder="What are you looking for?")
+            .filter-right 
+                a.category-link.btn-click.active(href="#") Tours
+                a.category-link.btn-click(href="#") Hotels
+                a.category-link.btn-click(href="#") Tickets
+                a.category-link.btn-click(href="#") Rental
+                a.category-link.btn-click(href="#") Activities
+        .block-dropdown-filter 
+            .left-dropdown-filter
+                .dropdown.dropdown-filter
+                    button#dropdownCategory.btn.btn-dropdown.dropdown-toggle(type='button', data-bs-toggle='dropdown', aria-expanded='false') 
+                        span Categories
+                    ul.dropdown-menu.dropdown-menu-light(aria-labelledby='dropdownCategory', style='margin: 0px;')
+                        li
+                            a.dropdown-item.active(href='#') Attractives
+                        li
+                            a.dropdown-item(href='#') Active
+                        li
+                            a.dropdown-item(href='#') Nature
+                    
+                .dropdown.dropdown-filter
+                    button#dropdownCategory.btn.btn-dropdown.dropdown-toggle(type='button', data-bs-toggle='dropdown', aria-expanded='false') 
+                        span Duration
+                    ul.dropdown-menu.dropdown-menu-light(aria-labelledby='dropdownCategory', style='margin: 0px;')
+                        li
+                            a.dropdown-item.active(href='#') 4 Hours
+                        li
+                            a.dropdown-item(href='#') 8 Hours
+                        li
+                            a.dropdown-item(href='#') 2 Days
+
+                .dropdown.dropdown-filter
+                    button#dropdownCategory.btn.btn-dropdown.dropdown-toggle(type='button', data-bs-toggle='dropdown', aria-expanded='false') 
+                        span Review / Rating
+                    ul.dropdown-menu.dropdown-menu-light(aria-labelledby='dropdownCategory', style='margin: 0px;')
+                        li
+                            a.dropdown-item.active(href='#') Newest
+                        li
+                            a.dropdown-item(href='#') Oldest
+                
+                .dropdown.dropdown-filter
+                    button#dropdownCategory.btn.btn-dropdown.dropdown-toggle(type='button', data-bs-toggle='dropdown', aria-expanded='false') 
+                        span Price range
+                    ul.dropdown-menu.dropdown-menu-light(aria-labelledby='dropdownCategory', style='margin: 0px;')
+                        li
+                            a.dropdown-item.active(href='#') $10 - $100
+                        li
+                            a.dropdown-item(href='#') $100 - $1.000
+                        li
+                            a.dropdown-item(href='#') $1.000 - $10.000
+
+                .dropdown.dropdown-filter
+                    button#dropdownCategory.btn.btn-dropdown.dropdown-toggle(type='button', data-bs-toggle='dropdown', aria-expanded='false') 
+                        span Language
+                    ul.dropdown-menu.dropdown-menu-light(aria-labelledby='dropdownCategory', style='margin: 0px;')
+                        li
+                            a.dropdown-item.active(href='#') English
+                        li
+                            a.dropdown-item(href='#') Japanese
+                        li
+                            a.dropdown-item(href='#') Chinese
+                        li
+                            a.dropdown-item(href='#') Vietnamese
+                
+            .right-dropdown-filter
+                .dropdown.dropdown-filter
+                    button#dropdownSort.btn.btn-dropdown.dropdown-toggle(type='button', data-bs-toggle='dropdown', aria-expanded='false') 
+                        span Sort from High to Low
+                    ul.dropdown-menu.dropdown-menu-light(aria-labelledby='dropdownSort', style='margin: 0px;')
+                        li
+                            a.dropdown-item.active(href='#') Default Sorting
+                        li
+                            a.dropdown-item(href='#') Sort from High to Low
+                        li
+                            a.dropdown-item(href='#') Comments products 

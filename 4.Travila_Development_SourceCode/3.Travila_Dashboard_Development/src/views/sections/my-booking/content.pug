@@ -1,0 +1,208 @@
+.section-box
+    .container 
+        .table-responsive
+            table.table.table-stripped.table-mybooking
+                thead 
+                    th.mw-76
+                    th.mw-450
+                        span.sort Title
+                    th.mw-145
+                        span.sort Start Date
+                    th.mw-145
+                        span.sort End Date
+                    th.mw-145
+                        span.sort Details
+                    th.mw-145
+                        span.sort Price
+                    th.mw-145
+                        span.sort Status
+                    th.mw-145
+                        span.sort Payment
+                    th.mw-76
+                tbody 
+                -
+                    const itemListsBooks = [
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/my-booking/tour1.png",
+                            title: 'Honolulu: Diamond Head Cruise with Drinks',
+                            startDate: '11 April 2024',
+                            endDate: '15 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Approved",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/my-booking/tour2.png",
+                            title: 'Waikiki: Catamaran Snorkeling Adventure',
+                            startDate: '12 April 2024',
+                            endDate: '16 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Pending",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "3",
+                            image: "assets/imgs/page/my-booking/tour3.png",
+                            title: 'Oahu: North Shore Surfing Lessons and Beach Day',
+                            startDate: '13 April 2024',
+                            endDate: '17 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Cancelled",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "4",
+                            image: "assets/imgs/page/my-booking/tour4.png",
+                            title: 'Maui: Road to Hana Guided Tour with Waterfall Hikes',
+                            startDate: '14 April 2024',
+                            endDate: '18 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Approved",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "5",
+                            image: "assets/imgs/page/my-booking/tour5.png",
+                            title: 'Big Island: Volcano National Park Full-Day Tour',
+                            startDate: '15 April 2024',
+                            endDate: '19 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Approved",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "6",
+                            image: "assets/imgs/page/my-booking/tour6.png",
+                            title: 'auai: Na Pali Coast Helicopter Tour',
+                            startDate: '16 April 2024',
+                            endDate: '20 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Approved",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "7",
+                            image: "assets/imgs/page/my-booking/tour7.png",
+                            title: 'Oahu: Kualoa Ranch Movie Sites Tour',
+                            startDate: '17 April 2024',
+                            endDate: '21 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Approved",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "8",
+                            image: "assets/imgs/page/my-booking/tour8.png",
+                            title: 'Maui: Molokini Crater Snorkeling Expedition',
+                            startDate: '18 April 2024',
+                            endDate: '22 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Approved",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "9",
+                            image: "assets/imgs/page/my-booking/tour9.png",
+                            title: 'Kona: Night Manta Ray Snorkel Adventure',
+                            startDate: '19 April 2024',
+                            endDate: '23 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Approved",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "10",
+                            image: "assets/imgs/page/my-booking/tour10.png",
+                            title: 'Oahu: Full-Day Circle Island Tour with Dole Plantation',
+                            startDate: '20 April 2024',
+                            endDate: '24 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Approved",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "11",
+                            image: "assets/imgs/page/my-booking/tour11.png",
+                            title: 'Kauai: Wailua River Kayak and Secret Falls Hike',
+                            startDate: '20 April 2024',
+                            endDate: '24 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Approved",
+                            payment: "Visa",
+                            link: '#'
+                        },
+                        {
+                            index: "12",
+                            image: "assets/imgs/page/my-booking/tour12.png",
+                            title: 'Lanai: Dolphin Watching and Snorkel Sail',
+                            startDate: '20 April 2024',
+                            endDate: '24 April 2024',
+                            numPax: '2 People',
+                            price: '$692.89',
+                            status: "Approved",
+                            payment: "Visa",
+                            link: '#'
+                        }
+                    ]
+                each item in itemListsBooks
+                    tr 
+                        td.text-center 
+                            input.cb-select(type="checkbox")
+                        td 
+                            .card-tour
+                                a(href="#")
+                                    img(src= item.image, alt="Travilla")
+                                a.text-md-bold.neutral-1000(href="#")= item.title
+                        td 
+                            span.text-md-medium.neutral-500= item.startDate
+                        td 
+                            span.text-md-medium.neutral-500= item.endDate
+                        td 
+                            span.text-md-medium.neutral-500= item.numPax
+                        td 
+                            span.text-md-medium.neutral-500= item.price
+                        td 
+                            if item.status == 'Approved'
+                                span.btn.btn-status= item.status
+                            else if item.status == 'Pending'
+                                span.btn.btn-status.pending= item.status
+                            else 
+                                span.btn.btn-status.cancelled= item.status
+                        td 
+                            span.text-md-medium.neutral-500 Visa
+                        td.text-center  
+                            .dropdown
+                                a.btn-action#dropdownAction(type='button', data-bs-toggle='dropdown', aria-expanded='false', data-bs-display='static')
+                                    svg(width='3', height='14', viewbox='0 0 3 14', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                        path(d='M1.25863 11.4676C1.56383 11.4676 1.85652 11.5889 2.07232 11.8047C2.28812 12.0205 2.40936 12.3132 2.40936 12.6184C2.40936 12.9236 2.28812 13.2162 2.07232 13.432C1.85652 13.6478 1.56383 13.7691 1.25863 13.7691C0.953444 13.7691 0.660752 13.6478 0.444949 13.432C0.229147 13.2162 0.10791 12.9236 0.10791 12.6184C0.10791 12.3132 0.229147 12.0205 0.444949 11.8047C0.660752 11.5889 0.953444 11.4676 1.25863 11.4676ZM1.25863 6.09759C1.56383 6.09759 1.85652 6.21882 2.07232 6.43463C2.28812 6.65043 2.40936 6.94312 2.40936 7.24831C2.40936 7.5535 2.28812 7.84619 2.07232 8.062C1.85652 8.2778 1.56383 8.39904 1.25863 8.39904C0.953444 8.39904 0.660752 8.2778 0.444949 8.062C0.229147 7.84619 0.10791 7.5535 0.10791 7.24831C0.10791 6.94312 0.229147 6.65043 0.444949 6.43463C0.660752 6.21882 0.953444 6.09759 1.25863 6.09759ZM1.25863 0.727539C1.56383 0.727539 1.85652 0.848776 2.07232 1.06458C2.28812 1.28038 2.40936 1.57307 2.40936 1.87826C2.40936 2.18345 2.28812 2.47615 2.07232 2.69195C1.85652 2.90775 1.56383 3.02899 1.25863 3.02899C0.953444 3.02899 0.660752 2.90775 0.444949 2.69195C0.229147 2.47615 0.10791 2.18345 0.10791 1.87826C0.10791 1.57307 0.229147 1.28038 0.444949 1.06458C0.660752 0.848776 0.953444 0.727539 1.25863 0.727539Z', fill='')
+                                ul.dropdown-menu.dropdown-menu-light.dropdown-menu-end(aria-labelledby='dropdownAction')
+                                    li
+                                        a.dropdown-item(href='#') View
+                                    li
+                                        a.dropdown-item.active(href='#') Edit
+                                    li
+                                        a.dropdown-item(href='#') Delete
+        include ../../elements/pagination.pug

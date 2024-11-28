@@ -1,0 +1,24 @@
+.text-start {
+    text-align: right !important;
+}
+.text-end {
+    text-align: left !important;
+}
+@media (min-width: 768px) {
+    .rtl {    
+        .text-md-start {
+            text-align: right !important;
+        }
+        .text-md-end {
+            text-align: left !important;
+        }
+    }
+}
+@media (min-width: 992px) {
+    .text-lg-start {
+        text-align: right !important;    
+    }
+    .text-lg-end {
+        text-align: left !important;
+    }
+}

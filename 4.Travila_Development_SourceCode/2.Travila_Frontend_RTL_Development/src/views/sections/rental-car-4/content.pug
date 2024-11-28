@@ -1,0 +1,106 @@
+section.box-section.block-content-tourlist.background-body
+    .container 
+        .box-content-main.pt-20
+            .content-right
+                include ../../elements/box-filters.pug
+
+                .box-grid-hotels.wow.fadeIn
+                    .row
+                        -
+                            const itemLists = [
+                                {
+                                    index: 1,
+                                    image: "assets/imgs/page/car/car-list.png",
+                                    title: 'Mini Cooper S Hardtop 2 Door',
+                                    location: 'Manchester, England',
+                                    price: '$202.87',
+                                    link: 'rental-detail.html'
+
+                                },
+                                {
+                                    index: 2,
+                                    image: "assets/imgs/page/car/car-list2.png",
+                                    title: 'Marina Bay Sands, Singapore',
+                                    location: '09 Arnulfo Crossing, Botsfordborough',
+                                    price: '$17.32',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    index: 3,
+                                    image: "assets/imgs/page/car/car-list3.png",
+                                    title: 'The Waldorf Astoria, Shanghai, China',
+                                    location: '74C Aaliyah River ,Bayerhaven',
+                                    price: '$15.63',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    index: 2,
+                                    image: "assets/imgs/page/car/car-list4.png",
+                                    title: 'Belmond Hotel Caruso, Ravello, Italy',
+                                    location: '3 Bauch Nook, Howefort',
+                                    price: '$35.62',
+                                    link: 'rental-detail.html'
+
+                                },
+                                {
+                                    index: 1,
+                                    image: "assets/imgs/page/car/car-list5.png",
+                                    title: 'The Venetian, Las Vegas, USA',
+                                    location: '0 / 77 Purdy Crescent, West Arthur',
+                                    price: '$17.32',
+                                    link: 'rental-detail.html'
+                                },
+                                {
+                                    index: 1,
+                                    image: "assets/imgs/page/car/car-list6.png",
+                                    title: 'The Venetian, Las Vegas, USA',
+                                    location: '0 / 77 Purdy Crescent, West Arthur',
+                                    price: '$17.32',
+                                    link: 'rental-detail.html'
+                                }
+                            ]
+                        each item in itemLists
+                            .col-xl-12.col-lg-12
+                                .card-flight.card-hotel.card-property.background-card 
+                                    .card-image 
+                                        a.wish(href="#")
+                                            svg(width='20', height='18', viewbox='0 0 20 18', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                path(d='M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                                        a(href= item.link)
+                                            img(src= item.image, alt="Travila")
+                                    .card-info 
+                                        label.sale-lbl -25%
+                                        .tour-rate 
+                                            .rate-element
+                                                span.rating 4.96 
+                                                    span.text-sm-medium.neutral-500 (672 reviews)
+                                        .card-title 
+                                            a.heading-6.neutral-1000(href= item.link)= item.title
+                                        .card-program 
+                                            .card-location.mb-25 
+                                                p.text-location.text-md-medium.neutral-500= item.location
+                                            .card-facilities 
+                                                    .item-facilities 
+                                                        p.room.text-md-medium.neutral-1000 Unlimited mileage
+                                                    .item-facilities 
+                                                        p.size.text-md-medium.neutral-1000 Automatic
+                                                    .item-facilities 
+                                                        p.parking.text-md-medium.neutral-1000 3 Large bags
+                                                    .item-facilities 
+                                                        p.bed.text-md-medium.neutral-1000 5 Diesel
+                                                    .item-facilities 
+                                                        p.bathroom.text-md-medium.neutral-1000 7 seats
+                                                    .item-facilities 
+                                                        p.pet.text-md-medium.neutral-1000 SUVs
+                                            .endtime 
+                                                .card-price 
+                                                    p.text-md-medium.neutral-500.ml-5 From 
+                                                    h6.heading-6.neutral-1000= item.price
+                                                    p.text-md-medium.neutral-500 / day
+                                                .card-button 
+                                                    a.btn.btn-gray(href="rental-detail.html") Book Now
+
+                include ../../elements/pagination.pug
+
+            .content-left.order-lg-first
+                include ../../elements/sidebar-left-car.pug

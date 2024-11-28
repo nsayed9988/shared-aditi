@@ -1,0 +1,63 @@
+section.section-box.box-news.background-body
+    .container 
+        .row.align-items-end
+            .col-md-9.mb-30.wow.fadeInUp 
+                h2.neutral-1000 Get inspiration for your next trip
+                p.text-xl-medium.neutral-500 Favorite destinations based on customer reviews
+            .col-md-3.mb-30.wow.fadeInUp
+                .d-flex.justify-content-center.justify-content-md-end
+                    a.btn.btn-black-lg(href="#") View More 
+                        svg(width='16', height='16', viewbox='0 0 16 16', fill='none', xmlns='http://www.w3.org/2000/svg')
+                            path(d='M8 15L15 8L8 1M15 8L1 8', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+
+        .box-list-news 
+            .box-swiper.mt-30
+                .swiper-container.swiper-group-3
+                    .swiper-wrapper
+                        -
+                            const newsLists = [
+                                {
+                                    image: "assets/imgs/page/homepage1/news.png",
+                                    title: 'Ultimate Travel Planning Guide: 10 Tips for a Seamless Journey',
+                                    label: 'Cultural',
+                                    link: 'blog-detail.html'
+
+                                },
+                                {
+                                    image: "assets/imgs/page/homepage1/news2.png",
+                                    title: 'Top 10 Travel Hacks for Budget-Conscious Adventurers',
+                                    label: 'Travel',
+                                    link: 'blog-detail.html'
+                                },
+                                {
+                                    image: "assets/imgs/page/homepage1/news3.png",
+                                    title: 'Discovering Hidden Gems: 10 Off-the-Beaten-Path Travel Tips',
+                                    label: 'Discovery',
+                                    link: 'blog-detail.html'
+                                }
+                            ]
+                        each item in newsLists
+                            .swiper-slide
+                                .card-news.background-card.hover-up
+                                    .card-image 
+                                        label.label= item.label
+                                        a.wish(href="#")
+                                            svg(width='20', height='18', viewbox='0 0 20 18', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                path(d='M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                                        img(src= item.image, alt="Travila")
+                                    .card-info 
+                                        .card-meta 
+                                            span.post-date.neutral-1000 18 Sep 2024
+                                            span.post-time.neutral-1000 6 mins
+                                            span.post-comment.neutral-1000 38 comments
+
+                                        .card-title 
+                                            a.text-xl-bold.neutral-1000(href= item.link)= item.title 
+                                        .card-program 
+                                            .endtime 
+                                                .card-author 
+                                                    img(src="assets/imgs/page/homepage1/avatar.png", alt="Travila")
+                                                    p.text-sm-bold.neutral-1000 Jimmy Dave
+                                                .card-button 
+                                                    a.btn.btn-gray(href="blog-detail.html") Keep Reading
+                                        

@@ -1,0 +1,52 @@
+section.section-box.block-why-choose-us.background-body 
+    .container 
+        .bg-why.shape-1.wow.fadeInUp 
+            img.light-mode(src="assets/imgs/page/homepage9/bg-dot.png", alt="Travila")
+            img.dark-mode(src="assets/imgs/page/homepage9/bg-dot-dark.png", alt="Travila")
+        .bg-why-2.shape-2.wow.fadeInUp
+            img.light-mode(src="assets/imgs/page/homepage9/bg-dot-2.png", alt="Travila")
+            img.dark-mode(src="assets/imgs/page/homepage9/bg-dot-2-dark.png", alt="Travila")
+        .box-why-home9-inner.background-card
+            .box-why-home9-inner-inner
+                h3.neutral-1000.mb-15.wow.fadeInUp Why Choose Us?
+                p.text-xl-medium.neutral-500.mb-45.wow.fadeInUp The best booking platform you can trust
+                .box-list-why.wow.fadeInUp
+                    -
+                        const itemSecuLists1 = [
+                            {
+                                index: "1",
+                                image: "assets/imgs/page/homepage2/support.svg",
+                                title: '24/7 Support',
+                                desc: 'We are here to help, before, during, and even after your trip.',
+                                link: 'help-center.html'
+                            },
+                            {
+                                index: "2",
+                                image: "assets/imgs/page/homepage2/repu.svg",
+                                title: 'Best Price',
+                                desc: 'Price match within 48 hours of order confirmation',
+                                link: 'help-center.html'
+                            },
+                            {
+                                index: "3",
+                                image: "assets/imgs/page/homepage2/security.svg",
+                                title: 'Fast Booking',
+                                desc: 'Ensure secure transactions.  Save and print confirmation emails.',
+                                link: 'help-center.html'
+                            }
+                        ]
+                    each item in itemSecuLists1
+                        if (item.index == 2)
+                            .card-why-travel.card-love-us.card-margin-left.wow.fadeInUp
+                                .card-image 
+                                    img(src= item.image, alt="Travila")
+                                .card-info 
+                                    a.text-xl-bold.card-title(href= item.link)= item.title
+                                    p.text-sm-medium.neutral-500.card-desc= item.desc
+                        else 
+                            .card-why-travel.card-love-us.wow.fadeInUp
+                                .card-image 
+                                    img(src= item.image, alt="Travila")
+                                .card-info 
+                                    a.text-xl-bold.card-title(href= item.link)= item.title
+                                    p.text-sm-medium.neutral-500.card-desc= item.desc

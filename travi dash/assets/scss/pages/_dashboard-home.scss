@@ -1,0 +1,190 @@
+.panel-white {
+    background-color: var(--bs-background-card);
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 1px solid var(--bs-border-color);
+}
+.panel-head {
+    border-bottom: 1px solid var(--bs-border-color);
+    padding: 14px 32px;
+    margin-bottom: 0px;
+    position: relative;
+    .dropdown-menu {
+        top: 83%;
+        min-width: 8rem;
+        padding: 0.5rem;
+        .dropdown-item {
+            color: $color-brand;
+            font-size: 14px;
+            &.active, &:active {
+                background-color: transparent;
+                color: $color-brand-2;
+            }
+            &:hover {
+                background-color: transparent;
+                color: $color-brand-2;
+            }
+        }
+    }
+}
+.panel-body {
+    padding: 30px 30px 10px 30px;
+}
+.menudrop {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    height: 20px;
+    width: 20px;
+    background: url(../imgs/page/dashboard/dot-menu.svg) no-repeat center;
+    cursor: pointer;
+}
+.box-heading {
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--bs-border-color);
+    margin-bottom: 30px;
+    .box-heading-left {
+        width: 60%;
+        display: flex;
+        position: relative;
+        align-items: center;
+        flex-wrap: wrap;
+        .box-title {
+            width: 100%;
+        }
+        .box-breadcrumb {
+            width: 100%;
+            text-align: left;
+            margin-top: 0px;
+            .breadcrumbs {
+                display: inline-block;
+                ul {
+                    li {
+                        position: relative;
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 6px;
+                            height: 24px;
+                            width: 24px;
+                            background: url(../imgs/template/icons/arrow2.svg) no-repeat 0px 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .box-heading-right {
+        width: 40%;
+        text-align: right;
+    }
+}
+.swiper-group-10 .swiper-slide {
+    text-align: center;
+}
+.box-statistical {
+    .row {
+        margin: 0px -8px;
+        .col-xxl-2 {
+            padding: 0px 8px;
+        }
+    }
+}
+@media (min-width: 768px) {
+    .box-list-tours.list-tours {
+        .card-journey-small {
+            display: flex;
+            align-items: center;
+            .card-image {
+                height: 298px;
+                min-width: 201px;
+                img {
+                    display: block;
+                    width: auto;
+                    height: 100%;
+                    min-width: 100%;
+                    max-width: none;
+                    min-height: 100%;
+                }
+            }
+            .card-info {
+                padding-top: 80px;
+                padding-left: 40px;
+                height: 298px;
+                width: 100%;
+                margin-top: 0px;
+                margin-left: -30px;
+                border-radius: 24px;
+                .card-rating {
+                    top: 30px;
+                    left: 40px;
+                    right: auto;
+                }
+                .card-title {
+                    a {
+                        font-size: 24px;
+                        line-height: 32px;
+                    }
+                }
+                .card-duration-tour {
+                    margin-bottom: 24px;
+                }
+            }
+        }
+    }
+}
+.box-list-tours {
+    .card-journey-small .card-image .wish {
+        left: 26px;
+        top: 22px;
+    }
+}
+.box-list-tours, .box-grid-tours {
+    .card-journey-small {
+        margin-bottom: 24px;
+        max-width: 100%;
+        .card-info {
+            padding: 28px 21px;
+            border-radius: 24px;
+        }
+        .card-image {
+            height: 230px;
+            line-height: 230px;
+        }
+    }
+}
+.box-experiences {
+    background-color: var(--bs-background-4);
+    border: 1px solid var(--bs-border-color);
+    border-radius: 12px;
+    padding: 20px 27px;
+    text-align: center;
+    margin-top: 15px;
+    .bottom-experience {
+        .text-sm-bold {
+            font-size: 15px;
+            line-height: 24px;
+            margin-bottom: 5px;
+        }
+    }
+}
+.box-need-help {
+    padding: 14px;
+    margin-top: 20px;
+    .top-need-help {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: 7px;
+        svg {
+            fill: var(--bs-neutral-600);
+            margin-right: 7px;
+        }
+    }
+}

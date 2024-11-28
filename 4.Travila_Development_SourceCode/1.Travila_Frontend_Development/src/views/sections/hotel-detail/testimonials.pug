@@ -1,0 +1,66 @@
+section.section-box.box-testimonials-2.box-testimonials-5.box-testimonials-hotel-detail.background-body
+    .container 
+        .box-author-testimonials.button-bg-2.wow.fadeInUp 
+            img(src="assets/imgs/page/homepage1/testimonial.png", alt="Travila")
+            img(src="assets/imgs/page/homepage1/testimonial2.png", alt="Travila")
+            img(src="assets/imgs/page/homepage1/testimonial3.png", alt="Travila")
+            | Testimonials
+        h2.mt-8.mb-25.neutral-1000 What they say about us?
+    .block-testimonials
+        .container-testimonials.wow.fadeInUp 
+            .container-slider
+                .box-swiper.mt-0
+                    .swiper-container.swiper-group-animate.swiper-group-journey
+                        .swiper-wrapper
+                            -
+                                const itemTestLists = [
+                                    {
+                                        image: "assets/imgs/page/homepage1/author.png",
+                                        title: 'The best booking system',
+                                        desc: "I've been using the hotel booking system for several years now, and it's become my go-to platform for planning my trips. The interface is user-friendly, and I appreciate the detailed information and real-time availability of hotels.",
+                                        author: 'Sara Mohamed',
+                                        position: 'Jakatar'
+
+                                    },
+                                    {
+                                        image: "assets/imgs/page/homepage1/author2.png",
+                                        title: 'The best booking system',
+                                        desc: "I've been using the hotel booking system for several years now, and it's become my go-to platform for planning my trips. The interface is user-friendly, and I appreciate the detailed information and real-time availability of hotels.",
+                                        author: 'Atend John',
+                                        position: 'Califonia'
+                                    },
+                                    {
+                                        image: "assets/imgs/page/homepage1/author.png",
+                                        title: 'The best booking system',
+                                        desc: "I've been using the hotel booking system for several years now, and it's become my go-to platform for planning my trips. The interface is user-friendly, and I appreciate the detailed information and real-time availability of hotels.",
+                                        author: 'Sara Mohamed',
+                                        position: 'Jakatar'
+                                    },
+                                    {
+                                        image: "assets/imgs/page/homepage1/author2.png",
+                                        title: 'The best booking system',
+                                        desc: "I've been using the hotel booking system for several years now, and it's become my go-to platform for planning my trips. The interface is user-friendly, and I appreciate the detailed information and real-time availability of hotels.",
+                                        author: 'Sara Mohamed',
+                                        position: 'Jakatar'
+                                    }
+                                ]
+                            each item in itemTestLists
+                                .swiper-slide
+                                    .card-testimonial.background-card 
+                                        .card-info 
+                                            p.text-xl-bold.card-title.neutral-1000= item.title
+                                            p.neutral-500= item.desc
+                                        .card-top
+                                            .card-author 
+                                                .card-image 
+                                                    img(src= item.image, alt="Travila")
+                                                .card-info 
+                                                    p.text-lg-bold.neutral-1000= item.author
+                                                    p.text-sm.neutral-1000= item.position
+                                            .card-rate 
+                                                img(src="assets/imgs/template/icons/star.svg", alt="Travila")
+                                                img(src="assets/imgs/template/icons/star.svg", alt="Travila")
+                                                img(src="assets/imgs/template/icons/star.svg", alt="Travila")
+                                                img(src="assets/imgs/template/icons/star.svg", alt="Travila")
+                                                img(src="assets/imgs/template/icons/star.svg", alt="Travila")    
+            

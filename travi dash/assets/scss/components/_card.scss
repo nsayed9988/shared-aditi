@@ -1,0 +1,914 @@
+.card-style-1 {
+    border-radius: 16px;
+    background-color: var(--bs-background-card);
+    padding: 18px 18px;
+    margin-bottom: 31px;
+    border: 1px solid var(--bs-border-color);
+    display: flex;
+    width: 100%;
+    .card-image {
+        min-width: 75px;
+        width: 10%;
+        text-align: center;
+        padding-right: 10px;
+        line-height: 40px;
+        span {
+            display: inline-block;
+            width: 56px;
+            height: 56px;
+            background-color: var(--bs-background-1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 56px;
+        }
+        img {
+            vertical-align: middle;
+            display: inline-block;
+        }
+    }
+    .card-info {
+        width: 100%;
+        .card-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0px;
+            .status {
+                margin-left: 15px;
+                &.up {
+                    background: url(../imgs/page/dashboard/up.svg) no-repeat left center;
+                    display: inline-block;
+                    padding: 0px 0px 0px 30px;
+                    color: $background-green;
+                }
+                &.down {
+                    display: inline-block;
+                    padding: 0px;
+                    color: $color-red;
+                    padding: 0px 0px 0px 30px;
+                    background: url(../imgs/page/dashboard/down.svg) no-repeat left center;
+                }
+            }
+        }
+    }
+}
+.card-style-2 {
+    border-radius: 8px;
+    background-color: $background-white;
+    padding: 21px 25px;
+    margin-bottom: 15px;
+    border: 1px solid $color-border-3;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    .card-head {
+        width: 55%;
+        display: flex;
+        .card-image {
+            max-width: 67px;
+            padding-right: 15px;
+            width: 100%;
+            img {
+                display: block;
+                border-radius: 8px;
+            }
+        }
+        .card-title {
+            width: 100%;
+            margin-bottom: 0px !important;
+            .time-post {
+                font-size: $font-xs;
+                line-height: 18px;
+                color: $color-text-mutted;
+                background: url(../imgs/page/dashboard/time.svg) no-repeat 0px 3px;
+                display: inline-block;
+                padding: 0px 0px 0px 15px;
+                margin-right: 12px;
+            }
+            .location {
+                font-size: $font-xs;
+                line-height: 18px;
+                color: $color-text-mutted;
+                background: url(../imgs/page/dashboard/marker.svg) no-repeat 0px 3px;
+                display: inline-block;
+                padding: 0px 0px 0px 15px;
+                margin-right: 12px;
+            }
+        }    
+    }
+    .card-tags {
+        width: 40%;
+    }
+    .card-price {
+        width: 15%;
+        min-width: 100px;
+        text-align: right;
+        strong {
+            color: $color-brand-2;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 26px;
+        }
+        span {
+            color: $color-text-mutted;
+            font-size: $font-xs;
+            line-height: 12px;
+        }
+    }
+}
+.card-style-3 {
+    padding: 0px 0px 15px 0px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--bs-border-color);
+    display: flex;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    .card-image {
+        display: flex;
+        align-items: center;
+        .card-image-inner {
+            max-width: 58px;
+            padding-right: 10px;
+            width: 100%;
+            position: relative;
+            min-width: 58px;
+            &.online {
+                &::before {
+                    content: "";
+                    height: 10px;
+                    width: 10px;
+                    border-radius: 50%;
+                    background-color: $background-green;
+                    position: absolute;
+                    bottom: 1px;
+                    right: 12px;
+                }
+            }
+            img {
+                display: block;
+                border-radius: 50%;
+            }
+        }
+    }
+    .card-title {
+        margin-bottom: 0px !important;
+        padding-right: 20px;
+        h6 {
+            line-height: 20px;
+            margin-top: 4px;
+        }
+        .job-position {
+            font-size: $font-xs;
+            line-height: 18px;
+            display: inline-block;
+        }
+    }
+    .card-phone {
+        .phone {
+            font-size: $font-xs;
+            line-height: 12px;
+            color: var(--bs-neutral-1000);
+            background: url(../imgs/template/icons/phone-sm.svg) no-repeat 0px 3px;
+            display: inline-block;
+            padding: 3px 0px 5px 15px;
+            margin-right: 12px;
+        }
+    }
+    .card-email {
+        .email {
+            font-size: $font-xs;
+            line-height: 18px;
+            color: var(--bs-neutral-1000);
+            background: url(../imgs/template/icons/email.png) no-repeat 0px 6px;
+            display: inline-block;
+            padding: 3px 0px 7px 20px;
+            margin-right: 12px;
+        }
+    }
+}
+.card-style-4 {
+    border-radius: 16px;
+    background-color: $background-white;
+    padding: 19px 15px;
+    margin-bottom: 15px;
+    border: 1px solid $color-border-3;
+    display: inline-block;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    .card-image {
+        max-width: 67px;
+        padding-right: 15px;
+        width: 100%;
+        img {
+            display: block;
+            border-radius: 8px;
+        }
+    }
+    .card-title {
+        width: 100%;
+        margin-bottom: 0px !important;
+    }
+    .card-location {
+        padding-top: 15px;
+        .location {
+            width: 50%;
+            font-size: $font-xs;
+            line-height: 18px;
+            color: $color-text-mutted;
+            background: url(../imgs/page/dashboard/marker.svg) no-repeat 0px 3px;
+            display: inline-block;
+            padding: 0px 0px 0px 15px;
+            margin-right: 12px;
+        }
+        .jobs-number {
+            width: 50%;
+            text-align: right;
+            font-size: $font-xs;
+            line-height: 18px;
+            color: $color-text-mutted;
+            display: inline-block;
+        }
+    }
+}
+.card-style-5 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px dashed $color-border-2;
+    padding: 0px 0px 10px 0px;
+    margin-bottom: 15px;
+    &:last-child {
+        border-bottom: 0px;
+        margin-bottom: 0px;
+    }
+    .card-title {
+        position: relative;
+        width: 55%;
+    }
+    .card-progress {
+        position: relative;
+        width: 45%;
+        display: flex;
+        align-items: center;
+        .number {
+            display: inline-block;
+            padding: 0px 7px 0px 0px;
+            vertical-align: top;
+        }
+        .progress {
+            height: 8px;
+            border-radius: 5px;
+            background-color: $background-white;
+            width: 100%;
+            .progress-bar {
+                border-radius: 5px;
+                background-color: var(--bs-success);
+            }
+        }
+    }
+}
+.card-grid-2 {
+    border-radius: 8px;
+    border: 1px solid $color-border-2;
+    overflow: hidden;
+    margin-bottom: 24px;
+    position: relative;
+    background: $background-5;
+    i {
+        font-size: $font-xl;
+        color: $color-text-mutted;
+        margin-left: 5px;
+        &.fi-rr-marker {
+            margin-left: 0;
+        }
+    }
+    .btn-apply-now {
+        color: $color-brand-2;
+    }
+    &:hover {
+        border-color: $color-border-1;
+        background-color: $background-white;
+        .btn-apply-now {
+            color: $color-white;
+            background-color: $color-brand-2;
+        }
+    }
+    a {
+        text-decoration: none;
+        color: $color-brand;
+        &:hover {
+            color: $color-brand-2;
+        }
+    }
+    .card-grid-2-image-rd {
+        padding: 0px 15px 0px 0px;
+        display: inline-block;
+        width: 30%;
+        min-width: 115px;
+        max-width: 115px;
+        figure {
+            position: relative;
+            display: inline-block;
+            img {
+                border-radius: 50%;
+                height: 100px;
+                width: 100px;
+            }
+        }
+        &.online {
+            figure {
+                &::before {
+                    height: 18px;
+                    width: 18px;
+                    border-radius: 50%;
+                    content: "";
+                    position: absolute;
+                    bottom: 13px;
+                    right: 9px;
+                    background: $background-success;
+                }
+            }
+        }
+    }
+    &.grid-bd-16 {
+        background-color: $background-white;
+        border-radius: 16px;
+        .lbl-hot {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 0px 10px;
+            height: 24px;
+            background: $color-brand-2;
+            border-radius: 5px;
+            color: $color-white;
+            min-width: 42px;
+            font-size: $font-xs;
+            line-height: 18px;
+        }
+        .card-block-info {
+            .card-text-price {
+                font-size: 16px;
+                line-height: 26px;
+            }
+        }
+    }
+    .card-grid-2-image {
+        position: relative;
+        padding: 10px;
+        .tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 12;
+        }
+        figure {
+            display: block;
+            img {
+                width: 100%;
+                border-radius: 12px;
+            }
+        }
+    }
+    .card-block-info {
+        display: inline-block;
+        width: 100%;
+        padding: 5px 10px 20px 10px;
+        .card-2-img-text {
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            padding: 4px 0px 4px 40px;
+            font-size: $font-sm;
+            max-width: 90%;
+            min-height: 44px;
+            .card-grid-2-img-small {
+                background: #e4e4e4;
+                border-radius: 50%;
+                padding: 5px;
+                height: 32px;
+                width: 32px;
+                float: left;
+                margin-right: 8px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                text-align: center;
+                line-height: 30px;
+            }
+            span {
+                display: inline-block;
+                color: $color-brand;
+                font-size: $font-sm;
+            }
+            img {
+                max-width: 100%;
+            }
+        }
+        .card-text-price {
+            color: $color-brand-2;
+            font-family: $font-heading;
+            font-weight: bold;
+            font-size: 22px;
+            span {
+                font-size: $font-sm;
+                color: $color-text-paragraph;
+                font-weight: 400;
+            }
+        }
+        .card-2-bottom {
+            position: relative;
+            .btn-grey-small {
+                margin-right: 5px;
+            }
+            .btn-tags-sm {
+                margin-bottom: 5px;
+            }
+            &.card-2-bottom-candidate {
+                .btn-brand-hover {
+                    padding: 15px 33px;
+                    border: thin solid $border-color-1-hover;
+                    font-size: 14px;
+                    &:hover {
+                        color: $color-white;
+                    }
+                }
+            }
+        }
+        .card-grid-2-img-medium {
+            padding-left: 55px;
+            font-size: $font-sm;
+            font-weight: 600;
+            font-family: $font-heading;
+            color: #151515;
+            line-height: 17px;
+            .card-grid-2-img-small {
+                background-color: $background-13;
+                height: 44px;
+                width: 44px;
+                border-radius: 8px;
+            }
+        }
+        .card-profile {
+            text-align: center;
+            strong {
+                font-size: $font-lg;
+                color: $color-brand;
+                line-height: 18px;
+                font-weight: bold;
+                font-family: $font-heading;
+                display: block;
+                padding-bottom: 5px;
+                &:hover {
+                    color: $color-brand;
+                }
+            }
+            >span {
+                color: $color-text-paragraph;
+            }
+            .rate-reviews-small {
+                span {
+                    display: inline-block;
+                    vertical-align: middle;
+                    img {
+                        height: 13px;
+                        display: flex;
+                    }
+                }
+            }
+        }
+    }
+    .employers-info {
+        border-top: 1px solid $color-border-2;
+        padding-top: 20px;
+    }
+    // new
+    .flash {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        height: 25px;
+        width: 25px;
+        background: url(../imgs/template/icons/flash.svg) no-repeat 0px 0px;
+    }
+    .card-grid-2-image-left {
+        padding: 30px 20px 15px 20px;
+        display: flex;
+        position: relative;
+        .image-box {
+            min-width: 52px;
+            padding-right: 15px;
+        }
+        .right-info {
+            .name-job {
+                font-size: $font-lg;
+                line-height: 26px;
+                color: $color-brand;
+                font-weight: bold;
+                display: block;
+                &:hover {
+                    color: $color-brand-2;
+                }
+            }
+            .location-small {
+                background: url(../imgs/template/icons/location.svg) no-repeat 0px 5px;
+                display: inline-block;
+                padding: 0px 0px 0px 20px;
+                font-size: $font-xs;
+                color: $color-text-mutted;
+            }
+        }
+    }
+}
+.display-list {
+    .card-style-2 {
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+        &:hover {
+            box-shadow: $box-shadow-4;
+            border-color: $color-border-1;
+        }
+        .card-head {
+            width: 100%;
+            .card-image {
+                margin-bottom: 30px;
+            }
+            .card-title {
+                margin-bottom: 30px !important;
+            }
+        }
+        .card-tags {
+            width: 50%;
+        }
+        .card-price {
+            width: 50%;
+            strong {
+                font-size: 24px;
+                line-height: 40px;
+            }
+            span {
+                font-size: 18px;
+                line-height: 19px;
+            }
+        }
+    }
+}
+.card-journey-small {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid var(--bs-border-color);
+    max-width: 403px;
+    width: 100%;
+    margin-bottom: 40px;
+    &:hover {
+        box-shadow: $box-shadow-2;
+    }
+    .card-image {
+        position: relative;
+        overflow: hidden;
+        height: 326px;
+        .wish {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            background-color: #ffffffd1;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            z-index: 12;
+            svg {
+                stroke: var(--bs-neutral-1000);
+            }
+            &:hover {
+                svg {
+                    stroke: var(--bs-warning);
+                    fill: var(--bs-warning);
+                }
+            }
+        }
+        .label {
+            position: absolute;
+            top: 22px;
+            left: 25px;
+            border-radius: 50px;
+            font-size: 12px;
+            line-height: 18px;
+            font-weight: 700;
+            color: var(--bs-warning);
+            z-index: 12;
+            padding: 7px 20px;
+            background-color: var(--bs-background-card);
+            &.bestsale {
+                color: var(--bs-success);
+            }
+            &.saleoff {
+                color: var(--bs-danger);
+            }
+        }
+        img {
+            display: block;
+            width: auto;
+            height: 100%;
+            max-width: none;
+            min-width: 100%;
+        }
+    }
+    .card-info {
+        padding: 43px 32px;
+        background-color: var(--bs-neutral-0);
+        border-radius: 30px;
+        position: relative;
+        margin-top: -40px;
+        .card-facilities {
+            border-top: 1px solid var(--bs-border-color);
+            padding-top: 25px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            .item-facilities {
+                width: 50%;
+                p {
+                    background-repeat: no-repeat;
+                    background-position: left center;
+                    padding: 0px 0px 0px 30px;
+                    margin-bottom: 13px;
+                    &.speed {
+                        background-image: url(../imgs/page/homepage8/speed.svg);
+                    }
+                    &.gear {
+                        background-image: url(../imgs/page/homepage8/engineering.svg);
+                    }
+                    &.fuel {
+                        background-image: url(../imgs/page/homepage8/fuel.svg);
+                    }
+                    &.seats {
+                        background-image: url(../imgs/page/homepage8/seat.svg);
+                    }
+                    &.room {
+                        background-image: url(../imgs/page/homepage9/room.svg);
+                    }
+                    &.pax {
+                        background-image: url(../imgs/page/hotel/pax.svg);
+                    }
+                    &.size {
+                        background-image: url(../imgs/page/homepage9/size.svg);
+                    }
+                    &.bed {
+                        background-image: url(../imgs/page/homepage9/bed.svg);
+                    }
+                    &.bathroom {
+                        background-image: url(../imgs/page/homepage9/bathroom.svg);
+                    }
+                    &.parkin {
+                        background-image: url(../imgs/page/property/parking.png);
+                    }
+                    &.pet {
+                        background-image: url(../imgs/page/property/pet.png);
+                    }
+                }
+            }
+        }
+        .card-rating {
+            position: absolute;
+            top: -19px;
+            z-index: 13;
+            left: 12px;
+            right: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .card-left {
+                .lightning {
+                    background-color: var(--bs-brand-secondary);
+                    display: inline-block;
+                    padding: 7px 19px 7px 39px;
+                    border-radius: 50px;
+                    color: var(--bs-neutral-1000);
+                    font-size: 14px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    background-image: url(../imgs/template/icons/lightning.svg);
+                    background-repeat: no-repeat;
+                    background-position: left 15px center;
+                }
+            }
+            .card-right {
+                .rating {
+                    display: inline-block;
+                    padding: 6px 16px 6px 30px;
+                    background-color: var(--bs-neutral-0);
+                    border-radius: 50px;
+                    color: var(--bs-neutral-1000);
+                    font-size: 14px;
+                    line-height: 22px;
+                    font-weight: 700;
+                    border: 1px solid var(--bs-border-color);
+                    box-shadow: $box-shadow-1;
+                    background-image: url(../imgs/template/icons/star.svg);
+                    background-repeat: no-repeat;
+                    background-position: left 12px center;
+                }
+            }
+        }
+        .card-title {
+            margin-bottom: 8px;
+            a {
+                color: var(--bs-neutral-1000);
+                &:hover {
+                    color: var(--bs-warning) !important;
+                }
+            }
+        }
+        .card-program {
+            position: relative;
+            .card-location {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 45px;
+                .text-location {
+                    background: url(../imgs/template/icons/location.svg) no-repeat left center;
+                    padding-left: 20px;
+                }
+                .text-star {
+                    img {
+                        margin-left: 2px;
+                    }
+                }
+            }
+            .card-facitlities {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                margin-top: -15px;
+                padding-top: 27px;
+                border-top: 1px solid var(--bs-border-color);
+                margin-bottom: 15px;
+                .card-miles, .card-gear, .card-fuel, .card-seat {
+                    width: 50%;
+                    padding: 0px 0px 0px 30px;
+                    margin-bottom: 13px;
+                    color: var(--bs-neutral-1000);
+                }
+                .card-miles {
+                    background: url(../imgs/page/homepage2/mile.svg) no-repeat left center;
+                }
+                .card-gear {
+                    background: url(../imgs/page/homepage2/automatic.svg) no-repeat left center;
+                }
+                .card-fuel {
+                    background: url(../imgs/page/homepage2/fuel.svg) no-repeat left center;
+                }
+                .card-seat {
+                    background: url(../imgs/page/homepage2/seat.svg) no-repeat left center;
+                }
+            }
+            .duration {
+                margin-bottom: 45px;
+                .card-price {
+                    display: flex;
+                    align-items: flex-end;
+                    h6 {
+                        margin-right: 6px;
+                    }
+                }
+            }
+            .card-duration-tour {
+                display: flex;
+                align-items: center;
+                margin-bottom: 35px;
+            }
+            .icon-duration {
+                padding: 0px 20px 0px 22px;
+                background: url(../imgs/template/icons/duration.svg) no-repeat left center;
+            }
+            .icon-guest {
+                padding: 0px 0px 0px 22px;
+                background: url(../imgs/template/icons/guest.svg) no-repeat left center;
+            }
+            .endtime {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .card-price {
+                    display: flex;
+                    align-items: flex-end;
+                    h6 {
+                        margin-right: 6px;
+                    }
+                }
+            }
+        }
+    }
+    &.card-journey-small-type-2 {
+        .card-info {
+            .card-rating {
+                .sign {
+                    background-image: url(../imgs/page/homepage5/sign.svg);
+                    background-position: left 15px center;
+                    padding-left: 35px;
+                }
+            }
+        }
+        .card-image {
+            height: 246px;
+            img {
+                min-width: 100%;
+            }
+        }
+        .card-links {
+            margin-top: 24px;
+            ul {
+                display: flex;
+                align-items: center;
+                margin: 0px -10px;
+                flex-wrap: wrap;
+                list-style: disc;
+                padding-left: 30px;
+                li {
+                    width: 50%;
+                    padding: 0px 10px 0px 0px;
+                    margin-bottom: 18px;
+                    color: var(--bs-neutral-500);
+                    &:hover {
+                        color: var(--bs-neutral-1000);
+                    }
+                    a {
+                        color: var(--bs-neutral-500);
+                        font-size: 16px;
+                        line-height: 26px;
+                        font-weight: 500;
+                        &:hover {
+                            color: var(--bs-neutral-1000);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.card-journey-small-type-3 {
+        border: 0px;
+        .card-info {
+            margin-top: 0px;
+            padding: 25px 17px 10px 17px;
+        }
+        .card-image {
+            border-radius: 32px;
+        }
+    }
+    &.card-grid-real {
+        .card-info {
+            border: 1px solid var(--bs-border-color);
+            border-radius: 32px;
+            margin: -40px -1px -1px -1px;
+            .card-location {
+                margin-bottom: 27px;
+            }
+        }
+    }
+    &.card-grid-car {
+        border: 1px solid var(--bs-border-color);
+        background-color: var(--bs-neutral-0) !important;
+        .card-info {
+            border: 1px solid var(--bs-border-color);
+            border-radius: 32px;
+            margin: 0px -1px -1px -1px;
+            .card-location {
+                margin-bottom: 27px;
+            }
+        }
+        .card-image {
+            line-height: 326px;
+            img {
+                max-width: 100%;
+                height: auto;
+                min-width: auto;
+                margin: auto;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+.card-tour {
+    display: flex;
+    align-items: center;
+    img {
+        width: 64px;
+        border-radius: 4px;
+        margin-right: 13px;
+        display: block;
+    }
+}

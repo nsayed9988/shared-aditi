@@ -1,0 +1,64 @@
+section.section-box.box-security.background-body
+    .container 
+        .row.align-items-center 
+            .col-lg-4
+                -
+                    const itemSecuLists1 = [
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/homepage2/security.svg",
+                            title: 'Security Assurance',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/homepage2/support.svg",
+                            title: 'Customer Support',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+                        }
+                    ]
+                each item in itemSecuLists1
+                    .card-why-travel.card-love-us.wow.fadeInUp
+                        .card-image 
+                            img(src= item.image, alt="Travila")
+                        .card-info 
+                            a.text-xl-bold.card-title(href= item.link)= item.title
+                            p.text-sm-medium.neutral-500.card-desc= item.desc
+                            a.text-sm-medium.card-link(href= item.link) Learn More 
+                                svg(width='11', height='10', viewbox='0 0 11 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                    path(d='M5.50011 9.08347L9.58347 5.00011L5.50011 0.916748M9.58347 5.00011L1.41675 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')
+            .col-lg-4
+                .box-img-security.wow.fadeInUp   
+                    span.text-phone +01 235 368
+                    img(src="assets/imgs/page/homepage6/man.png", alt="Travila")
+            .col-lg-4
+                -
+                    const itemSecuLists2 = [
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/homepage2/policy.svg",
+                            title: 'Transparent Policies',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/homepage2/repu.svg",
+                            title: 'Reputable Affiliations',
+                            desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                            link: '#'
+                        }
+                    ]
+                each item in itemSecuLists2
+                    .card-why-travel.card-love-us.wow.fadeInUp
+                        .card-image 
+                            img(src= item.image, alt="Travila")
+                        .card-info 
+                            a.text-xl-bold.card-title(href= item.link)= item.title
+                            p.text-sm-medium.neutral-500.card-desc= item.desc
+                            a.text-sm-medium.card-link(href= item.link) Learn More 
+                                svg(width='11', height='10', viewbox='0 0 11 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                    path(d='M5.50011 9.08347L9.58347 5.00011L5.50011 0.916748M9.58347 5.00011L1.41675 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')

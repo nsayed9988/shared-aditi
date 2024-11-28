@@ -1,0 +1,26 @@
+.box-form-profile {
+    padding: 30px;
+    background-color: var(--bs-background-body);
+    border: 1px solid var(--bs-border-color);
+    border-radius: 8px;
+    margin-bottom: 31px;
+    .form-group {
+        margin-bottom: 30px;
+    }
+}
+.box-avatar-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 45px;
+    .image-avatar {
+        width: 85px;
+        position: relative;
+        padding-right: 18px;
+        img {
+            display: block;
+            width: 100%;
+            border-radius: 16px;
+        }
+    }
+}

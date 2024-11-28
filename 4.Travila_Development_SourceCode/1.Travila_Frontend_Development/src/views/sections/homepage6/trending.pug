@@ -1,0 +1,83 @@
+section.section-box.box-trending-destination.background-body
+    .container 
+        .text-center 
+            h2.neutral-1000 Trending Destinations
+            p.text-xl-medium.neutral-500 Most popular choices for travelers
+        .box-list-featured 
+            .row
+                -
+                    const trendingLists = [
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/homepage6/trend.png",
+                            title: 'Western Europe',
+                            link: 'destination.html'
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/homepage6/trend2.png",
+                            title: 'New York',
+                            link: 'destination.html'
+                        },
+                        {
+                            index: "3",
+                            image: "assets/imgs/page/homepage6/trend3.png",
+                            title: 'Venice',
+                            link: 'destination.html'
+                        },
+                        {
+                            index: "4",
+                            image: "assets/imgs/page/homepage6/trend4.png",
+                            title: 'Amsterdam',
+                            link: 'destination.html'
+                        },
+                        {
+                            index: "5",
+                            image: "assets/imgs/page/homepage6/trend5.png",
+                            title: 'London',
+                            link: 'destination.html'
+                        }
+                    ]
+                each item in trendingLists
+                    if item.index == 1
+                        .col-xl-8.col-lg-8.col-md-12
+                            .card-spot.card-spot-2.background-card 
+                                .card-image 
+                                    label.lbl-promotion 26 promotions
+                                    a(href= item.link)
+                                        img(src= item.image, alt="Travila")
+                                .card-info-two-col
+                                    .card-info.card-mw.background-card.wow.fadeInUp 
+                                        .card-left
+                                            .card-title 
+                                                a.text-lg-bold.neutral-1000(href= item.link)= item.title 
+                                            .card-desc 
+                                                a.text-sm.neutral-500(href="#") 356 Tours,
+                                                a.text-sm.neutral-500(href="#") 248 Activities
+                                        .card-right 
+                                            .card-button 
+                                                a(href="#") 
+                                                    svg(width='10', height='10', viewbox='0 0 10 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                        path(d='M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                                    .card-count 
+                                        p.text-sm-bold.color-white Promotion will end in
+                                        .box-count.box-count-square.mb-0.mt-5.wow.fadeInUp
+                                            .deals-countdown(data-countdown='2024/06/08 00:00:00')
+                    else 
+                        .col-xl-4.col-lg-4.col-md-6
+                            .card-spot.card-spot-2.background-card.wow.fadeInUp 
+                                .card-image 
+                                    a(href= item.link)
+                                        img(src= item.image, alt="Travila")
+                                .card-info.background-card 
+                                    .card-left
+                                        .card-title 
+                                            a.text-lg-bold.neutral-1000(href= item.link)= item.title 
+                                        .card-desc 
+                                            a.text-sm.neutral-500(href="#") 356 Tours,
+                                            a.text-sm.neutral-500(href="#") 248 Activities
+                                    .card-right 
+                                        .card-button 
+                                            a(href="destination.html") 
+                                                svg(width='10', height='10', viewbox='0 0 10 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                    path(d='M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')

@@ -1,0 +1,64 @@
+section.section-box.box-top-search-destination.background-body
+    .container 
+        .text-center.wow.fadeInUp 
+            h2.neutral-1000.wow.fadeInUp Must-see Attractions
+            p.text-xl-medium.neutral-500.wow.fadeInUp Favorite destinations of professional tourists
+        .box-list-populars 
+            .row 
+                -
+                    const item2Lists = [
+                        {
+                            image: "assets/imgs/page/homepage6/destination.png",
+                            title: 'Venice',
+                            link: 'destination.html'
+                        },
+                        {
+                            image: "assets/imgs/page/homepage6/destination2.png",
+                            title: 'Amsterdam',
+                            link: 'destination.html'
+                        },
+                        {
+                            image: "assets/imgs/page/homepage6/destination3.png",
+                            title: 'Budapest',
+                            link: 'destination.html'
+                        },
+                        {
+                            image: "assets/imgs/page/homepage6/destination4.png",
+                            title: 'Lisbon',
+                            link: 'destination.html'
+                        },
+                        {
+                            image: "assets/imgs/page/homepage6/destination5.png",
+                            title: 'London',
+                            link: 'destination.html'
+                        },
+                        {
+                            image: "assets/imgs/page/homepage6/destination6.png",
+                            title: 'Ottawa',
+                            link: 'destination.html'
+                        },
+                        {
+                            image: "assets/imgs/page/homepage6/destination7.png",
+                            title: 'Paris',
+                            link: 'destination.html'
+                        },
+                        {
+                            image: "assets/imgs/page/homepage6/destination8.png",
+                            title: 'Paris',
+                            link: 'destination.html'
+                        }
+                    ]
+                each item2 in item2Lists
+                    .col-lg-3.col-sm-6 
+                        .card-popular.card-top-destination.background-card.wow.fadeInUp 
+                            .card-image 
+                                img(src= item2.image, alt="Travila")
+                            .card-info 
+                                a.card-title(href= item2.link)= item2.title
+                                .card-meta 
+                                    .meta-links 
+                                        a.text-tour(href="destination.html") 356 Tours
+                                    .card-button 
+                                        a(href= item2.link) 
+                                            svg(width='10', height='10', viewbox='0 0 10 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                path(d='M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')

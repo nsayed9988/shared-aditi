@@ -1,0 +1,58 @@
+//- Master layout
+block mixins
+  include ../mixins/mixins
+block variables
+doctype html
+html(lang='en', data-bs-theme="dark")
+  head
+    //- Meta
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    meta(name='msapplication-TileColor', content='#0E0E0E')
+    meta(name='template-color', content='#0E0E0E')
+
+    //- Basic Seo
+    block basicSeo
+      meta(name='description' content='Index page')
+      meta(name='keywords', content='index, page')
+      meta(name='author' content='')
+
+    //- Favicons
+    link(rel='shortcut icon' type='image/x-icon' href='assets/imgs/template/favicon.svg')
+    link(href='assets/css/style.css?v=1.0.0', rel='stylesheet')
+
+    //- Title
+    block title
+      title Travila – Creative Digital Agency HTML Bootstrap 5 Template
+
+  //- Easily add or remove Page transition, smooth scroll or custom cursor functions by adding or removing classes of the body tag.
+  //- .dark-mode    .page-transition    .alith-smooth-scroll    .alith-magic-cursor
+  body
+    //- Preloadr
+    include ../components/preloader.pug
+    //- header
+    block header
+    
+    //-Menu mobi
+    block mobile
+      include ../components/mobile-menu.pug
+      include ../components/sidebar-canvas.pug
+      
+
+      //- block content
+      main.main
+        block content
+
+      //- headerd
+      block footer
+
+      block popup
+        include ../components/popup.pug
+        include ../elements/signin.pug
+        include ../elements/register.pug
+
+      //- Scripts
+    include ../components/script-vendors.pug
+    block scripts-custom
+    include ../components/script-main.pug

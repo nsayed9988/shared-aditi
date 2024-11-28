@@ -1,0 +1,21 @@
+extends ../layouts/master.pug
+
+block title
+  title Tickets - Modern Travel Tour Booking Template
+
+block header
+  include ../components/header.pug
+
+block content
+  include ../sections/tickets/banner.pug
+  include ../sections/tickets/slide-logo.pug
+  include ../sections/tickets/content.pug
+  include ../sections/homepage10/how-it-work.pug
+  .pb-90.background-body
+  include ../sections/homepage5/media.pug
+  
+block footer
+  //- Footer
+  include ../components/footer-5.pug
+
+block scripts-custom

@@ -1,0 +1,83 @@
+section.box-section.box-best-places.background-body 
+    .container 
+        .row.align-items-end
+            .col-md-7.mb-30.wow.fadeInLeft
+                h2.neutral-1000 Best Places in Europe
+                p.text-xl-medium.neutral-500 Find awesome hotel, tour, car and activities in Europe
+            .col-md-5.mb-30.wow.fadeInRight
+                .d-flex.justify-content-center.justify-content-md-end
+                    a.btn.btn-black-lg(href="#") View More 
+                        svg(width='16', height='16', viewbox='0 0 16 16', fill='none', xmlns='http://www.w3.org/2000/svg')
+                            path(d='M8 15L15 8L8 1M15 8L1 8', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+
+        .box-list-featured 
+            .row
+                -
+                    const spotsLists = [
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/homepage4/spot.png",
+                            title: 'Venice',
+                            link: 'destination-4.html'
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/homepage4/spot2.png",
+                            title: 'New York',
+                            link: 'destination-4.html'
+                        },
+                        {
+                            index: "3",
+                            image: "assets/imgs/page/homepage4/spot3.png",
+                            title: 'Amsterdam',
+                            link: 'destination-4.html'
+                        },
+                        {
+                            index: "1",
+                            image: "assets/imgs/page/homepage4/spot4.png",
+                            title: 'Budapest',
+                            link: 'destination-4.html'
+                        },
+                        {
+                            index: "2",
+                            image: "assets/imgs/page/homepage4/spot5.png",
+                            title: 'Lisbon',
+                            link: 'destination-4.html'
+                        },
+                        {
+                            index: "3",
+                            image: "assets/imgs/page/homepage4/spot6.png",
+                            title: 'London',
+                            link: 'destination-4.html'
+                        },
+                        {
+                            index: "3",
+                            image: "assets/imgs/page/homepage4/spot7.png",
+                            title: 'Ottawa',
+                            link: 'destination-4.html'
+                        },
+                        {
+                            index: "3",
+                            image: "assets/imgs/page/homepage4/spot8.png",
+                            title: 'Paris',
+                            link: 'destination-4.html'
+                        }
+                    ]
+                each item in spotsLists
+                    .col-xl-3.col-lg-4.col-md-6.wow.fadeInUp
+                        .card-spot.background-card 
+                            .card-image 
+                                a(href= item.link)
+                                    img(src= item.image, alt="Travila")
+                            .card-info.background-card 
+                                .card-left
+                                    .card-title 
+                                        a.text-lg-bold.neutral-1000(href= item.link)= item.title 
+                                    .card-desc 
+                                        a.text-sm.neutral-500(href="destination-4.html") 356 Tours,
+                                        a.text-sm.neutral-500(href="destination-4.html") 248 Activities
+                                .card-right 
+                                    .card-button 
+                                        a(href="destination-4.html") 
+                                            svg(width='10', height='10', viewbox='0 0 10 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                                path(d='M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')

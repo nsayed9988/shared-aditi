@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <link rel="manifest" href="manifest.json" crossorigin>
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
+    <link href="assets/css/style.css?version=2.0" rel="stylesheet">
+    <title>My Profile  </title>
+  </head>
+  <body>
+    <div id="preloader-active">
+      <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+          <div class="text-center">
+            <div class="spinning-coin-fall"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <header class="header sticky-bar background-body">
+      <div class="container">
+        <div class="main-header">
+          <div class="header-left">
+            <div class="header-logo"><a class="d-flex" href="index.html"><img class="light-mode" alt="Travilla" src="assets/imgs/page/dashboard/logo.svg"><img class="dark-mode" alt="Travilla" src="assets/imgs/template/logonew.svg"></a></div>
+          </div>
+          <div class="header-search"> <a class="btn btn-expanded"></a>
+            <div class="box-search"> 
+              <form action="">
+                <input class="form-control input-search" type="text" name="keyword" placeholder="What are you looking for?">
+              </form>
+            </div><a class="text-sm-bold neutral-1000 ps-5 d-flex align-items-center" href="https://travila.netlify.app/" target="_blank">         <span>Visit Site</span><img class="size-16 ms-2 img-invert" alt="Travilla" src="assets/imgs/template/icons/expand-arrows.svg"></a>
+          </div>
+          <div class="header-right">
+            <div class="block-signin">
+              <div class="dropdown d-inline-block mr-25"><a class="btn btn-notify" id="dropdownNotify" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                  <svg width="20" height="24" viewbox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.81336 9.69212C2.05799 7.61607 3.05152 5.70775 4.61158 4.31725C4.92067 4.04149 4.94776 3.56761 4.67237 3.25816C4.39661 2.94871 3.92274 2.92162 3.61329 3.19738C1.77637 4.83471 0.60743 7.08287 0.322513 9.52807C0.31922 9.55699 0.317383 9.58593 0.317383 9.61486V9.62254C0.317383 10.0367 0.653195 10.3689 1.06738 10.3689C1.45558 10.3689 1.77491 10.0704 1.81336 9.69212Z" fill=""></path>
+                    <path d="M19.7013 9.53392C19.4494 7.12241 18.2601 4.72877 16.4036 3.14867C16.0882 2.88023 15.6147 2.91869 15.3463 3.23399C15.0779 3.5493 15.116 4.02281 15.4316 4.29124C16.9919 5.61806 18.0014 7.58135 18.2049 9.61485C18.2049 10.029 18.5408 10.3648 18.9549 10.3649C19.3794 10.3649 19.7461 9.96292 19.7013 9.53392Z" fill=""></path>
+                    <path d="M18.1336 17.2218C17.2283 15.6383 16.75 13.8369 16.75 12.0124C16.75 12.0124 16.75 10.5011 16.75 10.5C16.75 7.58985 14.7483 4.90612 11.9741 4.05693C12.1444 3.74034 12.25 3.38402 12.25 3C12.25 1.75927 11.2408 0.75 10 0.75C8.7593 0.75 7.75003 1.75927 7.75003 3C7.75003 3.38425 7.85582 3.74075 8.02629 4.05748C5.25586 4.93186 3.25003 7.60927 3.25003 10.7303V12.0124C3.25003 13.8369 2.77175 15.6383 1.86612 17.2222C1.38161 18.0695 1.10258 18.9553 1.63871 19.879C2.04556 20.5811 2.77322 21 3.58475 21H7.00003C7.00003 22.6542 8.34585 24 10 24C11.6542 24 13 22.6542 13 21H16.4153C17.2268 21 17.9545 20.5811 18.3613 19.879C18.8792 18.9856 18.6115 18.0588 18.1336 17.2218ZM10 2.25C10.4135 2.25 10.75 2.58655 10.75 3C10.75 3.41345 10.4135 3.75 10 3.75C9.58658 3.75 9.25003 3.41345 9.25003 3C9.25003 2.58655 9.58658 2.25 10 2.25ZM10 22.5C9.17276 22.5 8.50003 21.8273 8.50003 21H11.5C11.5 21.8273 10.8273 22.5 10 22.5ZM17.0642 19.1265C16.999 19.2385 16.8053 19.5 16.4153 19.5H3.58475C3.19479 19.5 3.00106 19.2386 2.93585 19.1265C2.69871 18.7189 2.96626 18.321 3.16873 17.9659C4.20328 16.1565 4.75003 14.0977 4.75003 12.0124C4.75003 12.0124 4.75003 10.731 4.75003 10.7303C4.75003 7.89772 7.07082 5.25041 9.99155 5.25037C12.8215 5.25033 15.25 7.67938 15.25 10.5V12.0124C15.25 14.0976 15.7968 16.1564 16.8309 17.9655C17.0413 18.3336 17.3076 18.7044 17.0642 19.1265Z" fill=""></path>
+                  </svg></a>
+                <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownNotify">
+                  <li><a class="dropdown-item active" href="#">10 notifications</a></li>
+                  <li><a class="dropdown-item" href="#">12 messages</a></li>
+                  <li><a class="dropdown-item" href="#">20 replies</a></li>
+                </ul>
+              </div>
+              <div class="dropdown d-inline-block"><a class="btn btn-lang neutral-1000" id="dropdownLang" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                  <svg class="first" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.1506 4.22779C18.1502 4.22135 18.1495 4.2149 18.1484 4.20849C18.1234 4.17278 18.0927 4.14205 18.0669 4.10705C17.8802 3.85268 17.6825 3.60785 17.4739 3.37252C17.4168 3.30821 17.3596 3.24462 17.301 3.18174C17.0862 2.95169 16.8609 2.73231 16.6251 2.52369C16.5815 2.48509 16.5408 2.44511 16.4972 2.40722C15.9161 1.9094 15.2798 1.47977 14.6009 1.12685C14.5737 1.11257 14.5452 1.10043 14.5173 1.08611C14.2149 0.932464 13.9049 0.794349 13.5884 0.672394C13.5169 0.646689 13.4519 0.622365 13.3841 0.600929C13.1026 0.499489 12.8167 0.41065 12.5267 0.334413C12.4409 0.311554 12.3552 0.287984 12.268 0.267972C11.9822 0.201531 11.6964 0.15079 11.4042 0.109343C11.3156 0.0964899 11.2284 0.079325 11.1391 0.0686074C10.3864 -0.0228691 9.62536 -0.0228691 8.87262 0.0686074C8.78332 0.079325 8.69615 0.0964899 8.60752 0.109343C8.3153 0.15079 8.02664 0.201531 7.74367 0.267972C7.6565 0.287984 7.57076 0.311554 7.48502 0.334413C7.19301 0.410608 6.90723 0.499447 6.62761 0.600929C6.55615 0.625211 6.49113 0.649535 6.42327 0.672394C6.1068 0.794349 5.79675 0.932422 5.49439 1.08611C5.46651 1.10039 5.43796 1.11253 5.41079 1.12685C4.72959 1.4794 4.09118 1.90898 3.50803 2.40722C3.46445 2.44507 3.42372 2.48509 3.38013 2.52369C3.14196 2.73327 2.91664 2.95265 2.70421 3.18174C2.64564 3.24462 2.58845 3.30821 2.53131 3.37252C2.32219 3.60735 2.1245 3.85218 1.93828 4.10701C1.91257 4.14201 1.88184 4.17274 1.85681 4.20845C1.85354 4.21469 1.85065 4.22114 1.84823 4.22775C-0.616238 7.68155 -0.616238 12.319 1.84823 15.7728C1.85065 15.7794 1.8535 15.7858 1.85681 15.7921C1.8818 15.8278 1.91253 15.8585 1.93828 15.8935C2.12454 16.1479 2.32219 16.3927 2.53131 16.628C2.58845 16.6923 2.64564 16.7559 2.70421 16.8188C2.91953 17.0489 3.14481 17.2682 3.38013 17.4769C3.42372 17.5155 3.46445 17.5554 3.50803 17.5933C4.08913 18.0912 4.7254 18.5208 5.40434 18.8737C5.43151 18.888 5.46006 18.9001 5.48794 18.9144C5.7903 19.0681 6.10031 19.2062 6.41682 19.3282C6.48828 19.3539 6.5533 19.3782 6.62116 19.3996C6.90267 19.5011 7.18849 19.5899 7.47857 19.6661C7.56431 19.689 7.65006 19.7126 7.73722 19.7326C8.02304 19.799 8.30881 19.8498 8.60108 19.8912C8.68966 19.9041 8.77683 19.9212 8.86617 19.9319C9.61887 20.0234 10.3799 20.0234 11.1326 19.9319C11.2219 19.9212 11.3091 19.9041 11.3977 19.8912C11.6899 19.8498 11.9786 19.799 12.2616 19.7326C12.3487 19.7126 12.4345 19.689 12.5202 19.6661C12.8127 19.5899 13.0985 19.5011 13.3776 19.3996C13.4491 19.3753 13.5141 19.351 13.582 19.3282C13.8984 19.2062 14.2085 19.0681 14.5108 18.9144C14.5387 18.9002 14.5673 18.888 14.5944 18.8737C15.2734 18.5207 15.9096 18.0912 16.4907 17.5933C16.5343 17.5554 16.5751 17.5155 16.6186 17.4769C16.8568 17.2677 17.0821 17.0484 17.2946 16.8188C17.3531 16.7559 17.4103 16.6923 17.4675 16.628C17.6766 16.3927 17.8743 16.1479 18.0605 15.8935C18.0862 15.8585 18.1169 15.8278 18.142 15.7921C18.1452 15.7858 18.1481 15.7794 18.1506 15.7728C20.615 12.319 20.615 7.68159 18.1506 4.22779ZM17.3353 5.57968C18.0186 6.70507 18.4313 7.97377 18.5407 9.28584H14.2608C14.2084 8.43446 14.0744 7.59011 13.8607 6.76435C15.0696 6.53794 16.2398 6.13896 17.3353 5.57968ZM11.8207 1.62341C11.8607 1.63271 11.8993 1.64556 11.9393 1.65486C12.1951 1.71489 12.4488 1.78347 12.6967 1.86921C12.7346 1.88206 12.7717 1.89709 12.8089 1.91066C13.0547 1.9964 13.2969 2.09143 13.5342 2.19647C13.5756 2.21577 13.6163 2.23721 13.6578 2.25651C13.885 2.36465 14.107 2.48158 14.3237 2.60734L14.4666 2.69379C14.6724 2.81956 14.8724 2.95412 15.0668 3.09751C15.1168 3.13393 15.1668 3.16897 15.2161 3.20895C15.4066 3.35184 15.5891 3.50498 15.7634 3.66839C15.8091 3.70983 15.8563 3.75057 15.9013 3.79344C16.0842 3.96706 16.2586 4.15068 16.4272 4.34075C16.4486 4.36574 16.4715 4.3886 16.4929 4.41221C15.5254 4.87328 14.5005 5.20251 13.4456 5.39107C12.9568 4.04752 12.3112 2.76635 11.5221 1.57418C11.6213 1.59202 11.7228 1.60202 11.8207 1.62341ZM7.17069 9.2858C7.22704 8.5127 7.35867 7.74694 7.56369 6.99939C8.37324 7.09555 9.18778 7.14324 10.003 7.14227C10.819 7.14202 11.6343 7.09312 12.4445 6.99579C12.6492 7.74455 12.7801 8.51153 12.8353 9.2858H7.17069ZM12.8353 10.7148C12.779 11.4879 12.6474 12.2537 12.4423 13.0012C11.6328 12.9051 10.8182 12.8574 10.003 12.8584C9.18703 12.8574 8.37178 12.9051 7.56151 13.0012C7.35708 12.2537 7.22621 11.4879 7.17065 10.7148H12.8353ZM10.003 1.89211C10.8161 3.04455 11.4849 4.29235 11.9943 5.60756C11.3329 5.67781 10.6682 5.71311 10.003 5.71331C9.33854 5.71252 8.67455 5.67702 8.01378 5.60685C8.52388 4.29252 9.19184 3.04513 10.003 1.89211ZM3.57958 4.33999C3.7475 4.14992 3.92254 3.9663 4.10546 3.79268C4.15046 3.74981 4.19764 3.70908 4.24336 3.66763C4.41962 3.50712 4.60207 3.35397 4.79067 3.2082C4.83999 3.17031 4.88998 3.13673 4.94001 3.09675C5.13435 2.95386 5.33442 2.81927 5.54019 2.69304L5.68308 2.60659C5.89982 2.4799 6.12179 2.36293 6.349 2.25575C6.39044 2.23645 6.43118 2.21502 6.47262 2.19572C6.70984 2.08854 6.95207 1.99351 7.19786 1.9099C7.235 1.89634 7.26933 1.88131 7.31002 1.86845C7.55795 1.78556 7.81019 1.71698 8.06741 1.6541C8.10744 1.64481 8.146 1.63196 8.18673 1.62337C8.28461 1.60194 8.3861 1.59193 8.4854 1.57406C7.69598 2.76643 7.05016 4.04786 6.56121 5.39166C5.50624 5.2031 4.48128 4.87387 3.51385 4.4128C3.53529 4.38785 3.55815 4.36499 3.57958 4.33999ZM2.67072 5.57968C3.76597 6.13892 4.9359 6.5379 6.14465 6.76435C5.93118 7.59015 5.79742 8.4345 5.74525 9.28584H1.46536C1.5748 7.97377 1.98743 6.70507 2.67072 5.57968ZM2.67072 14.421C1.98739 13.2956 1.57476 12.0269 1.46536 10.7148H5.74525C5.79767 11.5662 5.93164 12.4106 6.14536 13.2363C4.93641 13.4627 3.76622 13.8617 2.67072 14.421ZM8.18531 18.3772C8.14528 18.3679 8.10673 18.3551 8.0667 18.3458C7.8109 18.2857 7.55724 18.2172 7.30931 18.1314C7.27142 18.1186 7.23429 18.1035 7.19711 18.09C6.95132 18.0042 6.70912 17.9092 6.47187 17.8042C6.43042 17.7849 6.38969 17.7634 6.34824 17.7441C6.12104 17.636 5.89907 17.5191 5.68233 17.3933L5.53944 17.3068C5.33367 17.1811 5.13359 17.0465 4.93925 16.9031C4.88922 16.8667 4.83924 16.8317 4.78992 16.7917C4.59939 16.6488 4.41694 16.4957 4.24261 16.3322C4.19689 16.2908 4.14971 16.2501 4.1047 16.2072C3.92179 16.0336 3.74746 15.85 3.57883 15.6599C3.55739 15.6349 3.53453 15.612 3.5131 15.5884C4.48057 15.1274 5.50549 14.7981 6.56046 14.6096C7.0492 15.9531 7.69481 17.2343 8.48389 18.4265C8.38463 18.4087 8.28319 18.3987 8.18531 18.3772ZM10.003 18.1086C9.18987 16.9561 8.52111 15.7083 8.01165 14.3931C9.3349 14.2507 10.6696 14.2507 11.9929 14.3931L11.9922 14.3938C11.4821 15.7081 10.8142 16.9555 10.003 18.1086ZM16.4264 15.6606C16.2585 15.8507 16.0835 16.0343 15.9006 16.208C15.8556 16.2508 15.8084 16.2916 15.7627 16.333C15.5864 16.494 15.404 16.6472 15.2153 16.7924C15.166 16.8303 15.116 16.8675 15.066 16.9039C14.8717 17.0468 14.6716 17.1814 14.4658 17.3076L14.3229 17.394C14.1067 17.5203 13.8847 17.6372 13.657 17.7449C13.6156 17.7642 13.5748 17.7856 13.5334 17.8049C13.2962 17.9121 13.054 18.0071 12.8082 18.0907C12.771 18.1043 12.7367 18.1193 12.696 18.1322C12.4481 18.2151 12.1958 18.2836 11.9386 18.3465C11.8986 18.3558 11.86 18.3687 11.8193 18.3773C11.7214 18.3987 11.6199 18.4087 11.5206 18.4266C12.3097 17.2344 12.9554 15.9532 13.4441 14.6097C14.499 14.7982 15.524 15.1275 16.4914 15.5885C16.4707 15.6128 16.4479 15.6356 16.4264 15.6606ZM17.3353 14.421C16.2401 13.8618 15.0701 13.4628 13.8614 13.2363C14.0748 12.4105 14.2086 11.5662 14.2608 10.7148H18.5407C18.4312 12.0269 18.0186 13.2956 17.3353 14.421Z" fill=""></path>
+                  </svg><span>EN</span>
+                  <svg class="last" width="8" height="5" viewbox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.666687 0.666667L4.00002 4L7.33335 0.666667" stroke="" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg></a>
+                <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownLang">
+                  <li><a class="dropdown-item active" href="#">EN</a></li>
+                  <li><a class="dropdown-item" href="#">FR</a></li>
+                  <li><a class="dropdown-item" href="#">CHN</a></li>
+                </ul>
+              </div>
+              <div class="dropdown d-inline-block"><a class="btn btn-currency neutral-1000" id="dropdownCurrency" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"> <span>USD</span>
+                  <svg width="8" height="5" viewbox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.666687 0.666667L4.00002 4L7.33335 0.666667" stroke="" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg></a>
+                <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownCurrency">
+                  <li><a class="dropdown-item active" href="#">USD</a></li>
+                  <li><a class="dropdown-item" href="#">EUR</a></li>
+                  <li><a class="dropdown-item" href="#">SGP</a></li>
+                </ul>
+              </div>
+              <div class="d-none d-xxl-inline-block align-middle mr-15"><a class="btn btn-mode change-mode mr-15" href="#" data-bs-theme-value="dark"> 
+                  <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="4" stroke="" stroke-width="1.5" stroke-linejoin="round"></circle>
+                    <path d="M20 12H21" stroke="" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M3 12H4" stroke="" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M12 20L12 21" stroke="" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M12 3L12 4" stroke="" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M17.6569 17.6569L18.364 18.364" stroke="" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M5.63605 5.63605L6.34315 6.34315" stroke="" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M6.34314 17.6569L5.63603 18.364" stroke="" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M18.364 5.63605L17.6568 6.34315" stroke="" stroke-width="1.5" stroke-linecap="round"></path>
+                  </svg></a></div>
+              <div class="member-login"><img alt="" src="assets/imgs/page/dashboard/profile.png">
+                <div class="info-member"> <strong class="neutral-1000">Person Xyz</strong>
+                  <!--<div class="dropdown"><a class="text-xs-medium neutral-500 icon-down" id="dropdownProfile" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">Super Admin</a>
+                    <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownProfile">
+                      <li><a class="dropdown-item active" href="my-profile.html">Profiles</a></li>
+                      <li><a class="dropdown-item" href="my-comment.html">My Comments</a></li>
+                      <li><a class="dropdown-item" href="login.html">Login</a></li>
+                      <li><a class="dropdown-item" href="register.html">Register</a></li>
+                    </ul>
+                  </div>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
+    </header>
+    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
+      <div class="mobile-header-wrapper-inner">
+        <div class="mobile-header-content-area">
+          <div class="perfect-scroll">
+            <div class="mobile-search mobile-header-border mb-30">
+              <form action="#">
+                <input type="text" placeholder="Search…"><i class="fi-rr-search"></i>
+              </form>
+            </div>
+            <div class="mobile-menu-wrap mobile-header-border">
+              <!-- mobile menu start-->
+              <nav>
+                <ul class="main-menu">
+                  <li class="has-children"><a class="dashboard2" href="index.html"> <img src="assets/imgs/template/icons/dashboard.svg" alt="Travilla"><span>
+                         Dashboard</span></a></li>
+                  <li><a class="candidates2" href="#"> <img src="assets/imgs/template/icons/tour.svg" alt="Travilla"><span>
+                         Tours </span></a>
+                    <ul class="sub-menu"> 
+                      <!--<li> <a href="add-tour.html">Add New</a></li>-->
+                      <li> <a href="">Add Tour</a></li>
+                      <li> <a href="my-booking.html">View Recent Tours</a></li>
+                    </ul>
+                  </li>
+                  <!--<li><a class="recruiters2" href="#"> <img src="assets/imgs/template/icons/hotel.svg" alt="Travilla"><span>
+                         Hotels</span></a></li>
+                  <li><a class="jobs2" href="#"> <img src="assets/imgs/template/icons/destination.svg" alt="Travilla"><span>
+                         Destination</span></a>
+                    <ul class="sub-menu"> 
+                      <li> <a href="#">Add New</a></li>
+                      <li> <a href="#">All Destination</a></li>
+                      <li> <a href="#">View Booking</a></li>
+                    </ul>
+                  </li>
+                  <li><a class="tasks2" href="my-comment.html"> <img src="assets/imgs/template/icons/activities.svg" alt="Travilla"><span>
+                         Activities</span></a></li>
+                  <li><a class="myprofiles2" href="profile.html"> <img src="assets/imgs/template/icons/car.svg" alt="Travilla"><span>
+                         Cars Rental</span></a></li>
+                  <li><a class="cvmanage2" href="my-resume.html"> <img src="assets/imgs/template/icons/property.svg" alt="Travilla"><span>
+                         Properties</span></a></li>
+                  <li><a class="settings2" href="my-booking.html"> <img src="assets/imgs/template/icons/ticket.svg" alt="Travilla"><span>
+                         Tickets</span></a></li>
+                  <li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/vendor.svg" alt="Travilla"><span>
+                         Vendors</span></a></li>
+                  <li class="divider"></li>
+                  <li><a class="logout2" href="#"> <img src="assets/imgs/template/icons/blog.svg" alt="Travilla"><span>
+                         News & Blog</span></a></li>
+                  <li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/review.svg" alt="Travilla"><span>
+                         Review</span></a></li>
+                  <li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/message.svg" alt="Travilla"><span>
+                         Message</span></a></li>
+                  <li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/page.svg" alt="Travilla"><span>
+                         Pages</span></a></li>
+                  <li class="divider"></li>-->
+                  <!--<li><a class="authentication2" href="my-profile.html"> <img src="assets/imgs/template/icons/profile.svg" alt="Travilla"><span>
+                         My Profile</span></a></li>
+                  <li><a class="authentication2" href="my-comment.html"> <img src="assets/imgs/template/icons/message.svg" alt="Travilla"><span>
+                         My Comments</span></a></li>
+                  <li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/setting.svg" alt="Travilla"><span>
+                         Setting</span></a></li>-->
+                  <li><a class="authentication2" href="login.html"> <img src="assets/imgs/template/icons/logout.svg" alt="Travilla"><span>
+                         Logout</span></a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="mobile-account">
+              <h6 class="mb-10">Your Account</h6>
+              <ul class="mobile-menu font-heading">
+                <li><a href="my-profile.html">Profile</a></li>
+                <li><a href="#">Work Preferences</a></li>
+                <li><a href="#">Account Settings</a></li>
+                <li><a href="#">Go Pro</a></li>
+                <li><a href="login.html">Sign Out</a></li>
+              </ul>
+              <div class="mb-15 mt-15"> <a class="btn btn-default icon-edit hover-up" href="add-tour.html">Add new tour</a></div>
+            </div>
+            <div class="site-copyright">Copyright 2024 &copy; Travila. <br>Designed by AliThemes.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main class="main">
+      <div class="nav background-body">
+        <nav class="nav-main-menu">
+          <ul class="main-menu">
+            <li class="has-children"><a class="dashboard2" href="index.html"> <img src="assets/imgs/template/icons/dashboard.svg" alt="Travilla"><span>
+                   Dashboard</span></a></li>
+            <li><a class="candidates2" href="#"> <img src="assets/imgs/template/icons/tour.svg" alt="Travilla"><span>
+                   Tours </span></a>
+              <ul class="sub-menu"> 
+                  <li> <a href="">Add Tour</a></li>
+                      <li> <a href="my-booking.html">View Recent Tours</a></li>
+              </ul>
+            </li>
+           
+            <li><a class="jobs2" href="#"> <img src="assets/imgs/template/icons/destination.svg" alt="Travilla"><span>
+                   Wishlist</span></a>
+              <ul class="sub-menu"> 
+                <li> <a href="">Add Tour</a></li>
+                <li> <a href="my-booking.html">View Recent Tours</a></li>
+              </ul>
+            </li>
+            <!--<li><a class="tasks2" href="my-comment.html"> <img src="assets/imgs/template/icons/activities.svg" alt="Travilla"><span>
+                   Activities</span></a></li>
+            <li><a class="myprofiles2" href="profile.html"> <img src="assets/imgs/template/icons/car.svg" alt="Travilla"><span>
+                   Cars Rental</span></a></li>
+            <li><a class="cvmanage2" href="my-resume.html"> <img src="assets/imgs/template/icons/property.svg" alt="Travilla"><span>
+                   Properties</span></a></li>
+            <li><a class="settings2" href="my-booking.html"> <img src="assets/imgs/template/icons/ticket.svg" alt="Travilla"><span>
+                   Tickets</span></a></li>
+            <li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/vendor.svg" alt="Travilla"><span>
+                   Vendors</span></a></li>
+            <li class="divider"></li>
+            <li><a class="logout2" href="#"> <img src="assets/imgs/template/icons/blog.svg" alt="Travilla"><span>
+                   News & Blog</span></a></li>
+            <li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/review.svg" alt="Travilla"><span>
+                   Review</span></a></li>
+            <li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/message.svg" alt="Travilla"><span>
+                   Message</span></a></li>
+            <li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/page.svg" alt="Travilla"><span>
+                   Pages</span></a></li>
+            <li class="divider"></li>
+            <li><a class="authentication2" href="my-profile.html"> <img src="assets/imgs/template/icons/profile.svg" alt="Travilla"><span>
+                   My Profile</span></a></li>
+            <li><a class="authentication2" href="my-comment.html"> <img src="assets/imgs/template/icons/message.svg" alt="Travilla"><span>
+                   My Comments</span></a></li>
+            <li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/setting.svg" alt="Travilla"><span>
+                   Setting</span></a></li>-->
+            <li><a class="authentication2" href="login.html"> <img src="assets/imgs/template/icons/logout.svg" alt="Travilla"><span>
+                   Logout</span></a></li>
+          </ul>
+        </nav>
+        <div class="box-experiences"> 
+          <div class="top-experience"> <img class="light-mode" src="assets/imgs/page/dashboard/experience.svg" alt="Travilla"><img class="dark-mode" src="assets/imgs/page/dashboard/experience-w.svg" alt="Travilla"></div>
+          <div class="bottom-experience"> 
+            <p class="text-sm-bold neutral-1000">300,000+ Experiences</p>
+            <p class="text-sm-medium neutral-500">Make memories around the world.</p>
+          </div>
+        </div>
+        <div class="box-need-help"> 
+          <div class="top-need-help"> 
+            <svg width="22" height="22" viewbox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 1.28906C13.2406 1.28997 15.412 2.06545 17.1463 3.48411C18.8806 4.90278 20.0711 6.87739 20.5161 9.07336C20.9611 11.2693 20.6333 13.5516 19.5881 15.5336C18.5429 17.5155 16.8447 19.0751 14.7812 19.9482C12.408 20.9511 9.73363 20.9701 7.34639 20.0011C4.95914 19.0321 3.05461 17.1545 2.05176 14.7812C1.04891 12.408 1.02989 9.73363 1.99889 7.34639C2.96789 4.95914 4.84553 3.05461 7.21875 2.05176C8.41496 1.54554 9.70109 1.28613 11 1.28906ZM11 0C4.92508 0 0 4.92508 0 11C0 17.0749 4.92508 22 11 22C17.0749 22 22 17.0749 22 11C22 4.92508 17.0749 0 11 0Z" fill="#575756"></path>
+              <path d="M14.2094 16.9241C13.5705 16.8811 12.6699 16.6607 11.7907 16.3462C8.69097 15.2367 5.6664 12.2809 5.02359 8.14644C4.90929 7.41038 5.02961 6.73792 5.58734 6.1905C5.77425 6.00745 5.94054 5.80378 6.12316 5.61644C6.81066 4.90874 7.81527 4.8907 8.52726 5.57046C8.75285 5.78531 8.9823 5.99714 9.2023 6.21886C9.50356 6.51594 9.67798 6.9182 9.68896 7.34116C9.69994 7.76411 9.54661 8.17487 9.26117 8.48718C9.08929 8.67796 8.90882 8.85929 8.7275 9.04019C8.52941 9.23785 8.2832 9.35128 8.01894 9.43378C7.69281 9.53605 7.63222 9.67269 7.78047 9.98421C8.71718 11.9462 10.1834 13.3588 12.1792 14.2222C12.446 14.3374 12.5693 14.2854 12.6768 14.0207C12.9122 13.4402 13.3441 13.0169 13.8403 12.6749C14.4019 12.2882 15.2063 12.3741 15.7383 12.8313C16.0299 13.0819 16.3086 13.3472 16.5732 13.6262C16.8579 13.9308 17.016 14.3323 17.0156 14.7492C17.0152 15.1662 16.8563 15.5673 16.571 15.8714C16.4881 15.9616 16.4026 16.0497 16.3231 16.1425C15.8444 16.6989 15.2373 16.9593 14.2094 16.9241Z" fill="#575756"></path>
+            </svg>
+            <p class="text-md-medium neutral-1000">Need help? Call us</p>
+          </div>
+          <div class="bottom-need-help"> 
+            <h6 class="neutral-1000">1-800-222-8888</h6>
+          </div>
+        </div>
+      </div>
+      <div class="box-content">
+        <div class="box-heading">
+          <div class="box-heading-left">
+            <div class="box-title"> 
+              <h4 class="neutral-1000 mb-15">My Profile</h4>
+            </div>
+            <div class="box-breadcrumb"> 
+              <div class="breadcrumbs">
+                <ul> 
+                  <li> <a class="icon-home" href="index.html">Home</a></li>
+                  <li><a class="icon-home" href="#">User</a></li>
+                  <li><span>Update Profile</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section-box">
+          <div class="container"> 
+            <div class="row"> 
+              <div class="col-xl-9 col-lg-8">
+                <div class="box-form-profile"> 
+                  <h6 class="text-lg-bold neutral-1000 mb-30">Update your profile</h6>
+                  <div class="box-avatar-profile"> 
+                    <div class="image-avatar">  <img src="assets/imgs/page/profile/avatar.png" alt="Travilla"></div>
+                    <div class="box-button-upload-avatar"> <a class="btn btn-upload-avatar" href="#">Upload Avatar</a><a class="btn btn-remove-avatar" href="#">
+                        <svg width="22" height="23" viewbox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12.7773 10.6111V15.9444" stroke="" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path d="M9.22168 10.6111V15.9444" stroke="" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path d="M5.66602 7.05557V17.7222C5.66602 18.7041 6.46196 19.5 7.4438 19.5H14.5549C15.5367 19.5 16.3327 18.7041 16.3327 17.7222V7.05557" stroke="" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path d="M3.88867 7.05557H18.1109" stroke="" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path d="M6.55566 7.05556L8.33344 3.5H13.6668L15.4446 7.05556" stroke="" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg></a></div>
+                  </div>
+                  <div class="row"> 
+                    <div class="col-lg-6">
+                      <div class="form-group"> 
+                        <label class="text-sm-medium neutral-500 mb-10"> Name </label>
+                        <input class="form-control" type="text" placeholder=" Your Full Name" name="fullName" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group"> 
+                        <label class="text-sm-medium neutral-500 mb-10">Email </label>
+                        <input class="form-control" type="email" placeholder="Email" name="email" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group"> 
+                        <label class="text-sm-medium neutral-500 mb-10">Contact Number </label>
+                        <input class="form-control" type="tel" placeholder="Contact number" name="contactNumber" pattern="\d{2} - \d{3} \d{3} \d{2}" title="Format: 01 - 234 567 89" required>
+                      </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                      <div class="form-group"> 
+                        <label class="text-sm-medium neutral-500 mb-10">Bio</label>
+                        <textarea class="form-control" placeholder="Your comment" name="bio" rows="6" minlength="10"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group"> 
+                        <label class="text-sm-medium neutral-500 mb-10">Languages</label>
+                        <input class="form-control" type="text" placeholder="e.g., English, French" name="languages" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group"> 
+                        <label class="text-sm-medium neutral-500 mb-10">Nationality</label>
+                        <input class="form-control" type="text" placeholder="Nationality" name="nationality" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="box-button-save mt-15"> 
+                    <button class="btn btn-gray" type="submit">Save Changes</button>
+                  </div>
+                  
+                </div>
+                <div class="box-form-profile">    
+                  <h6 class="text-lg-bold neutral-1000 mb-30">Contact Information</h6>
+                  <div class="row"> 
+                    <div class="col-lg-6">
+                      <div class="form-group"> 
+                        <label class="text-sm-medium neutral-500 mb-10">Country</label>
+                        <input class="form-control" type="text" placeholder="Country">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group"> 
+                        <label class="text-sm-medium neutral-500 mb-10">City</label>
+                        <input class="form-control" type="text" placeholder="City" >
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group"> 
+                        <label class="text-sm-medium neutral-500 mb-10">Complete Address</label>
+                        <input class="form-control" type="text" placeholder="Complete Address">
+                      </div>
+                    </div>
+                    
+                    
+                   
+                    
+                  </div>
+                  <div class="box-button-save"> 
+                    <button class="btn btn-black">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-4">
+                <div class="box-form-profile"> 
+                  <h6 class="text-lg-bold neutral-1000 mb-12">Social Network</h6>
+                  <div class="row"> 
+                    <div class="col-lg-12">
+                      <label class="lbl-checkbox text-sm-medium neutral-500">Facebook</label>
+                      <div class="form-group"> 
+                        <input class="form-control" type="text" placeholder="https://www.facebook.com">
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <label class="lbl-checkbox text-sm-medium neutral-500">Twitter</label>
+                      <div class="form-group"> 
+                        <input class="form-control" type="text" placeholder="https://twitter.com">
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <label class="lbl-checkbox text-sm-medium neutral-500">Instagram</label>
+                      <div class="form-group"> 
+                        <input class="form-control" type="text" placeholder="https://www.instagram.com">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="box-button-save mt-15"> 
+                    <button class="btn btn-gray">Save Changes</button>
+                  </div>
+                </div>
+                <div class="box-form-profile"> 
+                  <h6 class="text-lg-bold neutral-1000 mb-12">Change Password</h6>
+                  <div class="row"> 
+                    <div class="col-lg-12">
+                      <label class="lbl-checkbox text-sm-medium neutral-500">Old Password</label>
+                      <div class="form-group"> 
+                        <input class="form-control" type="password" placeholder="*************">
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <label class="lbl-checkbox text-sm-medium neutral-500">New Password</label>
+                      <div class="form-group"> 
+                        <input class="form-control" type="password" placeholder="*************">
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <label class="lbl-checkbox text-sm-medium neutral-500">Confirm new password</label>
+                      <div class="form-group"> 
+                        <input class="form-control" type="password" placeholder="*************">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="box-button-save mt-15"> 
+                    <button class="btn btn-gray">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer mt-20 background-body">
+          <div class="container">
+            <div class="box-footer">
+              <div class="row">
+                <div class="col-md-6 col-sm-12 mb-25 text-center text-md-start">
+                  <p class="text-xs-medium neutral-500">© 2024  <a class="neutral-1000" href="#">Travila </a><span>Inc. All rights reserved.</span></p>
+                </div>
+                <div class="col-md-6 col-sm-12 text-center text-md-end mb-25">
+                  <ul class="menu-footer">
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Privacy policy</a></li>
+                    <li><a href="#">Legal notice</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                    <li><a href="#">Contact</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </main>
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/waypoints.js"></script>
+    <script src="assets/js/plugins/wow.js"></script>
+    <script src="assets/js/plugins/magnific-popup.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/plugins/select2.min.js"></script>
+    <script src="assets/js/plugins/isotope.js"></script>
+    <script src="assets/js/plugins/counterup.js"></script>
+    <script src="assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="assets/js/plugins/jquery.circliful.js"></script>
+    <script src="assets/js/plugins/bootstrap-datepicker.js"></script>
+    <script src="assets/js/plugins/dark.js"></script>
+    <script src="assets/js/plugins/charts/index.js"></script>
+    <script src="assets/js/plugins/charts/xy.js"></script>
+    <script src="assets/js/plugins/charts/Animated.js"></script>
+    <script src="assets/js/plugins/armcharts5-script.js"></script>
+    <script src="assets/js/main.js?v=1.0"></script>
+  </body>
+</html>

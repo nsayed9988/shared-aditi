@@ -1,0 +1,103 @@
+section.section-box.box-why-travel-us.background-body
+    .container 
+        .text-center 
+            h2.neutral-1000 Why Travel With Us?
+            p.text-xl-medium.neutral-500 The best booking platform you can trust
+        .row.mt-55
+            -
+                const itemWhyLists = [
+                    {
+                        index: "1",
+                        image: "assets/imgs/page/homepage2/security.svg",
+                        title: 'Security Assurance',
+                        desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                        link: '#'
+                    },
+                    {
+                        index: "2",
+                        image: "assets/imgs/page/homepage2/support.svg",
+                        title: 'Security Assurance',
+                        desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                        link: '#'
+                    },
+                    {
+                        index: "3",
+                        image: "assets/imgs/page/homepage2/policy.svg",
+                        title: 'Security Assurance',
+                        desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                        link: '#'
+                    },
+                    {
+                        index: "4",
+                        image: "assets/imgs/page/homepage2/repu.svg",
+                        title: 'Security Assurance',
+                        desc: 'Demonstrates commitment to user data security through encryption and secure payment practices',
+                        link: '#'
+                    }
+                ]
+            each item in itemWhyLists
+                .col-lg-3.col-md-6
+                    if item.index == "1"
+                        .card-why-travel.background-2.hover-up 
+                            .card-image 
+                                img(src= item.image, alt="Travila")
+                            .card-info 
+                                a.text-xl-bold.card-title(href= item.link)= item.title
+                                p.text-sm-medium.neutral-500.card-desc= item.desc
+                                a.text-sm-medium.card-link(href= item.link) Learn More 
+                                    svg(width='11', height='10', viewbox='0 0 11 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                        path(d='M5.50011 9.08347L9.58347 5.00011L5.50011 0.916748M9.58347 5.00011L1.41675 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                    else if item.index == "2"
+                        .card-why-travel.background-7.hover-up 
+                            .card-image 
+                                img(src= item.image, alt="Travila")
+                            .card-info 
+                                a.text-xl-bold.card-title(href= item.link)= item.title
+                                p.text-sm-medium.neutral-500.card-desc= item.desc
+                                a.text-sm-medium.card-link(href= item.link) Learn More 
+                                    svg(width='11', height='10', viewbox='0 0 11 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                        path(d='M5.50011 9.08347L9.58347 5.00011L5.50011 0.916748M9.58347 5.00011L1.41675 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                    else if item.index == "3"
+                        .card-why-travel.background-3.hover-up 
+                            .card-image 
+                                img(src= item.image, alt="Travila")
+                            .card-info 
+                                a.text-xl-bold.card-title(href= item.link)= item.title
+                                p.text-sm-medium.neutral-500.card-desc= item.desc
+                                a.text-sm-medium.card-link(href= item.link) Learn More 
+                                    svg(width='11', height='10', viewbox='0 0 11 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                        path(d='M5.50011 9.08347L9.58347 5.00011L5.50011 0.916748M9.58347 5.00011L1.41675 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                    else if item.index == "4"
+                        .card-why-travel.background-8.hover-up 
+                            .card-image 
+                                img(src= item.image, alt="Travila")
+                            .card-info 
+                                a.text-xl-bold.card-title(href= item.link)= item.title
+                                p.text-sm-medium.neutral-500.card-desc= item.desc
+                                a.text-sm-medium.card-link(href= item.link) Learn More 
+                                    svg(width='11', height='10', viewbox='0 0 11 10', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                        path(d='M5.50011 9.08347L9.58347 5.00011L5.50011 0.916748M9.58347 5.00011L1.41675 5.00011', stroke='', stroke-linecap='round', stroke-linejoin='round')
+        .box-swiper.mt-30
+            .swiper-container.swiper-group-payment-7
+                .swiper-wrapper
+                    .swiper-slide
+                        .item-logo-payment 
+                            img(src="assets/imgs/page/homepage2/paypal.png", alt="Travila")
+                    .swiper-slide
+                        .item-logo-payment 
+                            img(src="assets/imgs/page/homepage2/stripe.png", alt="Travila")
+                    .swiper-slide
+                        .item-logo-payment 
+                            img(src="assets/imgs/page/homepage2/payoneer.png", alt="Travila")
+                    .swiper-slide
+                        .item-logo-payment 
+                            img(src="assets/imgs/page/homepage2/visa.png", alt="Travila")
+                    .swiper-slide
+                        .item-logo-payment 
+                            img(src="assets/imgs/page/homepage2/cashapp.png", alt="Travila")
+                    .swiper-slide
+                        .item-logo-payment 
+                            img(src="assets/imgs/page/homepage2/bitcoin.png", alt="Travila")
+                    .swiper-slide
+                        .item-logo-payment 
+                            img(src="assets/imgs/page/homepage2/discover.png", alt="Travila")

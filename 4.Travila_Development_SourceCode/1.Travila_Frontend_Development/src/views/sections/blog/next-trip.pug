@@ -1,0 +1,78 @@
+section.section-box.box-next-trips.background-body
+    .container 
+        .row 
+            .col-lg-6.mb-30
+                h1.text-86-bold.neutral-1000 Inspiration 
+                h2.text-64-medium.neutral-1000 for Your Next Trips
+                h6.neutral-500 Discover the World's Treasures with Travila 
+            .col-lg-6.mb-30
+                .box-swiper.mt-30.wow.fadeInUp
+                    .swiper-container.swiper-group-5
+                        .swiper-wrapper
+                            -
+                                const itemActivities = [
+                                    {
+                                        image: "assets/imgs/page/homepage5/activity.png",
+                                        title: 'Wanderlust',
+                                        desc: "25 posts",
+
+                                    },
+                                    {
+                                        image: "assets/imgs/page/homepage5/activity2.png",
+                                        title: 'Cuisine',
+                                        desc: "34 posts",
+
+                                    },
+                                    {
+                                        image: "assets/imgs/page/homepage5/activity3.png",
+                                        title: 'Food Tours',
+                                        desc: "56 posts",
+
+                                    },
+                                    {
+                                        image: "assets/imgs/page/homepage5/activity4.png",
+                                        title: 'Heritage',
+                                        desc: "17 posts",
+
+                                    },
+                                    {
+                                        image: "assets/imgs/page/homepage5/activity5.png",
+                                        title: 'Lifestyle',
+                                        desc: "17 posts",
+
+                                    },
+                                    {
+                                        image: "assets/imgs/page/homepage5/activity6.png",
+                                        title: 'River Cruise',
+                                        desc: "18 posts",
+
+                                    },
+                                    {
+                                        image: "assets/imgs/page/homepage5/activity7.png",
+                                        title: 'Spa Retreat',
+                                        desc: "18 posts",
+
+                                    },
+                                    {
+                                        image: "assets/imgs/page/homepage5/activity8.png",
+                                        title: 'Road Trip',
+                                        desc: "19 posts",
+
+                                    }
+                                ]
+                            each item in itemActivities
+                                .swiper-slide
+                                    .card-popular-destination.card-popular-destination-type-2
+                                        .card-image 
+                                            img(src= item.image, alt="Travila")
+                                        .card-info 
+                                            a.text-sm-bold(href="#")= item.title
+                                            p.text-xs.neutral-500= item.desc
+
+        .box-button-slider-nexttrip 
+            .swiper-button-prev.swiper-button-prev-style-1.swiper-button-prev-group-5
+                    svg(xmlns='http://www.w3.org/2000/svg', width='16', height='16', viewbox='0 0 16 16', fill='none')
+                        path(d='M7.99992 3.33325L3.33325 7.99992M3.33325 7.99992L7.99992 12.6666M3.33325 7.99992H12.6666', stroke='', stroke-linecap='round', stroke-linejoin='round')
+            .swiper-button-next.swiper-button-next-style-1.swiper-button-next-group-5
+                svg(xmlns='http://www.w3.org/2000/svg', width='16', height='16', viewbox='0 0 16 16', fill='none')
+                    path(d='M7.99992 12.6666L12.6666 7.99992L7.99992 3.33325M12.6666 7.99992L3.33325 7.99992', stroke='', stroke-linecap='round', stroke-linejoin='round')  

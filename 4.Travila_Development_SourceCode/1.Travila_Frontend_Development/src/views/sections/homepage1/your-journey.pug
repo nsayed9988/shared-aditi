@@ -1,0 +1,113 @@
+section.section-box.box-your-journey.background-body 
+    .container 
+        .row.align-items-end
+            .col-md-9.mb-30
+                h1.neutral-1000.mb-15 Your Journey, Your Way
+                h6.heading-6-medium.neutral-400 Discover the World's Treasures with Travila 
+            .col-md-3.position-relative.mb-30
+                .box-button-slider.box-button-slider-team.justify-content-end
+                    .swiper-button-prev.swiper-button-prev-style-1.swiper-button-prev-animate
+                        svg(xmlns='http://www.w3.org/2000/svg', width='16', height='16', viewbox='0 0 16 16', fill='none')
+                            path(d='M7.99992 3.33325L3.33325 7.99992M3.33325 7.99992L7.99992 12.6666M3.33325 7.99992H12.6666', stroke='', stroke-linecap='round', stroke-linejoin='round')
+                    .swiper-button-next.swiper-button-next-style-1.swiper-button-next-animate
+                        svg(xmlns='http://www.w3.org/2000/svg', width='16', height='16', viewbox='0 0 16 16', fill='none')
+                            path(d='M7.99992 12.6666L12.6666 7.99992L7.99992 3.33325M12.6666 7.99992L3.33325 7.99992', stroke='', stroke-linecap='round', stroke-linejoin='round')
+    .container-slider
+        .box-swiper.mt-30
+            .swiper-container.swiper-group-animate.swiper-group-journey
+                .swiper-wrapper
+                    .swiper-slide
+                        .card-journey-big.background-card 
+                            .card-image 
+                                a.wish(href="#")
+                                    svg(width='20', height='18', viewbox='0 0 20 18', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                        path(d='M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                                img(src="assets/imgs/page/homepage1/journey1.png", alt="Travila")
+                            .card-info.background-card 
+                                .card-rating 
+                                    .card-left 
+                                        span.lightning Exceptional
+                                    .card-right 
+                                        span.rating 5.00
+                                .card-title 
+                                    a.text-32-bold(href="#") California Sunset/Twilight Boat Cruise 
+                                .card-program 
+                                    .duration 
+                                        p.text-md-medium.neutral-500.mb-25 7 days 6 nights - Small group
+                                        .card-price 
+                                            h6.heading-6.neutral-1000 $35.62
+                                            p.text-md-medium.neutral-500 / person
+                                    .endtime 
+                                        p.text-sm-bold.neutral-600 Promotion will end in
+                                        .box-count.box-count-square.mb-0.mt-5.wow.fadeInUp
+                                            .deals-countdown(data-countdown='2024/12/31 00:00:00')
+                    -
+                        const itemLists = [
+                            {
+                                image: "assets/imgs/page/homepage1/journey2.png",
+                                title: 'California Sunset/Twilight Boat Cruise ',
+                                duration: '2 days 3 nights - Family',
+                                price: '$48.25',
+                                link: 'tour-detail.html'
+                            },
+                            {
+                                image: "assets/imgs/page/homepage1/journey3.png",
+                                title: 'NYC: Food Tastings and Culture Tour',
+                                duration: '3 days 3 nights - Company',
+                                price: '$17.32',
+                                link: 'tour-detail.html'
+                            },
+                            {
+                                image: "assets/imgs/page/homepage1/journey4.png",
+                                title: 'Grand Canyon Horseshoe Bend  2 days',
+                                duration: '7 days 6 nights - Small group',
+                                price: '$15.63',
+                                link: 'tour-detail.html'
+                            },
+                            {
+                                image: "assets/imgs/page/homepage1/journey2.png",
+                                title: 'California Sunset/Twilight Boat Cruise ',
+                                duration: '2 days 3 nights - Family',
+                                price: '$48.25',
+                                link: 'tour-detail.html'
+                            },
+                            {
+                                image: "assets/imgs/page/homepage1/journey3.png",
+                                title: 'NYC: Food Tastings and Culture Tour',
+                                duration: '3 days 3 nights - Company',
+                                price: '$17.32',
+                                link: 'tour-detail.html'
+                            },
+                            {
+                                image: "assets/imgs/page/homepage1/journey4.png",
+                                title: 'Grand Canyon Horseshoe Bend  2 days',
+                                duration: '7 days 6 nights - Small group',
+                                price: '$15.63',
+                                link: 'tour-detail.html'
+                            }
+                        ]
+                    each item in itemLists
+                        .swiper-slide
+                            .card-journey-small.background-card 
+                                .card-image 
+                                    a.wish(href="tour-detail.html")
+                                        svg(width='20', height='18', viewbox='0 0 20 18', fill='none', xmlns='http://www.w3.org/2000/svg')
+                                            path(d='M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z', stroke='', stroke-width='1.5', stroke-linecap='round', stroke-linejoin='round')
+                                    img(src= item.image, alt="Travila")
+                                .card-info.background-card 
+                                    .card-rating 
+                                        .card-left 
+                                        .card-right 
+                                            span.rating 4.96 
+                                                span.text-sm-medium.neutral-500 (672 reviews)
+                                    .card-title 
+                                        a.heading-6.neutral-1000(href= item.link)= item.title 
+                                    .card-program 
+                                        .duration 
+                                            p.text-md-medium.neutral-500= item.duration
+                                        .endtime 
+                                            .card-price 
+                                                h6.heading-6.neutral-1000= item.price
+                                                p.text-md-medium.neutral-500 / person
+                                            .card-button 
+                                                a.btn.btn-gray(href="tour-detail.html") Book Now
