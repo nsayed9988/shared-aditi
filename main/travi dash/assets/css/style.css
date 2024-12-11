@@ -87,6 +87,143 @@ TABLE CONTENT
   --bs-color-grey-2: #F0F0F0;
   --bs-neutral-950: #1E1E1E;
 }
+.btntrip{
+
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+
+}
+#submittrip{
+  background-color: #3DC262;
+  border-radius: 40px;
+  color:rgb(249, 249, 249);
+ 
+}
+#submittrip:hover{
+  border-color: #3DC262;
+  color:   #3DC262;
+  background-color: rgb(249, 249, 249);
+}
+#country{
+  
+  background-color:  #F2F4F6;
+color: #AFAFAF;
+}
+#country:focus{
+  background-color: #F2F4F6;
+  border-color:#AFAFAF ;
+  color:#000000
+}
+.button-28 {
+  appearance: none;
+  background-color: transparent;
+  border:  solid #3DC262;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3DC262;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.button-28:disabled {
+  pointer-events: none;
+}
+
+.button-28:hover {
+  color: #3DC262;
+  background-color: #FEFA17;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button-28:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+.two-columns {
+  display: flex;
+  gap: 20px; /* Space between columns */
+}
+
+.column {
+  flex: 1; /* Equal width for both columns */ 
+}
+.three-columns {
+  display: flex;
+  gap: 20px; /* Space between columns */
+}
+
+.column3 {
+  flex: 1; /* Equal width for both columns */ 
+}
+
+.tripform{
+  color: black;
+}
+.container1{
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-top: 0;
+  background-image: url(../imgs/page/add-tour/bg09.jpg);
+  background-size: cover; /* The image will cover the entire container */
+  background-position: center; /* Centers the image within the container */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  height: 100vh; 
+  color: #111515; 
+ 
+}
+
+.aiquest{
+  padding-top: 90px;
+}
+.aiplan, #aiplan{
+  font-family:'Times New Roman', Times, serif;
+
+}
+.form-group{
+  padding-top: 20px;
+  color: black;
+
+}
+.form-control{
+  border-radius: 10px;
+ 
+}
+.btnprof{
+  padding-top: 0;
+}
+.btnview{
+  border-radius: 20px;
+  background-color:  #FEFA17;
+  height: 40px;
+  border-width: 0;
+  font-weight: bolder;
+
+}
+#regi{
+  color:#000000;
+  font-weight: bolder;
+  font-size: larger;
+}
+
 .custom-map-control-button {
   background-color: #fff;
   border: 0;
@@ -578,6 +715,7 @@ a {
   display: inline-block;
   width: 100%;
   overflow: visible;
+  
 }
 
 .text-shadow {

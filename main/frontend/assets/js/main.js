@@ -1167,3 +1167,43 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.getElementById("blogForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const title = document.getElementById("title").value.trim();
+    const content = document.getElementById("content").value.trim();
+    const category = document.getElementById("category").value;
+    const author = document.getElementById("author").value.trim();
+    const imageFile = document.getElementById("image").files[0];
+
+    if (!title || !content || !author || !imageFile) {
+        alert("Please fill in all fields and upload an image.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        const blogPost = {
+            title,
+            content,
+            category,
+            author,
+            image: event.target.result, // Base64 string
+            date: new Date().toLocaleDateString(),
+        };
+
+        // Save blog post to localStorage
+        let blogPosts = JSON.parse(localStorage.getItem("blogPosts")) || [];
+        blogPosts.push(blogPost);
+        localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
+
+        // Redirect to display page
+        window.location.href = "blog-grid.html";
+    };
+
+    reader.onerror = function () {
+        alert("Failed to read image file.");
+    };
+
+    reader.readAsDataURL(imageFile);
+});

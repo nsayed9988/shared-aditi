@@ -87,6 +87,13 @@ TABLE CONTENT
   --bs-color-grey-2: #F0F0F0;
   --bs-neutral-950: #1E1E1E;
 }
+
+#blogform{
+  color: #000;
+}
+#form-label{
+  color: #000;
+}
 .btntrip{
 
   padding-top: 20px;
