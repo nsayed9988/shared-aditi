@@ -1207,3 +1207,87 @@ document.getElementById("blogForm").addEventListener("submit", function (e) {
 
     reader.readAsDataURL(imageFile);
 });
+//itinerary.html form
+function checkForm() {
+    const tripName = document.getElementById('tripName').value.trim();
+    const country = document.getElementById('country').value;
+    const startDate = document.getElementById('dob').value;
+    const endDate = document.getElementById('dob1').value;
+   
+    // Check if any view option button is selected
+    const viewOptions = document.querySelectorAll('submittrip');
+    let viewSelected = false;
+    viewOptions.forEach(button => {
+        if (button.classList.contains('selected')) {
+            viewSelected = true;
+        }
+    });
+
+function validateForm() {
+    const tripName = document.getElementById('tripName').value.trim();
+    const country = document.getElementById('country').value;
+    const startDate = document.getElementById('dob').value;
+    const endDate = document.getElementById('dob1').value;
+    // Enable the button if all fields are filled, else disable
+    submitButton.disabled = !(tripName && country && startDate && endDate);
+  }
+
+  // Add event listeners to check inputs
+  [tripNameInput, countrySelect, startDateInput, endDateInput].forEach((element) => {
+    element.addEventListener("input", validateForm);
+    element.addEventListener("change", validateForm); // For select fields
+  });
+};
+
+// Event listener for form fields to check validation
+document.getElementById('tripName').addEventListener('input', checkForm);
+document.getElementById('country').addEventListener('change', checkForm);
+document.getElementById('dob').addEventListener('input', checkForm);
+document.getElementById('dob1').addEventListener('input', checkForm);
+
+
+
+// Event listeners for view options (buttons)
+const viewButtons = document.getElementById('submittrip');
+viewButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        // Toggle the 'selected' class
+        viewButtons.forEach(btn => btn.classList.remove('selected'));
+        this.classList.add('selected');
+        checkForm(); // Re-check the form after selecting a view option
+    });
+});
+//glass button
+const glassyButtons = document.querySelectorAll(".glassy-button");
+glassyButtons.forEach((button) => {
+  button.addEventListener("mousemove", (event) => {
+    const centerX = button.offsetWidth / 2;
+    const centerY = button.offsetHeight / 2;
+
+    const offsetX = event.offsetX - centerX;
+    const offsetY = event.offsetY - centerY;
+
+    button.style.setProperty("--_x-motion", `${offsetX}px`);
+    button.style.setProperty("--_y-motion", `${offsetY}px`);
+  });
+});
+
+
+document.getElementById('blogForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent form submission to the server
+
+    // Get form values
+    const blogDetails = {
+        title: document.getElementById('title').value,
+        content: document.getElementById('content').value,
+        category: document.getElementById('category').value,
+        author: document.getElementById('author').value
+    };
+
+    // Store the details in localStorage
+    localStorage.setItem('blogDetails', JSON.stringify(blogDetails));
+
+    // Redirect to the target page
+    window.location.href = 'display.html';
+});
+

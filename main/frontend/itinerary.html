@@ -671,10 +671,10 @@
             <p class="text-xl-medium neutral-500">Just provide some basic information, and our trip planner will generate a customized itinerary based on your preferences.</p>
           </div>
           <div class="aiquest">
-            <form  id="detailsForm" action="itinerary-Details.html" method="GET" >
+            <form  id="detailsForm" action="../travi dash/sample.html" method="GET" >
               <div class="form-group">
                 <label class="tripform" for="destination">Trip Name</label>
-                <input type="text" class="form-control"  placeholder="Give your trip a name!">   
+                <input type="text" class="form-control"  placeholder="Give your trip a name!" required>   
               </div>
               <div class="form-group">
                 <label class="tripform" for="destination">What is destination of choice? </label> 
@@ -927,6 +927,8 @@
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
                 </select>
+                <small id="countryError" class="text-danger" style="display:none;">Please select a valid country.</small>
+              </div>
               </div>
               <div class="form-group">
               <section class="two-columns">
@@ -936,7 +938,7 @@
                     
                     <input class="form-control" 
                            type="text" id="dob" 
-                           placeholder="Select date">
+                           placeholder="Select date" required>
                 </div>    
                 </div>
               
@@ -947,7 +949,7 @@
                   
                     <input class="form-control" 
                            type="text" id="dob1" 
-                           placeholder="Select date">
+                           placeholder="Select date" required>
                 </div>
       
                 </div>
@@ -956,14 +958,11 @@
               <div class="form-group">
                 <label class="tripform" for="destination">Who can view your trip? </label>  
                 <section class="three-columns">
-                  <div class="column3">
-          
+                  <div class="column3">         
                    <button class="button-28" onclick=""> My Followers                    
                    </button>
                   </div>
-                
-                  
-                  <div class="column3">
+                <div class="column3">
                     <button class="button-28"> Trip Members                    
                     </button>
                   </div>
@@ -973,7 +972,7 @@
                   </div>
               </section>
               <div class="btntrip">
-                <button type="button" id="submittrip" class="btn btn-outline-success">Start Planning</button>
+               <a href="../travi dash/sample.html"> <button type="button" id="submittrip" class="btn btn-outline-success" disabled>Start Planning</button></a>
               </div>
               </div>
              
