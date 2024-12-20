@@ -247,7 +247,7 @@ color: #AFAFAF;
 /* Form container styling */
 .form-login {
   width: 700px; /* Adjust width for better alignment */
-  background-color: rgba(25, 37, 86, 0.6); /* Subtle background to contrast form */
+  background-color: rgb(0, 0, 0); /* Subtle background to contrast form */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);

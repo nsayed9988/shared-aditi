@@ -14,7 +14,7 @@
     <title>Travi</title>
   </head>
   <body>
-    <!--<div id="login-overlay">
+   <div id="login-overlay">
       <div class="form-login">
           <form action="#" id="loginForm">
               <div class="form-group">
@@ -22,11 +22,15 @@
                   <label class="" id="logintext">
                       Username
                   </label>
-                  <input id="username" class="email" type="text" placeholder="Email">
+                  <input style="background-color: initial; border: 1px solid #ccc;"
+                  onfocus="this.style.backgroundColor='white';"
+                  onblur="this.style.backgroundColor='initial';" id="username" class="email" type="text" placeholder="Email">
               </div>
               <div class="form-group">
                   <label class="">Password</label>
-                  <input id="password" class="password" type="password" placeholder="Password">
+                  <input style="background-color: initial; border: 1px solid #ccc;"
+                  onfocus="this.style.backgroundColor='white';"
+                  onblur="this.style.backgroundColor='initial';"id="password" class="password" type="password" placeholder="Password">
               </div>
               <div class="form-group">
                   <div class="box-remember-forgot">
@@ -44,11 +48,11 @@
                   <button type="submit" id="login-button">Log In</button>
               </div>
               <p class="">Don’t have an account? 
-                  <a class="neutral-1000 btn-signup" href="#">Register Here!</a>
+                  <a style="color: #fff;" href="../travi dash/register.html">Register Here!</a>
               </p>
           </form>
       </div>
-  </div>-->
+  </div>
 </div>
 <div class="webiste-content" class="disabled">
     <div id="preloader-active">
@@ -271,8 +275,11 @@
                 </ul>
               </div>
             </div>
-            
-            <div class="burger-icon-2 burger-icon-white"><img src="assets/imgs/template/icons/menu.svg" alt="Travila"></div>
+           <a href="../travi dash/login.html"><button class="me-4 btn btn-brand-secondary">
+              Login
+            </button></a> 
+           
+            <div class="burger-icon-2 burger-icon-white"><img src="assets/imgs/template/icons/menu.svg" alt="Travila"></div> 
             <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
           </div>
         </div>
@@ -788,10 +795,10 @@
               <div class="col-lg-3 col-sm-6"> 
                 <div class="card-popular background-card hover-up"> 
                   <div class="card-image"> <img src="assets/imgs/page/homepage2/top.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="destination-2.html">Mountain</a>
+                  <div class="card-info"> <a class="card-title" href="tour-grid-3.html">Mountain</a>
                     <div class="card-meta"> 
                       <div class="meta-links"> <a href="#">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="destination-2.html"> 
+                      <div class="card-button"> <a href="tour-grid-3.html"> 
                           <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
                           </svg></a></div>
@@ -802,10 +809,10 @@
               <div class="col-lg-3 col-sm-6"> 
                 <div class="card-popular background-card hover-up"> 
                   <div class="card-image"> <img src="assets/imgs/page/homepage2/top2.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="destination-2.html">Safari</a>
+                  <div class="card-info"> <a class="card-title" href="tour-grid-3.html">Safari</a>
                     <div class="card-meta"> 
                       <div class="meta-links"> <a href="#">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="destination-2.html"> 
+                      <div class="card-button"> <a href="tour-grid-3.html"> 
                           <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
                           </svg></a></div>
@@ -816,24 +823,10 @@
               <div class="col-lg-3 col-sm-6"> 
                 <div class="card-popular background-card hover-up"> 
                   <div class="card-image"> <img src="assets/imgs/page/homepage2/top3.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="destination-2.html">Desert</a>
+                  <div class="card-info"> <a class="card-title" >Desert</a>
                     <div class="card-meta"> 
-                      <div class="meta-links"> <a href="#">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="destination-2.html"> 
-                          <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6"> 
-                <div class="card-popular background-card hover-up"> 
-                  <div class="card-image"> <img src="assets/imgs/page/homepage2/top4.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="destination-2.html">Flower</a>
-                    <div class="card-meta"> 
-                      <div class="meta-links"> <a href="#">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="destination-2.html"> 
+                      <div class="meta-links"> <a href="tour-grid-3.html">356 Tours, </a><a href="#">248 Activities</a></div>
+                      <div class="card-button"> <a href="tour-grid-3.html"> 
                           <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
                           </svg></a></div>
@@ -844,10 +837,10 @@
               <div class="col-lg-3 col-sm-6"> 
                 <div class="card-popular background-card hover-up"> 
                   <div class="card-image"> <img src="assets/imgs/page/homepage2/top5.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="destination-2.html">Beach</a>
+                  <div class="card-info"> <a class="card-title" href="tour-grid-3.html">Beach</a>
                     <div class="card-meta"> 
-                      <div class="meta-links"> <a href="#">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="destination-2.html"> 
+                      <div class="meta-links"> 356 Tours, 248 Activities</div>
+                      <div class="card-button"> <a href="tour-grid-3.html"> 
                           <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
                           </svg></a></div>
@@ -855,48 +848,11 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-sm-6"> 
-                <div class="card-popular background-card hover-up"> 
-                  <div class="card-image"> <img src="assets/imgs/page/homepage2/top6.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="destination-2.html">Temples</a>
-                    <div class="card-meta"> 
-                      <div class="meta-links"> <a href="#">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="destination-2.html"> 
-                          <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6"> 
-                <div class="card-popular background-card hover-up"> 
-                  <div class="card-image"> <img src="assets/imgs/page/homepage2/top7.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="destination-2.html">Yacht</a>
-                    <div class="card-meta"> 
-                      <div class="meta-links"> <a href="#">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="destination-2.html"> 
-                          <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6"> 
-                <div class="card-popular background-card hover-up"> 
-                  <div class="card-image"> <img src="assets/imgs/page/homepage2/top7.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="destination-2.html">Valley</a>
-                    <div class="card-meta"> 
-                      <div class="meta-links"> <a href="#">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="destination-2.html"> 
-                          <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            
+              
+              
+            
+             
             </div>
           </div>
         </div>

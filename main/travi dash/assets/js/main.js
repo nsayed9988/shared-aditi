@@ -954,3 +954,75 @@ document.getElementById("saveChangesBtn").addEventListener("click", function () 
   // Show success alert
   alert("Your contact information has been saved successfully!");
 });
+
+
+/*let map, userMarker;
+
+function initMap() {
+    // Default location (center of the map if geolocation fails)
+    const defaultLocation = { lat: 0, lng: 0 };
+
+    // Initialize the map
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: defaultLocation,
+        zoom: 12,
+    });
+
+    // Try to fetch the user's current location
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+
+                // Center map on user's location
+                map.setCenter(userLocation);
+
+                // Add a marker for the user's location
+                userMarker = new google.maps.Marker({
+                    position: userLocation,
+                    map: map,
+                    title: "You are here",
+                });
+            },
+            (error) => {
+                alert("Unable to fetch your location. Please enable location services.");
+            }
+        );
+    } else {
+        alert("Geolocation is not supported by your browser.");
+    }
+}
+
+// Share location on button click
+document.getElementById("shareLocation").addEventListener("click", () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                const locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
+                // Share via Web Share API if supported
+                if (navigator.share) {
+                    navigator
+                        .share({
+                            title: "My Current Location",
+                            text: "Check out my current location:",
+                            url: locationLink,
+                        })
+                        .catch((error) => console.error("Error sharing:", error));
+                } else {
+                    // Fallback: Show the link
+                    alert(`Share this link: ${locationLink}`);
+                }
+            },
+            (error) => {
+                alert("Unable to fetch your location for sharing.");
+            }
+        );
+    } else {
+        alert("Geolocation is not supported by your browser.");
+    }
+});*/

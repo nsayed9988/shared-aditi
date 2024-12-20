@@ -294,12 +294,9 @@
       flex-wrap: wrap;
     }
 #Packing{
-
-  background-color:rgba(132, 211, 172, 0.5);
-
+  background-color:rgba(145, 231, 237, 0.5);
 }
     .sidebar {
-  
       flex: 1;
       min-width: 200px;
       max-width: 500px;
@@ -520,6 +517,7 @@
 #add-list:hover,#add-item:hover{
   background-color: #373535;
 }
+
     </style>
 	<header class="header sticky-bar background-body">
 		<div class="container">
@@ -647,9 +645,9 @@
 			
 		  </div>
     </div>
+    </div>
     <div class="section-container" id="Budget">
       <div class="budget-container row">
-        <h2 id="expense">Expense Tracker</h2>
         <div class="add-container col-4">
             <div class="add-budget-container">
                 <h4>Add Budget</h4>
@@ -658,9 +656,10 @@
                         <label for="budget">Budget:</label>
                         <input class="form-control" type="text" id="budget">
                     </div>
-                        <button id="addbudget" class="btn btn-primary form-control mt-3">Add Budget</button>
+                        <button id="addBudget" class="btn btn-primary form-control">Add Budget</button>
                 </form>
             </div>
+            
             <div class="add-expense-container mt-4">
                 <h4>Add Expense</h4>
                 <form>
@@ -672,16 +671,48 @@
                         <label for="amount">Amount:</label>
                         <input class="form-control" type="text" id="amount">
                     </div>
-                    <button id="addexpense" class="btn btn-primary form-control mt-3">Add Expense</button>
+                    <button id="addExpense" class="btn btn-primary form-control">Add Expense</button>
                 </form>
             </div>
-            <!--<button class="btn btn-danger form-control mt-2" onclick="resetAll()"></button>-->
-            <button  id="reset" class="btn btn-outline-danger form-control mt-3" onclick="resetAll()">Reset All</button>
-            <!--<button type="button" class="btn btn-danger form-control mt-2" onclick="resetAll()">Danger</button>-->
+            <button class="btn btn-danger form-control mt-2" onclick="resetAll()">Reset All</button>
 
         </div>
 
         <div class="display-container">
+            <div class="heading row" style="display: flex; justify-content: space-around;">
+                <div class="alert alert-primary" role="alert">
+                    Total Budget: <span id="totalBudget">100</span>
+                </div>
+                <div class="alert alert-primary" role="alert">
+                    Total Expenses: <span id="totalExpenses">100</span>
+                </div>
+                <div class="alert alert-primary" role="alert">
+                    Budget Left: <span id="budgetLeft">100</span>
+                </div>
+            </div>
+            <hr>
+            <div class="table-container table-responsive">
+                <h5>Expense History:</h5>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Expense Name</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+        <!--<div class="display-container">
           <h4>Current Budget Status</h4>
             <div class="heading row" style="display: flex; justify-content: space-around;">
               
@@ -712,11 +743,12 @@
                       </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
+            </div>>-->
+
 
     </div>
     </div>
+    <div id="packextra">
     <div class="section-container" id="Packing">
       <div class="containerPack">
         <div class="sidebar">
@@ -754,6 +786,7 @@
       </div>
   </div>
 </div>
+
 
 <script>
     // Vertical Menu with Active Animation
@@ -799,118 +832,7 @@
         // Show the Dashboard section by default
         $('#dashboard').addClass('active');
     });
-     // Check if there is any data in localStorage
- let budgetData = JSON.parse(localStorage.getItem("budgetData")) || {
-    totalBudget: 0,
-    totalExpenses: 0,
-    budgetLeft: 0,
-    expenses: []
-};
 
-    
-// Function to update UI
-function updateUI() {
-    document.getElementById('totalBudget').textContent = budgetData.totalBudget.toFixed(2);
-    document.getElementById('totalExpenses').textContent = budgetData.totalExpenses.toFixed(2);
-    document.getElementById('budgetLeft').textContent = budgetData.budgetLeft.toFixed(2);
-
-    // Render expenses table
-    let tableBody = document.querySelector('.table-container tbody');
-    tableBody.innerHTML = '';
-    budgetData.expenses.forEach(function (expense) {
-        let row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${expense.title}</td>
-            <td>${expense.amount.toFixed(2)}</td>
-            <td><button class="btn btn-sm btn-danger">Remove</button></td>
-        `;
-        tableBody.appendChild(row);
-    });
-}
-
-// Function to update local storage
-function updateLocalStorage() {
-    localStorage.setItem("budgetData", JSON.stringify(budgetData));
-}
-
-function resetAll() {
-    // Reset budget data
-    budgetData.totalBudget = 0;
-    budgetData.totalExpenses = 0;
-    budgetData.budgetLeft = 0;
-    budgetData.expenses = [];
-
-    // Update local storage and UI
-    updateLocalStorage();
-    updateUI();
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Update UI with initial data
-    updateUI();
-
-    // Add Budget form submission
-    document.querySelector('.add-budget-container form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        let budgetInput = document.getElementById('budget');
-        let budgetAmount = parseFloat(budgetInput.value.trim());
-
-        if (isNaN(budgetAmount) || budgetAmount <= 0) {
-            alert('Please enter a valid budget amount.');
-            return;
-        }
-
-        budgetData.totalBudget = budgetAmount;
-        budgetData.budgetLeft = budgetAmount;
-        updateLocalStorage();
-        updateUI();
-        budgetInput.value = '';
-    });
-
-    // Add Expense form submission
-    document.querySelector('.add-expense-container form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        let expenseInput = document.getElementById('expense');
-        let amountInput = document.getElementById('amount');
-
-        let expenseTitle = expenseInput.value.trim();
-        let expenseAmount = parseFloat(amountInput.value.trim());
-
-        if (expenseTitle === '' || isNaN(expenseAmount) || expenseAmount <= 0) {
-            alert('Please enter a valid expense.');
-            return;
-        }
-
-        // Update expenses array
-        budgetData.expenses.push({
-            title: expenseTitle,
-            amount: expenseAmount
-        });
-
-        // Update total expenses and budget left
-        budgetData.totalExpenses += expenseAmount;
-        budgetData.budgetLeft -= expenseAmount;
-
-        updateLocalStorage();
-        updateUI();
-
-        // Clear input fields
-        expenseInput.value = '';
-        amountInput.value = '';
-    });
-
-    // Remove Expense button click event
-    document.querySelector('.table-container').addEventListener('click', function (event) {
-        if (event.target && event.target.matches("button.btn-danger")) {
-            let rowIndex = event.target.closest('tr').rowIndex - 1;
-            let removedExpense = budgetData.expenses.splice(rowIndex, 1)[0];
-            budgetData.totalExpenses -= removedExpense.amount;
-            budgetData.budgetLeft += removedExpense.amount;
-            updateLocalStorage();
-            updateUI();
-        }
-    });
-});
 //packing
 const lists = {
       Clothing: ["Boots", "Bra(s)", "Dress", "Flip Flops", "Hat","Heels", "Hoodie", "Jacket", "Jeans", "Pants","Pyjamas","Rain Jacket",
@@ -1036,6 +958,118 @@ function incrementItem(listName, item) {
     // Initialize with first list
     document.querySelector('.list-section').classList.add('active');
     renderItems('Clothing');
+         // Check if there is any data in localStorage
+ let budgetData = JSON.parse(localStorage.getItem("budgetData")) || {
+    totalBudget: 0,
+    totalExpenses: 0,
+    budgetLeft: 0,
+    expenses: []
+};
+
+    
+// Function to update UI
+function updateUI() {
+    document.getElementById('totalBudget').textContent = budgetData.totalBudget.toFixed(2);
+    document.getElementById('totalExpenses').textContent = budgetData.totalExpenses.toFixed(2);
+    document.getElementById('budgetLeft').textContent = budgetData.budgetLeft.toFixed(2);
+
+    // Render expenses table
+    let tableBody = document.querySelector('.table-container tbody');
+    tableBody.innerHTML = '';
+    budgetData.expenses.forEach(function (expense) {
+        let row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${expense.title}</td>
+            <td>${expense.amount.toFixed(2)}</td>
+            <td><button class="btn btn-sm btn-danger">Remove</button></td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Function to update local storage
+function updateLocalStorage() {
+    localStorage.setItem("budgetData", JSON.stringify(budgetData));
+}
+
+function resetAll() {
+    // Reset budget data
+    budgetData.totalBudget = 0;
+    budgetData.totalExpenses = 0;
+    budgetData.budgetLeft = 0;
+    budgetData.expenses = [];
+
+    // Update local storage and UI
+    updateLocalStorage();
+    updateUI();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Update UI with initial data
+    updateUI();
+
+    // Add Budget form submission
+    document.querySelector('.add-budget-container form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        let budgetInput = document.getElementById('budget');
+        let budgetAmount = parseFloat(budgetInput.value.trim());
+
+        if (isNaN(budgetAmount) || budgetAmount <= 0) {
+            alert('Please enter a valid budget amount.');
+            return;
+        }
+
+        budgetData.totalBudget = budgetAmount;
+        budgetData.budgetLeft = budgetAmount;
+        updateLocalStorage();
+        updateUI();
+        budgetInput.value = '';
+    });
+
+    // Add Expense form submission
+    document.querySelector('.add-expense-container form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        let expenseInput = document.getElementById('expense');
+        let amountInput = document.getElementById('amount');
+
+        let expenseTitle = expenseInput.value.trim();
+        let expenseAmount = parseFloat(amountInput.value.trim());
+
+        if (expenseTitle === '' || isNaN(expenseAmount) || expenseAmount <= 0) {
+            alert('Please enter a valid expense.');
+            return;
+        }
+
+        // Update expenses array
+        budgetData.expenses.push({
+            title: expenseTitle,
+            amount: expenseAmount
+        });
+
+        // Update total expenses and budget left
+        budgetData.totalExpenses += expenseAmount;
+        budgetData.budgetLeft -= expenseAmount;
+
+        updateLocalStorage();
+        updateUI();
+
+        // Clear input fields
+        expenseInput.value = '';
+        amountInput.value = '';
+    });
+
+    // Remove Expense button click event
+    document.querySelector('.table-container').addEventListener('click', function (event) {
+        if (event.target && event.target.matches("button.btn-danger")) {
+            let rowIndex = event.target.closest('tr').rowIndex - 1;
+            let removedExpense = budgetData.expenses.splice(rowIndex, 1)[0];
+            budgetData.totalExpenses -= removedExpense.amount;
+            budgetData.budgetLeft += removedExpense.amount;
+            updateLocalStorage();
+            updateUI();
+        }
+    });
+});
 </script>
 
 </body>

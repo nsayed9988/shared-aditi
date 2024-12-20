@@ -7651,5 +7651,14 @@ select {
   border-radius: 10px;
   height: 50px;
 }
-
+#addBudget{
+  color: #000;
+  background-color: #FEFA17 ;
+  margin-top: 10px;
+}
+#addExpense{
+  color: #000;
+  background-color: #FEFA17 ;
+  margin-top: 10px;
+}
 /*# sourceMappingURL=style.css.map */
