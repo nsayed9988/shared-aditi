@@ -14,45 +14,7 @@
     <title>Travi</title>
   </head>
   <body>
-   <div id="login-overlay">
-      <div class="form-login">
-          <form action="#" id="loginForm">
-              <div class="form-group">
-                <img class="light-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg">
-                  <label class="" id="logintext">
-                      Username
-                  </label>
-                  <input style="background-color: initial; border: 1px solid #ccc;"
-                  onfocus="this.style.backgroundColor='white';"
-                  onblur="this.style.backgroundColor='initial';" id="username" class="email" type="text" placeholder="Email">
-              </div>
-              <div class="form-group">
-                  <label class="">Password</label>
-                  <input style="background-color: initial; border: 1px solid #ccc;"
-                  onfocus="this.style.backgroundColor='white';"
-                  onblur="this.style.backgroundColor='initial';"id="password" class="password" type="password" placeholder="Password">
-              </div>
-              <div class="form-group">
-                  <div class="box-remember-forgot">
-                      <div class="remember-me">
-                          <label class="text-xs-medium neutral-500">
-                              <input class="cb-remember" type="checkbox"> Remember me
-                          </label>
-                      </div>
-                      <div class="forgotpass">
-                          <a class="text-xs-medium neutral-500" href="#">Forgot password?</a>
-                      </div>
-                  </div>
-              </div>
-              <div class="form-group mt-45 mb-30">
-                  <button type="submit" id="login-button">Log In</button>
-              </div>
-              <p class="">Don’t have an account? 
-                  <a style="color: #fff;" href="../travi dash/register.html">Register Here!</a>
-              </p>
-          </form>
-      </div>
-  </div>
+
 </div>
 <div class="webiste-content" class="disabled">
     <div id="preloader-active">
@@ -136,9 +98,15 @@
                       </div>
                     </div>
                   </li>
-                  <li class="mega-li-small"><a href="#featured">Tours</a>
-                    
+                  <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
                   </li>
+                  <li id="my-ite" class="mega-li-small"><a href="itinerary.html">My Iternaries</a>         
+                  </li>
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html">Profile</a>         
+                  </li>
+                  <!-- sir changes<li class="mega-li-small"><a href="#featured">Tours</a>
+                    
+                  </li>-->
                   <!--<li class="mega-li-small"><a href="destination.html">Destinations</a>
                     <div class="mega-menu">
                        <div class="mega-menu-inner mega-menu-inner-small mega-menu-inner-destinations">
@@ -212,7 +180,7 @@
                 <li class="has-children"><a href="blog-grid.html">Blog</a>
                   <ul class="sub-menu">
                     <li><a href="blog-grid.html">The Blog Vault</a></li>
-                    <li><a href="blogwrite.html">Share Your Thoughts</a></li>
+                    <li><a id="my-blog" href="blogwrite.html">Share Your Thoughts</a></li>
                     <!--<li><a href="blog-grid-3.html">List</a></li>
                     <li><a href="blog-detail.html">Blog Details</a></li>
                     <li><a href="blog-detail-2.html">Blog Details 2</a></li>-->
@@ -902,14 +870,12 @@
             </div>
           </div>
         </div>
-        <div class="container-slider box-swiper-padding">
-          <a href="itinerary.html"><button class="glassy-button"><span>Get started</span></button></a>
-           
+        <div id="aiplanbtn" class="container-slider box-swiper-padding">
+          <a href="itinerary.html"><button id="getStartedButton" class="glassy-button" disabled><span>Plan Your Trip NOW</span></button></a>
           <div class="box-swiper mt-30">
             <div class="swiper-container swiper-group-animate swiper-group-journey">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-               
                 </div>
                 <!--<div class="swiper-slide">
                   <div class="card-journey-small background-card"> 
@@ -1578,46 +1544,57 @@
     </div>
   -->
   </div>
-  <script>
- document.addEventListener('DOMContentLoaded', function () {
-  // Handle login form submission
-  document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
 
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Select the profile list item and link
+    const profileListItem = document.getElementById('my-profile-list-item');
+    const profileLink = profileListItem.querySelector('a');
 
-    // Validation: Check if fields are not empty
-    if (!username || !password) {
-      console.log("Validation failed");
-      alert('Please fill in both email and password fields before logging in.');
-      return; // Stop further actions if validation fails
+    const ite = document.getElementById('my-ite');
+    const itelink = profileListItem.querySelector('a');
+
+    const myblog = document.getElementById('my-blog');
+    const bloglink = profileListItem.querySelector('a');
+
+    // Check if the user is logged in or not from localStorage
+    const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+
+    // If not logged in, disable the profile list item (unclickable) and link
+    if (!isLoggedIn) {
+        // Remove the actual href link, preventing navigation
+        profileLink.setAttribute('href', '#'); 
+        itelink.setAttribute('href', '#'); 
+        bloglink.setAttribute('href', '#'); 
+        
+        // Add a click event listener to display alert when clicked
+        profileListItem.addEventListener('click', function (event) {
+            alert("You must be logged in to access the Profile.");
+            event.preventDefault();  // Prevent the default action (like following the link)
+        });
+        ite.addEventListener('click', function (event) {
+            alert("You must be logged in to view your iternaries");
+            event.preventDefault();  // Prevent the default action (like following the link)
+        });
+        myblog.addEventListener('click', function (event) {
+            alert("You must be logged in to post blogs");
+            event.preventDefault();  // Prevent the default action (like following the link)
+        });
+    } else {
+        // If logged in, set the href back to the correct link
+        profileLink.setAttribute('href', '../travi dash/my-profile.html');
+        itelink.setAttribute('href', 'itinerary.html');
+        bloglink.setAttribute('href', 'blogwrite.html');
     }
-    if (username!="noor@gmail.com" || password!="123") {
-      alert('Wrong Login Credential');
-      console.log("Login Successful");
-      return;
-    }
-    if (username=="noor@gmail.com" || password=="123") {
-      console.log("Login Successful");
- 
-    }
 
-    // If validation passes, assume successful login
-    localStorage.setItem('loggedIn', 'true'); // Save login status to localStorage
-    document.getElementById('login-overlay').style.display = 'none'; // Hide login overlay
-    document.getElementById('website-content').classList.remove('disabled'); // Show website content
-  });
-
-  // Check login status on page load
-  if (localStorage.getItem('loggedIn') === 'true') {
-    document.getElementById('login-overlay').style.display = 'none'; // Hide login overlay
-    document.getElementById('website-content').classList.remove('disabled'); // Show website content
-  }
+    // If logged in, enable the 'Get Started' button
+    const getStartedButton = document.getElementById('getStartedButton');
+    if (isLoggedIn) {
+        getStartedButton.disabled = false;  // Enable the button
+    }
 });
 
-
-</script>
+  </script>
     <!--Vendors Scripts-->
     <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
     <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>

@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?version=2.0" rel="stylesheet">
-    <title>Login - Modern Travel Tour Booking HTML Template </title>
+    <title>Login</title>
   </head>
   <body>
     <div id="preloader-active">
@@ -36,7 +36,7 @@
               <form action="">
                 <input class="form-control input-search" type="text" name="keyword" placeholder="What are you looking for?">
               </form>
-            </div><a class="text-sm-bold neutral-1000 ps-5 d-flex align-items-center" href="https://travila.netlify.app/" target="_blank">         <span>Visit Site</span><img class="size-16 ms-2 img-invert" alt="Travilla" src="assets/imgs/template/icons/expand-arrows.svg"></a>
+            </div><a class="text-sm-bold neutral-1000 ps-5 d-flex align-items-center" href="../frontend/index-2.html" target="_blank">         <span>Visit Site</span><img class="size-16 ms-2 img-invert" alt="Travilla" src="assets/imgs/template/icons/expand-arrows.svg"></a>
           </div>
           <div class="header-right">
             <div class="block-signin">
@@ -198,11 +198,11 @@
                     <form action="#">
                       <div class="form-group"> 
                         <label class="text-sm-medium">User name</label>
-                        <input class="form-control username" type="text" placeholder="Email / Username">
+                        <input id="username" class="form-control username" type="text" placeholder="Email / Username">
                       </div>
                       <div class="form-group"> 
                         <label class="text-sm-medium">Password</label>
-                        <input class="form-control password" type="password" placeholder="">
+                        <input id="password" class="form-control password" type="password" placeholder="">
                       </div>
                       <div class="form-group"> 
                         <div class="box-remember-forgot">   
@@ -211,13 +211,13 @@
                               <input class="cb-remember" type="checkbox">Remember me
                             </div>
                           </div>
-                          <div class="forgotpass"> <a class="text-xs-medium neutral-500" href="#">Forgot  password?</a></div>
+                          <div class="forgotpass"> 
+                            <a class="text-xs-medium neutral-500" href="#">Forgot password?</a>
+                          </div>
                         </div>
                       </div>
-                      <div class="form-group mt-45 mb-30"> <a class="btn btn-black-lg" href="#">Login 
-                          <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a></div>
+                      
+                      <button type="button" id="loginButton" class="btn btn-dark">Login</button>
                       <p class="text-sm-medium neutral-500">Don’t have an account? <a class="neutral-1000 btn-signup" href="register.html">Register Here !</a></p>
                     </form>
                   </div>
@@ -249,6 +249,45 @@
         </footer>
       </div>
     </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+  // Handle login button click
+  document.getElementById('loginButton').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    // Validation: Check if fields are not empty
+    if (!username || !password) {
+      alert('Please fill in both email and password fields before logging in.');
+      return; // Stop further actions if validation fails
+    }
+
+    // Check login credentials
+    if (username === "noor@gmail.com" && password === "123") {
+      alert('Login Successful!');
+      console.log("Login Successful");
+
+      // Store the login status in localStorage
+      localStorage.setItem('loggedIn', 'true');
+      // Optionally, redirect to another page after successful login
+      window.location.href = "my-profile.html"; // Redirect to the dashboard (example)
+
+    } else {
+      alert('Wrong login credentials');
+      console.log("Login Failed");
+    }
+  });
+
+  // Check login status on page load
+  if (localStorage.getItem('loggedIn') === 'true') {
+    console.log('User is already logged in!');
+    // Optional: You can hide the login form or redirect the user if they are logged in
+    // window.location.href = "dashboard.html"; // Redirect if already logged in
+  }
+});
+      </script>
     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
     <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
