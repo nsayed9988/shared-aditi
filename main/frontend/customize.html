@@ -11,6 +11,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
+    <script> </script>
     <title> Travi</title>
   </head>
   <body>
@@ -588,7 +589,20 @@
         <center>
             <!--<input class="btn btn-brand-secondary" type="submit" value="Create Itinerary">-->
             <center>
-              <a href="itinerary.html" class="btn btn-brand-secondary">Create Itinerary</a>
+              <button id="addButtonitn">Add</button>
+
+    <div id="popupitn">
+        <div id="popup-optionsitn">
+            <h2>Select an Option</h2>
+            <button id="privateButton">Private</button>
+            <button id="publicButton">Public</button>
+            <br>
+            <button id="closePopup">Close</button>
+        </div>
+    </div>
+
+    <div id="overlayitn"></div>
+
           </center>
           
         </center>
@@ -903,6 +917,9 @@
       </div>
     </div>
     <!--Vendors Scripts-->
+    <script>
+      
+      </script>
     <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
     <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>

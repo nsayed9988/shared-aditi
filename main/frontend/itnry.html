@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button with Options</title>
+    <style>
+        /* Root variables for consistent color scheme */
+        :root {
+            --bs-button-bg: #3DC262;
+            --bs-button-bg-hover: #FEFA17;
+            --bs-background-body: #ffffff;
+            --bs-background-card: #FFFFFF;
+            --bs-border-color: #E4E6E8;
+            --bs-neutral-200: #E4E6E8;
+            --bs-color-white: #FFFFFF;
+            --bs-color-black: #000000;
+            --bs-warning: #F09814;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: var(--bs-background-body);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: var(--bs-neutral-700);
+        }
+
+        #addButtonitn {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: var(--bs-button-bg);
+            color: var(--bs-color-white);
+            border: none;
+            border-radius: 40px;
+            transition: all 0.3s cubic-bezier(.23, 1, 0.32, 1);
+        }
+
+        #addButtonitn:hover {
+            background-color: var(--bs-button-bg-hover);
+            color: var(--bs-button-bg);
+        }
+
+        #popupitn {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--bs-background-card);
+            border: 1px solid var(--bs-border-color);
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+            max-width: 600px;
+            width: 90%;
+            border-radius: 8px;
+        }
+
+        #overlayitn {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        #popup-optionsitn h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            color: var(--bs-neutral-700);
+        }
+
+        #popup-optionsitn button {
+            margin: 10px;
+            padding: 15px;
+            background-color: var(--bs-button-bg);
+            color: var(--bs-color-white);
+            border-radius: 40px;
+            font-size: 1.2em;
+            transition: all 0.3s cubic-bezier(.23, 1, 0.32, 1);
+            cursor: pointer;
+        }
+
+        #popup-optionsitn button:hover {
+            background-color: var(--bs-button-bg-hover);
+            color: var(--bs-button-bg);
+        }
+
+        #closePopup {
+            background-color: var(--bs-warning);
+        }
+
+        #closePopup:hover {
+            background-color: #D63E29; /* Darker red for close button hover */
+        }
+    </style>
+</head>
+<body>
+    
+    <button id="addButtonitn">Add</button>
+
+    <div id="popupitn">
+        <div id="popup-optionsitn">
+            <h2>Select an Option</h2>
+            <button id="privateButton">Private</button>
+            <button id="publicButton">Public</button>
+            <br>
+            <button id="closePopup">Close</button>
+        </div>
+    </div>
+
+    <div id="overlayitn"></div>
+
+    <script>
+        const addButton = document.getElementById('addButtonitn');
+        const popup = document.getElementById('popupitn');
+        const overlay = document.getElementById('overlayitn');
+        const closePopup = document.getElementById('closePopup');
+        const publicButton = document.getElementById('publicButton');
+        const privateButton = document.getElementById('privateButton');
+
+        addButton.addEventListener('click', () => {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        closePopup.addEventListener('click', () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        overlay.addEventListener('click', () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        publicButton.addEventListener('click', () => {
+            window.location.href = 'pub.html'; // Redirect to pub.html
+        });
+
+        privateButton.addEventListener('click', () => {
+            window.location.href = 'priv.html'; // Redirect to priv.html
+        });
+    </script>
+</body>
+</html>
