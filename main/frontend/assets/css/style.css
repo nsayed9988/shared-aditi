@@ -98,6 +98,9 @@ TABLE CONTENT
   --bs-color-black: #000000;
   --bs-warning: #F09814;
 }
+.btn-back:hover{
+background-color: #000;
+}
 /* overay itn*/
 #addButtonitn {
   padding: 10px 20px;
@@ -16013,7 +16016,7 @@ h2 span {
   margin: 10px;
   font-size: 16px;
   cursor: pointer;
-  background-color: var(--bs-button-bg);
+
   color: var(--bs-color-white);
   border: none;
   border-radius: 40px;
@@ -16030,7 +16033,7 @@ h2 span {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--bs-background-card);
+
   border: 1px solid var(--bs-border-color);
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -16061,23 +16064,14 @@ h2 span {
 #popup-optionsitn button {
   margin: 10px;
   padding: 15px;
-  background-color: var(--bs-button-bg);
+
   color: var(--bs-color-white);
   border-radius: 40px;
   font-size: 1.2em;
   transition: all 0.3s cubic-bezier(.23, 1, 0.32, 1);
   cursor: pointer;
 }
+#closePopup{
+  background-color: rgb(255, 255, 255);
 
-#popup-optionsitn button:hover {
-  background-color: var(--bs-button-bg-hover);
-  color: var(--bs-button-bg);
-}
-
-#closePopup {
-  background-color: var(--bs-warning);
-}
-
-#closePopup:hover {
-  background-color: #D63E29; /* Darker red for close button hover */
 }

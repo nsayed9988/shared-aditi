@@ -9,19 +9,318 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <style>
+        #expensebox{
+        background: linear-gradient(135deg,#f6d896, #5badfa);
+      }
+      #destination,#currency{
+        background-color: white;
+      }
+#add-list,#add-item, #essentialsButton,#sub1{
+            display: inline-block;
+            background-color: #FEFA17; /* Teal background */
+            color: black;
+            padding: 12px 25px;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+       
+        }
+        #add-days,#sub-days,#addBudget {
+            display: inline-block;
+            background-color: #FEFA17; /* Teal background */
+            color: black;
+            padding: 12px 25px;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+         
+       
+        }
+        .btn-back{
+          display: inline-block;
+            background-color: #FEFA17; /* Teal background */
+            color: black;
+            margin-left: 20px;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+         width:100px;
+       
+        }
+        #add-days:hover,#sub-days:hover, #generate:hover,  #add-list:hover,#add-item:hover ,.btn-back:hover,#essentialsButton:hover, #sub1:hover,#addBudget:hover,#addexpense:hover
+{
+            background-color: #000000;
+            color: #fefa17; ; /* Darker teal */
+        }
+.containerPack,.containerpub{
+    margin: 0;
+  border-radius: 20px;
+    font-weight: 100;
+    background: radial-gradient(#f6d896, #5badfa);
+    -webkit-overflow-Y: hidden;
+    -moz-overflow-Y: hidden;
+    -o-overflow-Y: hidden;
+    overflow-y: hidden;
+    -webkit-animation: fadeIn 1 1s ease-out;
+    -moz-animation: fadeIn 1 1s ease-out;
+    -o-animation: fadeIn 1 1s ease-out;
+    animation: fadeIn 1 1s ease-out;
+}
+.containerpub{
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
-      
+
+.light {
+    position: absolute;
+    width: 0px;
+    opacity: 0.95;
+    background-color: rgb(0, 0, 0);
+    box-shadow: #e9f1f1 0px 0px 20px 2px;
+    opacity: 0;
+    top: 100vh;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+}
+
+.x1{
+  -webkit-animation: floatUp 4s infinite linear;
+  -moz-animation: floatUp 4s infinite linear;
+  -o-animation: floatUp 4s infinite linear;
+  animation: floatUp 4s infinite linear;
+   -webkit-transform: scale(1.0);
+   -moz-transform: scale(1.0);
+   -o-transform: scale(1.0);
+  transform: scale(1.0);
+}
+
+.x2{
+  -webkit-animation: floatUp 7s infinite linear;
+  -moz-animation: floatUp 7s infinite linear;
+  -o-animation: floatUp 7s infinite linear;
+  animation: floatUp 7s infinite linear;
+  -webkit-transform: scale(1.6);
+  -moz-transform: scale(1.6);
+  -o-transform: scale(1.6);
+  transform: scale(1.6);
+  left: 15%;
+}
+
+.x3{
+  -webkit-animation: floatUp 2.5s infinite linear;
+  -moz-animation: floatUp 2.5s infinite linear;
+  -o-animation: floatUp 2.5s infinite linear;
+  animation: floatUp 2.5s infinite linear;
+  -webkit-transform: scale(.5);
+  -moz-transform: scale(.5);
+  -o-transform: scale(.5);
+  transform: scale(.5);
+  left: -15%;
+}
+
+.x4{
+  -webkit-animation: floatUp 4.5s infinite linear;
+  -moz-animation: floatUp 4.5s infinite linear;
+  -o-animation: floatUp 4.5s infinite linear;
+  animation: floatUp 4.5s infinite linear;
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+  left: -34%;
+}
+
+.x5{
+  -webkit-animation: floatUp 8s infinite linear;
+  -moz-animation: floatUp 8s infinite linear;
+  -o-animation: floatUp 8s infinite linear;
+  animation: floatUp 8s infinite linear;
+  -webkit-transform: scale(2.2);
+  -moz-transform: scale(2.2);
+  -o-transform: scale(2.2);
+  transform: scale(2.2);
+  left: -57%;
+}
+
+.x6{
+  -webkit-animation: floatUp 3s infinite linear;
+  -moz-animation: floatUp 3s infinite linear;
+  -o-animation: floatUp 3s infinite linear;
+  animation: floatUp 3s infinite linear;
+  -webkit-transform: scale(.8);
+  -moz-transform: scale(.8);
+  -o-transform: scale(.8);
+  transform: scale(.8);
+  left: -81%;
+}
+
+.x7{
+  -webkit-animation: floatUp 5.3s infinite linear;
+  -moz-animation: floatUp 5.3s infinite linear;
+  -o-animation: floatUp 5.3s infinite linear;
+  animation: floatUp 5.3s infinite linear;
+  -webkit-transform: scale(3.2);
+  -moz-transform: scale(3.2);
+  -o-transform: scale(3.2);
+  transform: scale(3.2);
+  left: 37%;
+}
+
+.x8{
+  -webkit-animation: floatUp 4.7s infinite linear;
+  -moz-animation: floatUp 4.7s infinite linear;
+  -o-animation: floatUp 4.7s infinite linear;
+  animation: floatUp 4.7s infinite linear;
+  -webkit-transform: scale(1.7);
+  -moz-transform: scale(1.7);
+  -o-transform: scale(1.7);
+  transform: scale(1.7);
+  left: 62%;
+}
+
+.x9{
+  -webkit-animation: floatUp 4.1s infinite linear;
+  -moz-animation: floatUp 4.1s infinite linear;
+  -o-animation: floatUp 4.1s infinite linear;
+  animation: floatUp 4.1s infinite linear;
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+  left: 85%;
+}
+
+@-webkit-keyframes floatUp{
+  0%{top: 100vh; opacity: 0;}
+  25%{opacity: 1;}
+  50%{top: 0vh; opacity: .8;}
+  75%{opacity: 1;}
+  100%{top: -100vh; opacity: 0;}
+}
+@-moz-keyframes floatUp{
+  0%{top: 100vh; opacity: 0;}
+  25%{opacity: 1;}
+  50%{top: 0vh; opacity: .8;}
+  75%{opacity: 1;}
+  100%{top: -100vh; opacity: 0;}
+}
+@-o-keyframes floatUp{
+  0%{top: 100vh; opacity: 0;}
+  25%{opacity: 1;}
+  50%{top: 0vh; opacity: .8;}
+  75%{opacity: 1;}
+  100%{top: -100vh; opacity: 0;}
+}
+@keyframes floatUp{
+  0%{top: 100vh; opacity: 0;}
+  25%{opacity: 1;}
+  50%{top: 0vh; opacity: .8;}
+  75%{opacity: 1;}
+  100%{top: -100vh; opacity: 0;}
+}
+
+
+
+@-webkit-keyframes fadeIn{
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
+@-moz-keyframes fadeIn{
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
+@-o-keyframes fadeIn{
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
+@keyframes fadeIn{
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
+@-webkit-keyframes fadeOut{
+  0%{opacity: 0;}
+  30%{opacity: 1;}
+  80%{opacity: .9;}
+  100%{opacity: 0;}
+}
+
+@-moz-keyframes fadeOut{
+  0%{opacity: 0;}
+  30%{opacity: 1;}
+  80%{opacity: .9;}
+  100%{opacity: 0;}
+}
+
+@-o-keyframes fadeOut{
+  0%{opacity: 0;}
+  30%{opacity: 1;}
+  80%{opacity: .9;}
+  100%{opacity: 0;}
+}
+
+@keyframes fadeOut{
+  0%{opacity: 0;}
+  30%{opacity: 1;}
+  80%{opacity: .9;}
+  100%{opacity: 0;}
+}
+
+@-webkit-keyframes finalFade{
+  0%{opacity: 0;}
+  30%{opacity: 1;}
+  80%{opacity: .9;}
+  100%{opacity: 1;}
+}
+
+@-moz-keyframes finalFade{
+  0%{opacity: 0;}
+  30%{opacity: 1;}
+  80%{opacity: .9;}
+  100%{opacity: 1;}
+}
+
+@-o-keyframes finalFade{
+  0%{opacity: 0;}
+  30%{opacity: 1;}
+  80%{opacity: .9;}
+  100%{opacity: 1;}
+}
+
+@keyframes finalFade{
+  0%{opacity: 0;}
+  30%{opacity: 1;}
+  80%{opacity: .9;}
+  100%{opacity: 1;}
+}
       .containermain {
           max-width: 1000px;
           min-width: 100px;
           margin: 50px auto;
-          background: #fff;
-          padding: 25px;
+          
+          padding-right: 25px;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
           border-radius: 12px;
           font-weight: bolder;
           font-family:'Times New Roman', Times, serif;
-          fon
+
       }
     
       label {
@@ -62,19 +361,26 @@
       select {
           width: 100%; /* Increased width for the destination field */
       }
-      button {
-          background-color: yellow;
-          color: black;
-          font-weight: bold;
+     .people-controls {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+      }
+      .people-controls button {
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+          background-color: #d9d9d9;
+          border: 1px solid #ccc;
+          border-radius: 50%;
           cursor: pointer;
-          border: none;
-          padding: 8px 16px; /* Decreased padding to make the button smaller */
-          transition: background-color 0.3s ease;
-          border-radius: 6px; /* Adjusted to match the form field's border radius */
       }
-      button:hover {
-          background-color: #f1c232; /* Lighter yellow when hovered */
+      .people-controls button:hover {
+          background-color: #bfbfbf;
       }
+
+
+
       .duration-controls {
           display: flex;
           gap: 10px;
@@ -419,20 +725,12 @@
   color: #000000;
 
 }
-#addbudget:hover{
-  background-color:#b0ae11;
-  color: #000000;
 
-}
 #addexpense{
   background-color:#FEFA17;
   color: #000000;
 }
-#addexpense:hover{
-  background-color:#b0ae11;
-  color: #000000;
 
-}
 #expense{
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
@@ -660,21 +958,7 @@
   color: white;
   font-size: 12px;
 }
-#add-list,#add-item{
-  background-color: #777;
-  border-radius: 10px;
-  color: white;
-  padding-top:10px ;
-  padding-right:40px ;
-  padding-left:40px ;
-  padding-bottom: 10px;
-  border-color:  #777;
-  box-shadow: none;
 
-}
-#add-list:hover,#add-item:hover{
-  background-color: #373535;
-}
 .containerplan {
             max-width: 800px;
             margin: 50px auto;
@@ -786,8 +1070,12 @@
 </div>
 
 <div id="main" class="col-lg-10">
+  <a href="../frontend/index-2.html"><button type="button" class="btn-back">Go Back</button></a>
   <div class="section-container" id="dashboard">
-  <div class="containermain">
+    
+    
+   
+  <div class="containerpub">
     <h2>Customize Itinerary </h2>
     <form id="itineraryForm">
         <label  id="namelabel" for="name">Name Your Trip</label>
@@ -1056,6 +1344,7 @@
             <button type="button" onclick="adjustDuration(1)">+</button>
         </div>
 
+
         <label for="activities">Activities/Attractions</label>
         <textarea id="activities" rows="4" placeholder="List specific places, landmarks, or experiences"></textarea>
 
@@ -1076,13 +1365,25 @@
         <textarea id="essentials" rows="4" placeholder="Enter packing needs, documents, health items, etc."></textarea>
         <button type="button" id="essentialsButton" onclick="openModal()">Essentials Details</button>
 
-        <button type="button" onclick="generateItinerary()">Submit</button>
+        <button type="button" id="sub1"  onclick="generateItinerary()">Submit</button>
+        <br>
+        <br>
+        <h7 style="color: #000000;">Note:</h7><h7> This is a <strong>private</strong> itinerary. It won't be visible to others.</h7>
     </form>
 
     <div class="output" id="output" style="display: none;"></div>
     
 </div>
-
+<div class="modal" id="essentialsModal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Essentials</h2>
+      <textarea id="modalEssentials" rows="6" placeholder="Edit your packing needs, documents, health items, etc."></textarea>
+      <button type="button" onclick="saveEssentials()">Save</button>
+  
+  </div>
+</div>
+</div>
 </div>
 
     <!-- Default Section is not shown anymore -->
@@ -1122,13 +1423,13 @@
 
         <div class="display-container">
             <div class="heading row" style="display: flex; justify-content: space-around;">
-                <div class="alert alert-primary" role="alert">
+                <div class="alert alert-primary" id="expensebox" role="alert">
                     Total Budget: <span id="totalBudget">100</span>
                 </div>
-                <div class="alert alert-primary" role="alert">
+                <div class="alert alert-primary"  id="expensebox" role="alert">
                     Total Expenses: <span id="totalExpenses">100</span>
                 </div>
-                <div class="alert alert-primary" role="alert">
+                <div class="alert alert-primary"  id="expensebox" role="alert">
                     Budget Left: <span id="budgetLeft">100</span>
                 </div>
             </div>
@@ -1543,7 +1844,7 @@ function openModal() {
             currentValue = Math.max(1, currentValue + value);
             durationInput.value = currentValue;
         }
-
+      
         // Function to generate itinerary
         function generateItinerary() {
             const name = document.getElementById('name').value;
