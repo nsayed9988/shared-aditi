@@ -36,7 +36,7 @@
     margin: 0;
   border-radius: 20px;
     font-weight: 100;
-    background: radial-gradient(#f6d896, #5badfa);
+    background: #8FE3CF;
     -webkit-overflow-Y: hidden;
     -moz-overflow-Y: hidden;
     -o-overflow-Y: hidden;
@@ -533,13 +533,14 @@
 
         .section-container {
             flex-grow: 1;
-            padding: 20px;
-          
-            display: none; 
-			      border-radius: 10px;
+            padding: 20px; 
+		background-color:#8FE3CF;
+         display: none; 
+	 border-radius: 10px;
             margin-left: auto; /* Push it to the right */
             margin-right: 0;
 			/* Hide all sections by default */
+	
         }
 
         .section-container.active {
@@ -1076,27 +1077,29 @@
             cursor: pointer;
         }
         .list-item {
-            margin: 12px 0;
-            cursor: pointer;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #ecf0f1; /* Light grey background */
-            transition: background-color 0.3s ease;
-        }
-        .list-item:hover {
-            background-color: #bdc3c7; /* Slightly darker grey on hover */
-        }
-        .list-item input {
-            margin-right: 10px;
-        }
-        .completed {
-            text-decoration: line-through;
-            color: #aaa;
-        }
-        #travel-dates{
-          color: #000000;
-        }
+    margin: 12px 0;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ecf0f1; /* Light grey background */
+    transition: background-color 0.3s ease;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center vertically */
+    padding: 10px;
+}
+
+.list-item:hover {
+    background-color: #bdc3c7; /* Slightly darker grey on hover */
+}
+
+/* Checkbox styling */
+.list-item input[type="checkbox"] {
+    margin-right: 10px; /* Space between checkbox and text */
+    accent-color: #4caf50; /* Custom color for checkbox */
+    width: 16px; /* Adjust checkbox size */
+    height: 16px;
+}
+	
 
     </style>
 	<header class="header sticky-bar background-body">
@@ -1207,13 +1210,13 @@
     <div class="containerpub">
       <div class="sectionpub">
         <form  id="tourForm">
-          <h2 style="color: #000000;">Create an Itinerary:</h2>
+          <h3 style="color: #000000;">Create an Itinerary:</h3>
           <div class="form-group">
-              <label for="traveler-name">Traveler Name:</label>
+              <label for="traveler-name"><h6>Traveler Name:</h6></label>
               <input type="text" id="traveler-name" placeholder="Enter your name">
           </div>
           <div class="form-group">
-              <label for="destination">Destination:</label>
+              <label for="destination"><h6>Destination:</h6></label>
               <select id="destination" required>
            
                 <option value="" selected disabled>Select a country</option>
@@ -1464,11 +1467,11 @@
                 </select>
           </div>
           <div class="form-group">
-              <label for="travel-dates">Travel Dates:</label>
+              <label for="travel-dates"><h6>Travel Dates:</h6></label>
               <input type="date" id="travel-dates">
           </div>
           <div class="form-group">
-              <label for="number-of-days">Number of Days:</label>
+              <label for="number-of-days"><h6>Number of Days:</h6></label>
               <div class="number-input">
                   <button id="add-days" type="button" onclick="decrementDays()">-</button>
                   <input type="number" id="number-of-days" value="1" min="1" onchange="generateDayActivities()">
@@ -1476,7 +1479,7 @@
               </div>
           </div>
 
-        <label for="people">Maximum Number of People</label>
+        <label for="people"><h6>Maximum Number of People</h6></label>
         <div class="people-controls">
             <button type="button" id="add-people" onclick="adjustPeople(-1)">-</button>
             <input type="number" id="people" value="1" min="1" required>
@@ -1511,10 +1514,9 @@
   <div id="essentialsModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
+        <h4>Essentials to Carry During a Trip</h4><br>
+	<div class ="section">
         <div class="sectionpub">
-        <h4>Essentials to Carry During a Trip</h4>
-        <br>
-        <div class="section">
             <h5>1. Travel Documents</h5>
             <div class="list-item" onclick="toggleItem(this)">
                 <input type="checkbox"> Passport and visa (if applicable)
@@ -1529,9 +1531,8 @@
                 <input type="checkbox"> Copies of IDs (physical and digital backups)
             </div>
             <div class="list-item" onclick="toggleItem(this)">
-                <input type="checkbox"> Itinerary with contact numbers
+                <input type="checkbox"> Itinerary with contact numbers<br>
             </div>
-        </div>
         </div>
 <br>
         <div class="sectionpub">
@@ -1543,10 +1544,10 @@
                 <input type="checkbox"> Debit/credit cards
             </div>
             <div class="list-item" onclick="toggleItem(this)">
-                <input type="checkbox"> Travel wallet for secure storage
+                <input type="checkbox"> Travel wallet for secure storage<br>
             </div>
         </div>
-        <br>
+<br>
         <div class="sectionpub">
             <h5>3. Toiletries and Personal Care</h5>
             <div class="list-item" onclick="toggleItem(this)">
@@ -1559,7 +1560,7 @@
                 <input type="checkbox"> Sunscreen and insect repellent
             </div>
         </div>
-        <br>
+<br>
         <div class="sectionpub">
             <h5>4. Miscellaneous</h5>
             <div class="list-item" onclick="toggleItem(this)">
@@ -1572,13 +1573,13 @@
                 <input type="checkbox"> Travel pillow, eye mask, and earplugs
             </div>
         </div>
-        <br>
+
         <div class="section">
             <button class="essentials-button" onclick="saveEssentials()">Save Essentials</button>
         </div>
     </div>
 </div>
-
+</div>
 <div class='light x1'></div>
 <div class='light x2'></div>
 <div class='light x3'></div>
