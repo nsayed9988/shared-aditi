@@ -65,7 +65,7 @@
     margin: 0;
   border-radius: 20px;
     font-weight: 100;
-    background: radial-gradient(#f6d896, #5badfa);
+    background: radial-gradient(#f6d896, #8FE3CF);
     -webkit-overflow-Y: hidden;
     -moz-overflow-Y: hidden;
     -o-overflow-Y: hidden;
@@ -967,7 +967,10 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             border-radius: 12px;
         }
-
+input activities{
+  padding: 10px;
+  height: 50px;
+}
     </style>
 	<header class="header sticky-bar background-body">
 		<div class="container">
@@ -1077,12 +1080,12 @@
    
   <div class="containerpub">
     <h2>Customize Itinerary </h2>
-    <form id="itineraryForm">
+    <form id="itineraryForm" action="details.html" method="GET" >
         <label  id="namelabel" for="name">Name Your Trip</label>
-        <input type="text" id="name" placeholder="Enter your name" required>
+        <input type="text" name="namepriv" id="name" placeholder="Enter your name" required>
 
         <label id="destlabel" for="destination">Destination(s)</label>
-        <select id="destination" required>
+        <select name="destinationpriv" id="destination" required>
            
                 <option value="" selected disabled>Select a country</option>
                 <option value="Afghanistan">Afghanistan</option>
@@ -1340,13 +1343,14 @@
         <label for="duration">Duration (in days)</label>
         <div class="duration-controls">
             <button type="button" onclick="adjustDuration(-1)">-</button>
-            <input type="number" id="duration" value="1" min="1" required>
+            <input name="durationpriv" type="number" id="duration" value="1" min="1" required>
             <button type="button" onclick="adjustDuration(1)">+</button>
         </div>
 
 
         <label for="activities">Activities/Attractions</label>
-        <textarea id="activities" rows="4" placeholder="List specific places, landmarks, or experiences"></textarea>
+       
+ <textarea  id="activities" name="activities" rows="4" placeholder="List specific places, landmarks, or experiences"></textarea>
 
         <label for="budget">Budget</label>
         <div class="budget-group">
@@ -1365,7 +1369,7 @@
         <textarea id="essentials" rows="4" placeholder="Enter packing needs, documents, health items, etc."></textarea>
         <button type="button" id="essentialsButton" onclick="openModal()">Essentials Details</button>
 
-        <button type="button" id="sub1"  onclick="generateItinerary()">Submit</button>
+        <button type="submit" id="sub1"  onclick="generateItinerary()">Submit</button>
         <br>
         <br>
         <h7 style="color: #000000;">Note:</h7><h7> This is a <strong>private</strong> itinerary. It won't be visible to others.</h7>

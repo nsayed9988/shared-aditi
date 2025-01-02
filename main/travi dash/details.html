@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
+    <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
+    <title>Travi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }.card-container {
+            display: flex;
+            flex-wrap: wrap; /* Ensures cards wrap to the next row */
+            gap: 16px;       /* Spacing between cards */
+            padding: 16px;   /* Padding around the container */
+        }
+
+        .card {
+            flex: 1 1 calc(33.33% - 32px); /* Each card takes up 1/3rd of the container */
+            max-width: calc(33.33% - 32px); /* Prevents overflow */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            background-color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                flex: 1 1 calc(50% - 32px); /* Adjust for smaller screens */
+                max-width: calc(50% - 32px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                flex: 1 1 100%; /* Full width on very small screens */
+                max-width: 100%;
+            }
+        }
+        .btn-back{
+          display: inline-block;
+            background-color: #FEFA17; /* Teal background */
+            color: black;
+            margin-left: 20px;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+         width:100px;
+        }
+        .btn-back:hover
+        {
+            background-color: #000000;
+            color: #fefa17; ; /* Darker teal */
+        }
+
+        h3 { 
+            display: block;
+            font-size: 1.7em;     
+        }
+
+        .contents{
+          font-family: Georgia, 'Times New Roman', Times, serif;
+          font-size: larger;
+          padding: 1.5px;
+        }
+        
+    </style>
+    <!--<header class="header sticky-bar">
+        <div class="top-bar"> 
+          <div class="container-fluid"> 
+            <div class="text-header"> 
+              <div class="text-unlock text-sm-bold">Unlock the Magic of Travel with Travi - Your Gateway to Extraordinary Experiences</div><a class="link-secondary-2" href="#">Get This Now 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16" fill="none">
+                  <path d="M7.99992 12.6666L12.6666 7.99992L7.99992 3.33325M12.6666 7.99992L3.33325 7.99992" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></a>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid background-body">
+          <div class="main-header">
+            <div class="header-left">
+              <div class="header-logo"><a class="d-flex" href="index-2.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
+              <div class="header-nav">
+                <nav class="nav-main-menu">
+                  <ul class="main-menu">
+                    <li class="mega-li has-children"><a class="active" href="index-2.html">Home</a>
+                      <div class="mega-menu">
+                        <div class="mega-menu-inner">
+                          <div class="row align-items-center">
+                            <div class="col-lg-10">
+                              <div class="row align-items-center">
+                                <div class="col-lg-4">
+                                  <p class="text-md-bold mb-10 neutral-1000">Start Your Journey</p>
+                                  <h5 class="mb-45 neutral-1000">Book, Pack, Go! Your Ultimate Travel Companion</h5><a class="btn btn-brand-secondary">Exploring Now 
+                                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path d="M8 15L15 8L8 1M15 8L1 8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"> </path>
+                                    </svg></a>
+                                </div>
+                                <div class="col-lg-4">
+                                  <div class="card-home-link background-body"> <a class="card-icon" href="index-2.html"> <img src="assets/imgs/template/icons/activity.svg" alt="Travila"></a>
+                                    <div class="card-info"> <a href="index-2.html">
+                                      <h6 class="text-md-bold"> Everything in one space</h6></a>
+                                      <p class="text-xs-medium neutral-500">
+                                        Whether it's your own personalized trip or a bookmarked plan, you'll find everything organized on a single page for your convenience.</p>
+                                    </div>
+                                  </div>
+                                  <div class="card-home-link background-body"> <a class="card-icon" href="index-2.html"> <img src="assets/imgs/template/icons/map.svg" alt="Travila"></a>
+                                    <div class="card-info"> <a href="index-2.html">
+                                        <h6 class="text-md-bold"> Our Services</h6></a>
+                                      <p class="text-xs-medium neutral-500">Tours, Activities, Destinations</p>
+                                    </div>
+                                  </div>
+                                  <div class="card-home-link background-body"> <a class="card-icon" href="index-3.html"> <img src="assets/imgs/template/icons/deck-chair.svg" alt="Travila"></a>
+                                    <div class="card-info"> <a href="index-3.html">
+                                        <h6 class="text-md-bold">Adjust your itinerary as needed
+                                        </h6></a>
+                                      <p class="text-xs-medium neutral-500">Seamlessly manage your itinerary all in one page with Travi - from reconfiguring the order of your plans, introducing new destinations to your itinerary, or even discarding plans as needed.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-4">
+                                  <ul class="list-featured">
+                                    <li><h1><a class="tours" href="tour-grid-3.html">Tours</a></li></h1>
+                              <li><h2><a class="activities" href="index-5.html">Activities</a></li></h2>
+                                    <li><h2><a class="destinations" href="index-6.html"> Destinations</a></li></h2><br><br>
+                                      <li><a class="hotels" href="customize.html">Customize Your Own Tour With AI</a></li>-->
+                                  
+                                 <!--     <li><a class="hotels" href="index-7.html">Hotels</a></li>
+                                    <li><a class="rental-car" href="index-8.html">Rental Car</a></li>
+                                    <li><a class="property" href="index-9.html">Property</a></li>
+                              <li><a class="tickets" href="index-10.html">Tickets</a></li>--> 
+                                  <!--</ul>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-2"><img src="assets/imgs/template/world.png" alt="Travila"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
+                    </li>
+                    <li id="my-ite" class="mega-li-small"><a href="../travi dash/my-booking.html">My Iternaries</a>         
+                    </li>
+                    <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html">Profile</a>         
+                    </li>
+                  <li class="has-children"><a href="#">Blog</a>
+                    <ul class="sub-menu">
+                      <li><a href="blog-grid.html">The Blog Vault</a></li>
+                      <li><a id="my-blog" href="blogwrite.html">Share Your Thoughts</a></li>
+                    </ul>
+                  </li>
+                  <li class=""><a href='privacy.html'>Privacy Notice</a>
+                    
+                  </li>
+                    <li class=""><a href="faq.html">FAQs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </nav>
+              </div>
+            </div>
+            <div class="header-right">
+              <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-account icon-lang"><span class="text-14-medium arrow-down">EN</span></span>
+                <div class="dropdown-account">
+                  <ul>
+                    <li><a class="text-sm-medium" href="#">English</a></li>
+                    <li><a class="text-sm-medium" href="#">French</a></li>
+                    <li><a class="text-sm-medium" href="#">Chinese</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-cart"><span class="text-14-medium arrow-down">USD</span></span>
+                <div class="dropdown-cart">
+                  <ul>
+                    <li><a class="text-sm-medium" href="#">USD</a></li>
+                    <li><a class="text-sm-medium" href="#">EUR</a></li>
+                    <li><a class="text-sm-medium" href="#">SGP</a></li>
+                  </ul>
+                </div>
+              </div>
+             <a href="../travi dash/login.html"><button class="me-4 btn btn-brand-secondary">
+                Login
+              </button></a> 
+             
+              <div class="burger-icon-2 burger-icon-white"><img src="assets/imgs/template/icons/menu.svg" alt="Travila"></div> 
+              <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
+            </div>
+          </div>
+        </div>
+      </header>-->
+      <body>
+        <a href="../travi dash/private.html"><button type="button" class="btn-back">Go Back</button></a>
+        <br>
+        <br>
+        <h2>Created By You, For You!</h2>
+        <div class="card-container" id="cardContainer">
+            <!-- Cards will be appended here -->
+        </div>
+        <h2>Public Iternaries Created By You</h2>
+        <div class="card-containerpublic" id="cardContainer">
+            <!-- Cards will be appended here -->
+        </div>
+        <script>
+            // Parse query parameters
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('namepriv') || "Unnamed Trip";
+            const destination = params.get('destinationpriv') || "Unknown Destination";
+            const duration = params.get('durationpriv');
+            const activities = params.get('activities');
+          
+            // Create a new card
+            const cardContainer = document.getElementById('cardContainer');
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3> Trip Name: ${name}</h3>
+                <p class="contents">Destination: ${destination}</p>
+                <p class="contents">Trip Duration:${duration} day(s)</p> 
+                <p class="contents">Activities:${activities}</p>
+
+            `;
+    
+            // Append the card to the container
+            cardContainer.appendChild(card);
+
+        </script>
+    </body>
+</html>
