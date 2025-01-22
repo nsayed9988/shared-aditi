@@ -1299,5 +1299,3 @@ document.addEventListener('DOMContentLoaded', function () {
       getStartedButton.disabled = false; // Enable the button
     }
   });
-  //add for itn
- 

@@ -13,6 +13,9 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?version=2.0" rel="stylesheet">
+ <script type="module" src="profile.js" defer></script>
+ <script type='module' src="../firebase.js" defer></script>
+  
     <title>My Profile  </title>
   </head>
   <body>
@@ -105,16 +108,16 @@
               <!-- mobile menu start-->
               <nav>
                 <ul class="main-menu">
-                  <li class="has-children"><a class="dashboard2" href="index.html"> <img src="assets/imgs/template/icons/dashboard.svg" alt="Travilla"><span>
+                  <!--<li class="has-children"><a class="dashboard2" href="index.html"> <img src="assets/imgs/template/icons/dashboard.svg" alt="Travilla"><span>
                          Dashboard</span></a></li>
                   <li><a class="candidates2" href="#"> <img src="assets/imgs/template/icons/tour.svg" alt="Travilla"><span>
                          Tours </span></a>
-                    <ul class="sub-menu"> 
+                    <ul class="sub-menu"> -->
                       <!--<li> <a href="add-tour.html">Add New</a></li>-->
-                      <li> <a href="../frontend/itinerary.html">Add Tour</a></li>
+                      <!--<li> <a href="../frontend/itinerary.html">Add Tour</a></li>
                       <li> <a href="my-booking.html">View Recent Tours</a></li>
                     </ul>
-                  </li>
+                  </li>-->
                   <!--<li><a class="recruiters2" href="#"> <img src="assets/imgs/template/icons/hotel.svg" alt="Travilla"><span>
                          Hotels</span></a></li>
                   <li><a class="jobs2" href="#"> <img src="assets/imgs/template/icons/destination.svg" alt="Travilla"><span>
@@ -176,7 +179,7 @@
       <div class="nav background-body">
         <nav class="nav-main-menu">
           <ul class="main-menu">
-            <li class="has-children"><a class="dashboard2" href="index.html"> <img src="assets/imgs/template/icons/dashboard.svg" alt="Travilla"><span>
+            <!--<li class="has-children"><a class="dashboard2" href="index.html"> <img src="assets/imgs/template/icons/dashboard.svg" alt="Travilla"><span>
                    Dashboard</span></a></li>
             <li><a class="candidates2" href="#"> <img src="assets/imgs/template/icons/tour.svg" alt="Travilla"><span>
                    Tours </span></a>
@@ -184,7 +187,7 @@
                   <li> <a href="../frontend/itinerary.html">Add Tour</a></li>
                       <li> <a href="my-booking.html">View Recent Tours</a></li>
               </ul>
-            </li>
+            </li>-->
            
             <!--<li><a class="authentication2" href="#"> <img src="assets/imgs/template/icons/page.svg" alt="Travilla"><span>
               My Wishlist</span></a></li>-->
@@ -249,7 +252,7 @@
             <div class="box-breadcrumb"> 
               <div class="breadcrumbs">
                 <ul> 
-                  <li> <a class="icon-home" href="index.html">Home</a></li>
+                  <li> <a class="icon-home" href="../frontend/index-2.html">Home</a></li>
                   <li><a class="icon-home" href="#">User</a></li>
                   <li><span>Update Profile</span></li>
                 </ul>
@@ -272,7 +275,8 @@
                       <a class="btn btn-upload-avatar" href="#" onclick="document.getElementById('uploadAvatar').click();">Upload Avatar</a>
                     </div>
                   </div>
-                  <form id="profileForm">
+                  <div id="userdisplay">
+                  <form id="profileForm" >
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group">
@@ -283,7 +287,7 @@
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label class="text-sm-medium neutral-500 mb-10">Email</label>
-                          <input id="email" class="form-control" type="email" placeholder="Email" name="email" required>
+                          <input id="email" class="form-control" type="email" placeholder="Email" name="email" required disabled>
                         </div>
                       </div>
                      
@@ -508,9 +512,10 @@
                       
                     </div>
                     <div class="box-button-save mt-15">
-                      <button class="btn btn-gray" type="button" onclick="saveProfile()">Save Changes</button>
+                      <button id="saveprofile" class="btn btn-gray" type="button" onclick="saveProfile()">Save Changes</button>  <button id="editProfile" class="btn btn-gray" onclick="editProfile()">Edit Profile</button>
                     </div>
                   </form>
+                </div>
                 </div>
                 
                
@@ -521,31 +526,37 @@
                 <div class="box-form-profile"> 
                   <h6 class="text-lg-bold neutral-1000 mb-12">Social Network</h6>
                   <div class="row"> 
+                    <form id="social">
                     <div class="col-lg-12">
                       <label class="lbl-checkbox text-sm-medium neutral-500">Facebook</label>
                       <div class="form-group"> 
-                        <input class="form-control" type="text" placeholder="https://www.facebook.com">
+                        <input id="face" class="form-control" type="text" placeholder="https://www.facebook.com">
                       </div>
                     </div>
                     <div class="col-lg-12">
                       <label class="lbl-checkbox text-sm-medium neutral-500">Twitter</label>
                       <div class="form-group"> 
-                        <input class="form-control" type="text" placeholder="https://twitter.com">
+                        <input id="twit" class="form-control" type="text" placeholder="https://twitter.com">
                       </div>
                     </div>
                     <div class="col-lg-12">
                       <label class="lbl-checkbox text-sm-medium neutral-500">Instagram</label>
                       <div class="form-group"> 
-                        <input class="form-control" type="text" placeholder="https://www.instagram.com">
+                        <input id="insta" class="form-control" type="text" placeholder="https://www.instagram.com">
                       </div>
                     </div>
+                  </form>
                   </div>
                   <div class="box-button-save mt-15"> 
-                    <button class="btn btn-gray" id="">Save Changes</button>
+                    
+                    <button id="savelink" class="btn btn-gray" type="button">Save Changes</button>
+                    <button id="editlink" class="btn btn-gray" onclick="editlink()">Edit Profile</button>
+                    
+
                   </div>
                   
                 </div>
-                <div class="box-form-profile"> 
+                <!--<div class="box-form-profile"> 
                   <h6 class="text-lg-bold neutral-1000 mb-12">Change Password</h6>
                   <div class="row"> 
                     <div class="col-lg-12">
@@ -570,7 +581,7 @@
                   <div class="box-button-save mt-15"> 
                     <button class="btn btn-gray" id="savePasswordBtn" onclick="savePassword()">Save Changes</button>
                   </div>
-                </div>
+                </div>-->
               </div>
             </div>
           </div>
@@ -919,7 +930,7 @@ function populateCountries(countryElementId, stateElementId){
 populateCountries("country", "state");
 
 // Add event listener to the Save Changes button
-document.getElementById("saveChangesBtn").addEventListener("click", function () {
+/*document.getElementById("saveChangesBtn").addEventListener("click", function () {
   // Get the selected values
   const country = document.getElementById("country").value;
   const state = document.getElementById("state").value;
@@ -977,7 +988,7 @@ document.getElementById("savePasswordBtn").addEventListener("click", function ()
   // Show success message
   alert("Your password has been updated successfully!");
   console.log("wow");
-  });
+  });*/
 
    </script>
   </body>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
+    <script type="module" src="itinerary.js" defer></script>
     <style>
         #expensebox{
         background: linear-gradient(135deg,#f6d896, #5badfa);
@@ -1080,7 +1081,7 @@ input activities{
    
   <div class="containerpub">
     <h2>Customize Itinerary </h2>
-    <form id="itineraryForm" action="../frontend/details.html" method="GET" >
+    <form id="itineraryForm" action="../frontend/detail.html" method="GET" >
         <label  id="namelabel" for="name">Name Your Trip</label>
         <input type="text" name="namepriv" id="name" placeholder="Enter your name" required>
 
@@ -1337,7 +1338,7 @@ input activities{
               
         </select>
 
-        <label  for="dates">Dates</label>
+        <label  for="dates">Start Date</label>
         <input type="date" id="dates" required>
 
         <label for="duration">Duration (in days)</label>
@@ -1369,7 +1370,7 @@ input activities{
         <textarea id="essentials" rows="4" placeholder="Enter packing needs, documents, health items, etc."></textarea>
         <button type="button" id="essentialsButton" onclick="openModal()">Essentials Details</button>
 
-        <button type="submit" id="sub1"  onclick="generateItinerary()">Submit</button>
+        <button type="submit" id="sub1"  >Submit</button>
         <br>
         <br>
         <h7 style="color: #000000;">Note:</h7><h7> This is a <strong>private</strong> itinerary. It won't be visible to others.</h7>
@@ -1850,7 +1851,7 @@ function openModal() {
         }
       
         // Function to generate itinerary
-        function generateItinerary() {
+       /* function generateItinerary() {
             const name = document.getElementById('name').value;
             const destination = document.getElementById('destination').value;
             const dates = document.getElementById('dates').value;
@@ -1877,7 +1878,7 @@ function openModal() {
                 <p><strong>Budget:</strong> ${budget} ${currency}</p>
                 <p><strong>Essentials:</strong><br> ${essentials || 'Not specified.'}</p>
             `;
-        }
+        }*/
        
 </script>
 

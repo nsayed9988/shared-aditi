@@ -1,8 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
   authDomain: "ty-project-80ab7.firebaseapp.com",
@@ -15,8 +15,13 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
+const db = getDatabase(app);
+
+// Generate unique user ID
+function generateUserId() {
+  return `user_${Math.random().toString(36).substr(2, 9)}`;
+}
 
 const submit = document.getElementById('submit');
 
@@ -25,15 +30,55 @@ submit.addEventListener("click", function (event) {
   const email = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
+  if (!email || !password) {
+    alert("Please fill in both email and password.");
+    return;
+  }
+
   createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed up successfully
-      alert("Account created successfully!");
-      window.location.href="../frontend/index-2.html";
+    .then(async (userCredential) => {
+      const user = userCredential.user;
+
+      // Generate unique user ID
+      const userId = generateUserId();
+
+      // Format email to use as a key
+      const emailKey = email.replace(/\./g, ',');
+
+      // Store user data in Realtime Database
+      try {
+        await set(ref(db, `User Profile/${emailKey}`), {
+          userId: userId,
+          email: email,
+          createdAt: new Date().toISOString(),
+          authUid: user.uid  // Firebase Auth UID
+        });
+
+        alert("Account created successfully!");
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem("loggedIn", "true");
+
+        setTimeout(() => {
+          window.location.href = "my-profile.html";
+        }, 500);
+
+      } catch (dbError) {
+        console.error("Error storing user data in database:", dbError);
+        alert("Account created but failed to save additional data. Please contact support.");
+      }
     })
     .catch((error) => {
-      // Handle Errors
-      const errorMessage = error.message;
+      let errorMessage = error.message;
+
+      if (error.code === 'auth/email-already-in-use') {
+        errorMessage = "This email is already registered. Please use a different email.";
+      } else if (error.code === 'auth/weak-password') {
+        errorMessage = "Password should be at least 6 characters long.";
+      } else if (error.code === 'auth/invalid-email') {
+        errorMessage = "Please enter a valid email address.";
+      }
+
       alert(`Error: ${errorMessage}`);
+      console.error("Error details:", error);
     });
 });

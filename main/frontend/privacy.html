@@ -722,6 +722,39 @@
       </div>
     </div>
     <!--Vendors Scripts-->
+    <script> 
+    const linkElements = [
+  { element: document.getElementById("my-ite"), href: "../travi dash/my-booking.html" },
+  { element: document.getElementById("my-blog"), href: "../travi dash/my-blog.html" },
+  { element: document.getElementById("my-profile-list-item"), href: "../travi dash/my-profile.html" }
+];
+
+// Check the loggedIn status from localStorage
+const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+
+// Loop through each link element
+linkElements.forEach(link => {
+  if (!isLoggedIn) {
+   
+    // If not logged in, disable the link
+    link.element.classList.add("disabled-link");
+    link.element.removeAttribute("href"); // Remove the href to disable navigation
+    link.element.addEventListener("click", (e) => {
+      e.preventDefault(); // Prevent default link action
+      console.log("Alert will be shown now.");
+      alert("You must be logged in to access this page."); 
+    // Optional feedback to the user
+    });
+  } else {
+    // If logged in, enable the link
+    link.element.classList.remove("disabled-link");
+    link.element.setAttribute("href", link.href);
+    
+    
+     // Add the appropriate href
+  }
+});
+      </script>
     <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
     <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>

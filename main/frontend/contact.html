@@ -12,6 +12,54 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <title>Contact</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script  type="module"  src="contactdb.js" defer></script>
+
+<!-- Add these in your HTML head -->
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+  // Initialize EmailJS
+emailjs.init("hcJfmY5yNibHcjamE");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  if (!form) {
+    console.error("Form not found");
+    return;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    console.log("Form submitted"); // Debug log
+
+    try {
+      const templateParams = {
+        first_name: form.first_name.value,
+        last_name: form.last_name.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        message: form.message.value,
+      };
+
+      console.log("Sending data:", templateParams); // Debug log
+
+      const response = await emailjs.send(
+        "service_7tctd52",
+        "template_l7dgk6l",
+        templateParams
+      );
+
+      console.log("Success:", response);
+      alert("Message sent successfully!");
+      form.reset();
+    } catch (error) {
+      console.error("Error details:", error);
+      alert("Failed to send message: " + error.text);
+    }
+  });
+});
+</script>
   </head>
   <body>
     <div id="preloader-active">
@@ -41,18 +89,105 @@
             <div class="header-nav">
               <nav class="nav-main-menu">
                 <ul class="main-menu">
-                 
+                  <li class="mega-li has-children"><a class="active" href="index-2.html">Home</a>
                     <div class="mega-menu">
-                      
+                      <div class="mega-menu-inner">
+                        <div class="row align-items-center">
+                          <div class="col-lg-10">
+                            <div class="row align-items-center">
+                              <div class="col-lg-4">
+                                <p class="text-md-bold mb-10 neutral-1000">Start Your Journey</p>
+                                <h5 class="mb-45 neutral-1000">Book, Pack, Go! Your Ultimate Travel Companion</h5><a class="btn btn-brand-secondary">Exploring Now 
+                                  <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 15L15 8L8 1M15 8L1 8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"> </path>
+                                  </svg></a>
+                              </div>
+                              <div class="col-lg-4">
+                                <div class="card-home-link background-body"> <a class="card-icon" href="index-2.html"> <img src="assets/imgs/template/icons/activity.svg" alt="Travila"></a>
+                                  <div class="card-info"> <!--<a href="index-2.html">-->
+                                    <h6 class="text-md-bold"> Everything in one space</h6></a>
+                                    <p class="text-xs-medium neutral-500">
+                                      Whether it's your own personalized trip or a bookmarked plan, you'll find everything organized on a single page for your convenience.</p>
+                                  </div>
+                                </div>
+                                <div class="card-home-link background-body"> <a class="card-icon" href="index-2.html"> <img src="assets/imgs/template/icons/map.svg" alt="Travila"></a>
+                                  <div class="card-info"> <a href="index-2.html">
+                                      <h6 class="text-md-bold"> Our Services</h6></a>
+                                    <p class="text-xs-medium neutral-500">Tours, Activities, Destinations</p>
+                                  </div>
+                                </div>
+                                <div class="card-home-link background-body"> <a class="card-icon" href="index-3.html"> <img src="assets/imgs/template/icons/deck-chair.svg" alt="Travila"></a>
+                                  <div class="card-info"> <!--<a href="index-3.html">-->
+                                      <h6 class="text-md-bold">Adjust your itinerary as needed
+                                      </h6></a>
+                                    <p class="text-xs-medium neutral-500">Seamlessly manage your itinerary all in one page with Travi - from reconfiguring the order of your plans, introducing new destinations to your itinerary, or even discarding plans as needed.</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-4">
+                                <ul class="list-featured">
+                                  <li><h1><a class="tours" href="tour-grid-3.html">Tours</a></li></h1>
+                                  <!--<li><h2><a class="activities" href="index-5.html">Activities</a></li></h2>
+                                  <li><h2><a class="destinations" href="index-6.html"> Destinations</a></li></h2><br><br>-->
+                                  <li><a class="hotels" href="customize.html">Customize Your Own Tour With AI</a></li>
+                               <!--     <li><a class="hotels" href="index-7.html">Hotels</a></li>
+                                  <li><a class="rental-car" href="index-8.html">Rental Car</a></li>
+                                  <li><a class="property" href="index-9.html">Property</a></li>
+                            <li><a class="tickets" href="index-10.html">Tickets</a></li>--> 
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-2"><img src="assets/imgs/template/world.png" alt="Travila"></div>
+                        </div>
                       </div>
                     </div>
                   </li>
-                 
+                  <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
+                  </li>
+                  <li id="my-ite" class="mega-li-small"><a href="../travi dash/my-booking.html">My Iternaries</a>         
+                  </li>
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html">Profile</a>         
+                  </li>
+                <li class="has-children"><a href="#">Blog</a>
+                  <ul class="sub-menu">
+                    <li><a href="blog-grid.html">The Blog Vault</a></li>
+                    <li><a id="my-blog" href="blogwrite.html">Share Your Thoughts</a></li>
+                  </ul>
+                </li>
+                <li class=""><a href='privacy.html'>Privacy Notice</a>
                   
-                 
-                  
-                  
-            \
+                </li>
+                  <li class=""><a href="faq.html">FAQs</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+              </nav>
+            </div>
+          </div>
+          <div class="header-right">
+            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-account icon-lang"><span class="text-14-medium arrow-down">EN</span></span>
+              <div class="dropdown-account">
+                <ul>
+                  <li><a class="text-sm-medium" href="#">English</a></li>
+                  <li><a class="text-sm-medium" href="#">French</a></li>
+                  <li><a class="text-sm-medium" href="#">Chinese</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-cart"><span class="text-14-medium arrow-down">USD</span></span>
+              <div class="dropdown-cart">
+                <ul>
+                  <li><a class="text-sm-medium" href="#">USD</a></li>
+                  <li><a class="text-sm-medium" href="#">EUR</a></li>
+                  <li><a class="text-sm-medium" href="#">SGP</a></li>
+                </ul>
+              </div>
+            </div>
+           <a href="../travi dash/login.html"><button class="me-4 btn btn-brand-secondary">
+              Login
+            </button></a> 
+           
+            <div class="burger-icon-2 burger-icon-white"><img src="assets/imgs/template/icons/menu.svg" alt="Travila"></div> 
+            <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
           </div>
         </div>
       </div>
@@ -468,57 +603,116 @@
           <div class="row"> 
             <div class="col-lg-7 mb-30">
               <h2 class="neutral-1000 mb-25">Get in Touch</h2>
-              <form class="form-contact" action="send_mail.php" method="POST">
+              <form id="contactForm">
                 <div class="row">
                   <div class="col-lg-6">
+                    <form id="contactform">
                     <div class="form-group">
                       <label class="text-sm-medium neutral-1000">First Name</label>
-                      <input class="form-control" type="text" name="first_name" placeholder="First Name" required>
+                      <input
+                        id="first_name"
+                        class="form-control"
+                        type="text"
+                        name="first_name"
+                        placeholder="First Name"
+                        required
+                      />
                     </div>
+               
                   </div>
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="text-sm-medium neutral-1000">Last Name</label>
-                      <input class="form-control" type="text" name="last_name" placeholder="Last Name" required>
+                      <input
+                        id="last_name"
+                        class="form-control"
+                        type="text"
+                        name="last_name"
+                        placeholder="Last Name"
+                        required
+                      />
                     </div>
                   </div>
                   <div class="col-lg-12">
                     <div class="form-group">
                       <label class="text-sm-medium neutral-1000">Email Address</label>
-                      <input class="form-control" type="email" name="email" placeholder="email@domain.com" required>
+                      <input
+                        id="email"
+                        class="form-control"
+                        type="email"
+                        name="email"
+                        placeholder="email@domain.com"
+                        required
+                      />
                     </div>
                   </div>
                   <div class="col-lg-12">
                     <div class="form-group">
                       <label class="text-sm-medium neutral-1000">Phone Number</label>
-                      <input class="form-control" type="text" name="phone" placeholder="Phone number">
+                      <input
+                        id="phone"
+                        class="form-control"
+                        type="text"
+                        name="phone"
+                        placeholder="Phone number"
+                      />
                     </div>
                   </div>
                   <div class="col-lg-12">
                     <div class="form-group">
                       <label class="text-sm-medium neutral-1000">Your Message</label>
-                      <textarea class="form-control" name="message" rows="6" placeholder="Leave us a message..." required></textarea>
+                      <textarea
+                        class="form-control"
+                        name="message"
+                        id="message"
+                        rows="6"
+                        placeholder="Leave us a message..."
+                        required
+                      ></textarea>
                     </div>
                   </div>
                   <div class="box-remember-forgot">
                     <div class="form-group">
                       <div class="remember-me">
                         <label class="text-sm-medium neutral-500">
-                          <input class="cb-remember" type="checkbox" name="agree" required>
-                          Agree to our <a class="text-sm-bold" href="term.html">Terms of Service</a> and <a class="text-sm-bold" href="privacy.html">Privacy Policy</a>
+                          <input
+                            class="cb-remember"
+                            type="checkbox"
+                            name="agree"
+                            required
+                          />
+                          Agree to our
+                          <a class="text-sm-bold" href="term.html">Terms of Service</a> and
+                          <a class="text-sm-bold" href="privacy.html">Privacy Policy</a>
                         </label>
                       </div>
                     </div>
                   </div>
                   <div class="col-lg-12">
-                    <button type="submit" class="btn btn-book">Send Message
-                      <svg width="17" height="16" viewbox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.5 15L15.5 8L8.5 1M15.5 8L1.5 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <button type="submit" id="saveContact" class="btn btn-book">
+                      Send Message
+                      <svg
+                        width="17"
+                        height="16"
+                        viewbox="0 0 17 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8.5 15L15.5 8L8.5 1M15.5 8L1.5 8"
+                          stroke=""
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
                       </svg>
                     </button>
                   </div>
                 </div>
               </form>
+              
+           
+              
             </div>
             
             <div class="col-lg-5 mb-30"> 
@@ -801,93 +995,41 @@
         </div>
       </div>
     </div>
-    <div class="popup-signin"> 
-      <div class="popup-container"> 
-        <div class="popup-content"> <a class="close-popup-signin"></a>
-          <div class="d-flex gap-2 align-items-center"><a href="#"><img src="assets/imgs/template/popup/logo.svg" alt="Travila"></a>
-            <h4 class="neutral-1000">Hello there !</h4>
-          </div>
-          <div class="box-button-logins"> <a class="btn btn-login btn-google mr-10" href="#"><img src="assets/imgs/template/popup/google.svg" alt="Travila"><span class="text-sm-bold">Sign in with Google</span></a><a class="btn btn-login mr-10" href="#"><img src="assets/imgs/template/popup/facebook.svg" alt="Travila"></a><a class="btn btn-login" href="#"><img src="assets/imgs/template/popup/apple.svg" alt="Travila"></a></div>
-          <div class="form-login"> 
-            <form action="#">
-              <div class="form-group"> 
-                <label class="text-sm-medium">User name</label>
-                <input class="form-control username" type="text" placeholder="Email / Username">
-              </div>
-              <div class="form-group"> 
-                <label class="text-sm-medium">Password</label>
-                <input class="form-control password" type="password" placeholder="">
-              </div>
-              <div class="form-group"> 
-                <div class="box-remember-forgot">   
-                  <div class="remeber-me">
-                    <label class="text-xs-medium neutral-500"> 
-                      <input class="cb-remember" type="checkbox">Remember me
-                    </label>
-                  </div>
-                  <div class="forgotpass"> <a class="text-xs-medium neutral-500" href="#">Forgot  password?</a></div>
-                </div>
-              </div>
-              <div class="form-group mt-45 mb-30"> <a class="btn btn-black-lg" href="#">Login 
-                  <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg></a></div>
-              <p class="text-sm-medium neutral-500">Don’t have an account? <a class="neutral-1000 btn-signup" href="#">Register Here !</a></p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="popup-signup"> 
-      <div class="popup-container"> 
-        <div class="popup-content"> <a class="close-popup-signup"></a>
-          <div class="d-flex gap-2 align-items-center"><a href="#"><img src="assets/imgs/template/popup/logonew.svg" alt="Travila"></a>
-            <h4 class="neutral-1000">Register</h4>
-          </div>
-          <div class="box-button-logins"> <a class="btn btn-login btn-google mr-10" href="#"><img src="assets/imgs/template/popup/google.svg" alt="Travila"><span class="text-sm-bold">Sign up with Google</span></a><a class="btn btn-login mr-10" href="#"><img src="assets/imgs/template/popup/facebook.svg" alt="Travila"></a><a class="btn btn-login" href="#"><img src="assets/imgs/template/popup/apple.svg" alt="Travila"></a></div>
-          <div class="form-login"> 
-            <form action="#">
-              <div class="form-group"> 
-                <label class="text-sm-medium">Username *</label>
-                <input class="form-control username" type="text" placeholder="Email / Username">
-              </div>
-              <div class="form-group"> 
-                <label class="text-sm-medium">Your email *</label>
-                <input class="form-control email" type="text" placeholder="Email / Username">
-              </div>
-              <div class="row"> 
-                <div class="col-6">
-                  <div class="form-group"> 
-                    <label class="text-sm-medium">Password *</label>
-                    <input class="form-control password" type="password" placeholder="***********">
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group"> 
-                    <label class="text-sm-medium">Confirm Password *</label>
-                    <input class="form-control password" type="password" placeholder="***********">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group"> 
-                <div class="box-remember-forgot">   
-                  <div class="remeber-me">
-                    <label class="text-xs-medium neutral-500"> 
-                      <input class="cb-remember" type="checkbox">I agree to term and conditions
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group mt-45 mb-30"> <a class="btn btn-black-lg" href="#">Create New Account 
-                  <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg></a></div>
-              <p class="text-sm-medium neutral-500">Already have an account  <a class="neutral-1000 btn-signin" href="#">Login Here !</a></p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <script> 
+      const linkElements = [
+    { element: document.getElementById("my-ite"), href: "../travi dash/my-booking.html" },
+    { element: document.getElementById("my-blog"), href: "../travi dash/my-blog.html" },
+    { element: document.getElementById("my-profile-list-item"), href: "../travi dash/my-profile.html" }
+  ];
+  
+  // Check the loggedIn status from localStorage
+  const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+  
+  // Loop through each link element
+  linkElements.forEach(link => {
+    if (!isLoggedIn) {
+     
+      // If not logged in, disable the link
+      link.element.classList.add("disabled-link");
+      link.element.removeAttribute("href"); // Remove the href to disable navigation
+      link.element.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent default link action
+        console.log("Alert will be shown now.");
+        alert("You must be logged in to access this page."); 
+      // Optional feedback to the user
+      });
+    } else {
+      // If logged in, enable the link
+      link.element.classList.remove("disabled-link");
+      link.element.setAttribute("href", link.href);
+      
+      
+       // Add the appropriate href
+    }
+  });
+        </script>
+ 
+    
     <!--Vendors Scripts-->
     <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
     <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
@@ -911,5 +1053,10 @@
     <script src="assets/js/plugins/slider.js"></script>
     <!--Custom script for this template-->
     <script src="assets/js/main.js?v=1.0.0"></script>
+    <!-- Add these before your closing </body> tag -->
+<script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js"></script>
+<script type="module" src="path/to/your/contact-form.js"></script>
   </body>
 </html>

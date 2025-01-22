@@ -1,0 +1,56 @@
+// Profile saving and disabling the select fields
+document.getElementById("saveprofile").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  // Form validation
+  const fullName = document.getElementById("fullName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const bio = document.getElementById("bio").value.trim();
+  const languages = document.getElementById("languages").value.trim();
+  const nationality = document.getElementById("nationality").value;
+
+  if (!fullName || !email || !bio || !languages || !nationality) {
+    alert("Please fill out all required fields.");
+    return;
+  }
+  const emailKey = email.replace(/\./g, ",");
+
+  // Save to Firebase
+  set(ref(db, `User Profile/${emailKey}/About User`), {
+    name: fullName,
+    email: email,
+    bio: bio,
+    languages: languages,
+    nationality: nationality,
+  })
+    .then(() => {
+      alert("Profile Updated");
+
+      // Disable select input fields after update
+      document.getElementById("nationality").disabled = true;
+      document.getElementById("languages").disabled = true;
+
+      // Update UI with the new profile information
+      userdisplay.innerHTML = `
+        <h3>Profile Summary</h3>
+        <br>
+        <h6>
+          <p><strong>Name:</strong> ${fullName}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Bio:</strong> ${bio}</p>
+          <p><strong>Languages:</strong> ${languages}</p>
+          <p><strong>Nationality:</strong> ${nationality}</p>
+        </h6>
+        <br>
+        <button id="editProfile" class="btn btn-gray mt-10" onclick="editProfile()">Edit Profile</button>
+      `;
+      
+      // Attach event listener to the Edit Profile button
+      document.getElementById("editProfile").addEventListener("click", function () {
+        editProfile(fullName, email, bio, languages, nationality);
+      });
+    })
+    .catch((error) => {
+      alert("Error saving changes: " + error.message);
+    });
+});

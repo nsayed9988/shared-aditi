@@ -98,6 +98,11 @@ TABLE CONTENT
   --bs-color-black: #000000;
   --bs-warning: #F09814;
 }
+.disabled-link {
+  pointer-events: none; /* Disable clickability */
+  color: gray; /* Change color to indicate it is disabled */
+  text-decoration: none; /* Remove underline for consistency */
+}
 .btn-back:hover{
 background-color: #000;
 }
@@ -115,7 +120,9 @@ background-color: #000;
   
   font-weight: bolder;
 }
-
+#login-btn{
+  border-radius: 10px;
+}
 #addButtonitn:hover {
   background-color: var(--bs-button-bg-hover);
   color: var(--bs-button-bg);
@@ -208,9 +215,7 @@ label,#itiplan {
 #closePopup:hover {
   background-color: #D63E29; /* Darker red for close button hover */
 }
-#blogform{
-  color: #000;
-}
+
 #form-label{
   color: #000;
 }
@@ -3512,9 +3517,18 @@ textarea:focus {
 .contact-from-area .contact-form-style button:hover {
   background-color: #8ACFFF !important;
 }
+#modalContent label {
+  text-align: left !important;
+}
 
+#modalContent .field div, 
+#modalContent input, 
+#modalContent textarea {
+  text-align: left !important;
+}
 .form-group {
   margin-bottom: 12px;
+  text-align: left; 
 }
 .form-group label {
   font-size: 16px;
@@ -3522,6 +3536,7 @@ textarea:focus {
   font-weight: 600;
   font-family: "Manrope", sans-serif;
   margin-bottom: 16px;
+  text-align: left; 
 }
 .form-group input {
   background: var(--bs-neutral-100);
