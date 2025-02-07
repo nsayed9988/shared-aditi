@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passport Validator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+        .preview-container {
+            width: 200px;
+            height: 200px;
+            border: 2px dashed #ddd;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        #imagePreview {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        .success-message {
+            color: green;
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e8f5e9;
+            border-radius: 4px;
+        }
+        .pdf-preview {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            display: none;
+        }
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #dc3545;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Passport Validation</h1>
+        <form id="passportForm">
+            <div class="form-group">
+                <label for="passportNumber">Passport Number</label>
+                <input type="text" id="passportNumber" required>
+                <div id="passportError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="expiryDate">Expiry Date</label>
+                <input type="date" id="expiryDate" required>
+                <div id="expiryError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="passportPDF">Passport Document (PDF)</label>
+                <input type="file" id="passportPDF" accept=".pdf" required>
+                <div class="pdf-preview" id="pdfPreview">
+                    <div class="file-info">
+                        <div class="file-icon">PDF</div>
+                        <div id="pdfName"></div>
+                    </div>
+                </div>
+                <div id="pdfError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="passportImage">Passport Size Photo (35mm x 45mm)</label>
+                <input type="file" id="passportImage" accept="image/*" required>
+                <div class="preview-container">
+                    <img id="imagePreview" alt="Preview">
+                </div>
+                <div id="imageError" class="error"></div>
+            </div>
+
+            <button type="submit">Validate Passport</button>
+        </form>
+        <div id="successMessage" class="success-message">
+            Passport validation successful!
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('passportForm');
+            const passportInput = document.getElementById('passportNumber');
+            const expiryInput = document.getElementById('expiryDate');
+            const imageInput = document.getElementById('passportImage');
+            const pdfInput = document.getElementById('passportPDF');
+            const imagePreview = document.getElementById('imagePreview');
+            const pdfPreview = document.getElementById('pdfPreview');
+            const pdfName = document.getElementById('pdfName');
+            const successMessage = document.getElementById('successMessage');
+
+            // Preview image on selection
+            imageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.style.display = 'block';
+                        imagePreview.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Handle PDF selection
+            pdfInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    pdfPreview.style.display = 'block';
+                    pdfName.textContent = file.name;
+                } else {
+                    pdfPreview.style.display = 'none';
+                }
+            });
+
+            // Validate passport number format (example: A1234567)
+            function validatePassportNumber(number) {
+                const regex = /^[A-Z][0-9]{7}$/;
+                return regex.test(number);
+            }
+
+            // Validate expiry date (must be in the future)
+            function validateExpiryDate(date) {
+                const expiryDate = new Date(date);
+                const today = new Date();
+                return expiryDate > today;
+            }
+
+            // Validate image dimensions
+            function validateImage(file) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.src = URL.createObjectURL(file);
+                    img.onload = function() {
+                        // Check if dimensions are close to passport photo ratio (35mm x 45mm)
+                        const ratio = this.width / this.height;
+                        const expectedRatio = 35 / 45;
+                        const tolerance = 0.1;
+                        resolve(Math.abs(ratio - expectedRatio) <= tolerance);
+                    };
+                });
+            }
+
+            // Validate PDF file
+            function validatePDF(file) {
+                // Check file type
+                if (!file.type === 'application/pdf') {
+                    return false;
+                }
+                // Check file size (max 5MB)
+                const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+                return file.size <= maxSize;
+            }
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                let isValid = true;
+
+                // Reset errors
+                document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+                successMessage.style.display = 'none';
+
+                // Validate passport number
+                if (!validatePassportNumber(passportInput.value)) {
+                    document.getElementById('passportError').textContent = 'Invalid passport number format. Should be like A1234567';
+                    document.getElementById('passportError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Validate expiry date
+                if (!validateExpiryDate(expiryInput.value)) {
+                    document.getElementById('expiryError').textContent = 'Passport must not be expired';
+                    document.getElementById('expiryError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Validate PDF
+                if (pdfInput.files.length > 0) {
+                    if (!validatePDF(pdfInput.files[0])) {
+                        document.getElementById('pdfError').textContent = 'Invalid PDF file. Must be PDF format and less than 5MB';
+                        document.getElementById('pdfError').style.display = 'block';
+                        isValid = false;
+                    }
+                }
+
+                // Validate image
+                if (imageInput.files.length > 0) {
+                    const imageIsValid = await validateImage(imageInput.files[0]);
+                    if (!imageIsValid) {
+                        document.getElementById('imageError').textContent = 'Image dimensions should match passport photo ratio (35mm x 45mm)';
+                        document.getElementById('imageError').style.display = 'block';
+                        isValid = false;
+                    }
+                }
+
+                if (isValid) {
+                    successMessage.style.display = 'block';
+                    form.reset();
+                    imagePreview.style.display = 'none';
+                    pdfPreview.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

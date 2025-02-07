@@ -95,46 +95,27 @@
                       </div>
                     </div>
                   </li>
-                  <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
-                  </li>
-                  <li id="my-ite" class="mega-li-small"><a href="../travi dash/my-booking.html">My Iternaries</a>         
-                  </li>
-                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html">Profile</a>         
-                  </li>
-                <li class="has-children"><a href="#">Blog</a>
-                  <ul class="sub-menu">
-                    <li><a href="blog-grid.html">The Blog Vault</a></li>
-                    <li><a id="my-blog" href="blogwrite.html">Share Your Thoughts</a></li>
-                  </ul>
-                </li>
-                <li class=""><a href='privacy.html'>Privacy Notice</a>
+                  
+               
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login">Profile</a></li>
+                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login">Blog</a></li>
+                  
+                  
+      
+
+                <li class=""><a href="privacy.html">Privacy Notice</a>
                   
                 </li>
                   <li class=""><a href="faq.html">FAQs</a></li>
                   <li><a href="contact.html">Contact</a></li>
-              </nav>
+                 
+              
+              </ul>  </nav>
             </div>
           </div>
           <div class="header-right">
-            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-account icon-lang"><span class="text-14-medium arrow-down">EN</span></span>
-              <div class="dropdown-account">
-                <ul>
-                  <li><a class="text-sm-medium" href="#">English</a></li>
-                  <li><a class="text-sm-medium" href="#">French</a></li>
-                  <li><a class="text-sm-medium" href="#">Chinese</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-cart"><span class="text-14-medium arrow-down">USD</span></span>
-              <div class="dropdown-cart">
-                <ul>
-                  <li><a class="text-sm-medium" href="#">USD</a></li>
-                  <li><a class="text-sm-medium" href="#">EUR</a></li>
-                  <li><a class="text-sm-medium" href="#">SGP</a></li>
-                </ul>
-              </div>
-            </div>
-           <a href="../travi dash/login.html"><button class="me-4 btn btn-brand-secondary">
+
+           <a href="../travi dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
               Login
             </button></a> 
            
@@ -400,9 +381,6 @@
                 <h3 class="neutral-1000 mb-20">Frequently Asked Questions</h3>
                 <p class="text-lg-medium neutral-500">Access advanced order types including limit, market, stop limit and dollar cost averaging. Track your total asset holdings, values and equity over time. Monitor markets, manage your portfolio, and trade crypto on the go.</p>
                 <div class="d-flex align-items-center mt-45"><a class="btn btn-black-lg-square" href="contact.html">Contact Us
-                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg></a><a class="btn btn-link" href="help-center.html">Help Center
                     <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></a></div>
@@ -714,39 +692,29 @@
         </div>
       </div>
     </div>
-    <script> 
-      const linkElements = [
-    { element: document.getElementById("my-ite"), href: "../travi dash/my-booking.html" },
-    { element: document.getElementById("my-blog"), href: "../travi dash/my-blog.html" },
-    { element: document.getElementById("my-profile-list-item"), href: "../travi dash/my-profile.html" }
-  ];
-  
-  // Check the loggedIn status from localStorage
-  const isLoggedIn = localStorage.getItem("loggedIn") === "true";
-  
-  // Loop through each link element
-  linkElements.forEach(link => {
-    if (!isLoggedIn) {
-     
-      // If not logged in, disable the link
-      link.element.classList.add("disabled-link");
-      link.element.removeAttribute("href"); // Remove the href to disable navigation
-      link.element.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevent default link action
-        console.log("Alert will be shown now.");
-        alert("You must be logged in to access this page."); 
-      // Optional feedback to the user
-      });
-    } else {
-      // If logged in, enable the link
-      link.element.classList.remove("disabled-link");
-      link.element.setAttribute("href", link.href);
-      
-      
-       // Add the appropriate href
-    }
-  });
-        </script>
+        <!--Vendors Scripts-->
+        <script>
+
+          document.addEventListener("DOMContentLoaded", function() {
+            // Get all elements with the class 'check-login'
+            const links = document.querySelectorAll('.check-login');
+           
+               
+              
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    // Check if 'userEmail' exists in localStorage
+                    if (!localStorage.getItem('userEmail')) {
+                        event.preventDefault(); // Prevent the default link action
+                        alert('You need to log in first!');
+                    }
+                    // If userEmail exists, link will open normally
+                });
+            });
+        });
+        
+              </script>
+        
     <!--Vendors Scripts-->
     <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
     <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>

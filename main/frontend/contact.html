@@ -13,9 +13,9 @@
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <title>Contact</title>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script  type="module"  src="contactdb.js" defer></script>
+   
 
-<!-- Add these in your HTML head -->
+
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
@@ -143,46 +143,28 @@ document.addEventListener("DOMContentLoaded", () => {
                       </div>
                     </div>
                   </li>
-                  <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
-                  </li>
-                  <li id="my-ite" class="mega-li-small"><a href="../travi dash/my-booking.html">My Iternaries</a>         
-                  </li>
-                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html">Profile</a>         
-                  </li>
-                <li class="has-children"><a href="#">Blog</a>
-                  <ul class="sub-menu">
-                    <li><a href="blog-grid.html">The Blog Vault</a></li>
-                    <li><a id="my-blog" href="blogwrite.html">Share Your Thoughts</a></li>
-                  </ul>
-                </li>
-                <li class=""><a href='privacy.html'>Privacy Notice</a>
+                  
+                 
+                 
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login">Profile</a></li>
+                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login">Blog</a></li>
+                  
+                  
+      
+
+                <li class=""><a href="privacy.html">Privacy Notice</a>
                   
                 </li>
                   <li class=""><a href="faq.html">FAQs</a></li>
                   <li><a href="contact.html">Contact</a></li>
-              </nav>
+                 
+              
+              </ul>  </nav>
             </div>
           </div>
           <div class="header-right">
-            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-account icon-lang"><span class="text-14-medium arrow-down">EN</span></span>
-              <div class="dropdown-account">
-                <ul>
-                  <li><a class="text-sm-medium" href="#">English</a></li>
-                  <li><a class="text-sm-medium" href="#">French</a></li>
-                  <li><a class="text-sm-medium" href="#">Chinese</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-cart"><span class="text-14-medium arrow-down">USD</span></span>
-              <div class="dropdown-cart">
-                <ul>
-                  <li><a class="text-sm-medium" href="#">USD</a></li>
-                  <li><a class="text-sm-medium" href="#">EUR</a></li>
-                  <li><a class="text-sm-medium" href="#">SGP</a></li>
-                </ul>
-              </div>
-            </div>
-           <a href="../travi dash/login.html"><button class="me-4 btn btn-brand-secondary">
+
+           <a href="../travi dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
               Login
             </button></a> 
            
@@ -995,40 +977,29 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
     </div>
-    <script> 
-      const linkElements = [
-    { element: document.getElementById("my-ite"), href: "../travi dash/my-booking.html" },
-    { element: document.getElementById("my-blog"), href: "../travi dash/my-blog.html" },
-    { element: document.getElementById("my-profile-list-item"), href: "../travi dash/my-profile.html" }
-  ];
-  
-  // Check the loggedIn status from localStorage
-  const isLoggedIn = localStorage.getItem("loggedIn") === "true";
-  
-  // Loop through each link element
-  linkElements.forEach(link => {
-    if (!isLoggedIn) {
-     
-      // If not logged in, disable the link
-      link.element.classList.add("disabled-link");
-      link.element.removeAttribute("href"); // Remove the href to disable navigation
-      link.element.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevent default link action
-        console.log("Alert will be shown now.");
-        alert("You must be logged in to access this page."); 
-      // Optional feedback to the user
+      <!--Vendors Scripts-->
+      <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+          // Get all elements with the class 'check-login'
+          const links = document.querySelectorAll('.check-login');
+         
+             
+            
+          links.forEach(link => {
+              link.addEventListener('click', function(event) {
+                  // Check if 'userEmail' exists in localStorage
+                  if (!localStorage.getItem('userEmail')) {
+                      event.preventDefault(); // Prevent the default link action
+                      alert('You need to log in first!');
+                  }
+                  // If userEmail exists, link will open normally
+              });
+          });
       });
-    } else {
-      // If logged in, enable the link
-      link.element.classList.remove("disabled-link");
-      link.element.setAttribute("href", link.href);
       
+            </script>
       
-       // Add the appropriate href
-    }
-  });
-        </script>
- 
     
     <!--Vendors Scripts-->
     <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>

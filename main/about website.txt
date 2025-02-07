@@ -1,9 +1,0 @@
-Website Name: Travi
-Our mission is to create memories that last a lifetime for every traveler who chooses us.
-Using AI to create itineraries means transforming travel planning into an effortless experience. With AI, you get personalized recommendations based on your preferences, interests, budget, and time constraints.
-
-Everything in one space
-Whether it's your own personalized trip or a bookmarked plan, you'll find everything organized on a single page for your convenience.
-Travi doesnt allow you to book flights, hotels.It just helps you create itineraries and post them publicly or private.
-In public itineraries, other users can join your trip.
-In private itineraries, only you can access it.

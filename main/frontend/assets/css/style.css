@@ -112,7 +112,7 @@ background-color: #000;
   margin: 10px;
   font-size: 55px;
   cursor: pointer;
-  background-color: var(--bs-button-bg);
+  background-color: #FF8C00;
   color: var(--bs-color-white);
   border: none;
   border-radius: 40px;
@@ -16033,7 +16033,7 @@ h2 span {
   cursor: pointer;
 
   color: var(--bs-color-white);
-  border: none;
+  border:none;
   border-radius: 40px;
   transition: all 0.3s cubic-bezier(.23, 1, 0.32, 1);
 }

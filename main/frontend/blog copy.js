@@ -89,7 +89,7 @@ function retrieveBlogPosts() {
     onValue(postsRef, (snapshot) => {
         console.log('Retrieved data:', snapshot.val());
         const data = snapshot.val();
-        const blogContainer = document.getElementById('blog_cards_container_2024');
+        const blogContainer = document.getElementById('modern_blog_cards_container_jan2024');
         
         if (!blogContainer) {
             console.error('Blog container not found!');
@@ -115,7 +115,7 @@ function retrieveBlogPosts() {
             const postDate = new Date(post.timestamp).toLocaleDateString();
             
             postElement.innerHTML = `
-                <img src="${post.imageUrl || '/placeholder-image.jpg'}" alt="${post.title}" class="modern_blog_card_image_jan2024">
+                <!--<img src="${post.imageUrl || '/placeholder-image.jpg'}" alt="${post.title}" class="modern_blog_card_image_jan2024">-->
                 <div class="modern_blog_card_content_jan2024">
                     <div class="modern_blog_card_title_jan2024">${post.title || 'Untitled'}</div>
                     <div class="modern_blog_card_author_jan2024">${post.name || 'Anonymous'} • ${postDate}</div>
@@ -130,7 +130,7 @@ function retrieveBlogPosts() {
         });
     }, (error) => {
         console.error('Error fetching blog posts:', error);
-        const blogContainer = document.getElementById('blog_cards_container_2024');
+        const blogContainer = document.getElementById('modern_blog_cards_container_jan2024');
         if (blogContainer) {
             blogContainer.innerHTML = '<p>Error loading blog posts. Please try again later.</p>';
         }
@@ -139,13 +139,13 @@ function retrieveBlogPosts() {
 
 // Detail view functionality
 function showDetailView(post) {
-    const overlay = document.getElementById('modern_blog_detail_overlay_jan2024') || createDetailOverlay();
+    const overlay = document.getElementById('blog_cards_container_2024') || createDetailOverlay();
     const postDate = new Date(post.timestamp).toLocaleDateString();
     
     overlay.innerHTML = `
         <div id="modern_blog_detail_content_jan2024">
             <button id="modern_blog_detail_close_jan2024">&times;</button>
-            <img id="modern_blog_detail_image_jan2024" src="${post.imageUrl || '/placeholder-image.jpg'}" alt="${post.title}">
+           <!-- <img id="modern_blog_detail_image_jan2024" src="${post.imageUrl || '/placeholder-image.jpg'}" alt="${post.title}">-->
             <h1 class="modern_blog_detail_title_jan2024">${post.title || 'Untitled'}</h1>
             <div class="modern_blog_detail_meta_jan2024">
                 <span>${post.name || 'Anonymous'}</span>
@@ -167,7 +167,7 @@ function showDetailView(post) {
 
 function createDetailOverlay() {
     const overlay = document.createElement('div');
-    overlay.id = 'modern_blog_detail_overlay_jan2024';
+    overlay.id = 'blog_cards_container_2024';
     document.body.appendChild(overlay);
     return overlay;
 }
@@ -175,7 +175,7 @@ function createDetailOverlay() {
 // Add styling
 const style = document.createElement('style');
 style.textContent = `
-    #blog_cards_container_2024 {
+    #modern_blog_cards_container_jan2024 {
         margin-top: 30px;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -230,7 +230,7 @@ style.textContent = `
         font-size: 14px;
     }
 
-    #modern_blog_detail_overlay_jan2024 {
+    #blog_cards_container_2024 {
         display: none;
         position: fixed;
         top: 0;

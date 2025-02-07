@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
-
+import { GoogleAuthProvider } from "firebase/auth";
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
@@ -82,3 +82,10 @@ submit.addEventListener("click", function (event) {
       console.error("Error details:", error);
     });
 });
+
+
+
+
+
+
+

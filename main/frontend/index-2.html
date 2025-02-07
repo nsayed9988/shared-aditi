@@ -12,6 +12,95 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <title>Travi</title>
+    <style>
+             #trip-card-2025 {
+            width: 350px;
+            padding: 20px;
+            background: white;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        #trip-image-2025 {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        #trip-name-2025 {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #333;
+        }
+        
+        #trip-details-2025 {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        
+        #view-details-button-2025 {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        #view-details-button-2025:hover {
+            background-color: #e05247;
+        }
+        
+        #overlay-2025 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #overlay-content-2025 {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: left;
+            width: 80%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        #close-overlay-2025 {
+            margin-top: 10px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+        
+        #join-now-2025 {
+            margin-top: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+    </style>
     <script type="module">
       // Import Firebase app initialization first
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
@@ -91,8 +180,8 @@ document.getElementById('logout').addEventListener('click', logout);
   </head>
   <body>
 
-</div>
-<div class="webiste-content" class="disabled">
+
+<div class="webiste-content"  class="disabled"></div>
     <div id="preloader-active">
       <div class="preloader d-flex align-items-center justify-content-center">
         <div class="preloader-inner position-relative">
@@ -174,45 +263,29 @@ document.getElementById('logout').addEventListener('click', logout);
                       </div>
                     </div>
                   </li>
+                  
                   <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
                   </li>
-                  <li id="my-ite" class="mega-li-small"><a href="../travi dash/my-booking.html">My Iternaries</a>         
-                  </li>
-                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html">Profile</a>         
-                  </li>
-                <li class="has-children"><a href="#">Blog</a>
-                  <ul class="sub-menu">
-                    <li><a href="blog-grid.html">The Blog Vault</a></li>
-                    <li><a id="my-blog" href="blogwrite.html">Share Your Thoughts</a></li>
-                  </ul>
-                </li>
-                <li class=""><a href='privacy.html'>Privacy Notice</a>
+                 
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login">Profile</a></li>
+                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login">Blog</a></li>
+                  
+                  
+      
+
+                <li class=""><a href="privacy.html">Privacy Notice</a>
                   
                 </li>
-                  <li class=""><a href="faq.html">FAQs</a></li>
+           
                   <li><a href="contact.html">Contact</a></li>
-              </nav>
+                  <li  class="has-children"><a>Request Sent </a></li>
+                  <li  class="has-children"><a>Request Received </a></li>
+              
+              </ul>  </nav>
             </div>
           </div>
           <div class="header-right">
-            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-account icon-lang"><span class="text-14-medium arrow-down">EN</span></span>
-              <div class="dropdown-account">
-                <ul>
-                  <li><a class="text-sm-medium" href="#">English</a></li>
-                  <li><a class="text-sm-medium" href="#">French</a></li>
-                  <li><a class="text-sm-medium" href="#">Chinese</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-cart"><span class="text-14-medium arrow-down">USD</span></span>
-              <div class="dropdown-cart">
-                <ul>
-                  <li><a class="text-sm-medium" href="#">USD</a></li>
-                  <li><a class="text-sm-medium" href="#">EUR</a></li>
-                  <li><a class="text-sm-medium" href="#">SGP</a></li>
-                </ul>
-              </div>
-            </div>
+
            <a href="../travi dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
               Login
             </button></a> 
@@ -229,115 +302,35 @@ document.getElementById('logout').addEventListener('click', logout);
           <div class="burger-icon burger-icon-white"></div>
         </div>
         <div class="mobile-header-top">
-          <div class="box-author-profile"> 
-            <div class="card-author"> 
-              <div class="card-image"> <img src="assets/imgs/page/homepage1/author2.png" alt="Travila"></div>
-              <div class="card-info"> 
-                <p  class="text-md-bold neutral-1000"><span style="color: black;" id="updateName"></span></p>
-                <!--<p class="text-xs neutral-1000">London, England</p>-->
-              </div>
-            </div><a id="logout" class="btn btn-black" href="#">Logout</a>
-          </div>
+        
         </div>
         <div class="mobile-header-content-area">
           <div class="perfect-scroll">
             <div class="mobile-menu-wrap mobile-header-border">
               <nav>
                 <ul class="mobile-menu font-heading">
-                  <li class="has-children"><a class="active" href="index-2.html">Home</a>
-                    <ul class="sub-menu">
-                    
-                     
-                      <!--<li><a href="index-6.html"> Activities</a></li>
-                      <li><a href="index-7.html">Destinations</a></li>-->
-                      
-                      
-                    </ul>
+                  <li ><a class="active" href="index-2.html">Home</a>
+                
                   </li>
-                  <li><a href="index-5.html">Tours</a></li>
-                   
-           
-                  <li><a href="customize.html"> Customize Your Own Tour With AI</a></li>
-                    <ul class="sub-menu">
-                      <li><a href="destination.html">Destinations list</a></li> 
-                      <!--<li><a href="destination-2.html">Destinations list 2</a></li>
-                      <li><a href="destination-3.html">Destinations list 3</a></li>
-                      <li><a href="destination-4.html">Destinations Details 01</a></li>
-                      <li><a href="destination-5.html">Destinations Details 02</a></li>
-                      <li><a href="destination-6.html">Destinations Details 03</a></li>-->
-                    </ul>
+            
+             
+                
+              
+                  <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
                   </li>
-                  <li class="has-children"><a href="activities.html">Activities</a>
-                    <ul class="sub-menu">
-                      <li><a href="activities.html">Activities List </a></li>
-                      <!--<li><a href="activities-2.html">Activities List - Sidebar Left Fillter</a></li>
-                      <li><a href="activities-3.html">Activities List - Sidebar Right Fillter</a></li>
-                      <li><a href="activities-4.html">Activities List - Grid</a></li>
-                      <li><a href="activities-detail-2.html">Activities Single 02 - Slideshow</a></li>
-                      <li><a href="activities-detail-4.html">Activities Single 04</a></li>
-                      <li><a href="activities-5.html">Activities List - List</a></li>-->
-                      <li><a href="activities-detail.html">Activities</a></li>
-                      
-                      <li><a href="activities-detail-3.html">Activities </a></li>
-                      
-                    </ul>
-                  </li>
-                  <!--<li class="has-children"> <a href="hotel-grid.html">Hotels</a>
-                    <ul class="sub-menu">
-                      <li><a href="hotel-grid.html">Hotel List 01</a></li>
-                      <li><a href="hotel-grid-2.html">Hotel List 02</a></li>
-                      <li><a href="hotel-grid-3.html">Hotel List 03</a></li>
-                      <li><a href="hotel-grid-4.html">Hotel List 04</a></li>
-                      <li><a href="hotel-grid-5.html">Hotel List 05</a></li>
-                      <li><a href="hotel-grid-6.html">Hotel List 06</a></li>
-                      <li><a href="hotel-detail.html">Hotel Details 01</a></li>
-                      <li><a href="hotel-detail-2.html">Hotel Details 02</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-children"> <a href="rental-car.html">Rental</a>
-                    <ul class="sub-menu">
-                      <li><a href="rental-car.html">Car Grid</a></li>
-                      <li><a href="rental-car-2.html">Car list</a></li>
-                      <li><a href="rental-car-3.html">Car Details</a></li>
-                      <li><a href="rental-proprty.html">Property Grid</a></li>
-                      <li><a href="rental-proprty-2.html">Property Grid</a></li>
-                      <li><a href="rental-proprty-3.html">Property List</a></li>
-                      <li><a href="rental-detail.html">Property Details</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-children"> <a href="tickets.html">Tickets</a>
-                    <ul class="sub-menu">
-                      <li><a href="tickets.html">Flight tickets</a></li>
-                      <li><a href="tickets-2.html">Train tickets</a></li>
-                      <li><a href="book-ticket.html">Ticket details</a></li>
-                    </ul>
-                  </li>-->
-                  <li class="has-children"> <a href="javascript:void(0)">Pages</a>
-                    <ul class="sub-menu">
-                      <!--<li><a href="about.html">About</a></li>
-                      <li><a href="contact.html">Contact</a></li>
-                      <li><a href="faq.html">FAQs</a></li>
-                       <li><a href="term.html">Term</a></li>-->
-                      <li><a href="help-center.html">Help center</a></li>
-                      <li><a href="become-expert.html">Become Expert</a></li>
-                      <li><a href="comming-soon.html">Coming soon    </a></li>
-                      <li><a href="checkout.html">Checkout</a></li>
-                      <li><a href="confirmation.html">Confirmationn</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                     
-                      <li><a href="404.html">404</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-children"> <a href="#">Blog</a>
-                    <ul class="sub-menu">
-                      <li><a href="blog-grid.html">The Blog Vault</a></li>
-                      <li><a href="#">Grid Sidebar</a>Share Your Thoughts</li>
-                      <!--<li><a href="blog-grid-3.html">List</a></li>
-                      <li><a href="blog-detail.html">Blog Details</a></li>
-                      <li><a href="blog-detail-2.html">Blog Details 2</a></li>-->
-                    </ul>
-                  </li>
-                  <li><a href="contact.html">Contact</a></li>
+                  <li id="my-ite" class="mega-li-small"><a href="../travi dash/my-booking.html" class="check-login">My Itineraries</a></li>
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login">Profile</a></li>
+                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login">Blog</a></li>
+                  
+                  
+      
+
+                <li class=""><a href="privacy.html">Privacy Notice</a>
+                  
+                </li>
+                  <li class=""><a href="faq.html">FAQs</a></li>
+                 
+                 
                 </ul>
               </nav>
             </div>
@@ -375,12 +368,12 @@ document.getElementById('logout').addEventListener('click', logout);
             <div class="card-author"> 
               <div class="card-image"> <img src="assets/imgs/page/homepage1/author2.png" alt="Travila"></div>
               <div class="card-info"> 
-                <p  class="text-md-bold neutral-1000" style="color: black;"> <span id="updateName" >Please login first</span></p>
+                <p  class="text-md-bold neutral-1000" style="color: black;"> <span id="updateName" ></span></p>
                 
               </div>
             
             </div><div class="btnprof">
-              <button class="btnview"><a href="../travi dash/my-profile.html">View Profile</a></button>
+             
              </div><a id="logout" class="btn btn-black" href="../travi dash/login.html">Logout</a>
           </div>
           
@@ -394,17 +387,11 @@ document.getElementById('logout').addEventListener('click', logout);
                   <p class="text-xs neutral-500 online">2 new messages</p>
                 </!--div>
               </div>--->
-              <div class="item-quicklinks"> 
-                <div class="item-icon"> <img src="assets/imgs/template/icons/bookmark.svg" alt="Travila"></div>
-                <div class="item-info"> <a href="#"> 
-                    <h6 class="text-md-bold neutral-1000">Collection</h6></a>
-                 
-                </div>
-              </div>
+             
               <div class="item-quicklinks"> 
                 <div class="item-icon"> <img src="assets/imgs/template/icons/settings.svg" alt="Travila"></div>
                 <div class="item-info"> <a href="../travi dash/my-profile.html"> 
-                    <h6 class="text-md-bold neutral-1000">Setting</h6></a>
+                    <h6 class="text-md-bold neutral-1000"> <a href="../travi dash/my-profile.html">My Profile</a></h6></a>
                   <p class="text-xs neutral-500">Your account</p>
                 </div>
               </div>
@@ -418,8 +405,8 @@ document.getElementById('logout').addEventListener('click', logout);
               </div>-->
               <div class="item-quicklinks"> 
                 <div class="item-icon"> <img src="assets/imgs/template/icons/tickets.svg" alt="Travila"></div>
-                <div class="item-info"> <a href="#"> 
-                    <h6 class="text-md-bold neutral-1000">Connect With Us</h6></a>
+                <div class="item-info"> 
+                    <h6 class="text-md-bold neutral-1000"><a href="./contact.html"> Connect With Us </a></h6>
                 </div>
               </div>
              
@@ -427,7 +414,7 @@ document.getElementById('logout').addEventListener('click', logout);
           </div>
           
           
-             </a></h6>
+
          
           <div class="box-contactus">
             <h6 class="title-contactus neutral-1000">Contact Us</h6>
@@ -543,9 +530,7 @@ document.getElementById('logout').addEventListener('click', logout);
                   </svg>Search
                 </button>
               </div>-->  
-            </div>
-          </div>
-        </div>
+          
       </section>
       <br>  <br>  <br>
 
@@ -576,8 +561,8 @@ document.getElementById('logout').addEventListener('click', logout);
           </div>
         </div>
         <div id="aiplanbtn" class="container-slider box-swiper-padding">
-          <!--<a href="itinerary.html"><button id="getStartedButton" class="glassy-button" disabled><span>Plan Your Trip NOW</span></button></a>-->
-          <button id="addButtonitn">Create Itinerary</button>
+         
+          <button id="addButtonitn" class="check-login">Create Itinerary</button>
 
                 <div id="popupitn">
                     <div id="popup-optionsitn">
@@ -622,65 +607,50 @@ document.getElementById('logout').addEventListener('click', logout);
               <div class="d-flex align-items-center justify-content-center justify-content-lg-end popular-categories">
                
 
-                <!-- Button that will open the calendar picker 
-                <button id="addButtonitn">Add Tour</button>
-
-                <div id="popupitn">
-                    <div id="popup-optionsitn">
-                        <h2>Select an Option</h2>
-                        <button id="privateButton">Private</button>
-                        <button id="publicButton">Public</button>
-                        <br>
-                        <button id="closePopup">Close</button>
-                    </div>
-                </div>
-            
-                <div id="overlayitn"></div>-->
-
+           
 
                 <div class="dropdown dropdown-filter">          
 <!-- Button that will open the calendar picker -->
-<button class="btn btn-dropdown dropdown-toggle" id="dropdownCategory" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-  <span>Duration</span>
-</button>
 
-<!-- Dropdown content with calendar for selecting dates -->
-<div class="dropdown-menu" aria-labelledby="dropdownCategory">
-  <div class="datepicker-container p-3">
-      <!-- Start Date -->
-      <label for="startDate">Start Date</label>
-      <input type="text" id="startDate" class="form-control" placeholder="Select Start Date" readonly>
-      
-      <!-- End Date -->
-      <label for="endDate" class="mt-2">End Date</label>
-      <input type="text" id="endDate" class="form-control" placeholder="Select End Date" readonly>
 
-      <!-- Confirm Dates Button -->
-      <div class="mt-3 text-center">
-          <button class="btn btn-outline-info" id="confirmDatesBtn">Confirm Dates</button>
-      </div>
-  </div>
-</div>
-
-</div>
-
-                <div class="dropdown dropdown-filter">
-                  <button class="btn btn-dropdown dropdown-toggle" id="dropdownCategory" type="button" data-bs-toggle="dropdown" aria-expanded="false"> <span>Price range</span></button>
-                  <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownCategory" style="margin: 0px;">
-                    <li><a class="dropdown-item active" href="#">₹2,000 - ₹4,000/day</a></li>
-                    <li><a class="dropdown-item" href="#">₹₹4,000 - ₹7,500/day</a></li>
-                    <li><a class="dropdown-item" href="#">₹7,500 - ₹12,000/day</a></li>
-                    <li><a class="dropdown-item" href="#">₹18,000 - ₹25,000/day</a></li>
-                    <li><a class="dropdown-item" href="#">₹25,000 - ₹40,000/day</a></li>
-                    <li><a class="dropdown-item" href="#">₹40,000+/day</a></li>
-                  </ul>
-                </div>
+               
               </div>
             </div>
           </div>
           <div class="box-list-featured"> 
             <div class="row">
-              <div class="col-lg-4 col-md-6">
+           <!--  <div id="trip-card-2025">
+                <img id="trip-image-2025" src="./assets/imgs/page/destination/banner2.png" alt="Trip Image">
+                <p id="trip-name-2025">Mountain Adventure</p><br>
+                <p id="trip-details-2025">Created by: John Doe  Start: Mar 10, 2025 | End: Mar 15, 2025</p>
+                
+                <button id="view-details-button-2025">View Details</button>
+            </div>
+            
+            <div id="overlay-2025">
+                <div id="overlay-content-2025">
+                    <h2 id="trip-overlay-title-2025">Trip Details</h2>
+                    <p><strong>Name:</strong> Mountain Adventure</p>
+                    <p><strong>Created by:</strong> John Doe</p>
+                    <p><strong>Start Date:</strong> 10th March 2025</p>
+                    <p><strong>End Date:</strong> 15th March 2025</p>
+                    <p><strong>Last Date to Apply:</strong> 5th March 2025</p>
+                    <p><strong>Gender Preference:</strong> All</p>
+                    <p><strong>Day-to-Day Activities:</strong></p>
+                    <ul>
+                        <li>Day 1: Arrival & Orientation</li>
+                        <li>Day 2: Trekking & Camping</li>
+                        <li>Day 3: Sightseeing</li>
+                        <li>Day 4: Adventure Sports</li>
+                        <li>Day 5: Return</li>
+                    </ul>
+                    <p><strong>Essentials to Carry:</strong> Warm Clothes, Hiking Shoes, ID Proof</p>
+                    <button id="join-now-2025">Join Now</button>
+                    <button id="close-overlay-2025">Close</button>
+                </div>
+            </div>
+            --> 
+       <div class="col-lg-4 col-md-6">
                 <div class="card-journey-small background-card"> 
                   <div class="card-image"> <a class="label" href="#">Top Rated</a><a class="wish" href="#">
                       <svg width="20" height="18" viewbox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -767,112 +737,13 @@ document.getElementById('logout').addEventListener('click', logout);
                   </div>
                 </div>
               </div>
-            </div>
+          </div>
+        </div>
           </div>
         </div>
       </section>
-      <section class="section-box box-top-category background-body">
-        <div class="container"> 
-          <div class="row align-items-end">
-            <div class="col-md-8"> 
-              <h2 class="neutral-1000">Top Categories of Tours</h2>
-              <p class="text-xl-medium neutral-500">Favorite destinations based on customer reviews</p>
-            </div>
-            <div class="col-md-4">
-              <div class="d-flex justify-content-end"><a class="btn btn-black-lg" href="tour-grid-3.html">View More 
-                  <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg></a></div>
-            </div>
-          </div>
-          <div class="box-list-populars"> 
-            <div class="row"> 
-              <div class="col-lg-3 col-sm-6"> 
-                <div class="card-popular background-card hover-up"> 
-                  <div class="card-image"> <img src="assets/imgs/page/homepage2/top.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="tour-grid-3.html">Mountain</a>
-                    <div class="card-meta"> 
-                      <div class="meta-links"> <a href="#">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="tour-grid-3.html"> 
-                          <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6"> 
-                <div class="card-popular background-card hover-up"> 
-                  <div class="card-image"> <img src="assets/imgs/page/homepage2/top2.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="tour-grid-3.html">Safari</a>
-                    <div class="card-meta"> 
-                      <div class="meta-links"> <a href="#">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="tour-grid-3.html"> 
-                          <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6"> 
-                <div class="card-popular background-card hover-up"> 
-                  <div class="card-image"> <img src="assets/imgs/page/homepage2/top3.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" >Desert</a>
-                    <div class="card-meta"> 
-                      <div class="meta-links"> <a href="tour-grid-3.html">356 Tours, </a><a href="#">248 Activities</a></div>
-                      <div class="card-button"> <a href="tour-grid-3.html"> 
-                          <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6"> 
-                <div class="card-popular background-card hover-up"> 
-                  <div class="card-image"> <img src="assets/imgs/page/homepage2/top5.png" alt="Travila"></div>
-                  <div class="card-info"> <a class="card-title" href="tour-grid-3.html">Beach</a>
-                    <div class="card-meta"> 
-                      <div class="meta-links"> 356 Tours, 248 Activities</div>
-                      <div class="card-button"> <a href="tour-grid-3.html"> 
-                          <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            
-              
-              
-            
-             
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="section-box box-2-banner background-body">
-        <div class="container"> 
-          <div class="row">   
-            <div class="col-lg-6 mb-30">
-             
-            </div>
-            <div class="col-lg-6 mb-30">
-              <!--<div class="card-banner"> 
-                <div class="card-image"> <img src="assets/imgs/page/homepage2/banner2.png" alt="Travila"></div>
-                <div class="card-info">
-                  <h5>Big promotion <br class="d-none d-md-block">at the end of <br class="d-none d-md-block">the year</h5><a class="btn btn-brand-secondary" href="#">View More 
-                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8 15L15 8L8 1M15 8L1 8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg></a>
-                </div>
-              </div>-->
-            </div>
-          </div>
-        </div>
-      </section>
-  
+    
+     
     
       <section class="section-box box-payments box-payments-2 background-body">
         <div class="container"> 
@@ -1458,160 +1329,161 @@ document.getElementById('logout').addEventListener('click', logout);
         </div>
       </div>
     </footer>
-    <!--<div class="popup-firstload"> 
-      <div class="popup-container"> 
-        <div class="popup-content"> <a class="close-popup"></a>
-          <div class="popup-left">
-            <div class="logo-area"> <img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-w.svg"></div>
-            <h3 class="title-popup">Book, Pack, Go! Your Ultimate Travel Companion</h3><a class="btn btn-black-lg" href="#">Exploring Now 
-              <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg></a>
-          </div>
-          <div class="popup-right"> 
-            <div class="box-price"> 
-              <div class="box-price-inner"> <span class="text-price-1">SAVE 39%</span><span class="text-price-2">$899</span><a class="text-price-3" href="#">BOOK NOW</a></div>
-            </div><img alt="Travila" src="assets/imgs/template/img-popup.png">
-            <div class="button-area"> <a class="btn btn-next" href="#">
-                <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5.99992 10.6668L10.6666 6.00016L5.99992 1.3335M10.6666 6.00016L1.33325 6.00016" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg></a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  -->
-  </div>
-
-  <script>
- 
-
- const addButton = document.getElementById('addButtonitn');
-  const popup = document.getElementById('popupitn');
-  const overlay = document.getElementById('overlayitn');
-  const closePopup = document.getElementById('closePopup');
-  const publicButton = document.getElementById('publicButton');
-  const privateButton = document.getElementById('privateButton');
-
-  addButton.addEventListener('click', () => {
-      popup.style.display = 'block';
-      overlay.style.display = 'block';
-  });
-
-  closePopup.addEventListener('click', () => {
-      popup.style.display = 'none';
-      overlay.style.display = 'none';
-  });
-
-  overlay.addEventListener('click', () => {
-      popup.style.display = 'none';
-      overlay.style.display = 'none';
-  });
-
-  publicButton.addEventListener('click', () => {
-      window.location.href = '../travi dash/public.html'; // Redirect to pub.html
-  });
-
-  privateButton.addEventListener('click', () => {
-      window.location.href = '../travi dash/private.html'; // Redirect to priv.html
-  });
   
 
-  // Get all the link elements
-const linkElements = [
-  { element: document.getElementById("my-ite"), href: "../travi dash/my-booking.html" },
-  { element: document.getElementById("my-blog"), href: "../travi dash/my-blog.html" },
-  { element: document.getElementById("my-profile-list-item"), href: "../travi dash/my-profile.html" }
-];
+ 
+    <script>
 
-// Check the loggedIn status from localStorage
-const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+document.addEventListener('DOMContentLoaded', function () {
+    // Only check login status when clicking on protected elements
+    function initializeLoginChecks() {
+        const addButton = document.getElementById('addButtonitn');
+        const popup = document.getElementById('popupitn');
+        const overlay = document.getElementById('overlayitn');
+        const closePopup = document.getElementById('closePopup');
+        const publicButton = document.getElementById('publicButton');
+        const privateButton = document.getElementById('privateButton');
+        const links = document.querySelectorAll('.check-login');
 
-// Loop through each link element
-linkElements.forEach(link => {
-  if (!isLoggedIn) {
-   
-    // If not logged in, disable the link
-    link.element.classList.add("disabled-link");
-    link.element.removeAttribute("href"); // Remove the href to disable navigation
-    link.element.addEventListener("click", (e) => {
-      e.preventDefault(); // Prevent default link action
-      console.log("Alert will be shown now.");
-      alert("You must be logged in to access this page."); 
-    // Optional feedback to the user
-    });
-  } else {
-    // If logged in, enable the link
-    link.element.classList.remove("disabled-link");
-    link.element.setAttribute("href", link.href);
-    
-    
-     // Add the appropriate href
-  }
-});
-     // Fetch userEmail from localStorage
-    const userEmail = localStorage.getItem('userEmail');
-    
-    // Get the email input field
-    const emailInput = document.getElementById('email');
-    
-    // If userEmail exists, fill the field and disable it
-    if (userEmail) {
-        emailInput.value = userEmail;
-        emailInput.disabled = true;
-    } else {
-        console.warn('No userEmail found in localStorage.');
-    }
-        // Handle image upload and preview
-        const imageUpload = document.getElementById('imageUpload');
-        const imageInput = document.getElementById('image');
-        const preview = document.getElementById('preview');
+        // Function to check login status
+        function isLoggedIn() {
+            return localStorage.getItem('loggedIn') === 'true' || localStorage.getItem('userEmail');
+        }
 
-        imageUpload.addEventListener('click', () => imageInput.click());
-        
-        imageInput.addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
+        // Function to handle protected actions
+        function handleProtectedAction(callback) {
+            if (!isLoggedIn()) {
+                alert('You need to log in first!');
+                return false;
             }
+            if (callback) callback();
+            return true;
+        }
+
+        // Add click handlers to all check-login elements
+        links.forEach(link => {
+            link.addEventListener('click', function(event) {
+                if (!handleProtectedAction()) {
+                    event.preventDefault();
+                }
+            });
         });
 
-        // Handle form submission
-        document.getElementById('blogForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                email: document.getElementById('email').value,
-                authorName: document.getElementById('authorName').value,
-                blogTitle: document.getElementById('blogTitle').value,
-                category: document.getElementById('category').value,
-                content: document.getElementById('content').value,
-                tags: document.getElementById('tags').value.split(',').map(tag => tag.trim()),
-                image: preview.src
-            };
+        // Add button click handler
+        if (addButton) {
+            addButton.addEventListener('click', (event) => {
+                handleProtectedAction(() => {
+                  window.location.href = "tour-grid-3 copy.html";
+                });
+            });
+        }
 
-            // Store blog post in localStorage
-            let blogs = JSON.parse(localStorage.getItem('blogs') || '[]');
-            blogs.push(formData);
-            localStorage.setItem('blogs', JSON.stringify(blogs));
+        // Close popup handlers
+        if (closePopup) {
+            closePopup.addEventListener('click', () => {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+        }
 
-            // Reset form and show success message
-            alert('Blog post created successfully!');
-            this.reset();
-            preview.style.display = 'none';
-            
-            // Redirect to display page
-            window.location.href = 'blog-display.html';
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+        }
+
+        // Navigation button handlers
+        if (publicButton) {
+            publicButton.addEventListener('click', (event) => {
+                handleProtectedAction(() => {
+                    window.location.href = '../travi dash/public.html';
+                });
+            });
+        }
+
+        if (privateButton) {
+            privateButton.addEventListener('click', (event) => {
+                handleProtectedAction(() => {
+                    window.location.href = '../travi dash/private.html';
+                });
+            });
+        }
+    }
+
+    // Initialize all login checks
+    initializeLoginChecks();
+});
+/*document.addEventListener('DOMContentLoaded', function () {
+    // Check if the user is logged in from localStorage
+    if (localStorage.getItem('loggedIn') === 'true') {
+        const addButton = document.getElementById('addButtonitn');
+        const popup = document.getElementById('popupitn');
+        const overlay = document.getElementById('overlayitn');
+        const closePopup = document.getElementById('closePopup');
+        const publicButton = document.getElementById('publicButton');
+        const privateButton = document.getElementById('privateButton');
+
+        if (addButton) {
+            addButton.addEventListener('click', () => {
+                popup.style.display = 'block';
+                overlay.style.display = 'block';
+            });
+        }
+
+        if (closePopup) {
+            closePopup.addEventListener('click', () => {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+        }
+
+        if (publicButton) {
+            publicButton.addEventListener('click', () => {
+                window.location.href = '../travi dash/public.html';
+            });
+        }
+
+        if (privateButton) {
+            privateButton.addEventListener('click', () => {
+                window.location.href = '../travi dash/private.html';
+            });
+        }
+    } else {
+        alert('You need to log in first!');
+    }
+});
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get all elements with the class 'check-login'
+    const links = document.querySelectorAll('.check-login');
+   
+       
+      
+    links.forEach(link => {
+        link.addEventListener('click', function(event) {
+            // Check if 'userEmail' exists in localStorage
+            if (!localStorage.getItem('userEmail')) {
+                event.preventDefault(); // Prevent the default link action
+                alert('You need to log in first!');
+            }
+            // If userEmail exists, link will open normally
         });
-    </script>
+    });
+});
+*/
 
+      
+        </script>
 
-    
     <!--Vendors Scripts-->
     <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
     <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>

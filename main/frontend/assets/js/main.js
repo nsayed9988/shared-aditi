@@ -1291,11 +1291,5 @@ document.getElementById('blogForm').addEventListener('submit', function (e) {
     window.location.href = 'display.html';
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Check if the user is logged in from localStorage
-    if (localStorage.getItem('loggedIn') === 'true') {
-      // If logged in, remove the 'disabled' attribute from the button
-      const getStartedButton = document.getElementById('getStartedButton');
-      getStartedButton.disabled = false; // Enable the button
-    }
-  });
+
+
