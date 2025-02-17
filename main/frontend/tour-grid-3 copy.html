@@ -818,7 +818,7 @@ width: auto;
     }
     
     .trip-card p strong {
-        min-width: 120px;
+        min-width: 550px;
     }
 }
 
@@ -1421,7 +1421,80 @@ width: auto;
                     </div>
                   </div>
                 </div>
-                
+                <script type="module">
+                // Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
+    authDomain: "ty-project-80ab7.firebaseapp.com",
+    projectId: "ty-project-80ab7",
+    storageBucket: "ty-project-80ab7.firebasestorage.app",
+    messagingSenderId: "491495110151",
+    appId: "1:491495110151:web:035795af4bc8eebff79ca2",
+    measurementId: "G-XFS1VYTHSM",
+    databaseURL: "https://ty-project-80ab7-default-rtdb.firebaseio.com/"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// Update the onclick handler for the submit button
+document.querySelector('.travel_submit_pub_btn').onclick = function() {
+    if (validateTravelStepPub(3)) {
+        saveToFirebase();
+    }
+};
+
+async function saveToFirebase() {
+    try {
+        // Get user email from local storage
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            alert('User email not found. Please login first.');
+            return;
+        }
+
+        // Get form data using the existing collection function
+        const formData = collectTravelFormData();
+        
+        // Add additional fields
+        formData.userEmail = userEmail;
+        formData.timestamp = Date.now();
+
+        // Save to Firebase Realtime Database
+        const newBookingRef = push(ref(database, 'travel-bookings'));
+        await set(newBookingRef, formData);
+
+        // Success handling
+        console.log('Booking saved successfully with ID:', newBookingRef.key);
+        alert('Booking saved successfully!');
+
+        // Reset form and UI
+        document.getElementById('travel_booking_form_pub_20250202').reset();
+        if (document.getElementById('pub-essen-saved-items')) {
+            document.getElementById('pub-essen-saved-items').innerHTML = '';
+        }
+        currentTravelStepPub = 1;
+        showTravelStepPub(1);
+
+    } catch (error) {
+        console.error('Error saving booking:', error);
+        alert('Error saving booking: ' + error.message);
+    }
+}
+
+// Ensure the form doesn't submit normally
+document.getElementById('travel_booking_form_pub_20250202').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (validateTravelStepPub(3)) {
+        saveToFirebase();
+    }
+});
+                </script>
                 <script>
                   /*public Form Script*/
     /*public Form Script*/
@@ -1710,6 +1783,7 @@ width: auto;
   document.querySelector('.travel_submit_pub_btn').addEventListener('click', function() {
     if (validateTravelStepPub(3)) {
       alert('Travel Form submitted successfully!');
+      window.close();
     }
   });
 
@@ -2076,7 +2150,7 @@ document.head.appendChild(styleSheet);
   
 <section id="public-trip-section" class="section-1" style="display: none;">
   
-    <div id="public-trip-card" class="trip-card">
+   <div id="public-trip-card" class="trip-card">
         <p><strong>Traveler Name:</strong> <span id="card-traveler-name"></span></p>
         <p><strong>Destination:</strong> <span id="card-destination"></span></p>
         <p><strong>Start Date:</strong> <span id="card-start-date"></span></p>
@@ -2088,8 +2162,136 @@ document.head.appendChild(styleSheet);
         <p><strong>Last Apply Date:</strong> <span id="card-apply-date"></span></p>
     </div>
 </section>
-  </section>
+<div class="slider-container">
+  <div class="slider-nav">
+      <button id="prev-btn" class="nav-btn" style="background-color: #00d2ff;">← Prev</button>
+      <button id="next-btn" class="nav-btn" style="background-color: #00d2ff;">Next →</button>
+  </div>
+  <div id="trip-container"></div>
+</div>
+<style>
+  /* Slider Container */
+  .slider-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 20px;
+  }
 
+  /* Scrollable Trip Container */
+  #trip-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 20px;
+      scroll-behavior: smooth;
+      white-space: nowrap;
+  }
+
+  /* Trip Card Styling */
+  .trip-card {
+      flex: 0 0 300px;
+      min-width: 250px;
+      max-width: 350px;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .trip-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .trip-card p {
+      margin: 8px 0;
+      line-height: 1.4;
+      word-wrap: break-word;
+  }
+
+  .trip-card strong {
+      color: #333;
+      display: inline-block;
+      margin-right: 5px;
+  }
+
+  .trip-card span {
+      color: #666;
+      display: inline-block;
+  }
+
+  .trip-card .essentials {
+      word-break: break-word;
+  }
+
+  /* Custom Scrollbar */
+  #trip-container::-webkit-scrollbar {
+      height: 8px;
+  }
+
+  #trip-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 5px;
+  }
+
+  #trip-container::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 5px;
+  }
+
+  #trip-container::-webkit-scrollbar-thumb:hover {
+      background: #555;
+  }
+
+  /* Navigation Buttons */
+  .slider-nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px auto;
+      width: 95%;
+  }
+
+  .nav-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+  }
+
+  .nav-btn:hover {
+      background: #0056b3;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+      #trip-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          padding: 10px;
+      }
+
+      .trip-card {
+          min-width: 250px;
+          max-width: 100%;
+          padding: 15px;
+      }
+  }
+</style>
+<!--<div class="slider-container">
+  <button id="prev-btn" class="nav-button prev">&#10094;</button>
+  <div id="trip-container"></div>
+  <button id="next-btn" class="nav-button next">&#10095;</button>
+</div>-->
+
+
+</section>
   <section id="private-section-1" class="section-1">
       <h2>Private Trips</h2>
       <div id="trip-card-container" class="trip-card" style="display:none;">
@@ -2105,6 +2307,7 @@ document.head.appendChild(styleSheet);
         <p><strong>Currency:</strong> <span id="card-currency"></span></p>
     </div>
   </section>
+  <script type="module" src="retrieve.js"></script>
 
             
 
