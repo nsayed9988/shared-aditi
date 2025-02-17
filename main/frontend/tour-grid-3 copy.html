@@ -1714,41 +1714,6 @@ width: auto;
   });
 
 
-  // Function to collect form data
-function collectTravelFormData() {
-    const formData = {
-        // Step 1
-        travelerName: document.getElementById('travel_name_input_pub_20250202').value,
-        destination: document.getElementById('travel_destination_select_pub_20250202').value,
-        
-        // Step 2
-        startDate: document.getElementById('travel_start_date_pub_20250202').value,
-        endDate: document.getElementById('travel_end_date_pub_20250202').value,
-        numberOfDays: document.getElementById('travel_days_calc_pub_20250202').value,
-        
-        // Step 3
-        maxPeople: document.getElementById('travel_max_people_pub_20250202').value,
-        gender: {
-            male: document.getElementById('travel_gender_male_pub_20250202').checked,
-            female: document.getElementById('travel_gender_female_pub_20250202').checked,
-            other: document.getElementById('travel_gender_other_pub_20250202').checked
-        },
-        applyByDate: document.getElementById('travel_apply_date_pub_20250202').value,
-        
-        // Get saved essentials if they exist
-        savedEssentials: document.getElementById('pub-essen-saved-items') 
-            ? document.getElementById('pub-essen-saved-items').textContent 
-            : 'No essentials saved'
-    };
-    
-    // Display collected data in console
-    console.log('Travel Form Data:', formData);
-    
-    // Pretty print the data for better readability
-    console.table(formData);
-    
-    return formData;
-}
 
 // Add submit event listener to the form
 document.getElementById('travel_booking_form_pub_20250202').addEventListener('submit', function(e) {
@@ -1760,6 +1725,33 @@ document.getElementById('travel_booking_form_pub_20250202').addEventListener('su
 document.querySelector('.travel_submit_pub_btn').onclick = function() {
     collectTravelFormData();
 };
+function collectTravelFormData() {
+    const formData = {
+        travelerName: document.getElementById('travel_name_input_pub_20250202').value,
+        destination: document.getElementById('travel_destination_select_pub_20250202').value,
+        startDate: document.getElementById('travel_start_date_pub_20250202').value,
+        endDate: document.getElementById('travel_end_date_pub_20250202').value,
+        numberOfDays: document.getElementById('travel_days_calc_pub_20250202').value,
+        maxPeople: document.getElementById('travel_max_people_pub_20250202').value,
+        gender: {
+            male: document.getElementById('travel_gender_male_pub_20250202').checked,
+            female: document.getElementById('travel_gender_female_pub_20250202').checked,
+            other: document.getElementById('travel_gender_other_pub_20250202').checked
+        },
+        savedEssentials: document.getElementById('pub-essen-saved-items') 
+            ? document.getElementById('pub-essen-saved-items').textContent 
+            : 'No essentials saved',
+        applyByDate: document.getElementById('travel_apply_date_pub_20250202').value
+    };
+    
+    // Update the display card
+    updateTripCard(formData);
+    
+    // Also log to console for debugging
+    console.log('Travel Form Data:', formData);
+    
+    return formData;
+}
   </script>
 
     <!--private form-->        
@@ -1913,7 +1905,7 @@ document.querySelector('.travel_submit_pub_btn').onclick = function() {
            }
        }
 
-        document.getElementById('trip-start-date').addEventListener('change', validateDates);
+    document.getElementById('trip-start-date').addEventListener('change', validateDates);
     document.getElementById('trip-end-date').addEventListener('change', validateDates);
 
     function validateDates() {
@@ -1949,6 +1941,7 @@ document.querySelector('.travel_submit_pub_btn').onclick = function() {
             durationDisplay.value = duration > 0 ? duration : 0;
         }
     }
+
     document.querySelectorAll('.trip-form-input').forEach(input => {
     input.addEventListener('click', () => {
       input.showPicker(); // Opens the date picker
@@ -1985,8 +1978,6 @@ document.querySelector('.travel_submit_pub_btn').onclick = function() {
     });
 
 
-
-
     document.body.insertAdjacentHTML('beforeend', cardHTML);
     function updateTripCard(formData) {
     // Show the section
@@ -2012,33 +2003,9 @@ document.querySelector('.travel_submit_pub_btn').onclick = function() {
 }
 
 // Modify the existing collectTravelFormData function to update the card
-function collectTravelFormData() {
-    const formData = {
-        travelerName: document.getElementById('travel_name_input_pub_20250202').value,
-        destination: document.getElementById('travel_destination_select_pub_20250202').value,
-        startDate: document.getElementById('travel_start_date_pub_20250202').value,
-        endDate: document.getElementById('travel_end_date_pub_20250202').value,
-        numberOfDays: document.getElementById('travel_days_calc_pub_20250202').value,
-        maxPeople: document.getElementById('travel_max_people_pub_20250202').value,
-        gender: {
-            male: document.getElementById('travel_gender_male_pub_20250202').checked,
-            female: document.getElementById('travel_gender_female_pub_20250202').checked,
-            other: document.getElementById('travel_gender_other_pub_20250202').checked
-        },
-        savedEssentials: document.getElementById('pub-essen-saved-items') 
-            ? document.getElementById('pub-essen-saved-items').textContent 
-            : 'No essentials saved',
-        applyByDate: document.getElementById('travel_apply_date_pub_20250202').value
-    };
-    
-    // Update the display card
-    updateTripCard(formData);
-    
-    // Also log to console for debugging
-    console.log('Travel Form Data:', formData);
-    
-    return formData;
-}
+
+
+
 
 // Add CSS styles
 const styles = `
@@ -2085,6 +2052,7 @@ document.head.appendChild(styleSheet);
           div.classList.toggle("show");
       }
   </script>
+
 <div class="container-2025">
       <h3 class="h1-2025"> Created By You</h3>
 </div>
