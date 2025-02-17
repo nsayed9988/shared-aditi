@@ -1460,14 +1460,19 @@ async function saveToFirebase() {
 
         // Get form data using the existing collection function
         const formData = collectTravelFormData();
-        
-        // Add additional fields
-        formData.userEmail = userEmail;
-        formData.timestamp = Date.now();
 
-        // Save to Firebase Realtime Database
-        const newBookingRef = push(ref(database, 'travel-bookings'));
-        await set(newBookingRef, formData);
+// Add additional fields
+formData.userEmail = userEmail; // Store the original email
+formData.timestamp = Date.now();
+
+// Sanitize the email for use as a Firebase key
+const sanitizedEmail = userEmail.replace(/\./g, ","); // Replace dots with commas
+
+// Save data under travel-bookings-userEmail/public
+const newBookingRef = push(ref(database, `travel-bookings/${sanitizedEmail}/public-trips`));
+
+await set(newBookingRef, formData);
+
 
         // Success handling
         console.log('Booking saved successfully with ID:', newBookingRef.key);
@@ -1492,6 +1497,146 @@ document.getElementById('travel_booking_form_pub_20250202').addEventListener('su
     e.preventDefault();
     if (validateTravelStepPub(3)) {
         saveToFirebase();
+    }
+});
+
+
+
+// Function to validate and move to the next step
+function nextTripStep() {
+    const currentStep = document.querySelector('.trip-form-step.active');
+    const nextStep = currentStep.nextElementSibling;
+    
+    if (nextStep) {
+        currentStep.classList.remove('active');
+        nextStep.classList.add('active');
+    }
+}
+
+// Function to go back to the previous step
+function prevTripStep() {
+    const currentStep = document.querySelector('.trip-form-step.active');
+    const prevStep = currentStep.previousElementSibling;
+
+    if (prevStep) {
+        currentStep.classList.remove('active');
+        prevStep.classList.add('active');
+    }
+}
+
+// Function to reset form to specific step
+function resetToStep(stepNumber) {
+    const steps = document.querySelectorAll('.trip-form-step');
+    steps.forEach((step, index) => {
+        if (index + 1 === stepNumber) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
+        }
+    });
+}
+
+// Handle the form submission
+document.querySelector('#trip-submit-button').onclick = function(e) {
+    e.preventDefault();
+    if (validateTripForm()) {
+        saveTripToFirebase();
+    }
+};
+
+async function saveTripToFirebase() {
+    try {
+        // Get user email from local storage
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            alert('User email not found. Please login first.');
+            return;
+        }
+
+        // Collect form data
+        const formData = collectTripFormData();
+
+        // Add additional fields
+        formData.userEmail = userEmail;
+        formData.timestamp = Date.now();
+
+        // Sanitize the email for use as a Firebase key
+        const sanitizedEmail = userEmail.replace(/\./g, ",");
+
+        // Save data under trip-bookings-userEmail/public
+        const newTripRef = push(ref(database, `travel-bookings/${sanitizedEmail}/private-trips`));
+        
+        await set(newTripRef, formData);
+
+        // Success handling
+        console.log('Trip saved successfully with ID:', newTripRef.key);
+        alert('Trip saved successfully!');
+
+        // Reset form and UI
+        document.getElementById('trip-planning-form').reset();
+        resetToStep(1); // Reset to first step using the new function
+
+    } catch (error) {
+        console.error('Error saving trip:', error);
+        alert('Error saving trip: ' + error.message);
+    }
+}
+
+// Function to collect form data
+function collectTripFormData() {
+    return {
+        tripName: document.getElementById('trip-name-input').value,
+        destination: document.getElementById('trip-destination-select').value,
+        startDate: document.getElementById('trip-start-date').value,
+        endDate: document.getElementById('trip-end-date').value,
+        duration: document.getElementById('trip-duration-display').value,
+        activities: document.getElementById('trip-activities-input').value,
+        essentials: document.getElementById('trip-essentials-text').value,
+        budget: document.getElementById('trip-budget-input').value,
+        currency: document.getElementById('trip-currency-select').value
+    };
+}
+
+// Validate the form before submitting
+function validateTripForm() {
+    // Add custom validation for each step if needed
+    const currentStep = document.querySelector('.trip-form-step.active');
+    switch (currentStep.id) {
+        case 'trip-form-step-1':
+            if (!document.getElementById('trip-name-input').value || !document.getElementById('trip-destination-select').value) {
+                alert('Please complete step 1: Basic Info');
+                return false;
+            }
+            break;
+        case 'trip-form-step-2':
+            if (!document.getElementById('trip-start-date').value || !document.getElementById('trip-end-date').value) {
+                alert('Please complete step 2: Dates');
+                return false;
+            }
+            break;
+        case 'trip-form-step-3':
+            if (!document.getElementById('trip-activities-input').value) {
+                alert('Please complete step 3: Activities');
+                return false;
+            }
+            break;
+        case 'trip-form-step-4':
+            if (!document.getElementById('trip-budget-input').value || !document.getElementById('trip-currency-select').value) {
+                alert('Please complete step 4: Budget');
+                return false;
+            }
+            break;
+        default:
+            break;
+    }
+    return true;
+}
+
+// Ensure the form doesn't submit normally
+document.getElementById('trip-planning-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (validateTripForm()) {
+        saveTripToFirebase();
     }
 });
                 </script>
@@ -1783,7 +1928,7 @@ document.getElementById('travel_booking_form_pub_20250202').addEventListener('su
   document.querySelector('.travel_submit_pub_btn').addEventListener('click', function() {
     if (validateTravelStepPub(3)) {
       alert('Travel Form submitted successfully!');
-      window.close();
+    
     }
   });
 
@@ -1826,6 +1971,9 @@ function collectTravelFormData() {
     
     return formData;
 }
+
+
+
   </script>
 
     <!--private form-->        
@@ -1910,7 +2058,8 @@ function collectTravelFormData() {
               </div>
               <div class="trip-form-navigation">
                   <button type="button" class="trip-form-button" id="trip-prev-button-4" onclick="prevTripStep()">Previous</button>
-                  <button type="submit" class="trip-form-button" id="trip-submit-button" onclick="privb">Submit</button>
+                 <!-- <button type="submit" class="trip-form-button" id="trip-submit-button" onclick="privb">Submit</button>-->
+                  <button type="submit" class="trip-form-button" id="trip-submit-button" onclick="return validateTripForm()">Submit</button>
               </div>
           </div>
       </form>
