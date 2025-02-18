@@ -1353,7 +1353,7 @@ width: auto;
             
                         <!-- Step 2 -->
                         <div class="travel_step_pub_panel" id="travel_step2_panel_pub_20250202">
-                            <div class="travel_form_pub_group">
+                            <!--<div class="travel_form_pub_group">
                                 <label for="travel_start_date_pub_20250202">Start Date:</label>
                                 <input type="date" id="travel_start_date_pub_20250202" required>
                                 <div class="travel_error_pub_message" id="travel_start_date_error_pub_20250202">Please select a start date</div>
@@ -1366,13 +1366,30 @@ width: auto;
                             <div class="travel_form_pub_group">
                                 <label for="travel_days_calc_pub_20250202">Number of Days:</label>
                                 <input type="text" id="travel_days_calc_pub_20250202" readonly>
-                            </div>
+                            </div>-->
+                            <div class="travel_form_pub_group">
+                              <label for="travel_start_date_pub_20250202">Start Date:</label>
+                              <input type="date" id="travel_start_date_pub_20250202" required>
+                              <div class="travel_error_pub_message" id="travel_start_date_error_pub_20250202">Please select a start date</div>
+                          </div>
+                          <div class="travel_form_pub_group">
+                              <label for="travel_end_date_pub_20250202">End Date:</label>
+                              <input type="date" id="travel_end_date_pub_20250202" required>
+                              <div class="travel_error_pub_message" id="travel_end_date_error_pub_20250202">Please select an end date</div>
+                          </div>
+                          <div class="travel_form_pub_group">
+                              <label for="travel_days_calc_pub_20250202">Number of Days:</label>
+                              <input type="text" id="travel_days_calc_pub_20250202" readonly>
+                          </div>
+                          <div id="day-activities-container" class="form-group"></div>
+
+                          
                             <div class="travel_button_pub_group">
                                 <button type="button" class="travel_prev_pub_btn" onclick="travelPrevStepPub(2)">Previous</button>
                                 <button type="button" class="travel_next_pub_btn" onclick="travelNextStepPub(2)">Next</button>
                             </div>
                         </div>
-            
+                        
                         <!-- Step 3 -->
                         <div class="travel_step_pub_panel" id="travel_step3_panel_pub_20250202">
                             <div class="travel_form_pub_group">
@@ -1458,21 +1475,20 @@ async function saveToFirebase() {
             return;
         }
 
-        // Get form data using the existing collection function
+        // Get form data using the modified collection function
         const formData = collectTravelFormData();
 
-// Add additional fields
-formData.userEmail = userEmail; // Store the original email
-formData.timestamp = Date.now();
+        // Add additional fields
+        formData.userEmail = userEmail;
+        formData.timestamp = Date.now();
 
-// Sanitize the email for use as a Firebase key
-const sanitizedEmail = userEmail.replace(/\./g, ","); // Replace dots with commas
+        // Sanitize the email for use as a Firebase key
+        const sanitizedEmail = userEmail.replace(/\./g, ",");
 
-// Save data under travel-bookings-userEmail/public
-const newBookingRef = push(ref(database, `travel-bookings/${sanitizedEmail}/public-trips`));
-
-await set(newBookingRef, formData);
-
+        // Save data under travel-bookings/userEmail/public-trips
+        const newBookingRef = push(ref(database, `travel-bookings/${sanitizedEmail}/public-trips`));
+        
+        await set(newBookingRef, formData);
 
         // Success handling
         console.log('Booking saved successfully with ID:', newBookingRef.key);
@@ -1482,6 +1498,9 @@ await set(newBookingRef, formData);
         document.getElementById('travel_booking_form_pub_20250202').reset();
         if (document.getElementById('pub-essen-saved-items')) {
             document.getElementById('pub-essen-saved-items').innerHTML = '';
+        }
+        if (document.getElementById('day-activities-container')) {
+            document.getElementById('day-activities-container').innerHTML = '';
         }
         currentTravelStepPub = 1;
         showTravelStepPub(1);
@@ -1780,7 +1799,38 @@ document.getElementById('trip-planning-form').addEventListener('submit', (e) => 
       travelNumDaysPub.value = diffDays;
     }
   }
-
+  document.getElementById("travel_start_date_pub_20250202").addEventListener("change", calculateDays);
+    document.getElementById("travel_end_date_pub_20250202").addEventListener("change", calculateDays);
+    ///new aditi code
+    function calculateDays() {
+        const startDate = new Date(document.getElementById("travel_start_date_pub_20250202").value);
+        const endDate = new Date(document.getElementById("travel_end_date_pub_20250202").value);
+        
+        if (!isNaN(startDate) && !isNaN(endDate) && endDate >= startDate) {
+            const timeDiff = endDate - startDate;
+            const numberOfDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1;
+            document.getElementById("travel_days_calc_pub_20250202").value = numberOfDays;
+            generateDayActivities(numberOfDays);
+        } else {
+            document.getElementById("travel_days_calc_pub_20250202").value = "";
+            document.getElementById("day-activities-container").innerHTML = "";
+        }
+    }
+    
+    function generateDayActivities(numberOfDays) {
+        const dayActivitiesContainer = document.getElementById("day-activities-container");
+        dayActivitiesContainer.innerHTML = "";
+        
+        for (let i = 1; i <= numberOfDays; i++) {
+            const dayActivityField = document.createElement("div");
+            dayActivityField.classList.add("form-group");
+            dayActivityField.innerHTML = `
+                <label for="day${i}-activities">Day ${i} Activities:</label>
+                <textarea id="day${i}-activities" rows="4" placeholder="Enter activities for Day ${i}"></textarea>
+            `;
+            dayActivitiesContainer.appendChild(dayActivityField);
+        }
+    }
   function validateApplyByDate() {
     const startDatePub = document.getElementById('travel_start_date_pub_20250202');
     const applyDatePub = document.getElementById('travel_apply_date_pub_20250202');
@@ -1851,6 +1901,7 @@ document.getElementById('trip-planning-form').addEventListener('submit', (e) => 
       
       if (!startDate) errors.push('travel_start_date');
       if (!endDate) errors.push('travel_end_date');
+
     }
     else if (step === 3) {
       const maxPeople = document.getElementById('travel_max_people_pub_20250202').value;
@@ -1944,6 +1995,9 @@ document.getElementById('travel_booking_form_pub_20250202').addEventListener('su
 document.querySelector('.travel_submit_pub_btn').onclick = function() {
     collectTravelFormData();
 };
+
+
+// Update the collectTravelFormData function to include day activities
 function collectTravelFormData() {
     const formData = {
         travelerName: document.getElementById('travel_name_input_pub_20250202').value,
@@ -1960,20 +2014,29 @@ function collectTravelFormData() {
         savedEssentials: document.getElementById('pub-essen-saved-items') 
             ? document.getElementById('pub-essen-saved-items').textContent 
             : 'No essentials saved',
-        applyByDate: document.getElementById('travel_apply_date_pub_20250202').value
+        applyByDate: document.getElementById('travel_apply_date_pub_20250202').value,
+        
+        // Add day activities
+        dayActivities: {}
     };
+
+    // Collect activities for each day
+    const numberOfDays = parseInt(document.getElementById('travel_days_calc_pub_20250202').value) || 0;
+    for (let i = 1; i <= numberOfDays; i++) {
+        const dayActivity = document.getElementById(`day${i}-activities`);
+        if (dayActivity && dayActivity.value.trim()) {
+            formData.dayActivities[`day${i}`] = dayActivity.value.trim();
+        }
+    }
     
-    // Update the display card
-    updateTripCard(formData);
+    // Update the display card if needed
+    if (typeof updateTripCard === 'function') {
+        updateTripCard(formData);
+    }
     
-    // Also log to console for debugging
     console.log('Travel Form Data:', formData);
-    
     return formData;
 }
-
-
-
   </script>
 
     <!--private form-->        
@@ -2295,7 +2358,7 @@ document.head.appendChild(styleSheet);
   <!-- Content Sections -->
 
   <section id="public-section-1" class="section-1 active-1">
-      <h2>Public Trips</h2>
+      <h4>Public Trips</h4>
   
 <section id="public-trip-section" class="section-1" style="display: none;">
   
@@ -2309,15 +2372,38 @@ document.head.appendChild(styleSheet);
         <p><strong>Gender Options:</strong> <span id="card-gender"></span></p>
         <p><strong>Travel Essentials:</strong> <span id="card-essentials"></span></p>
         <p><strong>Last Apply Date:</strong> <span id="card-apply-date"></span></p>
+        
     </div>
 </section>
 <div class="slider-container">
-  <div class="slider-nav">
-      <button id="prev-btn" class="nav-btn" style="background-color: #00d2ff;">← Prev</button>
-      <button id="next-btn" class="nav-btn" style="background-color: #00d2ff;">Next →</button>
-  </div>
+ 
   <div id="trip-container"></div>
 </div>
+
+</section>
+<section id="private-section-1" class="section-1"> 
+    <h4>Private Trips</h4>
+    <div id="trip-card-container" class="trip-card" style="display:none;">
+      <h4>Your Trip Details</h4>
+      <p><strong>Trip Name:</strong> <span id="card-trip-name"></span></p>
+      <p><strong>Destination:</strong> <span id="priv-card-destination"></span></p>
+      <p><strong>Start Date:</strong> <span id="priv-card-start-date"></span></p>
+      <p><strong>End Date:</strong> <span id="priv-card-end-date"></span></p>
+      <p><strong>Duration (Days):</strong> <span id="priv-card-duration"></span></p>
+      <p><strong>Activities/Attractions:</strong> <span id="card-activities"></span></p>
+      <p><strong>Travel Essentials:</strong> <span id="priv-card-essentials"></span></p>
+      <p><strong>Budget:</strong> <span id="card-budget"></span></p>
+      <p><strong>Currency:</strong> <span id="card-currency"></span></p>
+  </div>
+  <div class="slider-container">
+    <div class="slider-container">
+ 
+      <div id="trip-container"></div>
+    </div>
+    <div id="trip-container1"></div>
+  </div>
+</section>
+
 <style>
   /* Slider Container */
   .slider-container {
@@ -2433,29 +2519,10 @@ document.head.appendChild(styleSheet);
       }
   }
 </style>
-<!--<div class="slider-container">
-  <button id="prev-btn" class="nav-button prev">&#10094;</button>
-  <div id="trip-container"></div>
-  <button id="next-btn" class="nav-button next">&#10095;</button>
-</div>-->
 
 
-</section>
-  <section id="private-section-1" class="section-1">
-      <h2>Private Trips</h2>
-      <div id="trip-card-container" class="trip-card" style="display:none;">
-        <h4>Your Trip Details</h4>
-        <p><strong>Trip Name:</strong> <span id="card-trip-name"></span></p>
-        <p><strong>Destination:</strong> <span id="priv-card-destination"></span></p>
-        <p><strong>Start Date:</strong> <span id="priv-card-start-date"></span></p>
-        <p><strong>End Date:</strong> <span id="priv-card-end-date"></span></p>
-        <p><strong>Duration (Days):</strong> <span id="priv-card-duration"></span></p>
-        <p><strong>Activities/Attractions:</strong> <span id="card-activities"></span></p>
-        <p><strong>Travel Essentials:</strong> <span id="priv-card-essentials"></span></p>
-        <p><strong>Budget:</strong> <span id="card-budget"></span></p>
-        <p><strong>Currency:</strong> <span id="card-currency"></span></p>
-    </div>
-  </section>
+ 
+  
   <script type="module" src="retrieve.js"></script>
 
             
@@ -2464,17 +2531,10 @@ document.head.appendChild(styleSheet);
   
    
       <section class="box-section block-content-tourlist background-body">
-
-        <div class="container-2025">
-    
-         
-          
-      </div>
-  
-      
+        <div class="container-2025"></div>
+</section>
 
 
-        </section>
       <section class="section-box box-media background-body"> 
         <div class="container-media wow fadeInUp"> <img src="assets/imgs/page/homepage5/media.png" alt="Travila"><img src="assets/imgs/page/homepage5/media2.png" alt="Travila"><img src="assets/imgs/page/homepage5/media3.png" alt="Travila"><img src="assets/imgs/page/homepage5/media4.png" alt="Travila"><img src="assets/imgs/page/homepage5/media5.png" alt="Travila"><img src="assets/imgs/page/homepage5/media6.png" alt="Travila"><img src="assets/imgs/page/homepage5/media7.png" alt="Travila"></div>
       </section>

@@ -101,280 +101,324 @@
         }
 
     </style>
+    
     <script type="module">
-    // Import Firebase modules
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
-
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
-        authDomain: "ty-project-80ab7.firebaseapp.com",
-        projectId: "ty-project-80ab7",
-        storageBucket: "ty-project-80ab7.firebasestorage.app",
-        messagingSenderId: "491495110151",
-        appId: "1:491495110151:web:035795af4bc8eebff79ca2",
-        measurementId: "G-XFS1VYTHSM",
-        databaseURL: "https://ty-project-80ab7-default-rtdb.firebaseio.com/" // Added this
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-
-    // Function to retrieve and display trips
-    function retrieveAndDisplayTrips() {
-    console.log('Fetching all trips...');
-
-    const tripsRef = ref(database, 'travel-bookings');
-    const tripContainer = document.getElementById('trip-container');
-
-    if (!tripContainer) {
-        console.error('Trip container element not found');
-        return;
-    }
-
-        console.log('Fetching data from:', tripsRef); // Debug log
-        onValue(tripsRef, (snapshot) => {
-        console.log('Data received:', snapshot.val());
-        tripContainer.innerHTML = '';
-
-        if (!snapshot.exists()) {
-            tripContainer.innerHTML = '<p>No trips found.</p>';
-            return;
-        }
-
-        const allData = snapshot.val();
-        let allTrips = [];
-
-        // Loop through each user's public-trips
-        Object.keys(allData).forEach(userEmail => {
-            if (allData[userEmail].hasOwnProperty('public-trips')) {
-                const userTrips = allData[userEmail]['public-trips'];
-                Object.keys(userTrips).forEach(tripId => {
-                    allTrips.push({ id: tripId, ...userTrips[tripId] });
-                });
-            }
-        });
-
-        // Sort trips by timestamp (latest first)
-        allTrips.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-
-        // Display trips
-        if (allTrips.length === 0) {
-            tripContainer.innerHTML = '<p>No trips found.</p>';
-            return;
-        }
-
-        allTrips.forEach(trip => {
-            const cardDiv = document.createElement('div');
-            cardDiv.className = 'trip-card';
-
-            const startDate = trip.startDate ? new Date(trip.startDate).toLocaleDateString() : 'N/A';
-            const endDate = trip.endDate ? new Date(trip.endDate).toLocaleDateString() : 'N/A';
-            const applyDate = trip.applyByDate ? new Date(trip.applyByDate) : null;
-            const applyDateString = applyDate ? applyDate.toLocaleDateString() : 'N/A';
-
-            // Check if the apply by date has passed
-            const isExpired = applyDate && applyDate < new Date();
-
-            cardDiv.innerHTML = `
-                <p><strong>Traveler Name:</strong> <span>${trip.travelerName || 'N/A'}</span></p>
-                <p><strong>Destination:</strong> <span>${trip.destination || 'N/A'}</span></p>
-                <p><strong>Start Date:</strong> <span>${startDate}</span></p>
-                <p><strong>End Date:</strong> <span>${endDate}</span></p>
-                 <p><strong>Duration:</strong> <span>${trip.numberOfDays || 'N/A'} days</span></p>
-                <p><strong>Max People:</strong> <span>${trip.maxPeople || 'N/A'}</span></p>
-                <p><strong>Travel Essentials:</strong> <span>${trip.savedEssentials || 'None selected'}</span></p>
-                <p><strong>Apply By:</strong> <span>${applyDateString}</span></p>
-                 <div style="text-align: right; margin-top: 10px;">
-            <button onclick="joinTrip('${trip.id}')" 
-                style="padding: 10px 15px; background-color: ${isExpired ? '#ccc' : '#00d2ff'}; 
-                color: white; border: none; cursor: ${isExpired ? 'not-allowed' : 'pointer'}; 
-                border-radius: 5px;" ${isExpired ? 'disabled' : ''}>
-                ${isExpired ? 'Expired' : 'Join Now'}
-            </button>
-        </div>
-            `;
-
-            tripContainer.appendChild(cardDiv);
-        });
-
-    }, (error) => {
-        console.error('Error fetching trips:', error);
-        tripContainer.innerHTML = '<p>Error loading trips. Please try again later.</p>';
-    });
-}
-
-    // Add styling
-    const style = document.createElement('style');
-    style.textContent = `
-        .slider-container {
-            position: relative;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            overflow: hidden;
-            padding: 20px;
-        }
-
-        #trip-container {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding: 10px;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .trip-card {
-            min-width: 300px;
-            max-width: 350px;
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            overflow-wrap: break-word;
-            word-break: break-word;
-            white-space: normal;
-            flex-shrink: 0;
-            
-        }
-
-        .trip-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-        }
-
-        .trip-card p {
-            margin: 8px 0;
-            line-height: 1.4;
-        }
-
-        .trip-card strong {
-            color: #333;
-            font-weight: 600;
-        }
-
-        .trip-card span {
-            color: #666;
-        }
-
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #00d2ff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            z-index: 1;
-        }
-
-        #prev-btn { left: 10px; }
-        #next-btn { right: 10px; }
-
-        @media (max-width: 768px) {
-            .nav-btn {
-                display: none;
-            }
-            
-            .trip-card {
-                min-width: 260px;
-            }
-        }
-    `;
-
-    document.head.appendChild(style);
-
-    // Initialize slider functionality
-    function initializeSlider() {
-        const container = document.getElementById('trip-container');
-        const prevButton = document.getElementById('prev-btn');
-        const nextButton = document.getElementById('next-btn');
-
-        if (container && prevButton && nextButton) {
-            prevButton.addEventListener('click', () => {
-                container.scrollBy({ left: -300, behavior: 'smooth' });
-            });
-
-            nextButton.addEventListener('click', () => {
-                container.scrollBy({ left: 300, behavior: 'smooth' });
-            });
-        }
-    }
-
-    // Initialize everything when DOM is loaded
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM Content Loaded');
-            retrieveAndDisplayTrips();
-            initializeSlider();
-        });
-    } else {
-        // DOM is already loaded
-        console.log('DOM Already Loaded');
-        retrieveAndDisplayTrips();
-        initializeSlider();
-    }
-
-      const fetchUsername = () => {
-          console.log("1. Function started");
-          
-          const userEmail = localStorage.getItem('userEmail');
-          console.log("2. Email from localStorage:", userEmail);
+      // Import Firebase modules
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+      import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
   
-          if (!userEmail) {
-              console.log("3. No email found in localStorage");
-              document.getElementById('updateName').textContent = "Please login first";
+      // Firebase configuration
+      const firebaseConfig = {
+          apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
+          authDomain: "ty-project-80ab7.firebaseapp.com",
+          projectId: "ty-project-80ab7",
+          storageBucket: "ty-project-80ab7.firebasestorage.app",
+          messagingSenderId: "491495110151",
+          appId: "1:491495110151:web:035795af4bc8eebff79ca2",
+          measurementId: "G-XFS1VYTHSM",
+          databaseURL: "https://ty-project-80ab7-default-rtdb.firebaseio.com/"
+      };
+  
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+  
+      // Add modal styles
+      const modalStyle = document.createElement('style');
+      modalStyle.textContent = `
+          .modal {
+              display: none;
+              position: fixed;
+              z-index: 1000;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0,0,0,0.5);
+          }
+  
+          .modal-content {
+              background-color: white;
+              margin: 15% auto;
+              padding: 20px;
+              border-radius: 10px;
+              width: 80%;
+              max-width: 600px;
+              position: relative;
+          }
+  
+          .close-btn {
+              position: absolute;
+              right: 20px;
+              top: 10px;
+              font-size: 24px;
+              cursor: pointer;
+          }
+  
+          .trip-details {
+              margin: 10px 0;
+              padding: 10px;
+              border-bottom: 1px solid #eee;
+          }
+      `;
+      document.head.appendChild(modalStyle);
+  
+      // Add modal HTML structure
+      const modalHTML = `
+          <div id="trip-modal" class="modal">
+              <div class="modal-content">
+                  <span class="close-btn">&times;</span>
+                  <div class="daily-activities"></div>
+              </div>
+          </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+  
+      // Set up modal close functionality
+      const modal = document.getElementById('trip-modal');
+      const closeButton = modal.querySelector('.close-btn');
+  
+      closeButton.addEventListener('click', () => {
+          modal.style.display = 'none';
+      });
+  
+      window.addEventListener('click', (event) => {
+          if (event.target === modal) {
+              modal.style.display = 'none';
+          }
+      });
+  
+      // Function to retrieve and display trips
+      function retrieveAndDisplayTrips() {
+          console.log('Fetching all trips...');
+  
+          const tripsRef = ref(database, 'travel-bookings');
+          const tripContainer = document.getElementById('trip-container');
+  
+          if (!tripContainer) {
+              console.error('Trip container element not found');
               return;
           }
   
-          const sanitizedEmail = userEmail.replace(/\./g, ',');
-          console.log("4. Sanitized email:", sanitizedEmail);
+          onValue(tripsRef, (snapshot) => {
+              console.log('Data received:', snapshot.val());
+              tripContainer.innerHTML = '';
   
-          const dbRef = ref(db, `User Profile/${sanitizedEmail}/AboutUser/name`);
-          console.log("5. Database path:", `User Profile/${sanitizedEmail}/AboutUser/name`);
+              if (!snapshot.exists()) {
+                  tripContainer.innerHTML = '<p>No trips found.</p>';
+                  return;
+              }
   
-          get(dbRef)
-              .then((snapshot) => {
-                  console.log("6. Got snapshot");
-                  console.log("7. Snapshot exists?", snapshot.exists());
-                  
-                  if (snapshot.exists()) {
-                      const name = snapshot.val();
-                      console.log("8. Name found:", name);
-                      document.getElementById('updateName').textContent = name;
-                  } else {
-                      console.log("8. No data available");
-                      document.getElementById('updateName').textContent = "Name not found";
+              const allData = snapshot.val();
+              let allTrips = [];
+  
+              Object.keys(allData).forEach(userEmail => {
+                  if (allData[userEmail].hasOwnProperty('public-trips')) {
+                      const userTrips = allData[userEmail]['public-trips'];
+                      Object.keys(userTrips).forEach(tripId => {
+                          allTrips.push({ id: tripId, ...userTrips[tripId] });
+                      });
                   }
-              })
-              .catch((error) => {
-                  console.error("9. Error:", error);
-                  document.getElementById('updateName').textContent = "Error loading name";
               });
-      };
   
-      // Call the function when the script loads
-      console.log("0. Starting to fetch username");
-      fetchUsername();
-
-      //logout
-      const logout = () => {
-    // Clear the profile name display
-    document.getElementById('updateName').textContent = '';
-    document.getElementById('logout').addEventListener('click', logout);
-    // Clear localStorage
-    localStorage.clear();
-    localStorage.setItem('theme', 'light');
-};
-
-// Add event listener to logout button
-document.getElementById('logout').addEventListener('click', logout);
+              allTrips.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+  
+              if (allTrips.length === 0) {
+                  tripContainer.innerHTML = '<p>No trips found.</p>';
+                  return;
+              }
+  
+              allTrips.forEach(trip => {
+                  const cardDiv = document.createElement('div');
+                  cardDiv.className = 'trip-card';
+  
+                  const startDate = trip.startDate ? new Date(trip.startDate).toLocaleDateString() : 'N/A';
+                  const endDate = trip.endDate ? new Date(trip.endDate).toLocaleDateString() : 'N/A';
+                  const applyDate = trip.applyByDate ? new Date(trip.applyByDate) : null;
+                  const applyDateString = applyDate ? applyDate.toLocaleDateString() : 'N/A';
+                  const isExpired = applyDate && applyDate < new Date();
+  
+                  cardDiv.innerHTML = `
+                      <p><strong>Traveler Name:</strong> <span>${trip.travelerName || 'N/A'}</span></p>
+                      <p><strong>Destination:</strong> <span>${trip.destination || 'N/A'}</span></p>
+                      <p><strong>Start Date:</strong> <span>${startDate}</span></p>
+                      <p><strong>End Date:</strong> <span>${endDate}</span></p>
+                      <p><strong>Duration:</strong> <span>${trip.numberOfDays || 'N/A'} days</span></p>
+                      <p><strong>Max People:</strong> <span>${trip.maxPeople || 'N/A'}</span></p>
+                      <p><strong>Travel Essentials:</strong> <span>${trip.savedEssentials || 'None selected'}</span></p>
+                      <p><strong>Apply By:</strong> <span>${applyDateString}</span></p>
+                      <div style="text-align: right; margin-top: 10px;">
+                          <button onclick="joinTrip('${trip.id}')" 
+                              style="padding: 10px 15px; background-color: ${isExpired ? '#ccc' : '#00d2ff'}; 
+                              color: white; border: none; cursor: ${isExpired ? 'not-allowed' : 'pointer'}; 
+                              border-radius: 5px;" ${isExpired ? 'disabled' : ''}>
+                              ${isExpired ? 'Expired' : 'Join Now'}
+                          </button>
+                          <button class="view-details-btn" data-trip-id="${trip.id}"
+                              style="padding: 10px 15px; color: white; border: none; 
+                              border-radius: 5px; padding-left: 20px; float: left; background-color: rgb(0, 210, 255);">
+                              View Details
+                          </button>
+                      </div>`;
+  
+                  tripContainer.appendChild(cardDiv);
+  
+                  const viewDetailsBtn = cardDiv.querySelector('.view-details-btn');
+                  viewDetailsBtn.addEventListener('click', () => {
+                      openModal(trip.id);
+                  });
+              });
+          });
+      }
+  
+      // Function to open modal and display trip details
+      function openModal(tripId) {
+          console.log("openModal function triggered with tripId:", tripId);
+  
+          const dailyActivitiesContainer = modal.querySelector('.daily-activities');
+          
+          if (!dailyActivitiesContainer) {
+              console.error("Error: Modal structure is incorrect.");
+              return;
+          }
+  
+          const tripsRef = ref(database, 'travel-bookings');
+          
+          get(tripsRef).then((snapshot) => {
+              if (!snapshot.exists()) {
+                  dailyActivitiesContainer.innerHTML = '<h2>Error</h2><p>No trips found.</p>';
+                  return;
+              }
+  
+              const allData = snapshot.val();
+              let tripActivities = null;
+  
+              Object.keys(allData).forEach(userEmail => {
+                  if (allData[userEmail]?.['public-trips']?.[tripId]?.dayActivities) {
+                      tripActivities = allData[userEmail]['public-trips'][tripId].dayActivities;
+                  }
+              });
+  
+              if (tripActivities) {
+                  let activitiesHTML = `<h2>Daily Activities</h2>`;
+  
+                  const sortedDays = Object.keys(tripActivities)
+                      .filter(key => key.startsWith('day'))
+                      .sort((a, b) => parseInt(a.replace('day', '')) - parseInt(b.replace('day', '')));
+  
+                  sortedDays.forEach(day => {
+                      activitiesHTML += `
+                          <div class="trip-details">
+                              <p><strong>Day ${day.replace('day', '')}:</strong> ${tripActivities[day]}</p>
+                          </div>
+                      `;
+                  });
+  
+                  dailyActivitiesContainer.innerHTML = activitiesHTML;
+              } else {
+                  dailyActivitiesContainer.innerHTML = '<h2>Daily Activities</h2><p>No activities found for this trip.</p>';
+              }
+  
+              modal.style.display = 'block';
+          }).catch((error) => {
+              console.error("Error getting activities:", error);
+              dailyActivitiesContainer.innerHTML = '<h2>Error</h2><p>Failed to load trip activities. Please try again.</p>';
+              modal.style.display = 'block';
+          });
+      }
+  
+      // Add main styles
+      const mainStyle = document.createElement('style');
+      mainStyle.textContent = `
+          .slider-container {
+              position: relative;
+              width: 100%;
+              max-width: 1200px;
+              margin: 0 auto;
+              overflow: hidden;
+              padding: 20px;
+          }
+  
+          #trip-container {
+              display: flex;
+              gap: 20px;
+              overflow-x: auto;
+              padding: 10px;
+              scroll-behavior: smooth;
+              -webkit-overflow-scrolling: touch;
+          }
+  
+          .trip-card {
+              min-width: 300px;
+              max-width: 350px;
+              background: white;
+              border-radius: 10px;
+              padding: 20px;
+              box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+              transition: transform 0.3s ease;
+              overflow-wrap: break-word;
+              word-break: break-word;
+              white-space: normal;
+              flex-shrink: 0;
+          }
+  
+          .trip-card:hover {
+              transform: translateY(-5px);
+              box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+          }
+  
+          .trip-card p {
+              margin: 8px 0;
+              line-height: 1.4;
+          }
+  
+          .trip-card strong {
+              color: #333;
+              font-weight: 600;
+          }
+  
+          .trip-card span {
+              color: #666;
+          }
+  
+          .nav-btn {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              background: #00d2ff;
+              color: white;
+              border: none;
+              padding: 10px 20px;
+              cursor: pointer;
+              border-radius: 5px;
+              z-index: 1;
+          }
+  
+          #prev-btn { left: 10px; }
+          #next-btn { right: 10px; }
+  
+          @media (max-width: 768px) {
+              .nav-btn {
+                  display: none;
+              }
+              
+              .trip-card {
+                  min-width: 260px;
+              }
+          }
+      `;
+      document.head.appendChild(mainStyle);
+  
+      // Initialize everything when DOM is loaded
+      if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => {
+              console.log('DOM Content Loaded');
+              retrieveAndDisplayTrips();
+          });
+      } else {
+          console.log('DOM Already Loaded');
+          retrieveAndDisplayTrips();
+      }
   </script>
   </head>
   <body>
@@ -462,9 +506,11 @@ document.getElementById('logout').addEventListener('click', logout);
                       </div>
                     </div>
                   </li>
-                  
                   <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
                   </li>
+                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html">My Iternaries</a>         
+                  </li>
+                 
                  
                   <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login">Profile</a></li>
                   <li class="mega-li-small"><a href="blog-grid.html" class="check-login">Blog</a></li>
@@ -472,9 +518,9 @@ document.getElementById('logout').addEventListener('click', logout);
                   
       
 
-                <li class=""><a href="privacy.html">Privacy Notice</a>
+              
                   
-                </li>
+              
            
                   <li><a href="contact.html">Contact</a></li>
                   <li  class="has-children"><a>Request Sent </a></li>
@@ -516,6 +562,8 @@ document.getElementById('logout').addEventListener('click', logout);
                 
               
                   <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
+                  </li>
+                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html">My Iternaries</a>         
                   </li>
                   <li id="my-ite" class="mega-li-small"><a href="../travi dash/my-booking.html" class="check-login">My Itineraries</a></li>
                   <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login">Profile</a></li>
