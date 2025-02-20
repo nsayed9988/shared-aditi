@@ -101,244 +101,802 @@
         }
 
     </style>
-    
-    <script type="module">
-      // Import Firebase modules
-     // Import Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getDatabase, ref, onValue, get, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
-      // Firebase configuration
-      const firebaseConfig = {
-          apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
-          authDomain: "ty-project-80ab7.firebaseapp.com",
-          projectId: "ty-project-80ab7",
-          storageBucket: "ty-project-80ab7.firebasestorage.app",
-          messagingSenderId: "491495110151",
-          appId: "1:491495110151:web:035795af4bc8eebff79ca2",
-          measurementId: "G-XFS1VYTHSM",
-          databaseURL: "https://ty-project-80ab7-default-rtdb.firebaseio.com/"
-      };
+<style>
+ 
+  .reg-form {
+      background-color: #eeeaea;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 800px;
+      overflow: hidden;
+  }
   
-     // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const auth = getAuth(app);
-
-const modalStyle = document.createElement('style');
-      modalStyle.textContent = `
-      /* Trip Card Styles */
-.trip-card {
-    min-width: 300px;
-    max-width: 350px;
-    background: linear-gradient(145deg, #f1f1f1, #ffffff); /* Light gradient for depth */
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Soft shadow for elevated effect */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth hover effects */
-    overflow-wrap: break-word;
-    word-break: break-word;
-    white-space: normal;
-    flex-shrink: 0;
-    background: #ffffff;
-    border: 1px solid #f1f1f1;
-    color: #333; /* Default text color */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean, modern font */
-}
-
-.trip-card:hover {
-    transform: translateY(-8px); /* Slight lift on hover */
-    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15); /* Stronger shadow for hover effect */
-    background-color: #f9f9f9; /* Soft background color change */
-}
-
-.trip-card p {
-    margin: 10px 0;
-    line-height: 1.6;
-    color: #555;
-    font-size: 16px; /* Slightly lighter text for readability */
-}
-
-.trip-card strong {
-    color: #333;
-    font-weight: bold;
-    font-size: 16px; /* Slightly larger font for emphasis */
-}
-
-.trip-card span {
-    color: #888; /* Subtle text color for secondary information */
-}
-
-/* Trip Card Image */
-.trip-card img {
-    width: 100%;
-    border-radius: 12px;
-    margin-bottom: 15px; /* Space between image and content */
-    object-fit: cover; /* Ensures the image covers the space without distortion */
-    max-height: 180px; /* Limits image height for consistency */
-}
-
-/* Badge or Label (e.g. "Popular", "Recommended") */
-.trip-card .badge {
-    background-color: #00b8e6;
-    color: white;
-    padding: 5px 15px;
-    font-size: 14px;
-    border-radius: 20px;
-    font-weight: 600;
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    z-index: 10;
-}
-
-/* Adding a subtle transition to the image */
-.trip-card img:hover {
-    transform: scale(1.05); /* Slight zoom-in effect on image hover */
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Button within the trip card */
-.trip-card .details-btn {
-    background: #00d2ff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.trip-card .details-btn:hover {
-    background: #00b8e6;
-    transform: scale(1.05); /* Slight zoom effect on button hover */
-}
-///remove above if too much
- /* Modal Background */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    transition: opacity 0.3s ease-in-out;
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: white;
-    margin: 10% auto;
-    padding: 30px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 600px;
-    position: relative;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* Subtle, softer shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-family: 'Arial', sans-serif;
-    font-size: 18px;
-    line-height: 1.6;
-    color: #333;
-}
-
-.modal-content:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15); /* Slightly elevated effect on hover */
-}
-
-/* Close Button */
-.close-btn {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    font-size: 30px;
-    color: #333;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.close-btn:hover {
-    color: #ff6347;
-    transform: rotate(45deg); /* Subtle rotation effect for a playful feel */
-}
-
-/* Trip Details */
-.trip-details {
-    margin: 20px 0;
-    padding: 15px;
-    border-bottom: 2px solid #f1f1f1;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #555;
-    background-color: #f9f9f9; /* Light background for better contrast */
-    border-radius: 8px;
-}
-
-.trip-details:last-child {
-    border-bottom: none;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .modal-content {
-        width: 95%;
-        padding: 20px; /* Reduce padding for small screens */
-    }
-
-    .close-btn {
-        font-size: 28px;
-    }
-}
-
-      `;
-      document.head.appendChild(modalStyle);
+  .reg-form .header {
+      background-color:  #15646c;
+      color: white;
+      padding: 20px;
+      text-align: center;
+  }
   
-      // Add modal HTML structure
-      const modalHTML = `
-          <div id="trip-modal" class="modal">
-              <div class="modal-content">
-                  <span class="close-btn">&times;</span>
-                  <div class="daily-activities"></div>
-              </div>
+  .reg-form .header h1 {
+      margin: 0;
+      font-size: 24px;
+  }
+  
+  .reg-form .stepper {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px;
+      position: relative;
+  }
+  
+  .reg-form .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+  }
+  
+  .step-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      color: #777;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+  }
+  
+  .reg-form .step.active .step-number {
+      background-color: #3498db;
+      color: white;
+  }
+  
+  .reg-form .step.completed .step-number {
+      background-color: #2ecc71;
+      color: white;
+  }
+  
+  .reg-form .step-label {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #777;
+  }
+  
+  .reg-form .step.active .step-label,
+  .step.completed .step-label {
+      color: #333;
+      font-weight: bold;
+  }
+  
+  .reg-form .progress-bar {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #e0e0e0;
+      z-index: 0;
+  }
+  
+  .reg-form .progress {
+      height: 100%;
+      background-color: #2ecc71;
+      width: 0%;
+      transition: width 0.3s ease;
+  }
+  
+  .reg-form .form-content {
+      padding: 20px;
+  }
+  
+  .reg-form .step-form {
+      display: none;
+  }
+  
+  .reg-form .step-form.active {
+      display: block;
+  }
+  
+  .reg-form .form-group {
+      margin-bottom: 20px;
+  }
+  
+  .reg-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #555;
+  }
+  
+ input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+  }
+  .form-group input[type='checkbox'] {
+    height: 20px; width:auto;}
+  .reg-form input:focus,
+  select:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  }
+  
+  .reg-form input.error-field,
+  select.error-field {
+      border-color: #e74c3c;
+      background-color: #ffffff;
+  }
+  
+  .reg-form .radio-group {
+      display: flex;
+      gap: 20px;
+  }
+  
+  .reg-form .radio-option {
+      display: flex;
+      align-items: center;
+  }
+  
+  .reg-form .radio-option input {
+      margin-right: 8px;
+  }
+  
+  .reg-form .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+  }
+  
+  .reg-form button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  }
+  
+  .reg-form .btn-prev {
+      background-color: #15646c;
+      color: white;
+  }
+  
+  .reg-form .btn-next, .btn-submit {
+      background-color:  #15646c;
+      color: white;
+  }
+  
+  .reg-form .btn-prev:hover {
+      background-color: #ddd;
+  }
+  
+  .reg-form .btn-next:hover, .btn-submit:hover {
+      background-color: #0c4c53;
+  }
+  
+  .reg-form .success-message {
+      text-align: center;
+      padding: 40px 20px;
+      display: none;
+  }
+  
+  .reg-form .success-message h2 {
+      color: #2ecc71;
+      margin-bottom: 10px;
+  }
+  
+  .reg-form .success-message p {
+      color: #555;
+      margin-bottom: 20px;
+  }
+  
+  .reg-form .success-icon {
+      font-size: 60px;
+      color: #2ecc71;
+      margin-bottom: 20px;
+  }
+  
+  .reg-form .error {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+  }
+  
+  .reg-form .form-group.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+  }
+  
+  @media (max-width: 768px) {
+      .reg-form .step-label {
+          display: none;
+      }
+      
+      .reg-form {
+          max-width: 100%;
+      }
+  }
+.reg-form .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: auto;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+  }
+   .modal-content {
+      background-color: white;
+      margin: 0% auto;
+      padding: 20px;
+      width: 50%;
+      border-radius: 10px;
+      text-align: center;
+  }
+  .reg-form .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+  }
+</style>
+  
+  <body>  
+    <div id="popupModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <div class="reg-form">
+      <div class="header">
+          <h1>Registration Form</h1>
+      </div>
+      
+      <div class="stepper">
+          <div class="progress-bar">
+              <div class="progress" id="progress"></div>
           </div>
-      `;
-      document.body.insertAdjacentHTML('beforeend', modalHTML);
+          
+          <div class="step active" data-step="1">
+              <div class="step-number">1</div>
+              <div class="step-label">Personal Info</div>
+          </div>
+          
+          <div class="step" data-step="2">
+              <div class="step-number">2</div>
+              <div class="step-label">Contact Info</div>
+          </div>
+          
+          <div class="step" data-step="3">
+              <div class="step-number">3</div>
+              <div class="step-label">Travel Details</div>
+          </div>
+          
+          <div class="step" data-step="4">
+              <div class="step-number">4</div>
+              <div class="step-label">Verification</div>
+          </div>
+      </div>
+      
+      <div class="form-content">
+          <form id="registration-form">
+              <!-- Step 1: Personal Information -->
+              <div class="step-form active" id="step-1">
+                  <h2>Personal Information</h2>
+                  
+                  <div class="form-group">
+                      <label for="name">Full Name</label>
+                      <input type="text" id="name" name="name" placeholder="Enter your full name">
+                      <div class="error" id="name-error">Please enter your full name (minimum 3 characters, alphabets only)</div>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="age">Age</label>
+                      <input type="number" id="age" name="age" min="18" max="120" placeholder="Enter your age">
+                      <div class="error" id="age-error">Please enter a valid age (18-120)</div>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label>Gender</label>
+                      <select id="gender" name="gender">
+                          <option value="">Select your gender</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="other">Other</option>
+                          <option value="prefer-not-to-say">Prefer not to say</option>
+                      </select>
+                      <div class="error" id="gender-error">Please select your gender</div>
+                  </div>
+                  
+                  <div class="button-group">
+                      <div></div> <!-- Empty div for spacing -->
+                      <button type="button" class="btn-next" data-next="2">Next</button>
+                  </div>
+              </div>
+              
+              <!-- Step 2: Contact Information -->
+              <div class="step-form" id="step-2">
+                  <h2>Contact Information</h2>
+                  
+                  <div class="form-group">
+                      <label for="phone">Phone Number</label>
+                      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                      <div class="error" id="phone-error">Please enter a valid 10-digit phone number</div>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="email">Email Address</label>
+                      <input type="email" id="email" name="email" placeholder="Enter your email address">
+                      <div class="error" id="email-error">Please enter a valid email address</div>
+                  </div>
+                  
+                  <div class="button-group">
+                      <button type="button" class="btn-prev" data-prev="1">Previous</button>
+                      <button type="button" class="btn-next" data-next="3">Next</button>
+                  </div>
+              </div>
+              
+              <!-- Step 3: Travel Details -->
+              <div class="step-form" id="step-3">
+                  <h2>Travel Details</h2>
+                  
+                  <div class="form-group">
+                      <label>Travel Type</label>
+                      <div class="radio-group">
+                          <div class="radio-option">
+                              <input type="radio" id="domestic" name="travel-type" value="domestic" checked>
+                              <label for="domestic">Domestic</label>
+                          </div>
+                          <div class="radio-option">
+                              <input type="radio" id="international" name="travel-type" value="international">
+                              <label for="international">International</label>
+                          </div>
+                      </div>
+                      <div class="error" id="travel-type-error">Please select a travel type</div>
+                  </div>
+                  
+                  <div id="passport-section">
+                      <div class="form-group">
+                          <label for="passport">Passport Number</label>
+                          <input type="text" id="passport" name="passport" placeholder="Enter your passport number">
+                          <div class="error" id="passport-error">Please enter a valid passport number (e.g., A1234567)</div>
+                      </div>
+                      
+                      <div class="form-group">
+                          <label for="passport-expiry">Passport Expiry Date</label>
+                          <input type="date" id="passport-expiry" name="passport-expiry">
+                          <div class="error" id="passport-expiry-error">Please enter a valid expiry date (must be in future)</div>
+                      </div>
+                  </div>
+                  
+                  <div id="aadhaar-section" class="form-group">
+                      <label for="aadhaar">Aadhaar Card Number</label>
+                      <input type="text" id="aadhaar" name="aadhaar" placeholder="Enter your 12-digit Aadhaar number">
+                      <div class="error" id="aadhaar-error">Please enter a valid 12-digit Aadhaar number</div>
+                  </div>
+                  
+                  <div class="button-group">
+                      <button type="button" class="btn-prev" data-prev="2">Previous</button>
+                      <button type="button" class="btn-next" data-next="4">Next</button>
+                  </div>
+              </div>
+              
+              <!-- Step 4: Verification -->
+              <div class="step-form" id="step-4">
+                  <h2>Verification</h2>
+                  
+                  <div class="form-group">
+                      <label for="terms">
+                          <input type="checkbox" id="terms" name="terms">
+                          I agree to the terms and conditions
+                      </label>
+                      <div class="error" id="terms-error">You must agree to the terms and conditions</div>
+                  </div>
+                  
+                  <div class="button-group">
+                      <button type="button" class="btn-prev" data-prev="3">Previous</button>
+                      <button type="submit" class="btn-submit">Submit Request</button>
+                  </div>
+              </div>
+          </form>
+          
+          <!-- Success Message -->
+          <div class="success-message" id="success-message">
+              <div class="success-icon">✓</div>
+              <h2>Registration Successful!</h2>
+              <p>Your request has been submitted successfully.</p>
+              <p>We'll contact you soon with further details.</p>
+              <button type="button" class="btn-next" onclick="resetForm()">Register Another</button>
+          </div>
+      </div>
+  </div>
+      </div>
+  </div>
   
-      // Set up modal close functionality
-      const modal = document.getElementById('trip-modal');
-      const closeButton = modal.querySelector('.close-btn');
-  
-      closeButton.addEventListener('click', () => {
-          modal.style.display = 'none';
-      });
-  
-      window.addEventListener('click', (event) => {
-          if (event.target === modal) {
-              modal.style.display = 'none';
+  <script>
+    //submitreq form 
+      document.addEventListener('DOMContentLoaded', function() {
+          const form = document.getElementById('registration-form');
+          const steps = document.querySelectorAll('.step');
+          const stepForms = document.querySelectorAll('.step-form');
+          const prevButtons = document.querySelectorAll('.btn-prev');
+          const nextButtons = document.querySelectorAll('.btn-next');
+          const progress = document.getElementById('progress');
+          const successMessage = document.getElementById('success-message');
+          
+          // Get travel type elements
+          const domesticRadio = document.getElementById('domestic');
+          const internationalRadio = document.getElementById('international');
+          const passportSection = document.getElementById('passport-section');
+          const aadhaarSection = document.getElementById('aadhaar-section');
+          
+          // Initialize travel type fields based on default selection
+          updateTravelFields();
+          
+          // Add event listeners to travel type radios
+          domesticRadio.addEventListener('change', updateTravelFields);
+          internationalRadio.addEventListener('change', updateTravelFields);
+          
+          // Add real-time validation to inputs
+          document.querySelectorAll('input, select').forEach(input => {
+              if (input.type !== 'radio' && input.type !== 'checkbox' && input.type !== 'submit') {
+                  input.addEventListener('blur', function() {
+                      validateField(this);
+                  });
+                  input.addEventListener('input', function() {
+                      if (this.classList.contains('error-field')) {
+                          validateField(this);
+                      }
+                  });
+              }
+          });
+          
+          document.getElementById('terms').addEventListener('change', function() {
+              validateField(this);
+          });
+          
+          // Function to update travel fields based on travel type
+          function updateTravelFields() {
+              if (domesticRadio.checked) {
+                  // Show Aadhaar, hide passport
+                  aadhaarSection.classList.remove('disabled');
+                  passportSection.classList.add('disabled');
+                  
+                  // Clear and disable passport fields
+                  document.getElementById('passport').value = '';
+                  document.getElementById('passport-expiry').value = '';
+                  document.getElementById('passport').disabled = true;
+                  document.getElementById('passport-expiry').disabled = true;
+                  
+                  // Enable Aadhaar field
+                  document.getElementById('aadhaar').disabled = false;
+              } else {
+                  // Show passport, hide Aadhaar
+                  passportSection.classList.remove('disabled');
+                  aadhaarSection.classList.add('disabled');
+                  
+                  // Clear and disable Aadhaar field
+                  document.getElementById('aadhaar').value = '';
+                  document.getElementById('aadhaar').disabled = true;
+                  
+                  // Enable passport fields
+                  document.getElementById('passport').disabled = false;
+                  document.getElementById('passport-expiry').disabled = false;
+              }
+          }
+          
+          // Initialize current step
+          let currentStep = 1;
+          updateProgress();
+          
+          // Previous button functionality
+          prevButtons.forEach(button => {
+              button.addEventListener('click', () => {
+                  const prevStep = parseInt(button.getAttribute('data-prev'));
+                  goToStep(prevStep);
+              });
+          });
+          
+          // Next button functionality
+          nextButtons.forEach(button => {
+              button.addEventListener('click', () => {
+                  const nextStep = parseInt(button.getAttribute('data-next'));
+                  
+                  // Validate current step before proceeding
+                  if (validateStep(currentStep)) {
+                      goToStep(nextStep);
+                  }
+              });
+          });
+          
+          // Handle form submission
+          form.addEventListener('submit', function(e) {
+              e.preventDefault();
+              
+              if (validateStep(currentStep)) {
+                  // Hide the form and show success message
+                  form.style.display = 'none';
+                  successMessage.style.display = 'block';
+                  
+                  // Log form data (you would normally send this to a server)
+                  const formData = new FormData(form);
+                  const formObject = {};
+                  
+                  formData.forEach((value, key) => {
+                      formObject[key] = value;
+                  });
+                  
+                  console.log('Form submitted successfully:', formObject);
+              }
+          });
+          
+          // Validate a specific field
+          function validateField(field) {
+              let isValid = true;
+              const fieldId = field.id;
+              const fieldValue = field.value.trim();
+              const errorElement = document.getElementById(`${fieldId}-error`);
+              
+              // Remove error styles
+              field.classList.remove('error-field');
+              if (errorElement) {
+                  errorElement.style.display = 'none';
+              }
+              
+              switch (fieldId) {
+                  case 'name':
+                      // Name validation: at least 3 characters, only letters and spaces
+                      if (fieldValue === '' || fieldValue.length < 3 || !/^[A-Za-z\s]+$/.test(fieldValue)) {
+                          isValid = false;
+                      }
+                      break;
+                      
+                  case 'age':
+                      // Age validation: between 18 and 120
+                      if (fieldValue === '' || isNaN(fieldValue) || fieldValue < 18 || fieldValue > 120) {
+                          isValid = false;
+                      }
+                      break;
+                      
+                  case 'gender':
+                      // Gender validation: must be selected
+                      if (fieldValue === '') {
+                          isValid = false;
+                      }
+                      break;
+                      
+                  case 'phone':
+                      // Phone validation: exactly 10 digits
+                      if (fieldValue === '' || !/^\d{10}$/.test(fieldValue)) {
+                          isValid = false;
+                      }
+                      break;
+                      
+                  case 'email':
+                      // Email validation: basic format
+                      if (fieldValue === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fieldValue)) {
+                          isValid = false;
+                      }
+                      break;
+                      
+                  case 'passport':
+                      // Passport validation: if international travel is selected
+                      if (internationalRadio.checked) {
+                          // Basic passport format: letter followed by numbers (different countries have different formats)
+                          if (fieldValue === '' || !/^[A-Z]\d{7}$/.test(fieldValue)) {
+                              isValid = false;
+                          }
+                      }
+                      break;
+                      
+                  case 'passport-expiry':
+                      // Passport expiry validation: if international travel is selected
+                      if (internationalRadio.checked) {
+                          const today = new Date();
+                          const expiry = new Date(fieldValue);
+                          
+                          if (fieldValue === '' || expiry <= today) {
+                              isValid = false;
+                          }
+                      }
+                      break;
+                      
+                  case 'aadhaar':
+                      // Aadhaar validation: if domestic travel is selected
+                      if (domesticRadio.checked) {
+                          // Must be exactly 12 digits
+                          if (fieldValue === '' || !/^\d{12}$/.test(fieldValue)) {
+                              isValid = false;
+                          }
+                      }
+                      break;
+                      
+                  case 'terms':
+                      // Terms validation: must be checked
+                      if (!field.checked) {
+                          isValid = false;
+                      }
+                      break;
+              }
+              
+              // Show error if validation failed
+              if (!isValid && errorElement) {
+                  field.classList.add('error-field');
+                  errorElement.style.display = 'block';
+              }
+              
+              return isValid;
+          }
+          
+          // Go to specific step
+          function goToStep(stepNumber) {
+              // Update active step
+              steps.forEach(step => {
+                  const stepNum = parseInt(step.getAttribute('data-step'));
+                  
+                  if (stepNum === stepNumber) {
+                      step.classList.add('active');
+                  } else if (stepNum < stepNumber) {
+                      step.classList.add('completed');
+                      step.classList.remove('active');
+                  } else {
+                      step.classList.remove('active', 'completed');
+                  }
+              });
+              
+              // Show appropriate step form
+              stepForms.forEach(stepForm => {
+                  stepForm.classList.remove('active');
+              });
+              
+              document.getElementById(`step-${stepNumber}`).classList.add('active');
+              
+              // Update current step
+              currentStep = stepNumber;
+              updateProgress();
+          }
+          
+          // Update progress bar
+          function updateProgress() {
+              const progressPercentage = ((currentStep - 1) / (steps.length - 1)) * 100;
+              progress.style.width = `${progressPercentage}%`;
+          }
+          
+          // Validate current step
+          function validateStep(step) {
+              let isValid = true;
+              const stepForm = document.getElementById(`step-${step}`);
+              const inputs = stepForm.querySelectorAll('input, select');
+              
+              // Validate all visible inputs in the current step
+              inputs.forEach(input => {
+                  // Skip hidden/disabled fields
+                  if (input.disabled || (input.parentElement.parentElement.classList.contains('disabled'))) {
+                      return;
+                  }
+                  
+                  // For radio buttons, we only need to validate one in the group
+                  if (input.type === 'radio' && input.name === 'travel-type') {
+                      if (document.querySelector('input[name="travel-type"]:checked') === null) {
+                          isValid = false;
+                          document.getElementById('travel-type-error').style.display = 'block';
+                      }
+                      return;
+                  }
+                  
+                  // Validate all other inputs
+                  if (!validateField(input)) {
+                      isValid = false;
+                  }
+              });
+              
+              return isValid;
           }
       });
-  
-     // Function to retrieve and display trips
-     function retrieveAndDisplayTrips() {
+      
+      // Reset form to start over
+      function resetForm() {
+          document.getElementById('registration-form').reset();
+          document.getElementById('registration-form').style.display = 'block';
+          document.getElementById('success-message').style.display = 'none';
+          
+          // Remove all error styles
+          document.querySelectorAll('.error-field').forEach(field => {
+              field.classList.remove('error-field');
+          });
+          document.querySelectorAll('.error').forEach(error => {
+              error.style.display = 'none';
+          });
+          
+          // Reset to first step
+          const steps = document.querySelectorAll('.step');
+          const stepForms = document.querySelectorAll('.step-form');
+          
+          steps.forEach((step, index) => {
+              if (index === 0) {
+                  step.classList.add('active');
+                  step.classList.remove('completed');
+              } else {
+                  step.classList.remove('active', 'completed');
+              }
+          });
+          
+          stepForms.forEach((form, index) => {
+              if (index === 0) {
+                  form.classList.add('active');
+              } else {
+                  form.classList.remove('active');
+              }
+          });
+          
+          // Reset progress bar
+          document.getElementById('progress').style.width = '0%';
+          
+          // Reset travel fields to default (domestic)
+          const domesticRadio = document.getElementById('domestic');
+          domesticRadio.checked = true;
+          
+          // Update form fields based on travel type
+          const event = new Event('change');
+          domesticRadio.dispatchEvent(event);
+      }
+      function joinTrip(tripId) {
+            document.getElementById("popupModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("popupModal").style.display = "none";
+        }
+  </script>
+
+    <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
+        authDomain: "ty-project-80ab7.firebaseapp.com",
+        projectId: "ty-project-80ab7",
+        storageBucket: "ty-project-80ab7.firebasestorage.app",
+        messagingSenderId: "491495110151",
+        appId: "1:491495110151:web:035795af4bc8eebff79ca2",
+        measurementId: "G-XFS1VYTHSM",
+        databaseURL: "https://ty-project-80ab7-default-rtdb.firebaseio.com/" // Added this
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // Function to retrieve and display trips
+    function retrieveAndDisplayTrips() {
     console.log('Fetching all trips...');
 
     const tripsRef = ref(database, 'travel-bookings');
     const tripContainer = document.getElementById('trip-container');
-    
+
     if (!tripContainer) {
         console.error('Trip container element not found');
         return;
     }
 
-    onValue(tripsRef, (snapshot) => {
+        console.log('Fetching data from:', tripsRef); // Debug log
+        onValue(tripsRef, (snapshot) => {
         console.log('Data received:', snapshot.val());
         tripContainer.innerHTML = '';
 
@@ -349,1171 +907,242 @@ const modalStyle = document.createElement('style');
 
         const allData = snapshot.val();
         let allTrips = [];
-        let participantCountPromises = [];
 
-        // Collect all trips and set up participant count promises
+        // Loop through each user's public-trips
         Object.keys(allData).forEach(userEmail => {
             if (allData[userEmail].hasOwnProperty('public-trips')) {
                 const userTrips = allData[userEmail]['public-trips'];
-                const sanitizedEmail = userEmail.replace(/[,; ]+/g, '.').toLowerCase();
-
                 Object.keys(userTrips).forEach(tripId => {
-                    // Create a trip object
-                    const tripObj = { 
-                        id: tripId, 
-                        creatorEmail: sanitizedEmail,
-                        ...userTrips[tripId]
-                    };
-                    
-                    allTrips.push(tripObj);
-                    
-                    // Create a promise to get participant count
-                    const participantPath = `travel-bookings/${userEmail}/public-trips/${tripId}/participants`;
-                    const countPromise = getParticipantCount(participantPath).then(count => {
-                        tripObj.participantCount = count; // Add count to trip object
-                        return tripObj;
-                    });
-                    
-                    participantCountPromises.push(countPromise);
+                    allTrips.push({ id: tripId, ...userTrips[tripId] });
                 });
             }
         });
 
-        // Wait for all participant counts to be retrieved
-        Promise.all(participantCountPromises).then(() => {
-            // Sort trips by timestamp
-            allTrips.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        // Sort trips by timestamp (latest first)
+        allTrips.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
-            if (allTrips.length === 0) {
-                tripContainer.innerHTML = '<p>No trips found.</p>';
-                return;
+        // Display trips
+        if (allTrips.length === 0) {
+            tripContainer.innerHTML = '<p>No trips found.</p>';
+            return;
+        }
+
+        allTrips.forEach(trip => {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'trip-card';
+
+            const startDate = trip.startDate ? new Date(trip.startDate).toLocaleDateString() : 'N/A';
+            const endDate = trip.endDate ? new Date(trip.endDate).toLocaleDateString() : 'N/A';
+            const applyDate = trip.applyByDate ? new Date(trip.applyByDate) : null;
+            const applyDateString = applyDate ? applyDate.toLocaleDateString() : 'N/A';
+
+            // Check if the apply by date has passed
+            const isExpired = applyDate && applyDate < new Date();
+
+            cardDiv.innerHTML = `
+                <p><strong>Traveler Name:</strong> <span>${trip.travelerName || 'N/A'}</span></p>
+                <p><strong>Destination:</strong> <span>${trip.destination || 'N/A'}</span></p>
+                <p><strong>Start Date:</strong> <span>${startDate}</span></p>
+                <p><strong>End Date:</strong> <span>${endDate}</span></p>
+                 <p><strong>Duration:</strong> <span>${trip.numberOfDays || 'N/A'} days</span></p>
+                <p><strong>Max People:</strong> <span>${trip.maxPeople || 'N/A'}</span></p>
+                <p><strong>Travel Essentials:</strong> <span>${trip.savedEssentials || 'None selected'}</span></p>
+                <p><strong>Apply By:</strong> <span>${applyDateString}</span></p>
+                 <div style="text-align: right; margin-top: 10px;">
+
+            <button onclick="joinTrip('${trip.id}')" 
+                style="padding: 10px 15px; background-color: ${isExpired ? '#ccc' : '#00d2ff'}; 
+                color: white; border: none; cursor: ${isExpired ? 'not-allowed' : 'pointer'}; 
+                border-radius: 5px;" ${isExpired ? 'disabled' : ''}>
+                ${isExpired ? 'Expired' : 'Join Now'}
+            </button>
+            
+        </div>
+            `;
+
+            tripContainer.appendChild(cardDiv);
+        });
+
+    }, (error) => {
+        console.error('Error fetching trips:', error);
+        tripContainer.innerHTML = '<p>Error loading trips. Please try again later.</p>';
+    });
+}
+
+    // Add styling
+    const style = document.createElement('style');
+    style.textContent = `
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        #trip-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .trip-card {
+            min-width: 300px; width:25%;
+            max-width: 350px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            white-space: normal;
+            flex-shrink: 0;
+            
+        }
+
+        .trip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .trip-card p {
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+
+        .trip-card strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .trip-card span {
+            color: #666;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #00d2ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        #prev-btn { left: 10px; }
+        #next-btn { right: 10px; }
+
+        @media (max-width: 768px) {
+            .nav-btn {
+                display: none;
             }
+            
+            .trip-card {
+                min-width: 260px;
+            }
+        }
+    `;
 
-            // Display all trips
-            allTrips.forEach(trip => {
-                const cardDiv = document.createElement('div');
-                cardDiv.className = 'trip-card';
+    document.head.appendChild(style);
 
-                const startDate = trip.startDate ? new Date(trip.startDate).toLocaleDateString() : 'N/A';
-                const endDate = trip.endDate ? new Date(trip.endDate).toLocaleDateString() : 'N/A';
-                const applyDate = trip.applyByDate ? new Date(trip.applyByDate) : null;
-                const applyDateString = applyDate ? applyDate.toLocaleDateString() : 'N/A';
-                const isExpired = applyDate && applyDate < new Date();
-                const isFull = trip.participantCount >= trip.maxPeople;
-                
-                // Add participant count to display
-                cardDiv.innerHTML = `
-                    <p><strong>Trip Name:</strong> <span>${trip.travelerName || 'N/A'}</span></p>
-                    <p><strong>Destination:</strong> <span>${trip.destination || 'N/A'}</span></p>
-                    <p><strong>Start Date:</strong> <span>${startDate}</span></p>
-                    <p><strong>End Date:</strong> <span>${endDate}</span></p>
-                    <p><strong>Duration:</strong> <span>${trip.numberOfDays || 'N/A'} days</span></p>
-                    <p><strong>People Joined:</strong> <span>${trip.participantCount || 0}/${trip.maxPeople || 'N/A'}</span></p>
-                    <p><strong>Travel Essentials:</strong> <span>${trip.savedEssentials || 'None selected'}</span></p>
-                    <p><strong>Apply By:</strong> <span>${applyDateString}</span></p>
-                    <p><strong>Creator Email:</strong> <span>${trip.creatorEmail || 'N/A'}</span></p>
+    // Initialize slider functionality
+    function initializeSlider() {
+        const container = document.getElementById('trip-container');
+        const prevButton = document.getElementById('prev-btn');
+        const nextButton = document.getElementById('next-btn');
 
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                       <button class="view-details-btn" data-trip-id="${trip.id}"
-                        style="padding: 10px 15px; color: white; border: none; 
-                        border-radius: 5px; background-color: rgb(0, 210, 255);">
-                        View Details
-                        </button>
-                        
-                        <button onclick="joinTrip('${trip.id}')" 
-                            style="padding: 10px 15px; background-color: ${isExpired || isFull ? '#ccc' : '#00d2ff'}; 
-                            color: white; border: none; cursor: ${isExpired || isFull ? 'not-allowed' : 'pointer'}; float:right; 
-                            border-radius: 5px;" ${isExpired || isFull ? 'disabled' : ''}>
-                            ${isExpired ? 'Expired' : isFull ? 'Full' : 'Join Now'}
-                        </button>
-                    </div>
-                `;
-
-                tripContainer.appendChild(cardDiv);
-
-                const viewDetailsBtn = cardDiv.querySelector('.view-details-btn');
-                viewDetailsBtn.addEventListener('click', () => {
-                    openModal(trip.id);
-                });
+        if (container && prevButton && nextButton) {
+            prevButton.addEventListener('click', () => {
+                container.scrollBy({ left: -300, behavior: 'smooth' });
             });
+
+            nextButton.addEventListener('click', () => {
+                container.scrollBy({ left: 300, behavior: 'smooth' });
+            });
+        }
+    }
+
+    // Initialize everything when DOM is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded');
+            retrieveAndDisplayTrips();
+            initializeSlider();
         });
-    });
-}
-// Helper function to get participant count
-function getParticipantCount(path) {
-    return new Promise((resolve) => {
-        const participantsRef = ref(database, path);
-        get(participantsRef).then((snapshot) => {
-            if (snapshot.exists()) {
-                const count = Object.keys(snapshot.val()).length;
-                resolve(count);
-            } else {
-                resolve(0);
-            }
-        }).catch((error) => {
-            console.error("Error getting participants:", error);
-            resolve(0);
-        });
-    });
-}
-      // Function to open modal and display trip details
-      function openModal(tripId) {
-          console.log("openModal function triggered with tripId:", tripId);
-  
-          const dailyActivitiesContainer = modal.querySelector('.daily-activities');
+    } else {
+        // DOM is already loaded
+        console.log('DOM Already Loaded');
+        retrieveAndDisplayTrips();
+        initializeSlider();
+    }
+
+      const fetchUsername = () => {
+          console.log("1. Function started");
           
-          if (!dailyActivitiesContainer) {
-              console.error("Error: Modal structure is incorrect.");
+          const userEmail = localStorage.getItem('userEmail');
+          console.log("2. Email from localStorage:", userEmail);
+  
+          if (!userEmail) {
+              console.log("3. No email found in localStorage");
+              document.getElementById('updateName').textContent = "Please login first";
               return;
           }
   
-          const tripsRef = ref(database, 'travel-bookings');
-          
-          get(tripsRef).then((snapshot) => {
-              if (!snapshot.exists()) {
-                  dailyActivitiesContainer.innerHTML = '<h2>Error</h2><p>No trips found.</p>';
-                  return;
-              }
+          const sanitizedEmail = userEmail.replace(/\./g, ',');
+          console.log("4. Sanitized email:", sanitizedEmail);
   
-              const allData = snapshot.val();
-              let tripActivities = null;
+          const dbRef = ref(db, `User Profile/${sanitizedEmail}/AboutUser/name`);
+          console.log("5. Database path:", `User Profile/${sanitizedEmail}/AboutUser/name`);
   
-              Object.keys(allData).forEach(userEmail => {
-                  if (allData[userEmail]?.['public-trips']?.[tripId]?.dayActivities) {
-                      tripActivities = allData[userEmail]['public-trips'][tripId].dayActivities;
+          get(dbRef)
+              .then((snapshot) => {
+                  console.log("6. Got snapshot");
+                  console.log("7. Snapshot exists?", snapshot.exists());
+                  
+                  if (snapshot.exists()) {
+                      const name = snapshot.val();
+                      console.log("8. Name found:", name);
+                      document.getElementById('updateName').textContent = name;
+                  } else {
+                      console.log("8. No data available");
+                      document.getElementById('updateName').textContent = "Name not found";
                   }
+              })
+              .catch((error) => {
+                  console.error("9. Error:", error);
+                  document.getElementById('updateName').textContent = "Error loading name";
               });
+      };
   
-              if (tripActivities) {
-                  let activitiesHTML = `<h2>Daily Activities</h2>`;
-  
-                  const sortedDays = Object.keys(tripActivities)
-                      .filter(key => key.startsWith('day'))
-                      .sort((a, b) => parseInt(a.replace('day', '')) - parseInt(b.replace('day', '')));
-  
-                  sortedDays.forEach(day => {
-                      activitiesHTML += `
-                          <div class="trip-details">
-                              <p><strong>Day ${day.replace('day', '')}:</strong> ${tripActivities[day]}</p>
-                          </div>
-                      `;
-                  });
-  
-                  dailyActivitiesContainer.innerHTML = activitiesHTML;
-              } else {
-                  dailyActivitiesContainer.innerHTML = '<h2>Daily Activities</h2><p>No activities found for this trip.</p>';
-              }
-  
-              modal.style.display = 'block';
-          }).catch((error) => {
-              console.error("Error getting activities:", error);
-              dailyActivitiesContainer.innerHTML = '<h2>Error</h2><p>Failed to load trip activities. Please try again.</p>';
-              modal.style.display = 'block';
-          });
-      }
-  
-      // Add main styles
-      const mainStyle = document.createElement('style');
-      mainStyle.textContent = `
-          .slider-container {
-              position: relative;
-              width: 100%;
-              max-width: 1200px;
-              margin: 0 auto;
-              overflow: hidden;
-              padding: 20px;
-          }
-  
-          #trip-container {
-              display: flex;
-              gap: 20px;
-              overflow-x: auto;
-              padding: 10px;
-              scroll-behavior: smooth;
-              -webkit-overflow-scrolling: touch;
-          }
-  
-          .trip-card {
-              min-width: 300px;
-              max-width: 350px;
-              background: white;
-              border-radius: 10px;
-              padding: 20px;
-              box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-              transition: transform 0.3s ease;
-              overflow-wrap: break-word;
-              word-break: break-word;
-              white-space: normal;
-              flex-shrink: 0;
-          }
-  
-          .trip-card:hover {
-              transform: translateY(-5px);
-              box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-          }
-  
-          .trip-card p {
-              margin: 8px 0;
-              line-height: 1.4;
-          }
-  
-          .trip-card strong {
-              color: #333;
-              font-weight: 600;
-          }
-  
-          .trip-card span {
-              color: #666;
-          }
-  
-          .nav-btn {
-              position: absolute;
-              top: 50%;
-              transform: translateY(-50%);
-              background: #00d2ff;
-              color: white;
-              border: none;
-              padding: 10px 20px;
-              cursor: pointer;
-              border-radius: 5px;
-              z-index: 1;
-          }
-  
-          #prev-btn { left: 10px; }
-          #next-btn { right: 10px; }
-  
-          @media (max-width: 768px) {
-              .nav-btn {
-                  display: none;
-              }
-              
-              .trip-card {
-                  min-width: 260px;
-              }
-          }
-      `;
-      document.head.appendChild(mainStyle);
-  
-      // Initialize everything when DOM is loaded
-      if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', () => {
-              console.log('DOM Content Loaded');
-              retrieveAndDisplayTrips();
-          });
-      } else {
-          console.log('DOM Already Loaded');
-          retrieveAndDisplayTrips();
-      }
+      // Call the function when the script loads
+      console.log("0. Starting to fetch username");
+      fetchUsername();
 
-
-
-// Make joinTrip function available globally
-/*window.joinTrip = async function(tripId) {
-    const currentUser = auth.currentUser;
-    if (!currentUser) {
-        alert('Please log in to join trips');
-        return;
-    }
-
-    try {
-        const tripsRef = ref(database, 'travel-bookings');
-        
-        // Find trip creator's email
-        let tripCreatorEmail = null;
-        const snapshot = await get(tripsRef);
-        const allData = snapshot.val();
-        
-        // Debug logs
-        console.log('Current user email:', currentUser.email);
-        
-        Object.keys(allData).forEach(userEmail => {
-            if (allData[userEmail]?.['public-trips']?.[tripId]) {
-                tripCreatorEmail = userEmail;
-                console.log('Found trip creator email:', tripCreatorEmail);
-            }
-        });
-
-        if (!tripCreatorEmail) {
-            throw new Error('Trip not found');
-        }
-
-        // Sanitize and normalize emails for comparison
-        function sanitizeEmail(email) {
-            // Replace commas with periods (fixes the common typo)
-            let sanitized = email.replace(/,/g, '.');
-            // Convert to lowercase and trim whitespace
-            sanitized = sanitized.toLowerCase().trim();
-            // Basic email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(sanitized)) {
-                console.warn(`Potentially invalid email format: ${sanitized}`);
-            }
-            return sanitized;
-        }
-
-        const normalizedUserEmail = sanitizeEmail(currentUser.email);
-        const normalizedCreatorEmail = sanitizeEmail(tripCreatorEmail);
-
-        // Log normalized emails for debugging
-        console.log('Normalized current user email:', normalizedUserEmail);
-        console.log('Normalized trip creator email:', normalizedCreatorEmail);
-        console.log('Are emails equal?', normalizedUserEmail === normalizedCreatorEmail);
-
-        // Check if the current user is the trip creator
-        if (normalizedUserEmail === normalizedCreatorEmail) {
-            console.log('Self-join attempt prevented');
-            alert('You cannot request to join your own trip');
-            return;
-        }
-
-        const requestData = {
-            requesterId: currentUser.uid,
-            requesterEmail: currentUser.email,
-            tripId: tripId,
-            status: 'pending',
-            timestamp: new Date().toISOString()
-        };
-
-        // Log the request data
-        console.log('Creating request with data:', requestData);
-
-        const requestRef = ref(
-            database,
-            `travel-bookings/${tripCreatorEmail}/public-trips/${tripId}/requests/${currentUser.uid}`
-        );
-
-        await set(requestRef, requestData);
-        console.log('Request successfully created');
-        alert('Your request to join has been submitted!');
-
-    } catch (error) {
-        console.error('Error joining trip:', error);
-        alert('Failed to submit join request. Please try again.');
-    }
-};
- */
- // Enhanced joinTrip function with stepper form
-window.joinTrip = async function(tripId) {
-    const currentUser = auth.currentUser;
-    if (!currentUser) {
-        alert('Please log in to join trips');
-        return;
-    }
-    // Gets human-readable text describing accepted genders from gender requirement object
-function getAcceptedGendersText(genderReq) {
-    // If gender is a string (legacy format or "Any")
-    if (typeof genderReq === 'string') {
-        return genderReq === 'Any' ? 'all' : genderReq;
-    }
-    
-    // If gender is an object with boolean flags
-    const acceptedGenders = [];
-    if (genderReq.female === true) acceptedGenders.push('Female');
-    if (genderReq.male === true) acceptedGenders.push('Male');
-    if (genderReq.other === true) acceptedGenders.push('Non-binary');
-    
-    if (acceptedGenders.length === 0) return 'all';
-    if (acceptedGenders.length === 3) return 'all';
-    
-    if (acceptedGenders.length === 1) {
-        return acceptedGenders[0];
-    } else {
-        return acceptedGenders.join(' or ');
-    }
-}
-
-// Validates if user's gender meets trip requirements
-function isGenderValid(userGender, genderReq) {
-    // If requirement is "Any" or not specified, all genders are valid
-    if (!genderReq || (typeof genderReq === 'string' && genderReq === 'Any')) {
-        return true;
-    }
-    
-    // Handle case where user selected "Prefer not to say"
-    if (userGender === 'Prefer not to say') {
-        // This is a policy decision - you might want to block or allow based on your app rules
-        return false; // Blocking as default - require explicit gender selection for restricted trips
-    }
-    
-    // If genderReq is a string (legacy format)
-    if (typeof genderReq === 'string') {
-        return userGender === genderReq;
-    }
-    
-    // If genderReq is an object with boolean flags
-    switch (userGender) {
-        case 'Female':
-            return genderReq.female === true;
-        case 'Male':
-            return genderReq.male === true;
-        case 'Non-binary':
-            return genderReq.other === true;
-        default:
-            return false;
-    }
-}
-    
-    try {
-        // First fetch trip details to validate against
-        const tripsRef = ref(database, 'travel-bookings');
-        const snapshot = await get(tripsRef);
-        const allData = snapshot.val();
-        
-        // Find trip creator's email and trip details
-        let tripCreatorEmail = null;
-        let tripDetails = null;
-        
-        Object.keys(allData).forEach(userEmail => {
-            if (allData[userEmail]?.['public-trips']?.[tripId]) {
-                tripCreatorEmail = userEmail;
-                tripDetails = allData[userEmail]['public-trips'][tripId];
-            }
-        });
-        
-        if (!tripCreatorEmail || !tripDetails) {
-            throw new Error('Trip not found');
-        }
-        
-        // Sanitize emails for comparison
-        function sanitizeEmail(email) {
-            let sanitized = email.replace(/,/g, '.');
-            sanitized = sanitized.toLowerCase().trim();
-            return sanitized;
-        }
-        
-        const normalizedUserEmail = sanitizeEmail(currentUser.email);
-        const normalizedCreatorEmail = sanitizeEmail(tripCreatorEmail);
-        
-        if (normalizedUserEmail === normalizedCreatorEmail) {
-            alert('You cannot request to join your own trip');
-            return;
-        }
-        
-        
-        // Create modal for stepper form
-        const modal = document.createElement('div');
-        modal.className = 'modal';
-        modal.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        `;
-        
-        const modalContent = document.createElement('div');
-        modalContent.className = 'modal-content';
-        modalContent.style.cssText = `
-             background-color: #fefefe;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 800px;
-    position: relative;
-    transition: all 0.3s ease;
-        `;
-        
-        // Step indicator
-        const stepIndicator = document.createElement('div');
-        stepIndicator.className = 'step-indicator';
-        stepIndicator.style.cssText = `
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        `;
-        
-        const steps = ['Personal Info', 'Trip Type', 'Confirmation'];
-        steps.forEach((step, index) => {
-            const stepEl = document.createElement('div');
-            stepEl.className = 'step';
-            stepEl.textContent = `${index + 1}. ${step}`;
-            stepEl.style.cssText = `
-                padding: 5px 10px;
-                border-radius: 15px;
-                background-color: #00d2ff;
-                font-weight: ${index === 0 ? 'bold' : 'normal'};
-                background-color: ${index === 0 ? '#00d2ff' : '#00d2ff'};
-                color: ${index === 0 ? 'white' : 'black'};
-            `;
-            stepIndicator.appendChild(stepEl);
-        });
-        
-        modalContent.appendChild(stepIndicator);
-        
-        // Form container
-        const formContainer = document.createElement('div');
-        formContainer.className = 'form-container';
-        modalContent.appendChild(formContainer);
-        
-        // Button container
-        const buttonContainer = document.createElement('div');
-        buttonContainer.style.cssText = `
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        `;
-        modalContent.appendChild(buttonContainer);
-        
-        modal.appendChild(modalContent);
-        document.body.appendChild(modal);
-        
-        // Current step tracker
-        let currentStep = 1;
-        const formData = {};
-        
-        // Show appropriate step
-        function showStep(step) {
-            // Update step indicator
-            const stepElements = stepIndicator.querySelectorAll('.step');
-            stepElements.forEach((el, index) => {
-                el.style.fontWeight = index + 1 === step ? 'bold' : 'normal';
-                el.style.backgroundColor = index + 1 === step ? '#4CAF50' : '#e0e0e0';
-                el.style.color = index + 1 === step ? 'white' : 'black';
-            });
-            
-            formContainer.innerHTML = '';
-            buttonContainer.innerHTML = '';
-            
-            switch(step) {
-                case 1:
-                    showPersonalInfoStep();
-                    break;
-                case 2:
-                    showTripTypeStep();
-                    break;
-                case 3:
-                    showConfirmationStep();
-                    break;
-            }
-        }
-        
-        function createFormGroup(labelText, inputElement) {
-            const formGroup = document.createElement('div');
-            formGroup.style.marginBottom = '15px';
-            
-            const label = document.createElement('label');
-            label.textContent = labelText;
-            label.style.display = 'block';
-            label.style.marginBottom = '5px';
-            label.style.fontWeight = 'bold';
-            label.style.color = 'black';
-            
-            formGroup.appendChild(label);
-            formGroup.appendChild(inputElement);
-            
-            return formGroup;
-        }
-        
-        function showPersonalInfoStep() {
-    const form = document.createElement('form');
-    form.id = 'personal-info-form';
-    
-    // Name field
-    const nameInput = document.createElement('input');
-    nameInput.type = 'text';
-    nameInput.id = 'user-name';
-    nameInput.name = 'name';
-    nameInput.required = true;
-    nameInput.placeholder = 'Enter your full name';
-    nameInput.value = formData.name || '';
-    nameInput.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-        color:black;
-    `;
-    form.appendChild(createFormGroup('Full Name', nameInput));
-    
-    // Age field
-    const ageInput = document.createElement('input');
-    ageInput.type = 'number';
-    ageInput.id = 'user-age';
-    ageInput.name = 'age';
-    ageInput.min = '18';
-    ageInput.max = '80';
-    ageInput.required = true;
-    ageInput.placeholder = 'Enter your age';
-    ageInput.value = formData.age || '';
-    ageInput.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-        color:black;
-    `;
-    form.appendChild(createFormGroup('Age', ageInput));
-    
-    // Gender field
-    const genderSelect = document.createElement('select');
-    genderSelect.id = 'user-gender';
-    genderSelect.name = 'gender';
-    genderSelect.required = true;
-    genderSelect.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-    `;
-    
-    const genderOptions = ['Select Gender', 'Male', 'Female', 'Others'];
-    genderOptions.forEach(option => {
-        const optionEl = document.createElement('option');
-        optionEl.value = option === 'Select Gender' ? '' : option;
-        optionEl.textContent = option;
-        genderSelect.appendChild(optionEl);
-    });
-    
-    if (formData.gender) {
-        genderSelect.value = formData.gender;
-    }
-    
-    // Add gender requirement notice if trip has gender specification
-    const genderFormGroup = createFormGroup('Gender', genderSelect);
-    form.appendChild(genderFormGroup);
-    
-    // Show gender requirement information, if any
-    if (tripDetails.gender && tripDetails.gender !== 'Any') {
-    const genderNotice = document.createElement('div');
-    genderNotice.textContent = `Note: This trip requires ${getAcceptedGendersText(tripDetails.gender)} participants.`;
-    genderNotice.style.color = 'red';
-    genderNotice.style.fontSize = '0.8rem';
-    genderNotice.style.marginTop = '5px';
-    genderFormGroup.appendChild(genderNotice);
-}
-    formContainer.appendChild(form);
-    
-    // Next button
-    const nextButton = document.createElement('button');
-    nextButton.textContent = 'Next';
-    nextButton.style.cssText = `
-        padding: 8px 16px;
-        background-color: #00d2ff;
-        
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      
-    `;
-    
-    nextButton.addEventListener('click', () => {
-        // Validate form
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-        }
-        
-        // Gender validation - only if user has made a selection and there's a requirement
-        if (genderSelect.value && tripDetails.gender && tripDetails.gender !== 'Any') {
-    if (!isGenderValid(genderSelect.value, tripDetails.gender)) {
-        alert(`This trip is only for ${getAcceptedGendersText(tripDetails.gender)} participants.`);
-        return;
-    }
-}
-        // Save form data
-        formData.name = nameInput.value;
-        formData.age = ageInput.value;
-        formData.gender = genderSelect.value;
-        
-        // Go to next step
-        currentStep++;
-        showStep(currentStep);
-    });
-    
-    // Cancel button
-    const cancelButton = document.createElement('button');
-    cancelButton.textContent = 'Cancel';
-    cancelButton.style.cssText = `
-        padding: 8px 16px;
-        background-color: #f44336;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    `;
-    
-    cancelButton.addEventListener('click', () => {
-        document.body.removeChild(modal);
-    });
-    
-    buttonContainer.appendChild(cancelButton);
-    buttonContainer.appendChild(nextButton);
-}
-function showTripTypeStep() {
-    const tripTypeForm = document.createElement('div');
-    
-    // Show trip destination information
-    const tripInfo = document.createElement('div');
-    tripInfo.innerHTML = `
-        <h3>Trip Details</h3>
-        <br>
-        <p><strong>Destination:</strong> ${tripDetails.destination}</p>
-        <p><strong>Start Date:</strong> ${tripDetails.startDate}</p>
-        <p><strong>End Date:</strong> ${tripDetails.endDate}</p>
-    `;
-    tripTypeForm.appendChild(tripInfo);
-    
-    // Add trip type selection
-    const tripTypeDiv = document.createElement('div');
-    tripTypeDiv.style.marginTop = '20px';
-    tripTypeDiv.style.marginBottom = '20px';
-    
-    const tripTypeLabel = document.createElement('label');
-    tripTypeLabel.textContent = 'Select Trip Type:';
-    tripTypeLabel.style.display = 'block';
-    tripTypeLabel.style.marginBottom = '10px';
-    tripTypeLabel.style.fontWeight = 'bold';
-    tripTypeLabel.style.color = 'black';
-    
-    const tripTypeSelect = document.createElement('select');
-    tripTypeSelect.id = 'trip-type-select';
-    tripTypeSelect.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-bottom: 15px;
-        color:black;
-    `;
-    
-    // Add options for domestic and international
-    const domesticOption = document.createElement('option');
-    domesticOption.value = 'domestic';
-    domesticOption.textContent = 'Domestic Trip';
-    
-    const internationalOption = document.createElement('option');
-    internationalOption.value = 'international';
-    internationalOption.textContent = 'International Trip';
-    
-    tripTypeSelect.appendChild(domesticOption);
-    tripTypeSelect.appendChild(internationalOption);
-    
-    // Set default selection based on stored data if available
-    if (formData.tripType) {
-        tripTypeSelect.value = formData.tripType;
-    }
-    
-    tripTypeDiv.appendChild(tripTypeLabel);
-    tripTypeDiv.appendChild(tripTypeSelect);
-    tripTypeForm.appendChild(tripTypeDiv);
-    
-    // Create containers for domestic and international forms
-    const domesticFormContainer = document.createElement('div');
-    domesticFormContainer.id = 'domestic-form';
-    domesticFormContainer.style.display = 'none';
-    
-    const internationalFormContainer = document.createElement('div');
-    internationalFormContainer.id = 'international-form';
-    internationalFormContainer.style.display = 'none';
-    
-// Alternative approach
-// Complete redesign of the terms container
-const termsContainer = document.createElement('div');
-termsContainer.style.position = 'relative';
-termsContainer.style.display = 'flex';
-termsContainer.style.alignItems = 'center';
-termsContainer.style.width = '100%';
-termsContainer.style.marginTop = '20px';
-termsContainer.style.marginBottom = '20px';
-
-const checkboxContainer = document.createElement('div');
-checkboxContainer.style.display = 'inline-block';
-checkboxContainer.style.verticalAlign = 'middle';
-checkboxContainer.style.marginRight = '10px';
-
-const termsCheckbox = document.createElement('input');
-termsCheckbox.type = 'checkbox';
-termsCheckbox.id = 'terms-checkbox';
-termsCheckbox.required = true;
-termsCheckbox.style.margin = '0';
-if (formData.termsAccepted) {
-  termsCheckbox.checked = true;
-}
-
-const termsText = document.createElement('span');
-termsText.innerHTML = 'I agree to the <a href="#" style="color: blue;">domestic travel terms and conditions.</a>';
-
-// Wrap both elements in a single label for better accessibility
-const termsLabel = document.createElement('label');
-termsLabel.htmlFor = 'terms-checkbox';
-termsLabel.style.display = 'flex';
-termsLabel.style.alignItems = 'center';
-termsLabel.style.cursor = 'pointer';
-termsLabel.style.width = 'fit-content';
-termsLabel.style.color = 'black';
-
-checkboxContainer.appendChild(termsCheckbox);
-termsLabel.appendChild(checkboxContainer);
-termsLabel.appendChild(termsText);
-termsContainer.appendChild(termsLabel);
-
-// Remove any existing terms container first
-const existingTerms = document.getElementById('terms-container');
-if (existingTerms) {
-  existingTerms.remove();
-}
-
-termsContainer.id = 'terms-container';
-domesticFormContainer.appendChild(termsContainer);
-    // International trip form elements
-    const passportDiv = document.createElement('div');
-    passportDiv.innerHTML = '<h4>International Travel Requirements</h4><br>';
-    
-    // Passport number
-    const passportInput = document.createElement('input');
-    passportInput.type = 'text';
-    passportInput.id = 'passport-number';
-    passportInput.name = 'passportNumber';
-    passportInput.placeholder = 'Enter passport number';
-    passportInput.value = formData.passportNumber || '';
-    passportInput.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-    `;
-    passportDiv.appendChild(createFormGroup('Passport Number', passportInput));
-    
-    // Passport expiry date
-    const expiryInput = document.createElement('input');
-    expiryInput.type = 'date';
-    expiryInput.id = 'passport-expiry';
-    expiryInput.name = 'passportExpiry';
-    expiryInput.value = formData.passportExpiry || '';
-    expiryInput.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-    `;
-    passportDiv.appendChild(createFormGroup('Passport Expiry Date', expiryInput));
-    
-    internationalFormContainer.appendChild(passportDiv);
-    
-    // International terms checkbox
-const intlTermsContainer = document.createElement('div');
-intlTermsContainer.style.position = 'relative';
-intlTermsContainer.style.display = 'flex';
-intlTermsContainer.style.alignItems = 'center';
-intlTermsContainer.style.marginTop = '20px';
-intlTermsContainer.style.marginBottom = '20px';
-
-const intlTermsCheckbox = document.createElement('input');
-intlTermsCheckbox.type = 'checkbox';
-intlTermsCheckbox.id = 'intl-terms-checkbox';
-intlTermsCheckbox.style.margin = '0';
-intlTermsCheckbox.style.marginRight = '8px';
-if (formData.intlTermsAccepted) {
-  intlTermsCheckbox.checked = true;
-}
-
-const intlTermsLabel = document.createElement('label');
-intlTermsLabel.htmlFor = 'intl-terms-checkbox';
-intlTermsLabel.style.display = 'flex';
-intlTermsLabel.style.alignItems = 'center';
-intlTermsLabel.style.cursor = 'pointer';
-
-const checkboxSpan = document.createElement('span');
-checkboxSpan.appendChild(intlTermsCheckbox);
-
-const textSpan = document.createElement('span');
-textSpan.innerHTML = 'I agree to the <a href="#" style="color: blue;">international travel terms and conditions</a>';
-
-intlTermsLabel.appendChild(checkboxSpan);
-intlTermsLabel.appendChild(textSpan);
-intlTermsContainer.appendChild(intlTermsLabel);
-
-// Remove any existing terms container first
-const existingIntlTerms = document.getElementById('intl-terms-container');
-if (existingIntlTerms) {
-  existingIntlTerms.remove();
-}
-
-intlTermsContainer.id = 'intl-terms-container';
-internationalFormContainer.appendChild(intlTermsContainer);
-    // Add both form containers to main form
-    tripTypeForm.appendChild(domesticFormContainer);
-    tripTypeForm.appendChild(internationalFormContainer);
-    
-    // Function to toggle form display based on selection
-    function updateFormDisplay() {
-        const selectedType = tripTypeSelect.value;
-        
-        if (selectedType === 'domestic') {
-            domesticFormContainer.style.display = 'block';
-            internationalFormContainer.style.display = 'none';
-            
-            // Update requirements
-            termsCheckbox.required = true;
-            passportInput.required = false;
-            expiryInput.required = false;
-            intlTermsCheckbox.required = false;
-        } else {
-            domesticFormContainer.style.display = 'none';
-            internationalFormContainer.style.display = 'block';
-            
-            // Update requirements
-            termsCheckbox.required = false;
-            passportInput.required = true;
-            expiryInput.required = true;
-            intlTermsCheckbox.required = true;
-        }
-    }
-    
-    // Set initial display based on stored value or default to domestic
-    tripTypeSelect.value = formData.tripType || 'domestic';
-    updateFormDisplay();
-    
-    // Add event listener for changes
-    tripTypeSelect.addEventListener('change', updateFormDisplay);
-    
-    formContainer.appendChild(tripTypeForm);
-    
-    // Back button
-    const backButton = document.createElement('button');
-    backButton.textContent = 'Back';
-    backButton.style.cssText = `
-        padding: 8px 16px;
-        background-color: #808080;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    `;
-    
-    backButton.addEventListener('click', () => {
-        currentStep--;
-        showStep(currentStep);
-    });
-    
-    // Next button
-    const nextButton = document.createElement('button');
-    nextButton.textContent = 'Next';
-    nextButton.style.cssText = `
-        padding: 8px 16px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    `;
-    
-    nextButton.addEventListener('click', () => {
-        // Get selected trip type
-        const selectedType = tripTypeSelect.value;
-        formData.tripType = selectedType;
-        
-        // Validate based on trip type
-        if (selectedType === 'domestic') {
-            if (!termsCheckbox.checked) {
-                alert('You must accept the domestic travel terms and conditions to proceed.');
-                return;
-            }
-            formData.termsAccepted = true;
-        } else {
-            // International trip validation
-            if (!passportInput.value) {
-                alert('Please enter your passport number.');
-                return;
-            }
-            
-            if (!expiryInput.value) {
-                alert('Please enter your passport expiry date.');
-                return;
-            }
-            
-            if (!intlTermsCheckbox.checked) {
-                alert('You must accept the international travel terms and conditions to proceed.');
-                return;
-            }
-            
-            // Check if passport expires before trip end date
-            const expiryDate = new Date(expiryInput.value);
-            const tripEndDate = new Date(tripDetails.endDate);
-            
-            if (expiryDate < tripEndDate) {
-                alert('Your passport expires before the trip end date. You cannot join this trip.');
-                return;
-            }
-            
-            formData.passportNumber = passportInput.value;
-            formData.passportExpiry = expiryInput.value;
-            formData.intlTermsAccepted = true;
-        }
-        
-        // Go to next step
-        currentStep++;
-        showStep(currentStep);
-    });
-    
-    buttonContainer.appendChild(backButton);
-    buttonContainer.appendChild(nextButton);
-}
-        function showConfirmationStep() {
-            const confirmationDiv = document.createElement('div');
-            
-            // Summary of information
-            confirmationDiv.innerHTML = `
-                <h3>Please Confirm Your Information</h3>
-                <p><strong>Name:</strong> ${formData.name}</p>
-                <p><strong>Age:</strong> ${formData.age}</p>
-                <p><strong>Gender:</strong> ${formData.gender}</p>
-                <p><strong>Trip Type:</strong> ${formData.tripType.charAt(0).toUpperCase() + formData.tripType.slice(1)}</p>
-            `;
-            
-            if (formData.tripType === 'international') {
-                confirmationDiv.innerHTML += `
-                    <p><strong>Passport Number:</strong> ${formData.passportNumber}</p>
-                    <p><strong>Passport Expiry:</strong> ${formData.passportExpiry}</p>
-                `;
-            }
-            
-            confirmationDiv.innerHTML += `
-                <p><strong>Terms & Conditions:</strong> Accepted</p>
-                <p style="margin-top: 20px; font-weight: bold;">Are you sure you want to submit your request to join this trip?</p>
-            `;
-            
-            formContainer.appendChild(confirmationDiv);
-            
-            // Back button
-            const backButton = document.createElement('button');
-            backButton.textContent = 'Back';
-            backButton.style.cssText = `
-                padding: 8px 16px;
-                background-color: #808080;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            `;
-            
-            backButton.addEventListener('click', () => {
-                currentStep--;
-                showStep(currentStep);
-            });
-            
-            // Submit button
-            const submitButton = document.createElement('button');
-            submitButton.textContent = 'Submit Request';
-            submitButton.style.cssText = `
-                padding: 8px 16px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            `;
-            
-            submitButton.addEventListener('click', async () => {
-                try {
-                    // Prepare request data with collected information
-                    const requestData = {
-                        requesterId: currentUser.uid,
-                        requesterEmail: currentUser.email,
-                        requesterName: formData.name,
-                        requesterAge: formData.age,
-                        requesterGender: formData.gender,
-                        tripId: tripId,
-                        status: 'pending',
-                        timestamp: new Date().toISOString()
-                    };
-                    
-                    // Add trip type specific data
-                    if (formData.tripType === 'international') {
-                        requestData.passportNumber = formData.passportNumber;
-                        requestData.passportExpiry = formData.passportExpiry;
-                    }
-                    
-                    console.log('Submitting request with data:', requestData);
-                    
-                    const requestRef = ref(
-                        database,
-                        `travel-bookings/${tripCreatorEmail}/public-trips/${tripId}/requests/${currentUser.uid}`
-                    );
-                    
-                    await set(requestRef, requestData);
-                    console.log('Request successfully created');
-                    
-                    // Close modal and show success message
-                    document.body.removeChild(modal);
-                    alert('Your request to join has been submitted!');
-                } catch (error) {
-                    console.error('Error submitting join request:', error);
-                    alert('Failed to submit join request. Please try again.');
-                }
-            });
-            
-            buttonContainer.appendChild(backButton);
-            buttonContainer.appendChild(submitButton);
-        }
-        
-        // Initialize with first step
-        showStep(1);
-        
-    } catch (error) {
-        console.error('Error processing join request:', error);
-        alert('Failed to process join request. Please try again.');
-    }
+      //logout
+      const logout = () => {
+    // Clear the profile name display
+    document.getElementById('updateName').textContent = '';
+    document.getElementById('logout').addEventListener('click', logout);
+    // Clear localStorage
+    localStorage.clear();
+    localStorage.setItem('theme', 'light');
 };
 
-
-
- 
- </script>
+// Add event listener to logout button
+document.getElementById('logout').addEventListener('click', logout);
+  </script>
   </head>
   <body>
 
-    <!DOCTYPE html>
-    <style>
-      /* Add these styles to your existing CSS */
-.stepper-container {
-    /* Add these new properties */
-    display: none;  /* Hidden by default */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    background: white;
-}
 
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
-
-/* Add a close button style */
-.close-btn {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #666;
-}
-    </style>
-    <div class="overlay"></div>
-
-    
 <div class="webiste-content"  class="disabled"></div>
     <div id="preloader-active">
       <div class="preloader d-flex align-items-center justify-content-center">
@@ -1596,26 +1225,23 @@ internationalFormContainer.appendChild(intlTermsContainer);
                       </div>
                     </div>
                   </li>
+                  
                   <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
                   </li>
-                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html">My Iternaries</a>         
-                  </li>
-                 
                  
                   <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login">Profile</a></li>
-                  <li><a href="../travi dash/index.html">Dashboard</a></li>
-    
                   <li class="mega-li-small"><a href="blog-grid.html" class="check-login">Blog</a></li>
                   
                   
       
 
-              
+                <li class=""><a href="privacy.html">Privacy Notice</a>
                   
-              
+                </li>
            
                   <li><a href="contact.html">Contact</a></li>
-                 
+                  <li  class="has-children"><a>Request Sent </a></li>
+                  <li  class="has-children"><a>Request Received </a></li>
               
               </ul>  </nav>
             </div>
@@ -1653,8 +1279,6 @@ internationalFormContainer.appendChild(intlTermsContainer);
                 
               
                   <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
-                  </li>
-                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html">My Iternaries</a>         
                   </li>
                   <li id="my-ite" class="mega-li-small"><a href="../travi dash/my-booking.html" class="check-login">My Itineraries</a></li>
                   <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login">Profile</a></li>
@@ -1909,7 +1533,7 @@ internationalFormContainer.appendChild(intlTermsContainer);
       <section id="featured" class="section-box box-news box-news-blog background-1">
         <div class="container"> 
           <div class="col-md-10"> 
-            <h2>Our Featured Tours</h2>
+            <h3>Our Featured Tours</h3>
             <br>
           </div>
         </div>
@@ -1921,7 +1545,7 @@ internationalFormContainer.appendChild(intlTermsContainer);
        
     </div>
     <br>
-    <div id="trip-container" style="padding-left: 80px; padding-right: 80px;"></div>
+    <div id="trip-container" style="padding-left: 5%; padding-right:5%; overflow: hidden; margin:0 auto;"></div>
 </section>
 
 
@@ -2029,7 +1653,97 @@ internationalFormContainer.appendChild(intlTermsContainer);
           </div>
         </div>
       </section>
-   
+      <section class="section-box box-news background-body">
+        <div class="container"> 
+          <div class="row align-items-end">
+            <div class="col-md-6 mb-30 wow fadeInLeft">
+              <h2 class="neutral-1000">News, Tips & Guides</h2>
+              <p class="text-xl-medium neutral-500">Favorite destinations based on customer reviews</p>
+            </div>
+            <div class="col-md-6 mb-30 wow fadeInRight">
+              <div class="d-flex justify-content-center justify-content-md-end"><a class="btn btn-black-lg" href="#">View More 
+                  <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg></a></div>
+            </div>
+          </div>
+          <div class="box-list-news wow fadeInUp"> 
+            <div class="box-swiper mt-30">
+              <div class="swiper-container swiper-group-3">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="card-news background-card hover-up">
+                      <div class="card-image"> 
+                        <label class="label">Cultural</label><a class="wish" href="#">
+                          <svg width="20" height="18" viewbox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                          </svg></a><img src="assets/imgs/page/homepage1/news.png" alt="Travila">
+                      </div>
+                      <div class="card-info"> 
+                        <div class="card-meta"> <span class="post-date neutral-1000">18 Sep 2024</span><span class="post-time neutral-1000">6 mins</span><span class="post-comment neutral-1000">38 comments</span></div>
+                        <div class="card-title"> <a class="text-xl-bold neutral-1000" href="blog-detail.html">Ultimate Travel Planning Guide: 10 Tips for a Seamless Journey</a></div>
+                        <div class="card-program"> 
+                          <div class="endtime"> 
+                            <div class="card-author"> <img src="assets/imgs/page/homepage1/avatar.png" alt="Travila">
+                              <p class="text-sm-bold neutral-1000">Jimmy Dave</p>
+                            </div>
+                            <div class="card-button"> <a class="btn btn-gray" href="blog-detail.html">Keep Reading</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="card-news background-card hover-up">
+                      <div class="card-image"> 
+                        <label class="label">Travel</label><a class="wish" href="#">
+                          <svg width="20" height="18" viewbox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                          </svg></a><img src="assets/imgs/page/homepage1/news2.png" alt="Travila">
+                      </div>
+                      <div class="card-info"> 
+                        <div class="card-meta"> <span class="post-date neutral-1000">18 Sep 2024</span><span class="post-time neutral-1000">6 mins</span><span class="post-comment neutral-1000">38 comments</span></div>
+                        <div class="card-title"> <a class="text-xl-bold neutral-1000" href="blog-detail.html">Top 10 Travel Hacks for Budget-Conscious Adventurers</a></div>
+                        <div class="card-program"> 
+                          <div class="endtime"> 
+                            <div class="card-author"> <img src="assets/imgs/page/homepage1/avatar.png" alt="Travila">
+                              <p class="text-sm-bold neutral-1000">Jimmy Dave</p>
+                            </div>
+                            <div class="card-button"> <a class="btn btn-gray" href="blog-detail.html">Keep Reading</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="card-news background-card hover-up">
+                      <div class="card-image"> 
+                        <label class="label">Discovery</label><a class="wish" href="#">
+                          <svg width="20" height="18" viewbox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                          </svg></a><img src="assets/imgs/page/homepage1/news3.png" alt="Travila">
+                      </div>
+                      <div class="card-info"> 
+                        <div class="card-meta"> <span class="post-date neutral-1000">18 Sep 2024</span><span class="post-time neutral-1000">6 mins</span><span class="post-comment neutral-1000">38 comments</span></div>
+                        <div class="card-title"> <a class="text-xl-bold neutral-1000" href="blog-detail.html">Discovering Hidden Gems: 10 Off-the-Beaten-Path Travel Tips</a></div>
+                        <div class="card-program"> 
+                          <div class="endtime"> 
+                            <div class="card-author"> <img src="assets/imgs/page/homepage1/avatar.png" alt="Travila">
+                              <p class="text-sm-bold neutral-1000">Jimmy Dave</p>
+                            </div>
+                            <div class="card-button"> <a class="btn btn-gray" href="blog-detail.html">Keep Reading</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       
     </main>
     <footer class="footer">
