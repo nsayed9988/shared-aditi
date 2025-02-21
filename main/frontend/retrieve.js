@@ -243,111 +243,118 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Function to retrieve and display public trips from all users
-// Function to retrieve and display public trips for the logged-in user only
+// Function to retrieve and display public trips from the logged-in user only
 function retrieveAndDisplayPublicTrips() {
-    console.log('Fetching public trips for current user...');
-    
-    // Get current user email from localStorage
-    const currentUserEmail = localStorage.getItem('userEmail');
-    if (!currentUserEmail) {
-      console.error('No user email found in localStorage');
+  console.log('Fetching your public trips...');
+  
+  // Get current user email from localStorage
+  const currentUserEmail = localStorage.getItem('userEmail');
+  if (!currentUserEmail) {
+      console.error('User not logged in or email not found in localStorage');
+      const tripContainer = document.getElementById('trip-container');
+      if (tripContainer) {
+          tripContainer.innerHTML = '<p class="error-message">Please log in to view your trips.</p>';
+      }
       return;
-    }
-    
-    // Format email for Firebase path (replacing dots with commas)
-    const formattedEmail = currentUserEmail.replace(/\./g, ',');
-    
-    // Reference to only this user's public trips
-    const userTripsRef = ref(database, `travel-bookings/${formattedEmail}/public-trips`);
-    const tripContainer = document.getElementById('trip-container');
-    
-    if (!tripContainer) {
+  }
+  
+  // Format email to match database structure (if needed)
+  const formattedEmail = currentUserEmail.replace(/\./g, ',');
+  
+  const userTripsRef = ref(database, `travel-bookings/${formattedEmail}/public-trips`);
+  const tripContainer = document.getElementById('trip-container');
+  
+  if (!tripContainer) {
       console.error('Trip container element not found');
       return;
-    }
-    
-    onValue(userTripsRef, (snapshot) => {
-      console.log('Data received for user:', currentUserEmail);
+  }
+  
+  onValue(userTripsRef, (snapshot) => {
+      console.log('Data received');
       tripContainer.innerHTML = ''; // Clear existing cards
       
       if (!snapshot.exists()) {
-        tripContainer.innerHTML = '<p class="no-trips-message">No public trips found for your account.</p>';
-        return;
+          tripContainer.innerHTML = '<p class="no-trips-message">You have no public trips.</p>';
+          return;
       }
       
-      const userTrips = snapshot.val();
-      let tripsArray = [];
+      const tripsData = snapshot.val();
+      let userTrips = [];
       
-      // Convert object to array with IDs
-      Object.keys(userTrips).forEach(tripId => {
-        tripsArray.push({
-          id: tripId,
-          userEmail: currentUserEmail,
-          ...userTrips[tripId]
-        });
+      // Process user's public trips
+      Object.keys(tripsData).forEach(tripId => {
+          userTrips.push({ 
+              id: tripId,
+              userEmail: currentUserEmail,
+              ...tripsData[tripId] 
+          });
       });
       
       // Sort trips by timestamp or apply date (newest first)
-      tripsArray.sort((a, b) => {
-        if (a.timestamp && b.timestamp) {
-          return b.timestamp - a.timestamp;
-        }
-        // Fallback to applyByDate
-        const dateA = new Date(a.applyByDate || 0).getTime();
-        const dateB = new Date(b.applyByDate || 0).getTime();
-        return dateB - dateA;
+      userTrips.sort((a, b) => {
+          if (a.timestamp && b.timestamp) {
+              return b.timestamp - a.timestamp;
+          }
+          // Fallback to applyByDate
+          const dateA = new Date(a.applyByDate || 0).getTime();
+          const dateB = new Date(b.applyByDate || 0).getTime();
+          return dateB - dateA;
       });
       
+      if (userTrips.length === 0) {
+          tripContainer.innerHTML = '<p class="no-trips-message">You have no public trips.</p>';
+          return;
+      }
+      
       // Create card for each trip
-      tripsArray.forEach(trip => {
-        const cardDiv = document.createElement('div');
-        cardDiv.className = 'trip-card';
-        
-        // Format dates
-        const startDate = trip.startDate ? new Date(trip.startDate).toLocaleDateString() : 'N/A';
-        const endDate = trip.endDate ? new Date(trip.endDate).toLocaleDateString() : 'N/A';
-        const applyDate = trip.applyByDate ? new Date(trip.applyByDate).toLocaleDateString() : 'N/A';
-        
-        // Format gender options if they exist
-        const genderOptions = trip.gender ? Object.entries(trip.gender)
-          .filter(([_, value]) => value)
-          .map(([key]) => key.charAt(0).toUpperCase() + key.slice(1))
-          .join(', ') : 'None specified';
-        
-        cardDiv.innerHTML = `
-          <p><strong>Trip Name:</strong> <span>${trip.travelerName || 'N/A'}</span></p>
-          <p><strong>Destination:</strong> <span>${trip.destination || 'N/A'}</span></p>
-          <p><strong>Start Date:</strong> <span>${startDate}</span></p>
-          <p><strong>End Date:</strong> <span>${endDate}</span></p>
-          <p><strong>Duration:</strong> <span>${trip.numberOfDays || 'N/A'} days</span></p>
-          <p><strong>Max People:</strong> <span>${trip.maxPeople || 'N/A'}</span></p>
-          <p><strong>Gender Options:</strong> <span>${genderOptions}</span></p>
-          <p><strong>Travel Essentials:</strong> <span>${trip.savedEssentials || 'None selected'}</span></p>
-          <p><strong>Apply By:</strong> <span>${applyDate}</span></p>
-          <br>
-          <button class="details-btn" data-trip-id="${trip.id}" data-user-email="${trip.userEmail}">View More Details</button>
-        `;
-        
-        tripContainer.appendChild(cardDiv);
+      userTrips.forEach(trip => {
+          const cardDiv = document.createElement('div');
+          cardDiv.className = 'trip-card';
+          
+          // Format dates
+          const startDate = trip.startDate ? new Date(trip.startDate).toLocaleDateString() : 'N/A';
+          const endDate = trip.endDate ? new Date(trip.endDate).toLocaleDateString() : 'N/A';
+          const applyDate = trip.applyByDate ? new Date(trip.applyByDate).toLocaleDateString() : 'N/A';
+          
+          // Format gender options if they exist
+          const genderOptions = trip.gender ? Object.entries(trip.gender)
+              .filter(([_, value]) => value)
+              .map(([key]) => key.charAt(0).toUpperCase() + key.slice(1))
+              .join(', ') : 'None specified';
+          
+          cardDiv.innerHTML = `
+              <p><strong>Traveler Name:</strong> <span>${trip.travelerName || 'N/A'}</span></p>
+              <p><strong>Destination:</strong> <span>${trip.destination || 'N/A'}</span></p>
+              <p><strong>Start Date:</strong> <span>${startDate}</span></p>
+              <p><strong>End Date:</strong> <span>${endDate}</span></p>
+              <p><strong>Duration:</strong> <span>${trip.numberOfDays || 'N/A'} days</span></p>
+              <p><strong>Max People:</strong> <span>${trip.maxPeople || 'N/A'}</span></p>
+              <p><strong>Gender Options:</strong> <span>${genderOptions}</span></p>
+              <p><strong>Travel Essentials:</strong> <span>${trip.savedEssentials || 'None selected'}</span></p>
+              <p><strong>Apply By:</strong> <span>${applyDate}</span></p>
+              <br>
+              <button class="details-btn" data-trip-id="${trip.id}" data-user-email="${trip.userEmail}">View More Details</button>
+          `;
+          
+          tripContainer.appendChild(cardDiv);
       });
       
       // Add event listeners to the view details buttons
       document.querySelectorAll('.details-btn').forEach(button => {
-        button.addEventListener('click', function() {
-          const tripId = this.getAttribute('data-trip-id');
-          const userEmail = this.getAttribute('data-user-email');
-          openTripModal(tripId, userEmail);
-        });
+          button.addEventListener('click', function() {
+              const tripId = this.getAttribute('data-trip-id');
+              const userEmail = this.getAttribute('data-user-email');
+              openTripModal(tripId, userEmail);
+          });
       });
-    }, (error) => {
+  }, (error) => {
       console.error('Error fetching trips:', error);
       tripContainer.innerHTML = '<p class="error-message">Error loading your trips. Please try again later.</p>';
-    });
-  }
+  });
+}
 // Function to open modal and display trip details and activities
 // Modify the openTripModal function to handle both public and private trips
 function openTripModal(tripIdOrData, userEmail) {
-    
     const modal = document.getElementById('trip-modal');
     if (!modal) {
         console.error('Modal element not found');
@@ -466,7 +473,12 @@ function displayTripInModal(tripData, container) {
     container.innerHTML = activitiesHTML;
 }
 
-
+// Update the event listener in retrievePrivateTrips function
+// Replace this line in retrievePrivateTrips():
+// button.addEventListener('click', function() {
+//     const tripData = JSON.parse(this.getAttribute('data-trip'));
+//     openTripModal(tripData);
+// });
 // Ensure modal exists
 function ensureModalExists() {
     if (!document.getElementById('trip-modal')) {
@@ -558,9 +570,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Retrieve and display all public trips
     retrieveAndDisplayPublicTrips();
 });
-
-
-
 function retrievePrivateTrips() {
     const userEmail = localStorage.getItem('userEmail');
     if (!userEmail) {
@@ -727,4 +736,3 @@ document.addEventListener('DOMContentLoaded', () => {
     retrieveAndDisplayPublicTrips();
     retrievePrivateTrips();
 });
-

@@ -439,6 +439,7 @@ const modalStyle = document.createElement('style');
         });
     });
 }
+
 // Helper function to get participant count
 function getParticipantCount(path) {
     return new Promise((resolve) => {
@@ -831,19 +832,18 @@ function isGenderValid(userGender, genderReq) {
         
         const steps = ['Personal Info', 'Trip Type', 'Confirmation'];
         steps.forEach((step, index) => {
-            const stepEl = document.createElement('div');
-            stepEl.className = 'step';
-            stepEl.textContent = `${index + 1}. ${step}`;
-            stepEl.style.cssText = `
-                padding: 5px 10px;
-                border-radius: 15px;
-                background-color: #00d2ff;
-                font-weight: ${index === 0 ? 'bold' : 'normal'};
-                background-color: ${index === 0 ? '#00d2ff' : '#00d2ff'};
-                color: ${index === 0 ? 'white' : 'black'};
-            `;
-            stepIndicator.appendChild(stepEl);
-        });
+    const stepEl = document.createElement('div');
+    stepEl.className = 'step';
+    stepEl.textContent = `${index + 1}. ${step}`;
+    stepEl.style.cssText = `
+        padding: 5px 10px;
+        border-radius: 15px;
+        background-color: ${index === 0 ? '#00d2ff' : '#ccc'}; /* Different color for inactive steps */
+        font-weight: ${index === 0 ? 'bold' : 'normal'};
+        color: ${index === 0 ? 'white' : 'black'};
+    `;
+    stepIndicator.appendChild(stepEl);
+})
         
         modalContent.appendChild(stepIndicator);
         
@@ -999,7 +999,7 @@ function isGenderValid(userGender, genderReq) {
     nextButton.style.cssText = `
         padding: 8px 16px;
         background-color: #00d2ff;
-        
+        color:white;
         border: none;
         border-radius: 4px;
         cursor: pointer;
@@ -1304,8 +1304,8 @@ internationalFormContainer.appendChild(intlTermsContainer);
     nextButton.textContent = 'Next';
     nextButton.style.cssText = `
         padding: 8px 16px;
-        background-color: #4CAF50;
-        color: white;
+        background-color: #00d2ff;
+        color:white;
         border: none;
         border-radius: 4px;
         cursor: pointer;
@@ -1410,7 +1410,7 @@ internationalFormContainer.appendChild(intlTermsContainer);
             submitButton.textContent = 'Submit Request';
             submitButton.style.cssText = `
                 padding: 8px 16px;
-                background-color: #4CAF50;
+                background-color: #00d2ff;
                 color: white;
                 border: none;
                 border-radius: 4px;
@@ -1915,8 +1915,7 @@ internationalFormContainer.appendChild(intlTermsContainer);
         </div>
     <div class="slider-container">
         <div class="slider-nav">
-            <button id="prev-btn" class="nav-btn">← Prev</button>
-            <button id="next-btn" class="nav-btn">Next →</button>
+      
         </div>
        
     </div>

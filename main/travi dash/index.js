@@ -1003,63 +1003,327 @@ function retrieveAndDisplayPublicTrips() {
         tripContainer.innerHTML = '<p class="error-message">Error loading trips. Please try again later.</p>';
     });
 }
-
+// Add this function to insert the CSS styles for the checklist
+function addChecklistStyles() {
+    // Check if styles are already added
+    if (document.getElementById('checklist-styles')) return;
+    
+    const styleElement = document.createElement('style');
+    styleElement.id = 'checklist-styles';
+    styleElement.textContent = `
+      /* Trip Checklist Section Styles */
+      .trip-checklist-section {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #f7f9fc;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+      
+      .trip-checklist-section h3 {
+        margin-top: 0;
+        color: #2c3e50;
+        font-size: 18px;
+        border-bottom: 2px solid #e0e6ed;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+      
+      .checklist-container {
+        background-color: white;
+        border-radius: 6px;
+        padding: 10px;
+      }
+      
+      .trip-checklist {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 0 15px 0;
+      }
+      
+      .trip-checklist li {
+        display: flex;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background-color 0.2s;
+      }
+      
+      .trip-checklist li:hover {
+        background-color: #f5f8ff;
+      }
+      
+      .trip-checklist li:last-child {
+        border-bottom: none;
+      }
+      
+      .trip-checklist input[type="checkbox"] {
+        margin-right: 10px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+      
+      .trip-checklist label {
+        font-size: 15px;
+        cursor: pointer;
+        flex-grow: 1;
+        transition: color 0.2s, text-decoration 0.2s;
+      }
+      
+      /* Style for checked items */
+      .trip-checklist input[type="checkbox"]:checked + label {
+        color: #7f8c8d;
+        text-decoration: line-through;
+      }
+      
+      /* Add Item Button */
+      .add-checklist-item {
+        background-color: #e3f2fd;
+        color: #0d6efd;
+        border: 1px dashed #0d6efd;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        width: 100%;
+        transition: all 0.2s;
+      }
+      
+      .add-checklist-item:hover {
+        background-color: #d1e7fc;
+      }
+      
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .trip-checklist-section {
+          padding: 10px;
+        }
+        
+        .trip-checklist li {
+          padding: 10px 0;
+        }
+      }
+    `;
+    
+    document.head.appendChild(styleElement);
+  }
 function openTripModal(tripId, userEmail) {
     // Ensure modal exists
+    addChecklistStyles();
+  
     ensureModalExists();
-    
     const modal = document.getElementById('trip-modal');
     if (!modal) {
-        console.error('Modal element not found');
-        return;
+      console.error('Modal element not found');
+      return;
     }
     
     const dailyActivitiesContainer = modal.querySelector('.daily-activities');
     if (!dailyActivitiesContainer) {
-        console.error('Daily activities container not found in modal');
-        return;
+      console.error('Daily activities container not found in modal');
+      return;
     }
     
     // Clear previous content
     dailyActivitiesContainer.innerHTML = `
-        <div class="modal-loading">
-            <div class="loader"></div>
-            <p>Loading trip details...</p>
-        </div>
+      <div class="modal-loading">
+        <div class="loader"></div>
+        <p>Loading trip details...</p>
+      </div>
     `;
+    
     modal.style.display = 'block';
+    
+    // Store current user and tripId globally for saving checklist changes
+    window.currentTripInfo = {
+      userEmail: userEmail,
+      tripId: typeof tripId === 'object' ? null : tripId,
+      isPrivate: typeof tripId === 'object'
+    };
     
     // Check if the parameter is a trip object (for private trips)
     if (typeof tripId === 'object') {
-        // This is a private trip object
-        displayTripInModal(tripId, dailyActivitiesContainer);
-        return;
+      // This is a private trip object
+      displayTripInModal(tripId, dailyActivitiesContainer);
+      createTripChecklist(tripId, dailyActivitiesContainer);
+      return;
     }
     
     // Otherwise, fetch the trip data from Firebase
     try {
-        // Format email for Firebase path
-        const sanitizedEmail = userEmail.replace(/\./g, ',');
-        const tripRef = ref(database, `travel-bookings/${sanitizedEmail}/public-trips/${tripId}`);
+      // Format email for Firebase path
+      const sanitizedEmail = userEmail.replace(/\./g, ',');
+      const tripRef = ref(database, `travel-bookings/${sanitizedEmail}/public-trips/${tripId}`);
+      
+      get(tripRef).then((snapshot) => {
+        if (!snapshot.exists()) {
+          dailyActivitiesContainer.innerHTML = '<h2>Error</h2><p>Trip not found.</p>';
+          return;
+        }
         
-        get(tripRef).then((snapshot) => {
-            if (!snapshot.exists()) {
-                dailyActivitiesContainer.innerHTML = '<h2>Error</h2><p>Trip not found.</p>';
-                return;
-            }
-            
-            const tripData = snapshot.val();
-            displayTripInModal(tripData, dailyActivitiesContainer);
-        }).catch((error) => {
-            console.error("Error getting trip details:", error);
-            dailyActivitiesContainer.innerHTML = '<h2>Error</h2><p>Failed to load trip details. Please try again.</p>';
-        });
-    } catch (error) {
-        console.error("Error in openTripModal:", error);
+        const tripData = snapshot.val();
+        
+        // Display trip data first
+        displayTripInModal(tripData, dailyActivitiesContainer);
+        
+        // Then create and append the checklist based on saved essentials
+        createTripChecklist(tripData, dailyActivitiesContainer);
+        
+      }).catch((error) => {
+        console.error("Error getting trip details:", error);
         dailyActivitiesContainer.innerHTML = '<h2>Error</h2><p>Failed to load trip details. Please try again.</p>';
+      });
+    } catch (error) {
+      console.error("Error in openTripModal:", error);
+      dailyActivitiesContainer.innerHTML = '<h2>Error</h2><p>Failed to load trip details. Please try again.</p>';
     }
-}
-
+  }
+  
+  // Function to create checklist based on trip data
+  function createTripChecklist(tripData, container) {
+    // Create checklist section
+    const checklistSection = document.createElement('div');
+    checklistSection.className = 'trip-checklist-section';
+    
+    // Set up the header
+    let checklistHeader = document.createElement('h3');
+    checklistHeader.textContent = 'Trip Essentials Checklist';
+    checklistSection.appendChild(checklistHeader);
+    
+    // Create the checklist container
+    const checklistContainer = document.createElement('div');
+    checklistContainer.className = 'checklist-container';
+    
+    // Create the checklist
+    const checklist = document.createElement('ul');
+    checklist.className = 'trip-checklist';
+    
+    // Parse savedEssentials if it exists
+    let essentialItems = [];
+    let checkedItems = {};
+    
+    if (tripData.savedEssentials) {
+      // The format appears to be "Selected Items:item1, item2, item3"
+      const essentialsString = tripData.savedEssentials;
+      if (essentialsString.includes(':')) {
+        const itemsStr = essentialsString.split(':')[1];
+        essentialItems = itemsStr.split(',').map(item => item.trim());
+      } else {
+        // Fallback in case the format is different
+        essentialItems = essentialsString.split(',').map(item => item.trim());
+      }
+    }
+    
+    // Parse savedCheckedItems if it exists
+    if (tripData.checkedItems) {
+      try {
+        checkedItems = JSON.parse(tripData.checkedItems);
+      } catch (e) {
+        console.error("Error parsing checked items:", e);
+        checkedItems = {};
+      }
+    }
+    
+    // If no essentials found, add default ones
+    if (essentialItems.length === 0) {
+      essentialItems = ['Passport/ID', 'Tickets', 'Accommodation Details', 'Travel Insurance', 'Local Currency'];
+    }
+    
+    // Add each essential item to the checklist
+    essentialItems.forEach((item, index) => {
+      const checkId = `check-item-${index}`;
+      const listItem = document.createElement('li');
+      const isChecked = checkedItems[item] === true;
+      
+      listItem.innerHTML = `
+        <input type="checkbox" id="${checkId}" name="${checkId}" data-item="${item}" ${isChecked ? 'checked' : ''}>
+        <label for="${checkId}">${item}</label>
+      `;
+      checklist.appendChild(listItem);
+    });
+    
+    // Add event listeners to all checkboxes to save state
+    checklist.addEventListener('change', (e) => {
+      if (e.target.type === 'checkbox') {
+        saveChecklistState(checklist);
+      }
+    });
+    
+    // Add the checklist to the container
+    checklistContainer.appendChild(checklist);
+    
+    // Add a button to add new items
+    const addButton = document.createElement('button');
+    addButton.className = 'add-checklist-item';
+    addButton.textContent = '+ Add Item';
+    addButton.addEventListener('click', () => {
+      const newItemText = prompt('Enter new checklist item:');
+      if (newItemText && newItemText.trim() !== '') {
+        const newId = `check-item-${Date.now()}`;
+        const newItem = document.createElement('li');
+        newItem.innerHTML = `
+          <input type="checkbox" id="${newId}" name="${newId}" data-item="${newItemText}">
+          <label for="${newId}">${newItemText}</label>
+        `;
+        checklist.appendChild(newItem);
+        
+        // Save the updated checklist including the new item
+        saveChecklistState(checklist);
+      }
+    });
+    
+    checklistContainer.appendChild(addButton);
+    checklistSection.appendChild(checklistContainer);
+    
+    // Finally, add the checklist section to the modal
+    container.appendChild(checklistSection);
+  }
+  
+  // Function to save the checklist state to Firebase
+  function saveChecklistState(checklist) {
+    if (!window.currentTripInfo) {
+      console.error("Cannot save checklist: trip info not available");
+      return;
+    }
+    
+    const { userEmail, tripId, isPrivate } = window.currentTripInfo;
+    
+    if (isPrivate) {
+      console.log("Private trips don't support saving checklist state yet");
+      return;
+    }
+    
+    // Collect all items and their checked state
+    const checkboxes = checklist.querySelectorAll('input[type="checkbox"]');
+    const checkedItems = {};
+    const allItems = [];
+    
+    checkboxes.forEach(checkbox => {
+      const itemName = checkbox.dataset.item;
+      allItems.push(itemName);
+      checkedItems[itemName] = checkbox.checked;
+    });
+    
+    // Format email for Firebase path
+    const sanitizedEmail = userEmail.replace(/\./g, ',');
+    const tripRef = ref(database, `travel-bookings/${sanitizedEmail}/public-trips/${tripId}`);
+    
+    // Update both the checkedItems and the savedEssentials fields
+    const updates = {
+      checkedItems: JSON.stringify(checkedItems),
+      savedEssentials: `Selected Items:${allItems.join(', ')}`
+    };
+    
+    // Update Firebase
+    update(tripRef, updates)
+      .then(() => {
+        console.log("Checklist saved successfully");
+      })
+      .catch(error => {
+        console.error("Error saving checklist:", error);
+      });
+  }
 // Helper function to display trip data in the modal
 function displayTripInModal(tripData, container) {
     let activitiesHTML = `<h3>${tripData.destination || tripData.tripName || 'Trip Details'}</h3>`;

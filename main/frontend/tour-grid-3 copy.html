@@ -1353,20 +1353,7 @@ width: auto;
             
                         <!-- Step 2 -->
                         <div class="travel_step_pub_panel" id="travel_step2_panel_pub_20250202">
-                            <!--<div class="travel_form_pub_group">
-                                <label for="travel_start_date_pub_20250202">Start Date:</label>
-                                <input type="date" id="travel_start_date_pub_20250202" required>
-                                <div class="travel_error_pub_message" id="travel_start_date_error_pub_20250202">Please select a start date</div>
-                            </div>
-                            <div class="travel_form_pub_group">
-                                <label for="travel_end_date_pub_20250202">End Date:</label>
-                                <input type="date" id="travel_end_date_pub_20250202" required>
-                                <div class="travel_error_pub_message" id="travel_end_date_error_pub_20250202">Please select an end date</div>
-                            </div>
-                            <div class="travel_form_pub_group">
-                                <label for="travel_days_calc_pub_20250202">Number of Days:</label>
-                                <input type="text" id="travel_days_calc_pub_20250202" readonly>
-                            </div>-->
+                            
                             <div class="travel_form_pub_group">
                               <label for="travel_start_date_pub_20250202">Start Date:</label>
                               <input type="date" id="travel_start_date_pub_20250202" required>
@@ -1381,6 +1368,16 @@ width: auto;
                               <label for="travel_days_calc_pub_20250202">Number of Days:</label>
                               <input type="text" id="travel_days_calc_pub_20250202" readonly>
                           </div>
+                          <div class="travel_form_pub_group">
+                            <label for="travel_days_calc_pub_20250202">Budget(Per Person):</label>
+                            <input type="number" id="trip-budget-input" class="trip-form-input" style="width: 100px;"required>
+                      <select id="trip-currency-select" style="width:50%; border-radius:5px; border:1px solid #ddd;">
+                          <option value="USD">USD</option>
+                          <option value="EUR">EUR</option>
+                          <option value="GBP">GBP</option>
+                          <option value="JPY">JPY</option>
+                      </select>
+                        </div>
                           <div id="day-activities-container" class="form-group"></div>
 
                           
@@ -1466,7 +1463,7 @@ document.querySelector('.travel_submit_pub_btn').onclick = function() {
     }
 };
 
-async function saveToFirebase() {
+/*async function saveToFirebase() {
     try {
         // Get user email from local storage
         const userEmail = localStorage.getItem('userEmail');
@@ -1508,6 +1505,34 @@ async function saveToFirebase() {
     } catch (error) {
         console.error('Error saving booking:', error);
         alert('Error saving booking: ' + error.message);
+    }
+}
+*/
+async function saveToFirebase() {
+    try {
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            alert('Please login first');
+            return;
+        }
+
+        const formData = collectTravelFormData();
+        
+        // Add timestamp and participants array
+        formData.timestamp = Date.now();
+        formData.participants = [userEmail]; // Creator is first participant
+        
+        const sanitizedEmail = userEmail.replace(/\./g, ',');
+        const newTripRef = push(ref(database, `travel-bookings/${sanitizedEmail}/public-trips`));
+        
+        await set(newTripRef, formData);
+        
+        alert('Trip saved successfully!');
+        retrieveAndDisplayTrips(); // Refresh the display
+        
+    } catch (error) {
+        console.error('Error saving trip:', error);
+        alert('Error saving trip: ' + error.message);
     }
 }
 
@@ -1659,7 +1684,8 @@ document.getElementById('trip-planning-form').addEventListener('submit', (e) => 
     }
 });
                 </script>
-                <script>
+              
+              <script>
                   /*public Form Script*/
     /*public Form Script*/
   function openTravelModal() {
