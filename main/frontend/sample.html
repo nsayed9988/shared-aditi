@@ -3,265 +3,485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Booking Form</title>
-    <style>
-        /* (Include your existing CSS as provided earlier) */
-        .travel-card-pub {
-            max-width: 400px;
-            border-radius: 12px;
-            background: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 24px;
-            margin: 20px auto;
-            font-family: system-ui, -apple-system, sans-serif;
-            display: none; /* Initially hidden, will display after form submission */
-        }
+    <title>Image Upload with Trip Selection</title>
+    <script type="module" src="gallery.js"></script>
 
-        .travel-card-header-pub {
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 16px;
-            margin-bottom: 16px;
-        }
-
-        .travel-card-title-pub {
-            font-size: 24px;
-            color: #2d3748;
-            margin: 0;
-        }
-
-        .travel-card-subtitle-pub {
-            color: #718096;
-            margin: 4px 0 0 0;
-            font-size: 14px;
-        }
-
-        .travel-card-content-pub {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .travel-card-field-pub {
-            margin-bottom: 8px;
-        }
-
-        .travel-card-label-pub {
-            font-size: 12px;
-            color: #718096;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .travel-card-value-pub {
-            font-size: 14px;
-            color: #2d3748;
-            font-weight: 500;
-        }
-
-        .travel-dates-pub {
-            grid-column: span 2;
-            display: flex;
-            gap: 16px;
-            padding: 12px;
-            background: #f7fafc;
-            border-radius: 8px;
-        }
-
-        .travel_modal_pub {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .travel_modal_pub_content {
-            background-color: white;
-            margin: 10% auto;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 800px;
-        }
-
-        .travel_modal_pub_close {
-            float: right;
-            font-size: 28px;
-            cursor: pointer;
-        }
-    </style>
 </head>
+<style>
+    /* Enhanced styles.css with blue and coral theme - with modal scrolling */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9ff;
+  color: #2d3436;
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* User Info Section */
+.user-info {
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(58, 123, 213, 0.08);
+  margin-bottom: 25px;
+  border-left: 4px solid #3a7bd5;
+}
+
+/* Upload Section */
+.upload-section {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(58, 123, 213, 0.08);
+  margin-bottom: 30px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.upload-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(58, 123, 213, 0.12);
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2d3436;
+  margin-bottom: 8px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e6ed;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: #fafcff;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: #3a7bd5;
+  box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.1);
+  outline: none;
+}
+
+/* File Input */
+input[type="file"] {
+  display: block;
+  margin-top: 10px;
+  padding: 8px;
+  background-color: #e8f1fd;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Image Preview */
+.preview-placeholder {
+  width: 100%;
+  min-height: 140px;
+  border: 2px dashed #3a7bd5;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f5ff;
+  margin: 20px 0;
+  transition: background 0.3s ease;
+}
+
+.preview-placeholder:hover {
+  background-color: #e8f1fd;
+}
+
+.img-preview {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(45, 52, 54, 0.1);
+}
+
+/* Upload Button */
+.upload-btn {
+  background: linear-gradient(135deg, #3a7bd5, #2e5ca5);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(46, 92, 165, 0.2);
+}
+
+.upload-btn:hover {
+  background: linear-gradient(135deg, #2e5ca5, #1d4179);
+  box-shadow: 0 6px 14px rgba(29, 65, 121, 0.25);
+}
+
+.upload-btn:disabled {
+  background: #c0c7d0;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Visibility Tags */
+.visibility-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.visibility-tag.public {
+  background-color: #e8f1fd;
+  color: #3a7bd5;
+}
+
+.visibility-tag.private {
+  background-color: #ffe8e5;
+  color: #ff7e67;
+}
+
+/* Status Messages */
+#uploadStatus {
+  margin: 18px 0;
+  text-align: center;
+}
+
+.error {
+  color: #ff6b52;
+  background: #ffe8e5;
+  padding: 14px;
+  border-radius: 10px;
+  text-align: center;
+  border-left: 4px solid #ff6b52;
+}
+
+.success {
+  color: #2e8b57;
+  background: #e6f7ee;
+  padding: 14px;
+  border-radius: 10px;
+  text-align: center;
+  border-left: 4px solid #2e8b57;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  text-align: center;
+  padding: 20px;
+  font-weight: 500;
+  color: #636e72;
+}
+
+/* Image Gallery */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 25px;
+}
+
+/* Card Style */
+.card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(58, 123, 213, 0.08);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(58, 123, 213, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.card-image {
+  width: 800px !important;
+  height: 200px !important;
+  object-fit: cover !important;
+}
+
+
+
+.card-info {
+  padding: 18px;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  font-weight: 600;
+  color: #2d3436;
+}
+
+.card-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #636e72;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.card-uploader,
+.card-timestamp {
+  font-size: 12px;
+  color: #939da3;
+}
+
+/* Delete Button */
+.delete-button {
+  background-color: #ff7e67;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #ff6b52;
+}
+
+/* Modal Background */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(45, 52, 54, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+  overflow-y: auto; /* Enable vertical scrolling for the entire modal */
+}
+
+.modal-content {
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh; /* Limit height to 85% of viewport height */
+  position: relative;
+  text-align: left;
+  box-shadow: 0 15px 30px rgba(45, 52, 54, 0.15);
+  overflow-y: auto; /* Enable vertical scrolling for content */
+  margin: auto; /* Center in viewport */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #3a7bd5 #e8f1fd; /* Firefox */
+}
+
+/* Custom scrollbar for webkit browsers */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #e8f1fd;
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #3a7bd5;
+  border-radius: 10px;
+  border: 2px solid #e8f1fd;
+}
+
+/* Responsive Image */
+.modal-image {
+  width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+  border-radius: 12px;
+ 
+}
+
+/* Modal Info */
+.modal-info {
+  margin-top: 16px;
+  font-size: 16px;
+  color: #2d3436;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #636e72;
+  background: none;
+  border: none;
+  transition: color 0.2s ease;
+  z-index: 10; /* Ensure it stays above other content */
+}
+
+.close-btn:hover {
+  color: #ff7e67;
+}
+
+/* Open Modal Button */
+.open-modal-btn {
+  background-color: #3a7bd5;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.open-modal-btn:hover {
+  background-color: #2e5ca5;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+    max-height: 80vh;
+  }
+  .modal-info {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 100%;
+    max-width: 90%;
+    padding: 15px;
+    max-height: 75vh;
+  }
+  .modal-info {
+    font-size: 13px;
+  }
+  .modal-image {
+    max-height: 220px;
+  }
+}
+</style>
+
 <body>
+    <button id="openModalBtn" class="open-modal-btn">Upload Image</button>
 
-<!-- Travel Form -->
-<div class="travel_stepper_pub_container">
-    <form id="travel_booking_form_pub_20250202">
-        <!-- Step 1 -->
-        <div class="travel_step_pub_panel active" id="travel_step1_panel_pub_20250202">
-            <div class="travel_form_pub_group">
-                <label for="travel_name_input_pub_20250202">Traveler Name:</label>
-                <input type="text" id="travel_name_input_pub_20250202" required>
-                <div class="travel_error_pub_message" id="travel_name_error_pub_20250202">Please enter your name</div>
-            </div>
-            <div class="travel_form_pub_group">
-                <label for="travel_destination_select_pub_20250202">Destination:</label>
-                <select id="travel_destination_select_pub_20250202" required>
-                    <option value="">Select a country</option>
-                    <!-- Add countries here -->
-                </select>
-                <div class="travel_error_pub_message" id="travel_destination_error_pub_20250202">Please select a destination</div>
-            </div>
-            <div class="travel_button_pub_group">
-                <button type="button" class="travel_next_pub_btn" onclick="travelNextStepPub(1)">Next</button>
-            </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="travel_step_pub_panel" id="travel_step2_panel_pub_20250202">
-            <div class="travel_form_pub_group">
-                <label for="travel_start_date_pub_20250202">Start Date:</label>
-                <input type="date" id="travel_start_date_pub_20250202" required>
-                <div class="travel_error_pub_message" id="travel_start_date_error_pub_20250202">Please select a start date</div>
-            </div>
-            <div class="travel_form_pub_group">
-                <label for="travel_end_date_pub_20250202">End Date:</label>
-                <input type="date" id="travel_end_date_pub_20250202" required>
-                <div class="travel_error_pub_message" id="travel_end_date_error_pub_20250202">Please select an end date</div>
-            </div>
-            <div class="travel_button_pub_group">
-                <button type="button" class="travel_prev_pub_btn" onclick="travelPrevStepPub(2)">Previous</button>
-                <button type="button" class="travel_next_pub_btn" onclick="travelNextStepPub(2)">Next</button>
-            </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="travel_step_pub_panel" id="travel_step3_panel_pub_20250202">
-            <div class="travel_form_pub_group">
-                <label for="travel_max_people_pub_20250202">Maximum Number of People:</label>
-                <input type="number" id="travel_max_people_pub_20250202" min="1" required>
-                <div class="travel_error_pub_message" id="travel_people_error_pub_20250202">Please enter number of people</div>
-            </div>
-            <div class="travel_form_pub_group">
-                <label>Select Gender:</label>
-                <div class="travel_gender_pub_group">
-                    <div class="travel_gender_pub_option">
-                        <input type="checkbox" id="travel_gender_male_pub_20250202">
-                        <label for="travel_gender_male_pub_20250202">Male</label>
+    <!-- Modal -->
+    <div id="uploadModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            
+            <div class="container">
+                <div id="userInfoDisplay" class="user-info"></div>
+                <div id="loginReminder" style="display: none;">
+                    Please log in to upload images
+                </div>
+    
+                <div class="upload-section">
+                    <h2>Upload New Image</h2>
+                    
+                    <div class="form-group">
+                        <label for="imageTitle">Image Title</label>
+                        <input type="text" id="imageTitle" placeholder="Enter image title" required>
                     </div>
-                    <div class="travel_gender_pub_option">
-                        <input type="checkbox" id="travel_gender_female_pub_20250202">
-                        <label for="travel_gender_female_pub_20250202">Female</label>
+    
+                    <div class="form-group">
+                        <label for="imageLocation">Location</label>
+                        <input type="text" id="imageLocation" placeholder="Enter location" required>
                     </div>
-                    <div class="travel_gender_pub_option">
-                        <input type="checkbox" id="travel_gender_other_pub_20250202">
-                        <label for="travel_gender_other_pub_20250202">Other</label>
+    
+                    <div class="form-group">
+                        <label for="tripSelect">Select Trip</label>
+                        <select id="tripSelect" required>
+                            <option value="">Select a trip...</option>
+                        </select>
+                        <div id="tripVisibility" class="visibility-tag"></div>
                     </div>
-                </div>
-                <div class="travel_error_pub_message" id="travel_gender_error_pub_20250202">Please select at least one gender</div>
-            </div>
-            <div class="travel_form_pub_group">
-                <label for="travel_apply_date_pub_20250202">Last Apply by Date:</label>
-                <input type="date" id="travel_apply_date_pub_20250202" required>
-                <div class="travel_error_pub_message" id="travel_apply_date_error_pub_20250202">Please select last apply by date</div>
-            </div>
-            <div class="travel_button_pub_group">
-                <button type="button" class="travel_prev_pub_btn" onclick="travelPrevStepPub(3)">Previous</button>
-                <button type="button" class="travel_submit_pub_btn" onclick="submitTravelForm()">Submit</button>
-            </div>
-        </div>
-    </form>
-</div>
-
-<!-- Modal to Display Travel Summary -->
-<div id="travel_modal_pub" class="travel_modal_pub">
-    <div class="travel_modal_pub_content">
-        <span class="travel_modal_pub_close" onclick="closeModal()">×</span>
-        <div class="travel-card-pub" id="travel_card_pub">
-            <div class="travel-card-header-pub">
-                <h2 class="travel-card-title-pub">Travel Booking Summary</h2>
-                <p class="travel-card-subtitle-pub">Review your booking details</p>
-            </div>
-            <div class="travel-card-content-pub">
-                <div class="travel-card-field-pub">
-                    <span class="travel-card-label-pub">Traveler Name:</span>
-                    <span class="travel-card-value-pub" id="traveler_name_value_pub"></span>
-                </div>
-                <div class="travel-card-field-pub">
-                    <span class="travel-card-label-pub">Destination:</span>
-                    <span class="travel-card-value-pub" id="destination_value_pub"></span>
-                </div>
-                <div class="travel-card-field-pub">
-                    <span class="travel-card-label-pub">Start Date:</span>
-                    <span class="travel-card-value-pub" id="start_date_value_pub"></span>
-                </div>
-                <div class="travel-card-field-pub">
-                    <span class="travel-card-label-pub">End Date:</span>
-                    <span class="travel-card-value-pub" id="end_date_value_pub"></span>
-                </div>
-                <div class="travel-dates-pub">
-                    <div class="travel-card-field-pub">
-                        <span class="travel-card-label-pub">Total Days:</span>
-                        <span class="travel-card-value-pub" id="total_days_value_pub"></span>
+    
+                    <div class="form-group">
+                        <label for="imageInput">Select Image</label>
+                        <input type="file" id="imageInput" accept="image/*" onchange="previewImage()" required>
                     </div>
+    
+                    <div id="preview">
+                        <div class="preview-placeholder">
+                            <p>Image preview will appear here</p>
+                        </div>
+                    </div>
+    
+                    <div id="uploadStatus"></div>
+    
+                    <button id="uploadBtn" onclick="uploadImage()" class="upload-btn">Upload Image</button>
                 </div>
+    
+                <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                    Loading...
+                </div>
+    
+               
             </div>
         </div>
     </div>
-</div>
-
-<script>
-    function travelNextStepPub(step) {
-        var currentStep = document.getElementById('travel_step' + step + '_panel_pub_20250202');
-        var nextStep = document.getElementById('travel_step' + (step + 1) + '_panel_pub_20250202');
-        currentStep.classList.remove('active');
-        nextStep.classList.add('active');
-    }
-
-    function travelPrevStepPub(step) {
-        var currentStep = document.getElementById('travel_step' + step + '_panel_pub_20250202');
-        var prevStep = document.getElementById('travel_step' + (step - 1) + '_panel_pub_20250202');
-        currentStep.classList.remove('active');
-        prevStep.classList.add('active');
-    }
-
-    function submitTravelForm() {
-        var travelerName = document.getElementById('travel_name_input_pub_20250202').value;
-        var destination = document.getElementById('travel_destination_select_pub_20250202').value;
-        var startDate = document.getElementById('travel_start_date_pub_20250202').value;
-        var endDate = document.getElementById('travel_end_date_pub_20250202').value;
-
-        if (!travelerName || !destination || !startDate || !endDate) {
-            alert("Please complete all required fields.");
-            return;
+    <div id="imageModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeImageModal()">&times;</span>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <div class="modal-info">
+                <h2 id="modalTitle"></h2>
+                <p id="modalLocation"></p>
+                <p id="modalUploader"></p>
+                <p id="modalTimestamp"></p>
+            </div>
+        </div>
+    </div>
+    <div id="imageGallery" class="image-gallery"></div>
+    <script>
+        function openModal() {
+            document.getElementById("uploadModal").style.display = "flex";
         }
+    
+        function closeModal() {
+            document.getElementById("uploadModal").style.display = "none";
+        }
+    
+        document.getElementById("openModalBtn").addEventListener("click", openModal);
+        function closeImageModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
 
-        var totalDays = calculateTotalDays(startDate, endDate);
-
-        // Display the travel summary card
-        document.getElementById('traveler_name_value_pub').innerText = travelerName;
-        document.getElementById('destination_value_pub').innerText = destination;
-        document.getElementById('start_date_value_pub').innerText = startDate;
-        document.getElementById('end_date_value_pub').innerText = endDate;
-        document.getElementById('total_days_value_pub').innerText = totalDays;
-
-        // Display the card
-        document.getElementById('travel_card_pub').style.display = 'block';
-    }
-
-    function calculateTotalDays(startDate, endDate) {
-        var start = new Date(startDate);
-        var end = new Date(endDate);
-        var timeDiff = end - start;
-        var totalDays = timeDiff / (1000 * 3600 * 24);
-        return totalDays;
-    }
-
-    function closeModal() {
-        document.getElementById('travel_modal_pub').style.display = 'none';
-    }
-</script>
-
+    </script>
 </body>
 </html>

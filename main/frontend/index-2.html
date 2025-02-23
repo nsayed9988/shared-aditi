@@ -12,97 +12,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <title>Travi</title>
-    <style>
-             #trip-card-2025 {
-            width: 350px;
-            padding: 20px;
-            background: white;
-            text-align: center;
-            border-radius: 15px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        #trip-image-2025 {
-            width: 100%;
-            border-radius: 10px;
-        }
-        
-        #trip-name-2025 {
-            font-size: 22px;
-            font-weight: bold;
-            margin: 15px 0;
-            color: #333;
-        }
-        
-        #trip-details-2025 {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 15px;
-        }
-        
-        #view-details-button-2025 {
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        
-        #view-details-button-2025:hover {
-            background-color: #e05247;
-        }
-        
-        #overlay-2025 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        #overlay-content-2025 {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: left;
-            width: 80%;
-            max-width: 400px;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        #close-overlay-2025 {
-            margin-top: 10px;
-            background: red;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 100%;
-        }
-        
-        #join-now-2025 {
-            margin-top: 10px;
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 100%;
-        }
-
-    </style>
+   
     
-    <script type="module">
+<script type="module">
       // Import Firebase modules
      // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
@@ -125,6 +37,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
+
 
 const modalStyle = document.createElement('style');
       modalStyle.textContent = `
@@ -327,7 +240,7 @@ const modalStyle = document.createElement('style');
       });
   
      // Function to retrieve and display trips
-     function retrieveAndDisplayTrips() {
+function retrieveAndDisplayTrips() {
     console.log('Fetching all trips...');
 
     const tripsRef = ref(database, 'travel-bookings');
@@ -408,6 +321,7 @@ const modalStyle = document.createElement('style');
                     <p><strong>Start Date:</strong> <span>${startDate}</span></p>
                     <p><strong>End Date:</strong> <span>${endDate}</span></p>
                     <p><strong>Duration:</strong> <span>${trip.numberOfDays || 'N/A'} days</span></p>
+                      <p><strong>Estimated Budget (Per Person):</strong> <span>${trip.budget || 'N/A'} ${trip.currency} </span></p>
                     <p><strong>People Joined:</strong> <span>${trip.participantCount || 0}/${trip.maxPeople || 'N/A'}</span></p>
                     <p><strong>Travel Essentials:</strong> <span>${trip.savedEssentials || 'None selected'}</span></p>
                     <p><strong>Apply By:</strong> <span>${applyDateString}</span></p>
@@ -439,6 +353,7 @@ const modalStyle = document.createElement('style');
         });
     });
 }
+
 
 // Helper function to get participant count
 function getParticipantCount(path) {
@@ -1473,44 +1388,88 @@ internationalFormContainer.appendChild(intlTermsContainer);
 
  
  </script>
-  </head>
-  <body>
-
-    <!DOCTYPE html>
-    <style>
-      /* Add these styles to your existing CSS */
+  <style>
+    .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 10%;
+            right: 10%;
+            width: 400px;
+            height: 500px;
+            background: white;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            padding: 10px;
+        }
+        .chat-popup .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .chat-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    /* Add these styles to your existing CSS */
 .stepper-container {
-    /* Add these new properties */
-    display: none;  /* Hidden by default */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    background: white;
+  /* Add these new properties */
+  display: none;  /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: white;
 }
 
 .overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
 /* Add a close button style */
 .close-btn {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #666;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #666;
 }
-    </style>
+  </style>
+  </head>
+
+  <body>
+
+    <!DOCTYPE html>
+   
     <div class="overlay"></div>
 
     
@@ -1542,7 +1501,7 @@ internationalFormContainer.appendChild(intlTermsContainer);
             <div class="header-nav">
               <nav class="nav-main-menu">
                 <ul class="main-menu">
-                  <li class="mega-li has-children"><a class="active" href="index-2.html">Home</a>
+                  <li class="mega-li has-children"><a class="active" href="index-2.html"><strong>Home</strong></a>
                     <div class="mega-menu">
                       <div class="mega-menu-inner">
                         <div class="row align-items-center">
@@ -1596,16 +1555,17 @@ internationalFormContainer.appendChild(intlTermsContainer);
                       </div>
                     </div>
                   </li>
-                  <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
+                  <li  class="mega-li-small"><a href="#featured"><strong>Iternaries</strong></a>         
                   </li>
-                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html">My Iternaries</a>         
+                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html"><strong> My Iternaries</strong></a>         
                   </li>
                  
                  
-                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login">Profile</a></li>
-                  <li><a href="../travi dash/index.html">Dashboard</a></li>
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login"><strong>Profile</strong></a></li>
+                  <li><a href="../travi dash/index.html"><strong>Dashboard</strong></a></li>
+                  <li class="mega-li-small"><a href="gallery.html" class="check-login"><strong>Gallery</strong></a></li>
     
-                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login">Blog</a></li>
+                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login"><strong>Blog</strong></a></li>
                   
                   
       
@@ -1614,157 +1574,30 @@ internationalFormContainer.appendChild(intlTermsContainer);
                   
               
            
-                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="contact.html"><strong>Contact</strong></a></li>
                  
               
               </ul>  </nav>
             </div>
           </div>
           <div class="header-right">
-
+            
            <a href="../travi dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
               Login
             </button></a> 
-           
+            <button class="chat-button" onclick="openChat()">Live Chat</button>
+
+            <div class="chat-popup" id="chatPopup">
+                <button class="close-btn" onclick="closeChat()">×</button>
+                <iframe class="chat-frame" src="https://organizations.minnit.chat/975468968082014/Main?embed" allow="autoplay"></iframe>
             <div class="burger-icon-2 burger-icon-white"><img src="assets/imgs/template/icons/menu.svg" alt="Travila"></div> 
             <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
           </div>
         </div>
       </div>
     </header>
-    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar button-bg-2">
-      <div class="mobile-header-wrapper-inner">
-        <div class="mobile-header-logo"> <a class="d-flex" href="index-2.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a>
-          <div class="burger-icon burger-icon-white"></div>
-        </div>
-        <div class="mobile-header-top">
-        
-        </div>
-        <div class="mobile-header-content-area">
-          <div class="perfect-scroll">
-            <div class="mobile-menu-wrap mobile-header-border">
-              <nav>
-                <ul class="mobile-menu font-heading">
-                  <li ><a class="active" href="index-2.html">Home</a>
-                
-                  </li>
-            
-             
-                
-              
-                  <li  class="mega-li-small"><a href="#featured">Iternaries</a>         
-                  </li>
-                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html">My Iternaries</a>         
-                  </li>
-                  <li id="my-ite" class="mega-li-small"><a href="../travi dash/my-booking.html" class="check-login">My Itineraries</a></li>
-                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login">Profile</a></li>
-                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login">Blog</a></li>
-                  
-                  
-      
-
-                <li class=""><a href="privacy.html">Privacy Notice</a>
-                  
-                </li>
-                  <li class=""><a href="faq.html">FAQs</a></li>
-                 
-                 
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="sidebar-canvas-wrapper perfect-scrollbar button-bg-2">
-      <div class="sidebar-canvas-container"> 
-        <div class="sidebar-canvas-head">
-          <div class="sidebar-canvas-logo"> <a class="d-flex" href="index-2.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
-          <div class="sidebar-canvas-lang"> 
-            <div class="d-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-account icon-lang"><span class="text-14-medium arrow-down">EN</span></span>
-              <div class="dropdown-account">
-                <ul>
-                  <li><a class="text-sm-medium" href="#">English</a></li>
-                  <li><a class="text-sm-medium" href="#">French</a></li>
-                  <li><a class="text-sm-medium" href="#">Chinese</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="d-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-cart"><span class="text-14-medium arrow-down">USD</span></span>
-              <div class="dropdown-cart">
-                <ul>
-                  <li><a class="text-sm-medium" href="#">USD</a></li>
-                  <li><a class="text-sm-medium" href="#">EUR</a></li>
-                  <li><a class="text-sm-medium" href="#">SGP</a></li>
-                </ul>
-              </div>
-            </div><a class="close-canvas" href="#"> <img alt="Travila" src="assets/imgs/template/icons/close.png"></a>
-          </div>
-        </div>
-        <div class="sidebar-canvas-content">
-          <div class="box-author-profile"> 
-            <div class="card-author"> 
-              <div class="card-image"> <img src="assets/imgs/page/homepage1/author2.png" alt="Travila"></div>
-              <div class="card-info"> 
-                <p  class="text-md-bold neutral-1000" style="color: black;"> <span id="updateName" ></span></p>
-                
-              </div>
-            
-            </div><div class="btnprof">
-             
-             </div><a id="logout" class="btn btn-black" href="../travi dash/login.html">Logout</a>
-          </div>
-          
-          <div class="box-quicklinks"> 
-            <h6 class="title-quicklinks neutral-1000">Quick Links</h6>
-            <div class="box-list-quicklinks"> 
-                  <!-- <div class="item-quicklinks"> 
-           <div class="item-icon"> <img src="assets/imgs/template/icons/notify.svg" alt="Travila"></div>
-               -div class="item-info"> <a href="#"> 
-                    <h6 class="text-md-bold neutral-1000">Notifications</h6></a>
-                  <p class="text-xs neutral-500 online">2 new messages</p>
-                </!--div>
-              </div>--->
-             
-              <div class="item-quicklinks"> 
-                <div class="item-icon"> <img src="assets/imgs/template/icons/settings.svg" alt="Travila"></div>
-                <div class="item-info"> <a href="../travi dash/my-profile.html"> 
-                    <h6 class="text-md-bold neutral-1000"> <a href="../travi dash/my-profile.html">My Profile</a></h6></a>
-                  <p class="text-xs neutral-500">Your account</p>
-                </div>
-              </div>
-              
-              <!--<div class="item-quicklinks"> 
-                <div class="item-icon"> <img src="assets/imgs/template/icons/friends.svg" alt="Travila"></div>
-                <div class="item-info"> <a href="#"> 
-                    <h6 class="text-md-bold neutral-1000">Friends</h6></a>
-                  <p class="text-xs neutral-500">Your team</p>
-                </div>
-              </div>-->
-              <div class="item-quicklinks"> 
-                <div class="item-icon"> <img src="assets/imgs/template/icons/tickets.svg" alt="Travila"></div>
-                <div class="item-info"> 
-                    <h6 class="text-md-bold neutral-1000"><a href="./contact.html"> Connect With Us </a></h6>
-                </div>
-              </div>
-             
-            </div>
-          </div>
-          
-          
-
-         
-          <div class="box-contactus">
-            <h6 class="title-contactus neutral-1000">Contact Us</h6>
-            <div class="contact-info"> 
-              <p class="address-2 text-md-medium neutral-1000">4517 Washington Ave. <br>Manchester, Kentucky 39495</p>
-              <p class="hour-work-2 text-md-medium neutral-1000">Hours: 8:00 - 17:00, Mon - Sat</p>
-              <p class="email-2 text-md-medium neutral-1000">support@travila.com</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+ 
+   
     <main class="main">
       <section class="section-box box-banner-home2 background-body">
         <div class="container-top"> 
@@ -2137,7 +1970,13 @@ internationalFormContainer.appendChild(intlTermsContainer);
 
  
     <script>
+function openChat() {
+            document.getElementById('chatPopup').style.display = 'block';
+        }
 
+        function closeChat() {
+            document.getElementById('chatPopup').style.display = 'none';
+        }
 document.addEventListener('DOMContentLoaded', function () {
     // Only check login status when clicking on protected elements
     function initializeLoginChecks() {

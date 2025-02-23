@@ -13,6 +13,8 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?version=2.0" rel="stylesheet">
+    <link href="../frontend/t.css" rel="stylesheet">
+    <script src="../frontend/t.js" type="module"></script>
     <title>Travi</title>
   </head>
   <body>
@@ -295,12 +297,119 @@
               <div class="container"> 
                 <div class="panel-white">
                   <div class="panel-head"> 
-                    <h6 class="text-xl-bold neutral-1000">Manage Your Trips</h6>
+                    <h6 class="text-xl-bold neutral-1000">Expense Tracker</h6>
                     <a class="menudrop" id="dropdownMenu3" type="button" data-bs-toggle="dropdown" 
                        aria-expanded="false" data-bs-display="static"></a>
                   </div>
+
                   <div class="panel-body">
-                    <!-- Content will be dynamically loaded here -->
+                   
+
+                
+                    <div class="container-final">
+                      <header>
+       
+                          <div id="user-info-final"></div>
+                      </header>
+                      
+                      <h4>Your Public Trips</h4>
+                      <br>
+                      <div id="trips-container-final" class="trips-container-final">
+                          <div class="loading-final">Loading your trips...</div>
+                      </div>
+                  </div>
+                  
+                  <!-- Trip Details Modal -->
+                  <div class="modal-backdrop-final" id="modal-backdrop-final">
+                      <div class="modal-final">
+                          <div class="modal-header-final">
+                              <h2 class="modal-title-final" id="modal-title-final">Trip Details</h2>
+                              <button class="close-modal-final" id="close-modal-final">&times;</button>
+                          </div>
+                          <div class="modal-content-final" id="modal-content-final">
+                              <!-- Trip details will be populated here -->
+                          </div>
+                          
+                          <!-- Trip Participants Section -->
+                          <div class="participants-section-final">
+                              <h6>Trip Participants</h6>
+                              <div id="participants-container-final" class="participants-container-final">
+                                  <div class="loading-final">Loading participants...</div>
+                              </div>
+                          </div>
+              
+                          <!-- Budget Tracker Section -->
+                          <div class="budget-tracker-section-final">
+                              <h6>Budget Tracker</h6>
+                              
+                              <div class="tab-navigation-final">
+                                  <button class="tab-button-final active" data-tab="expenses-tab-final">Expenses</button>
+                                  <button class="tab-button-final" data-tab="summary-tab-final">Summary</button>
+                              </div>
+                              
+                              <div id="expenses-tab-final" class="tab-content-final active">
+                                  <br>
+                                  <button id="show-add-expense-final" class="btn-primary-final">Add New Expense</button>
+                                  <br>
+                                  <div id="expense-form-container-final" class="expense-form-final" style="display: none;padding-bottom: 20px;">
+                                      <h6> Expense</h6>
+                                      <form id="expense-form-final">
+                                          <div class="form-group-final">
+                                              <label for="expense-name-final">Expense Name</label>
+                                              <input type="text" id="expense-name-final" required>
+                                          </div>
+                                          <div class="form-group-final">
+                                              <label for="expense-amount-final">Amount</label>
+                                              <div class="input-group-final">
+                                                  <span class="input-group-text-final currency-symbol">$</span>
+                                                  <input type="number" id="expense-amount-final" min="0" step="0.01" required>
+                                              </div>
+                                          </div>
+                                          <div class="form-group-final">
+                                              <label for="paid-by-final">Paid By</label>
+                                              <select id="paid-by-final" required>
+                                                  <!-- Will be populated dynamically -->
+                                              </select>
+                                          </div>
+                                          <div class="form-group-final">
+                                              <label>Split Among</label>
+                                              <div  style="text-align: left;" id="split-among-checkboxes-final" class="checkbox-group-final">
+                                                  <!-- Will be populated dynamically -->
+                                              </div>
+                                          </div>
+                                          <button type="submit" class="btn-primary-final">Save Expense</button>
+                                          <button type="button" id="cancel-expense-final" class="btn-secondary-final">Cancel</button>
+                                      </form>
+                                  </div>
+                                  <br><br>
+                                  <h6>Expenses List</h6>
+                                  <div id="expenses-list-final" class="expense-list-final">
+                                      <!-- Will be populated dynamically -->
+                                      <div class="expense-item-final" style="text-align: center; color: #888;">
+                                          No expenses added yet.
+                                      </div>
+                                  </div>
+                              </div>
+                              
+                              <div id="summary-tab-final" class="tab-content-final">
+                                  <div class="summary-section-final">
+                                      <h6 class="summary-title-final">Balances</h6>
+                                      <div id="balances-list-final">
+                                          <!-- Will be populated dynamically -->
+                                      </div>
+                                  </div>
+                                  <div class="summary-section-final">
+                                      <h6 class="summary-title-final">Settlements</h6>
+                                      <div id="settlements-list-final">
+                                          <!-- Will be populated dynamically -->
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <script src="t.js" type="module"></script>
+
                   </div>
                 </div>
               </div>
@@ -315,7 +424,7 @@
                 </div>
       
   </main>
-  <script type="module" src="index.js"></script>
+
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu2wDeOzJvQoAu6vR3soZvosMMJd532QI&callback=initMap&v=weekly&solution_channel=GMP_CCS_geolocation_v2"
       defer ></script>
@@ -339,5 +448,6 @@
     <script src="assets/js/plugins/charts/Animated.js"></script>
     <script src="assets/js/plugins/armcharts5-script.js"></script>
     <script src="assets/js/main.js?v=1.0"></script>
+    
   </body>
 </html>

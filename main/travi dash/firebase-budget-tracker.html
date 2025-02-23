@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Budget Tracker</title>
+    <style>
+        /* CSS Styles */
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .trip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .trip-title {
+            margin: 0;
+            color: #333;
+        }
+        
+        .budget-progress {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 15px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            background-color: #4caf50;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-bar.warning {
+            background-color: #ff9800;
+        }
+        
+        .progress-bar.danger {
+            background-color: #f44336;
+        }
+        
+        .expense-list {
+            margin-bottom: 30px;
+        }
+        
+        .expense-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .expense-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .expense-form {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .checkbox-group {
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            margin-right: 15px;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input {
+            margin-right: 5px;
+        }
+        
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0069d9;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        .summary-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .summary-title {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .balance-item {
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .pos-balance {
+            color: #28a745;
+        }
+        
+        .neg-balance {
+            color: #dc3545;
+        }
+        
+        .settlement-item {
+            padding: 10px 0;
+        }
+        
+        .tab-container {
+            margin-bottom: 20px;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .tab-btn {
+            padding: 10px 15px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        
+        .tab-btn.active {
+            border-bottom: 2px solid #007bff;
+            color: #007bff;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .trip-selector {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="auth-container">
+            <h2>Sign In</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <button id="login-btn" class="btn-primary">Sign In</button>
+        </div>
+        
+        <div id="app-container" style="display: none;">
+            <div id="trip-selector" class="trip-selector">
+                <h3>Select Trip</h3>
+                <select id="trip-select" class="form-group">
+                    <option value="">Loading trips...</option>
+                </select>
+            </div>
+            
+            <div id="budget-tracker-container" style="display: none;">
+                <div class="trip-header">
+                    <h1 class="trip-title">Trip to <span id="trip-destination"></span></h1>
+                    <div>
+                        <span id="trip-dates"></span>
+                    </div>
+                </div>
+                
+                <div class="budget-progress">
+                    <div style="display: flex; justify-content: space-between;">
+                        <h3>Budget Progress</h3>
+                        <div>
+                            <span id="current-spent">$0</span> / <span id="budget-amount">$0</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="expenses">Expenses</button>
+                        <button class="tab-btn" data-tab="summary">Summary</button>
+                    </div>
+                    
+                    <div id="expenses-tab" class="tab-content active">
+                        <button id="show-add-expense" class="btn-primary">Add New Expense</button>
+                        
+                        <div id="expense-form-container" class="expense-form" style="display: none;">
+                            <h3>Add New Expense</h3>
+                            <form id="expense-form">
+                                <div class="form-group">
+                                    <label for="expense-name">Expense Name</label>
+                                    <input type="text" id="expense-name" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="expense-amount">Amount (<span id="currency-symbol">USD</span>)</label>
+                                    <input type="number" id="expense-amount" min="0" step="0.01" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="paid-by">Paid By</label>
+                                    <select id="paid-by" required>
+                                        <!-- Will be populated dynamically -->
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Split Among</label>
+                                    <div id="split-among-checkboxes" class="checkbox-group">
+                                        <!-- Will be populated dynamically -->
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary">Save Expense</button>
+                                <button type="button" id="cancel-expense" class="btn-secondary">Cancel</button>
+                            </form>
+                        </div>
+                        
+                        <h3>Expenses List</h3>
+                        <div id="expenses-list" class="expense-list">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="summary-tab" class="tab-content">
+                        <div class="summary-section">
+                            <h3 class="summary-title">Balances</h3>
+                            <div id="balances-list">
+                                <!-- Will be populated dynamically -->
+                            </div>
+                        </div>
+                        
+                        <div class="summary-section">
+                            <h3 class="summary-title">Settlements</h3>
+                            <div id="settlements-list">
+                                <!-- Will be populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+    <script>
+     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+import { getDatabase, ref, get, update, remove, onValue } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+const firebaseConfig = {
+    apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
+    authDomain: "ty-project-80ab7.firebaseapp.com",
+    projectId: "ty-project-80ab7",
+    storageBucket: "ty-project-80ab7.firebasestorage.app",
+    messagingSenderId: "491495110151",
+    appId: "1:491495110151:web:035795af4bc8eebff79ca2",
+    measurementId: "G-XFS1VYTHSM"
+};
+// Ini
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        
+        // Global variables
+        let currentUser = null;
+        let currentTrip = null;
+        let userTrips = [];
+        
+        // DOM Elements
+        const authContainer = document.getElementById('auth-container');
+        const appContainer = document.getElementById('app-container');
+        const budgetTrackerContainer = document.getElementById('budget-tracker-container');
+        const tripSelect = document.getElementById('trip-select');
+        
+        // Auth State Change Listener
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                currentUser = {
+                    id: user.uid,
+                    email: user.email
+                };
+                
+                authContainer.style.display = 'none';
+                appContainer.style.display = 'block';
+                
+                // Load user's trips
+                loadUserTrips();
+            } else {
+                authContainer.style.display = 'block';
+                appContainer.style.display = 'none';
+                budgetTrackerContainer.style.display = 'none';
+            }
+        });
+        
+        // Login functionality
+        document.getElementById('login-btn').addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .catch(error => {
+                    alert(`Login failed: ${error.message}`);
+                });
+        });
+        
+        // Load trips for the current user
+        async function loadUserTrips() {
+            try {
+                // Query structure based on your Firebase schema
+                const tripBookingsRef = db.collection('travel-bookings');
+                const userTripsSnapshot = await db.collectionGroup('public-trips')
+                    .where('participants', 'array-contains', currentUser.id)
+                    .get();
+                
+                if (userTripsSnapshot.empty) {
+                    tripSelect.innerHTML = '<option value="">No trips found</option>';
+                    return;
+                }
+                
+                userTrips = [];
+                userTripsSnapshot.forEach(doc => {
+                    userTrips.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                // Populate trip selector
+                tripSelect.innerHTML = '<option value="">Select a trip</option>';
+                userTrips.forEach(trip => {
+                    const option = document.createElement('option');
+                    option.value = trip.id;
+                    option.textContent = `${trip.destination} (${new Date(trip.endDate).toLocaleDateString()})`;
+                    tripSelect.appendChild(option);
+                });
+                
+                // Add change event listener
+                tripSelect.addEventListener('change', handleTripSelection);
+            } catch (error) {
+                console.error("Error loading trips:", error);
+                tripSelect.innerHTML = '<option value="">Error loading trips</option>';
+            }
+        }
+        
+        // Handle trip selection
+        function handleTripSelection() {
+            const selectedTripId = tripSelect.value;
+            
+            if (!selectedTripId) {
+                budgetTrackerContainer.style.display = 'none';
+                return;
+            }
+            
+            currentTrip = userTrips.find(trip => trip.id === selectedTripId);
+            
+            if (currentTrip) {
+                loadTripDetails(currentTrip);
+                budgetTrackerContainer.style.display = 'block';
+            }
+        }
+        
+        // Load trip details
+        async function loadTripDetails(trip) {
+            try {
+                // Update UI with trip info
+                document.getElementById('trip-destination').textContent = trip.destination || 'Unknown';
+                document.getElementById('currency-symbol').textContent = trip.currency || 'USD';
+                
+                const startDate = trip.startDate ? new Date(trip.startDate).toLocaleDateString() : 'Unknown';
+                const endDate = trip.endDate ? new Date(trip.endDate).toLocaleDateString() : 'Unknown';
+                document.getElementById('trip-dates').textContent = `${startDate} to ${endDate}`;
+                
+                // Set budget amount
+                document.getElementById('budget-amount').textContent = `${trip.currency || '$'}${trip.budget || 0}`;
+                
+                // Load participants
+                await loadParticipants(trip.id);
+                
+                // Load expenses
+                await loadExpenses(trip.id);
+                
+                // Set up event listeners
+                document.getElementById('show-add-expense').addEventListener('click', toggleExpenseForm);
+                document.getElementById('cancel-expense').addEventListener('click', toggleExpenseForm);
+                document.getElementById('expense-form').addEventListener('submit', addExpense);
+                
+                // Set up tab navigation
+                const tabButtons = document.querySelectorAll('.tab-btn');
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const tabName = this.getAttribute('data-tab');
+                        changeTab(tabName);
+                    });
+                });
+                
+                // Update budget progress
+                updateBudgetProgress();
+            } catch (error) {
+                console.error("Error loading trip details:", error);
+                alert("Failed to load trip details");
+            }
+        }
+        
+        // Load participants for a trip
+        async function loadParticipants(tripId) {
+            try {
+                // Query structure based on your Firebase schema
+                const participantsRef = db.collection('travel-bookings')
+                    .doc(tripId)
+                    .collection('participants');
+                
+                const participantsSnapshot = await participantsRef.get();
+                
+                if (participantsSnapshot.empty) {
+                    console.log("No participants found");
+                    return;
+                }
+                
+                currentTrip.participants = [];
+                participantsSnapshot.forEach(doc => {
+                    currentTrip.participants.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                // Populate participants dropdown and checkboxes
+                populateParticipantsDropdown();
+            } catch (error) {
+                console.error("Error loading participants:", error);
+            }
+        }
+        
+        // Load expenses for a trip
+        async function loadExpenses(tripId) {
+            try {
+                // Query structure based on your Firebase schema
+                const expensesRef = db.collection('travel-bookings')
+                    .doc(tripId)
+                    .collection('expenses');
+                
+                const expensesSnapshot = await expensesRef.get();
+                
+                currentTrip.expenses = [];
+                if (!expensesSnapshot.empty) {
+                    expensesSnapshot.forEach(doc => {
+                        currentTrip.expenses.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
+                }
+                
+                // Update UI
+                updateExpensesList();
+                calculateBalances();
+            } catch (error) {
+                console.error("Error loading expenses:", error);
+                document.getElementById('expenses-list').innerHTML = `
+                    <div class="expense-item" style="text-align: center; color: #888;">
+                        Error loading expenses.
+                    </div>
+                `;
+            }
+        }
+        
+        // Populate the participants dropdown and checkboxes
+        function populateParticipantsDropdown() {
+            const paidBySelect = document.getElementById('paid-by');
+            const splitAmongContainer = document.getElementById('split-among-checkboxes');
+            
+            // Clear existing options
+            paidBySelect.innerHTML = '';
+            splitAmongContainer.innerHTML = '';
+            
+            if (!currentTrip || !currentTrip.participants || currentTrip.participants.length === 0) {
+                paidBySelect.innerHTML = '<option value="">No participants found</option>';
+                return;
+            }
+            
+            // Add participants to dropdown and checkboxes
+            currentTrip.participants.forEach(participant => {
+                // Add to paid by dropdown
+                const option = document.createElement('option');
+                option.value = participant.id;
+                option.textContent = participant.email || participant.userId;
+                if (participant.id === currentUser.id) {
+                    option.selected = true;
+                }
+                paidBySelect.appendChild(option);
+                
+                // Add to split among checkboxes
+                const checkboxItem = document.createElement('div');
+                checkboxItem.className = 'checkbox-item';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'splitAmong';
+                checkbox.value = participant.id;
+                checkbox.id = `split-${participant.id}`;
+                checkbox.checked = true; // Default all checked
+                
+                const label = document.createElement('label');
+                label.htmlFor = `split-${participant.id}`;
+                label.textContent = participant.email || participant.userId;
+                
+                checkboxItem.appendChild(checkbox);
+                checkboxItem.appendChild(label);
+                splitAmongContainer.appendChild(checkboxItem);
+            });
+        }
+        
+        // Toggle expense form visibility
+        function toggleExpenseForm() {
+            const formContainer = document.getElementById('expense-form-container');
+            if (formContainer.style.display === 'none') {
+                formContainer.style.display = 'block';
+                document.getElementById('expense-form').reset();
+                
+                // Set current user as default payer
+                const paidBySelect = document.getElementById('paid-by');
+                if (paidBySelect.querySelector(`option[value="${currentUser.id}"]`)) {
+                    paidBySelect.value = currentUser.id;
+                }
+            } else {
+                formContainer.style.display = 'none';
+            }
+        }
+        
+        // Add a new expense
+        async function addExpense(e) {
+            e.preventDefault();
+            
+            if (!currentTrip) {
+                alert('No trip selected');
+                return;
+            }
+            
+            // Get form values
+            const name = document.getElementById('expense-name').value;
+            const amount = parseFloat(document.getElementById('expense-amount').value);
+            const paidBy = document.getElementById('paid-by').value;
+            
+            // Get selected participants to split among
+            const splitAmongCheckboxes = document.querySelectorAll('input[name="splitAmong"]:checked');
+            const splitAmong = Array.from(splitAmongCheckboxes).map(cb => cb.value);
+            
+            if (splitAmong.length === 0) {
+                alert('Please select at least one participant to split the expense with.');
+                return;
+            }
+            
+            // Calculate individual shares
+            const shareAmount = amount / splitAmong.length;
+            
+            // Create shares for each participant
+            const shares = {};
+            splitAmong.forEach(participantId => {
+                shares[participantId] = shareAmount;
+            });
+            
+            try {
+                // Create expense object
+                const newExpense = {
+                    name,
+                    amount,
+                    paidBy,
+                    splitAmong,
+                    shares,
+                    date: new Date().toISOString(),
+                    createdBy: currentUser.id,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+                
+                // Save to Firebase
+                const expensesRef = db.collection('travel-bookings')
+                    .doc(currentTrip.id)
+                    .collection('expenses');
+                    
+                const docRef = await expensesRef.add(newExpense);
+                
+                // Add ID to the expense
+                newExpense.id = docRef.id;
+                
+                // Add to current trip data
+                if (!currentTrip.expenses) {
+                    currentTrip.expenses = [];
+                }
+                currentTrip.expenses.push(newExpense);
+                
+                // Update UI
+                updateExpensesList();
+                updateBudgetProgress();
+                calculateBalances();
+                
+                // Hide form
+                toggleExpenseForm();
+            } catch (error) {
+                console.error("Error adding expense:", error);
+                alert("Failed to add expense. Please try again.");
+            }
+        }
+        
+        // Update expenses list in UI
+        function updateExpensesList() {
+            const expensesList = document.getElementById('expenses-list');
+            
+            if (!currentTrip || !currentTrip.expenses || currentTrip.expenses.length === 0) {
+                expensesList.innerHTML = `
+                    <div class="expense-item" style="text-align: center; color: #888;">
+                        No expenses added yet.
+                    </div>
+                `;
+                return;
+            }
+            
+            expensesList.innerHTML = '';
+            
+            // Sort expenses by date (newest first)
+            const sortedExpenses = [...currentTrip.expenses].sort((a, b) => {
+                return new Date(b.date) - new Date(a.date);
+            });
+            
+            sortedExpenses.forEach(expense => {
+                // Find payer email
+                const payer = currentTrip.participants.find(p => p.id === expense.paidBy);
+                const payerEmail = payer ? (payer.email || payer.id) : 'Unknown';
+                
+                const expenseItem = document.createElement('div');
+                expenseItem.className = 'expense-item';
+                expenseItem.innerHTML = `
+                    <div>
+                        <strong>${expense.name}</strong>
+                        <div>Paid by: ${payerEmail}</div>
+                        <div>Split among: ${expense.splitAmong.length} people</div>
+                        <div>Date: ${new Date(expense.date).toLocaleDateString()}</div>
+                    </div>
+                    <div>
+                        <strong>${currentTrip.currency || '$'}${expense.amount.toFixed(2)}</strong>
+                    </div>
+                `;
+                
+                expensesList.appendChild(expenseItem);
+            });
+        }
+        
+        // Update budget progress bar
+        function updateBudgetProgress() {
+            if (!currentTrip) return;
+            
+            const expenses = currentTrip.expenses || [];
+            const totalSpent = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            const budget = currentTrip.budget || 0;
+            const percentUsed = budget > 0 ? (totalSpent / budget) * 100 : 0;
+            
+            document.getElementById('current-spent').textContent = `${currentTrip.currency || '$'}${totalSpent.toFixed(2)}`;
+            
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = `${Math.min(percentUsed, 100)}%`;
+            
+            // Color code based on percentage used
+            if (percentUsed > 100) {
+                progressBar.className = 'progress-bar danger';
+            } else if (percentUsed > 75) {
+                progressBar.className = 'progress-bar warning';
+            } else {
+                progressBar.className = 'progress-bar';
+            }
+        }
+        
+        // Calculate balances for each participant
+        function calculateBalances() {
+            if (!currentTrip || !currentTrip.participants) return;
+            
+            // Initialize balances for all participants
+            const balances = {};
+            currentTrip.participants.forEach(participant => {
+                balances[participant.id] = 0;
+            });
+            
+            // Calculate from expenses
+            if (currentTrip.expenses) {
+                currentTrip.expenses.forEach(expense => {
+                    // Add full amount to payer
+                    balances[expense.paidBy] += expense.amount;
+                    
+                    // Subtract each participant's share
+                    expense.splitAmong.forEach(participantId => {
+                        if (expense.shares && expense.shares[participantId]) {
+                            balances[participantId] -= expense.shares[participantId];
+                        }
+                    });
+                });
+            }
+            
+            // Update balances UI
+            updateBalancesUI(balances);
+            
+            // Calculate and update settlements
+            updateSettlementsUI(balances);
+        }
+        
+        // Update balances in UI
+        function updateBalancesUI(balances) {
+            const balancesList = document.getElementById('balances-list');
+            balancesList.innerHTML = '';
+            
+            if (!currentTrip || !currentTrip.participants) {
+                balancesList.innerHTML = '<div>No participant data available</div>';
+                return;
+            }
+            
+            Object.keys(balances).forEach(participantId => {
+                const participant = currentTrip.participants.find(p => p.id === participantId);
+                if (!participant) return;
+                
+                const balance = balances[participantId];
+                const balanceClass = balance >= 0 ? 'pos-balance' : 'neg-balance';
+                
+                const balanceItem = document.createElement('div');
+                balanceItem.className = 'balance-item';
+                balanceItem.innerHTML = `
+                    <div>${participant.email || participant.id}</div>
+                    <div class="${balanceClass}">
+                        ${balance >= 0 ? 'Gets back' : 'Owes'} 
+                        ${currentTrip.currency || '$'}${Math.abs(balance).toFixed(2)}
+                    </div>
+                `;
+                
+                balancesList.appendChild(balanceItem);
+            });
+        }
+        
+        // Calculate and display settlements
+        function updateSettlementsUI(balances) {
+            const settlementsList = document.getElementById('settlements-list');
+            settlementsList.innerHTML = '';
+            
+            if (!currentTrip || !currentTrip.participants) {
+                settlementsList.innerHTML = '<div>No participant data available</div>';
+                return;
+            }
+            
+            // Separate positive (creditors) and negative (debtors) balances
+            const creditors = [];
+            const debtors = [];
+            
+            Object.keys(balances).forEach(participantId => {
+                const balance = balances[participantId];
+                const participant = currentTrip.participants.find(p => p.id === participantId);
+                if (!participant) return;
+                
+                if (balance > 0) {
+                    creditors.push({ 
+                        id: participantId, 
+                        email: participant.email || participant.id, 
+                        amount: balance 
+                    });
+                } else if (balance < 0) {
+                    debtors.push({ 
+                        id: participantId, 
+                        email: participant.email || participant.id, 
+                        amount: -balance 
+                    });
+                }
+            });
+            
+            // Sort by amount (largest first)
+            creditors.sort((a, b) => b.amount - a.amount);
+            debtors.sort((a, b) => b.amount - a.amount);
+            
+            // No settlements needed
+            if (creditors.length === 0 || debtors.length === 0) {
+                settlementsList.innerHTML = `
+                    <div class="settlement-item">No settlements needed.</div>
+                `;
+                return;
+            }
+            
+            // Calculate settlements
+            const settlements = [];
+            
+            while (debtors.length > 0 && creditors.length > 0) {
+                const debtor = debtors[0];
+                const creditor = creditors[0];
+                
+                const amount = Math.min(debtor.amount, creditor.amount);
+                
+                if (amount > 0.01) { // Ignore tiny amounts due to floating point
+                    settlements.push({
+                        from: debtor.email,
+                        to: creditor.email,
+                        amount
+                    });
+                }
+                
+                // Adjust remaining balances
+                debtor.amount -= amount;
+                creditor.amount -= amount;
+                              
+                    // Remove settled parties
+                    if (debtor.amount < 0.01) debtors.shift();
+                    if (creditor.amount < 0.01) creditors.shift();
+                }
+                
+                // Display settlements
+                settlements.forEach(settlement => {
+                    const settlementItem = document.createElement('div');
+                    settlementItem.className = 'settlement-item';
+                    settlementItem.innerHTML = `
+                        <strong>${settlement.from}</strong> should pay 
+                        <strong>$${settlement.amount.toFixed(2)}</strong> to 
+                        <strong>${settlement.to}</strong>
+                    `;
+                    
+                    settlementsList.appendChild(settlementItem);
+                });
+            }
+            
+            // Change active tab
+            function changeTab(tabName) {
+                // Update tab buttons
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`.tab-btn[data-tab="${tabName}"]`).classList.add('active');
+                
+                // Update tab content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+                
+                // If summary tab selected, recalculate balances
+                if (tabName === 'summary') {
+                    calculateBalances();
+                }
+            }
+            
+            // Initialize the UI
+            initializeUI();
+        
+    </script>
+</body>
+</html>

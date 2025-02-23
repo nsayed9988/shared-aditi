@@ -11,18 +11,823 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
-    <title>Tour detail</title>
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css">
+    <title>Tour grid </title>
+   <style>
+    
+     .navbar-1 {
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-container-1 {
+            max-width: 1150px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3436;
+            text-decoration: none;
+        }
+
+        .nav-buttons-1 {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn-1 {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            color: #2d3436;
+        }
+
+        .nav-btn-1:hover {
+            background: #e9ecef;
+        }
+
+        .nav-btn-1.active-1 {
+            background: #00d2ff;
+            color: white;
+        }
+
+        /* Content Sections */
+        .section-1 {
+            display: none;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-1.active-1 {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+      
+
+        /* Responsive Design */
+        @media (max-width: 1008px) {
+            .nav-container-1 {
+                
+                gap: 1rem;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-buttons-1 {
+                width: 100%;
+                justify-content: center;
+                
+            }
+
+            .nav-btn-1 {
+                flex: 1;
+                min-width: 100px;
+                text-align: center;
+                
+            }
+        }
+    
+    .header-2025 {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-2025 {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .logo-2025 img {
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .search-container-2025 {
+            margin-left: 2rem;
+            flex-grow: 1;
+            max-width: 600px;
+        }
+
+        .search-bar-2025 {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 24px;
+            font-size: 1rem;
+            background-color: #f8f8f8;
+        }
+
+        .container-2025 {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+          
+        }
+
+        .notification-banner-2025 {
+            background: linear-gradient(to right, #e8e4ff, #f0e6ff);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-banner-2025 i {
+            color: #4834d4;
+        }
+
+       
+        h1-2025 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .create-trip-options-2025 {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .create-button-2025 {
+            flex: 1;
+            padding: 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .create-button-2025:hover {
+            border-color: #000;
+        }
+
+        .create-button-2025 i {
+            font-size: 1.2rem;
+        }
+
+        .ai-button-2025 {
+            background-color: #f8f8f8;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-buttons {
+
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: auto;
+        }
+
+        .public-button {
+            background-color: #00d2ff;
+            color: white;
+            width: auto;
+        }
+
+        .public-button:hover {
+            background-color: #1b3a42;
+            
+        }
+
+        .private-button {
+            background-color:#00d2ff;
+            border: 1px solid #dee2e6;
+            color: #ffffff;
+            width: auto;
+        }
+
+        .private-button:hover {
+            background-color: #1b3a42;
+        }    
+   </style>
+
+   <style>
+    .slide-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        background: rgb(243, 241, 241);
+        padding: 0 20px;
+        margin-top: 10px;
+        border-radius: 5px;
+        width:auto;
+        
+    }
+    .show {
+        max-height: 200px; /* Adjust height as needed */
+        padding: 20px;
+    }
+</style>
+
+<style>
+  /* Modal styles */
+  /*public */
+  .travel_modal_pub {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .travel_modal_pub_content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 800px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+  }
+
+  .travel_close_pub_btn {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #6c757d;
+  }
+
+  /* Form styles */
+  .travel_stepper_pub_container {
+      max-width: 800px;
+      margin: 30px auto;
+      font-family: Arial, sans-serif;
+  }
+
+  .travel_step_pub_panel {
+      display: none;
+      padding: 20px;
+      background-color: #eeeaea;
+      border-radius: 8px;
+      margin-bottom: 20px;
+  }
+
+  .travel_step_pub_panel.active {
+      display: block;
+  }
+
+  .travel_progress_pub_bar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      position: relative;
+  }
+
+  .travel_progress_pub_step {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+  }
+
+  .travel_progress_pub_step.active {
+      background-color: #15646c;
+      color: white;
+  }
+
+  .travel_progress_pub_line {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #ddd;
+      z-index: 1;
+  }
+
+  .travel_form_pub_group {
+      margin-bottom: 20px;
+  }
+
+  label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #000!important;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+
+  .travel_gender_pub_group {
+      display: flex;
+      gap: 20px;
+  }
+
+  .travel_gender_pub_option {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+  }
+
+  .travel_button_pub_group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+  }
+
+  button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+  }
+
+  .travel_prev_pub_btn {
+      background-color: #6c757d;
+      color: white;
+  }
+
+  .travel_next_pub_btn {
+      background-color: #15646c;
+      color: white;
+  }
+
+  .travel_submit_pub_btn {
+      background-color: #15646c;
+      color: white;
+  }
+
+  .travel_error_pub_message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+  }
+.travel_modal_pub {
+display: none;
+position: fixed;
+z-index: 1000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+}
+
+.travel_modal_pub_content {
+background-color: white;
+margin: 5% auto;
+padding: 20px;
+border-radius: 10px;
+max-width: 800px;
+}
+
+.travel_modal_pub_close {
+float: right;
+font-size: 28px;
+cursor: pointer;
+}
+.pub-essen-essentials-category input { width:auto!important;}
+.pub-essen-essentials-item {width:25%; float: left;}
+.pub-essen-essentials-category {overflow: hidden;}
+.pub-essen-essentials-item {margin:0px!important}
+:root {
+      --pub-essen-primary-color: #2c3e50;
+      --pub-essen-secondary-color: #3498db;
+      --pub-essen-background-color: #f4f6f7;
+      --pub-essen-text-color: #333;
+  }
+ 
+  .pub-essen-container {
+      background-color: rgba(216, 221, 226, 0.86);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+width: auto;
+  }
+  .pub-essen-toggle-btn {
+      width:auto;
+      padding: 10px;
+      background-color: var(--pub-essen-primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 15px;
+      transition: background-color 0.3s ease;
+  }
+  .pub-essen-toggle-btn:hover {
+      background-color: #34495e;
+  }
+  .pub-essen-essentials-list {
+      display: none;
+      max-height: 1400px;
+      overflow-y: auto;
+  }
+  textarea {min-height: 100px!important;}
+  input[type="text"], input[type="date"], input[type="number"], select, textarea {background-color: white!important;border: 1px solid #ddd!important;}
+  .pub-essen-essentials-category {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+  }
+  .pub-essen-essentials-category h3 {
+      margin-bottom: 10px;
+      color: var(--pub-essen-secondary-color);
+  }
+  .pub-essen-essentials-item {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+  }
+  .pub-essen-essentials-item input {
+      margin-right: 10px;
+  }
+  .pub-essen-save-btn {
+      width: auto;
+      padding: 10px;
+      background-color: var(--pub-essen-secondary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+  }
+  .pub-essen-save-btn:hover {
+      background-color: #2980b9;
+  }
+  #pub-essen-saved-items {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #f1f8ff;
+      border-radius: 5px;
+  }
+</style>
+
+   <style>
+    /*private form*/
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    .trip-planner-container {
+        width: 100%;
+        max-width: 900px;
+        background: #eeeaea;
+        border-radius: 10px;
+        padding: 20px;
+        color: #000;
+  height: auto;
+
+
+    }
+
+    .trip-progress-stepper {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    .trip-progress-step {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #9f9a9a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        color: white;
+    }
+
+    .trip-progress-step.active {
+        background: #15646c;
+    }
+
+    .trip-progress-step::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: #e0e0e0;
+        right: -100%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .trip-progress-step:last-child::after {
+        display: none;
+    }
+
+    .trip-form-step {
+        display: none;
+    }
+
+    .trip-form-step.active {
+        display: block;
+    }
+
+    .trip-form-group {
+        margin-bottom: 20px;
+    }
+
+    .trip-form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .trip-form-input, .trip-form-select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .trip-date-container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .trip-date-container input {
+        flex: 1;
+    }
+
+    .trip-form-button {
+        background:  #15646c;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .trip-form-button:hover {
+        background: #083e44;
+    }
+
+    .trip-form-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+   
+    .trip-popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+    }
+.priv-modal-button {
+        background: #15646c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .priv-modal-button:hover {
+        background: #083e44;
+    }
+    .priv-modal-container {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        width: 90%;
+        max-width: 800px;
+        z-index: 99999;
+    }
+    .priv-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+    }
+    .priv-close-button {
+        background: rgb(104, 100, 100);
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        float: right;
+    }
+    trip-essentials-area {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  margin: 20px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.trip-essentials-area h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+#trip-essentials-text {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 150px;
+  background-color: #f8f9fa;
+  transition: border-color 0.3s ease;
+}
+
+#trip-essentials-text:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+.trip-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(249, 250, 251, 0.95));
+    border-radius: 24px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06),
+                0 4px 8px rgba(0, 0, 0, 0.04);
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    border: 1px solid rgba(229, 231, 235, 0.5);
+    overflow: hidden;
+    width: 500px;
+    margin: 1.5rem auto;
+}
+
+.trip-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12),
+                0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.trip-card h4 {
+    color: #1a1f36;
+    margin-bottom: 1.75rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.75rem;
+    letter-spacing: -0.025em;
+}
+
+.trip-card p {
+    margin: 1rem 0;
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.trip-card p strong {
+    color: #2d3748;
+    font-weight: 600;
+    min-width: 140px;
+    display: inline-block;
+}
+
+.trip-card span {
+    color: #4b5563;
+}
+
+/* Add a subtle hover effect for text */
+.trip-card:hover p strong {
+    color: #1a365d;
+}
+
+/* Add some visual hierarchy with a background accent */
+.trip-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, rgba(99, 179, 237, 0.1), rgba(66, 153, 225, 0.05));
+    border-radius: 0 24px 0 100%;
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .trip-card {
+        width: 100%;
+        padding: 1.5rem;
+    }
+    
+    .trip-card h4 {
+        font-size: 1.5rem;
+    }
+    
+    .trip-card p strong {
+        min-width: 550px;
+    }
+}
+
+ 
+</style>
+
   </head>
   <body>
-    <div id="preloader-active">
-      <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-          <div class="text-center">
-            <div class="spinning-coin-fall"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+  
     <header class="header sticky-bar">
       <div class="top-bar"> 
         <div class="container-fluid"> 
@@ -56,7 +861,7 @@
                               </div>
                               <div class="col-lg-4">
                                 <div class="card-home-link background-body"> <a class="card-icon" href="index-2.html"> <img src="assets/imgs/template/icons/activity.svg" alt="Travila"></a>
-                                  <div class="card-info"> <!--<a href="index-2.html">-->
+                                  <div class="card-info"> <!--<a href="index.html">-->
                                     <h6 class="text-md-bold"> Everything in one space</h6></a>
                                     <p class="text-xs-medium neutral-500">
                                       Whether it's your own personalized trip or a bookmarked plan, you'll find everything organized on a single page for your convenience.</p>
@@ -72,7 +877,7 @@
                                   <div class="card-info"> <!--<a href="index-3.html">-->
                                       <h6 class="text-md-bold">Adjust your itinerary as needed
                                       </h6></a>
-                                    <p class="text-xs-medium neutral-500">Seamlessly manage your itinerary all in one page with Travi - from reconfiguring the order of your plans, introducing new destinations to your itinerary, or even discarding plans as needed.</p>
+                                    <p class="text-xs-medium neutral-500">Seamlessly manage your itinerary all in one page with Wonderplan - from reconfiguring the order of your plans, introducing new destinations to your itinerary, or even discarding plans as needed.</p>
                                   </div>
                                 </div>
                               </div>
@@ -95,80 +900,40 @@
                       </div>
                     </div>
                   </li>
-                  <li class="mega-li-small has-children"><a href="about.html">Tours</a>
-                    <div class="mega-menu">
-                      <div class="mega-menu-inner mega-menu-inner-small">
-                        <div class="row">
-                          <div class="col-lg-6">
-                            <h6 class="text-lg-bold neutral-1000">Tours Listing</h6>
-                            <ul class="sub-menu">
-                              <li><a href="tour-grid-3.html">Tours List</a></li>
-                              <!--<li><a href="tour-grid.html">Sidebar Left Fillter</a></li>
-                              <li><a href="tour-grid-2.html">Sidebar Right Fillter</a></li>
-                              <li><a href="tour-list.html">Tours List - List 1</a></li>
-                              <li><a href="tour-list-2.html">Tours List - List 2</a></li> -->
-                            </ul>
-                          </div>
-                          <div class="col-lg-6">
-                            <h6 class="text-lg-bold neutral-1000">Tour Details</h6>
-                            <ul class="sub-menu">
-                              <li><a href="tour-detail.html">Tour Single page </a></li>
-                             <!--<li><a href="tour-detail-2.html">Tour Single 02 - Slideshow</a></li>
-                              <li><a href="tour-detail-3.html">Tour Single 03 - Video</a></li>
-                              <li><a href="tour-detail-4.html">Tour Single 04 - Image</a></li>--> 
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <li class="mega-li-small "><a href="about.html">Tours</a>
+                    
                   </li>
-                  <li class="has-children"><a href="blog-grid.html">Blog</a>
-                    <ul class="sub-menu">
-                      <li><a href="blog-grid.html">The Blog Vault</a></li>
-                      <li><a href="blogwrite.html">Share Your Thoughts</a></li>
-                      <!--<li><a href="blog-grid-3.html">List</a></li>
-                      <li><a href="blog-detail.html">Blog Details</a></li>
-                      <li><a href="blog-detail-2.html">Blog Details 2</a></li>-->
-                    </ul>
-                  </li>
-                  <li class="has-children"><a href="#">Terms of Service & Privacy Notice</a>
-                    <ul class="sub-menu">
-                      <li><a href="privacy.html">Privacy Policy</a></li>
-                      <li><a href="term.html">Terms Of Service</a></li>
-                      <!--<li><a href="blog-grid-3.html">List</a></li>
-                      <li><a href="blog-detail.html">Blog Details</a></li>
-                      <li><a href="blog-detail-2.html">Blog Details 2</a></li>-->
-                    </ul>
-                  </li>
-                 <!-- <li class="mega-li-small has-children"><a href="service.html">Destinations</a>
+                  <!--<li class="mega-li-small has-children"><a href="service.html">Destinations</a>
                     <div class="mega-menu">
                       <div class="mega-menu-inner mega-menu-inner-small mega-menu-inner-destinations">
                         <h6 class="text-lg-bold neutral-1000">Destinations</h6>
-                        <ul class="sub-menu">
-                          <li><a href="destination.html">Destinations list 01</a></li>
-                          <li><a href="destination-2.html">Destinations list 02</a></li>
+                        <ul class="sub-menu">-->
+        
+                          <!--<li><a href="destination-2.html">Destinations list 02</a></li>
                           <li><a href="destination-3.html">Destinations list 03</a></li>
-                          <li><a href="destination-4.html">Destinations Details 01</a></li>
-                          <li><a href="destination-5.html">Destinations Details 02</a></li>
+                                            <li><a href="destination.html">Destinations list </a></li>-->
+                          <!--<li><a href="destination-4.html">Destinations Details page</a></li>-->
+                          <!--<li><a href="destination-5.html">Destinations Details 02</a></li>
                           <li><a href="destination-6.html">Destinations Details 03</a></li>
                         </ul>
                       </div>
                     </div>
-                  </li>
-                  <li class="has-children"><a href="#">Activities</a>
+                  </li>-->
+                  <!--<li class="has-children"><a href="#">Activities</a>
                     <ul class="sub-menu"> 
-                      <li> <a href="activities.html">Activities List 01</a></li>
-                      <li> <a href="activities-2.html">Activities List 02</a></li>
+                      <li> <a href="activities.html">Activities </a></li>-->
+                      <!--<li> <a href="activities-2.html">Activities List 02</a></li>
                       <li> <a href="activities-3.html">Activities List 03</a></li>
                       <li> <a href="activities-4.html">Activities List 04</a></li>
-                      <li> <a href="activities-5.html">Activities List 05</a></li>
-                      <li> <a href="activities-detail.html">Activities Single 01</a></li>
-                      <li> <a href="activities-detail-2.html">Activities Single 02</a></li>
-                      <li> <a href="activities-detail-3.html">Activities Single 03</a></li>
-                      <li> <a href="activities-detail-4.html">Activities Single 04</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-children"><a href="blog.html">Hotel</a>
+                      <li> <a href="activities-5.html">Activities List 05</a></li>-->
+                     
+                     <!--<li> <a href="activities-detail-2.html">Activities Single 02</a>
+
+                    </li>--> 
+                      
+                      <!--<li> <a href="activities-detail-4.html">Activities Single 04</a></li>-->
+                    
+                  <!--<li class="has-children"><a href="blog.html">Hotel</a>
                     <ul class="sub-menu">
                       <li><a href="hotel-grid.html">Hotel List 01</a></li>
                       <li><a href="hotel-grid-2.html">Hotel List 02</a></li>
@@ -179,8 +944,9 @@
                       <li><a href="hotel-detail.html">Hotel Details 01</a></li>
                       <li><a href="hotel-detail-2.html">Hotel Details 02</a></li>
                     </ul>
-                  </li>
-                  <li class="mega-li-small has-children"><a href="#">Rental</a>
+                  </li>-->
+
+                 <!-- <li class="mega-li-small has-children"><a href="#">Rental</a>
                     <div class="mega-menu">
                       <div class="mega-menu-inner mega-menu-inner-small">
                         <div class="row">
@@ -206,45 +972,27 @@
                         </div>
                       </div>
                     </div>
+                  </li>-->
+                  <li class="has-children"><a href="blog-grid.html">Blog</a>
+                    <ul class="sub-menu">
+                      <li><a href="blog-grid.html">The Blog Vault</a></li>
+                      <li><a href="#">Share Your Thoughts</a></li>
+                      </ul>
                   </li>
-                  <li class="has-children"><a href="tickets.html">Tickets</a>
+                  <li class=""><a href="privacy.html">Privacy Notice</a>
+                    
+                  </li>
+                  <!--<li class="has-children"><a href="tickets.html">Tickets</a>
                     <ul class="sub-menu">
                       <li><a href="tickets.html">Flight tickets</a></li>
                       <li><a href="tickets-2.html">Train tickets</a></li>
                       <li><a href="book-ticket.html">Ticket details</a></li>
                     </ul>
-                  </li>
-                  <li class="has-children"><a href="javascript:void(0)">Pages</a>
-                    <ul class="sub-menu">
-                      <li><a href="about.html">About</a></li>
-                      <li><a href="contact.html">Contact</a></li>
-                      <li><a href="privacy.html">Privacy</a></li>
-                      <li><a href="faq.html">FAQs</a></li>
-                      <li><a href="help-center.html">Help center</a></li>
-                      <li><a href="become-expert.html">Become Expert</a></li>
-                      <li><a href="comming-soon.html">Coming soon</a></li>
-                      <li><a href="checkout.html">Checkout</a></li>
-                      <li><a href="confirmation.html">Confirmationn</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="term.html">Term</a></li>
-                      <li><a href="404.html">404</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-children"><a href="blog-grid.html">Blog</a>
-                    <ul class="sub-menu">
-                      <li><a href="blog-grid.html">Grid Full</a></li>
-                      <li><a href="blog-grid-2.html">Grid Sidebar</a></li>
-                      <li><a href="blog-grid-3.html">List</a></li>
-                      <li><a href="blog-detail.html">Blog Details</a></li>
-                      <li><a href="blog-detail-2.html">Blog Details 2</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="contact.html">Contact</a></li>
-                </ul>-->
-                <li class=""><a href="faq.html">FAQs</a></li>
+                  </li>-->
+                  <li class=""><a href="faq.html">FAQs</a></li>
                   <li><a href="contact.html">Contact</a></li>
 
-                  <li class="has-children"><a href="javascript:void(0)"> </a>
+                  <li class="has-children"><a href="javascript:void(0)">#</a>
                     <ul class="sub-menu">
                       <!--<li><a href="about.html">About</a></li>
                       <li><a href="privacy.html">Privacy</a></li>
@@ -261,15 +1009,15 @@
                       <li><a href="404.html">404</a></li>
                     </ul>
                   </li>
+
                   
                 
                 </ul>
-                
               </nav>
             </div>
           </div>
           <div class="header-right">
-            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-account icon-lang"><span class="text-14-medium arrow-down">EN</span></span>
+            <!--<div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-account icon-lang"><span class="text-14-medium arrow-down">EN</span></span>
               <div class="dropdown-account">
                 <ul>
                   <li><a class="text-sm-medium" href="#">English</a></li>
@@ -277,7 +1025,7 @@
                   <li><a class="text-sm-medium" href="#">Chinese</a></li>
                 </ul>
               </div>
-            </div>
+    
             <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-cart"><span class="text-14-medium arrow-down">USD</span></span>
               <div class="dropdown-cart">
                 <ul>
@@ -286,8 +1034,8 @@
                   <li><a class="text-sm-medium" href="#">SGP</a></li>
                 </ul>
               </div>
-            </div>
-            <div class="d-none d-xxl-inline-block align-middle mr-15"><a class="btn btn-mode change-mode mr-15" href="#" data-bs-theme-value="dark"> <img class="light-mode" src="assets/imgs/template/icons/light.svg" alt="Travila"><img class="dark-mode" src="assets/imgs/template/icons/light-w.svg" alt="Travila"></a><a class="btn btn-default btn-signin" href="#">Signin</a></div>
+            </div>-->
+           
             <div class="burger-icon-2 burger-icon-white"><img src="assets/imgs/template/icons/menu.svg" alt="Travila"></div>
             <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
           </div>
@@ -296,7 +1044,7 @@
     </header>
     <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar button-bg-2">
       <div class="mobile-header-wrapper-inner">
-        <div class="mobile-header-logo"> <a class="d-flex" href="index-2.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a>
+        <div class="mobile-header-logo"> <a class="d-flex" href="index.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a>
           <div class="burger-icon burger-icon-white"></div>
         </div>
         <div class="mobile-header-top">
@@ -315,9 +1063,13 @@
             <div class="mobile-menu-wrap mobile-header-border">
               <nav>
                 <ul class="mobile-menu font-heading">
-                  <li class="has-children"><a class="active" href="index-2.html">Home Pages</a>
+                  <li class="has-children"><a class="active" href="index-2.html">Home</a>
                     <ul class="sub-menu">
-                      <li><a href="index-2.html">Home 1 - All services</a></li>
+                      <li><a href="index-5.html">Tours</a></li>
+                      <li><a href="index-6.html"> Activities</a></li>
+                      <li><a href="index-7.html">Destinations</a></li>
+                      <li><a href="customize.html"> Customize Your Own Tour With AI</a></li>
+                      <!---<li><a href="index.html">Home 1 - All services</a></li>
                       <li><a href="index-2.html">Home 2 - All services</a></li>
                       <li><a href="index-3.html">Home 3 - All services</a></li>
                       <li><a href="index-4.html">Home 4 - All services</a></li>
@@ -327,23 +1079,21 @@
                       <li><a href="index-8.html">Home 8 - Hotels</a></li>
                       <li><a href="index-9.html">Home 9 - Rental Car</a></li>
                       <li><a href="index-10.html">Home 10 - Rental Property</a></li>
-                      <li><a href="index-11.html">Home 11 - Tickets</a></li>
+                      <li><a href="index-11.html">Home 11 - Tickets</a></li>-->
                     </ul>
                   </li>
-                  <li class="has-children"><a href="tour-grid.html">Tours</a>
+                  <li class=""><a href="tour-grid-3.html">Tours</a></li> noorxyz
+                  <li class=""><a href="destination.html">Destinations</a>
                     <ul class="sub-menu">
-                      <li><a href="tour-grid-3.html">Tours List - Top Fillter</a></li>
-                      <li><a href="tour-grid.html">Tours List - Sidebar Left Fillter</a></li>
-                      <li><a href="tour-grid-2.html">Tours List - Sidebar Right Fillter</a></li>
-                      <li><a href="tour-list.html">Tours List 1</a></li>
-                      <li><a href="tour-list-2.html">Tours List 2</a></li>
-                      <li><a href="tour-detail.html">Tour Single 01 - Gallery</a></li>
-                      <li><a href="tour-detail-2.html">Tour Single 02 - Slideshow</a></li>
-                      <li><a href="tour-detail-3.html">Tour Single 03 - Video</a></li>
-                      <li><a href="tour-detail-4.html">Tour Single 04 - Image</a></li>
+                      <li><a href="destination.html">Destinations list</a></li>
+                      <!--<li><a href="destination-2.html">Destinations list 2</a></li>
+                      <li><a href="destination-3.html">Destinations list 3</a></li>
+                      <li><a href="destination-4.html">Destinations Details 01</a></li>
+                      <li><a href="destination-5.html">Destinations Details 02</a></li>
+                      <li><a href="destination-6.html">Destinations Details 03</a></li>-->
                     </ul>
                   </li>
-                  <li class="has-children"><a href="destination.html">Destinations</a>
+                  <!--<li class="has-children"><a href="destination.html">Destinations</a>
                     <ul class="sub-menu">
                       <li><a href="destination.html">Destinations list 1</a></li>
                       <li><a href="destination-2.html">Destinations list 2</a></li>
@@ -352,21 +1102,23 @@
                       <li><a href="destination-5.html">Destinations Details 02</a></li>
                       <li><a href="destination-6.html">Destinations Details 03</a></li>
                     </ul>
-                  </li>
+                  </li>-->
                   <li class="has-children"><a href="activities.html">Activities</a>
                     <ul class="sub-menu">
-                      <li><a href="activities.html">Activities List - Top Fillter</a></li>
-                      <li><a href="activities-2.html">Activities List - Sidebar Left Fillter</a></li>
+                      <li><a href="activities.html">Activities List</a></li>
+                      <!--<li><a href="activities-2.html">Activities List - Sidebar Left Fillter</a></li>
                       <li><a href="activities-3.html">Activities List - Sidebar Right Fillter</a></li>
-                      <li><a href="activities-4.html">Activities List - Grid</a></li>
-                      <li><a href="activities-5.html">Activities List - List</a></li>
-                      <li><a href="activities-detail.html">Activities Single 01 - Gallery</a></li>
-                      <li><a href="activities-detail-2.html">Activities Single 02 - Slideshow</a></li>
-                      <li><a href="activities-detail-3.html">Activities Single 03</a></li>
                       <li><a href="activities-detail-4.html">Activities Single 04</a></li>
+                       <li><a href="activities-detail-2.html">Activities Single 02 - Slideshow</a></li>
+                      <li><a href="activities-4.html">Activities List - Grid</a></li>
+                      <li><a href="activities-5.html">Activities List - List</a></li>-->
+                      <li><a href="activities-detail.html">Activities Single</a></li>
+                     
+                      <li><a href="activities-detail-3.html">Activities</a></li>
+                      
                     </ul>
                   </li>
-                  <li class="has-children"> <a href="hotel-grid.html">Hotels</a>
+                  <!--<li class="has-children"> <a href="hotel-grid.html">Hotels</a>
                     <ul class="sub-menu">
                       <li><a href="hotel-grid.html">Hotel List 01</a></li>
                       <li><a href="hotel-grid-2.html">Hotel List 02</a></li>
@@ -395,7 +1147,7 @@
                       <li><a href="tickets-2.html">Train tickets</a></li>
                       <li><a href="book-ticket.html">Ticket details</a></li>
                     </ul>
-                  </li>
+                  </li>-->
                   <li class="has-children"> <a href="javascript:void(0)">Pages</a>
                     <ul class="sub-menu">
                       <li><a href="about.html">About</a></li>
@@ -438,7 +1190,7 @@
                 <ul>
                   <li><a class="text-sm-medium" href="#">English</a></li>
                   <li><a class="text-sm-medium" href="#">French</a></li>
-                  <li><a class="text-sm-medium" href="#">Chiness</a></li>
+                  <li><a class="text-sm-medium" href="#">Chinese</a></li>
                 </ul>
               </div>
             </div>
@@ -458,11 +1210,15 @@
             <div class="card-author"> 
               <div class="card-image"> <img src="assets/imgs/page/homepage1/author2.png" alt="Travila"></div>
               <div class="card-info"> 
-                <p class="text-md-bold neutral-1000">Alice Roses</p>
+                <p class="text-md-bold neutral-1000">Person Xyz</p>
                 <p class="text-xs neutral-1000">London, England</p>
               </div>
-            </div><a class="btn btn-black" href="#">Logout</a>
+            
+            </div><div class="btnprof">
+              <button class="btnview"><a href="../travi dash/my-profile.html">View Profile</a></button>
+             </div><a class="btn btn-black" href="#">Logout</a>
           </div>
+          
           <div class="box-quicklinks"> 
             <h6 class="title-quicklinks neutral-1000">Quick Links</h6>
             <div class="box-list-quicklinks"> 
@@ -480,20 +1236,8 @@
                   <p class="text-xs neutral-500">7 tours, 2 rooms</p>
                 </div>
               </div>
-              <div class="item-quicklinks"> 
-                <div class="item-icon"> <img src="assets/imgs/template/icons/wallet.svg" alt="Travila"></div>
-                <div class="item-info"> <a href="#"> 
-                    <h6 class="text-md-bold neutral-1000">My Wallet</h6></a>
-                  <p class="text-xs neutral-500">$4500</p>
-                </div>
-              </div>
-              <div class="item-quicklinks"> 
-                <div class="item-icon"> <img src="assets/imgs/template/icons/discount.svg" alt="Travila"></div>
-                <div class="item-info"> <a href="#"> 
-                    <h6 class="text-md-bold neutral-1000">Discount</h6></a>
-                  <p class="text-xs neutral-500">Only today</p>
-                </div>
-              </div>
+              
+              
               <div class="item-quicklinks"> 
                 <div class="item-icon"> <img src="assets/imgs/template/icons/friends.svg" alt="Travila"></div>
                 <div class="item-info"> <a href="#"> 
@@ -517,62 +1261,10 @@
               </div>
             </div>
           </div>
-          <div class="box-eventsdate"> 
-            <h6 class="title-eventsdate neutral-1000">Event Dates</h6>
-            <div class="box-calendar-events"> 
-              <div id="calendar-events"></div>
-            </div>
-          </div>
-          <div class="box-savedplaces"> 
-            <h6 class="title-savedplaces neutral-1000">Saved Places</h6>
-            <div class="box-list-places"> 
-              <div class="card-place">
-                <div class="card-image"> <img src="assets/imgs/page/homepage1/place.png" alt="Travila"></div>
-                <div class="card-info background-card"> 
-                  <div class="card-info-top"> 
-                    <h6 class="text-xl-bold"> <a class="neutral-1000" href="#">Machu Picchu</a></h6>
-                    <p class="text-xs card-rate"> <img src="assets/imgs/template/icons/star.svg" alt="Travila">4/5</p>
-                  </div>
-                  <div class="card-info-bottom"> 
-                    <p class="text-xs-medium neutral-500">Carved by the Colorado River in Arizona, United States</p><a href="#"> 
-                      <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                      </svg></a>
-                  </div>
-                </div>
-              </div>
-              <div class="card-place">
-                <div class="card-image"> <img src="assets/imgs/page/homepage1/place2.png" alt="Travila"></div>
-                <div class="card-info background-card"> 
-                  <div class="card-info-top"> 
-                    <h6 class="text-xl-bold"> <a class="neutral-1000" href="#">Machu Picchu</a></h6>
-                    <p class="text-xs card-rate"> <img src="assets/imgs/template/icons/star.svg" alt="Travila">4/5</p>
-                  </div>
-                  <div class="card-info-bottom"> 
-                    <p class="text-xs-medium neutral-500">Carved by the Colorado River in Arizona, United States</p><a href="#"> 
-                      <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                      </svg></a>
-                  </div>
-                </div>
-              </div>
-              <div class="card-place"> 
-                <div class="card-image"> <img src="assets/imgs/page/homepage1/place3.png" alt="Travila"></div>
-                <div class="card-info background-card"> 
-                  <div class="card-info-top"> 
-                    <h6 class="text-xl-bold"> <a class="neutral-1000" href="#">Machu Picchu</a></h6>
-                    <p class="text-xs card-rate"> <img src="assets/imgs/template/icons/star.svg" alt="Travila">4/5</p>
-                  </div>
-                  <div class="card-info-bottom"> 
-                    <p class="text-xs-medium neutral-500">Carved by the Colorado River in Arizona, United States</p><a href="#"> 
-                      <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                      </svg></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          
+          
+        
+         
           <div class="box-contactus">
             <h6 class="title-contactus neutral-1000">Contact Us</h6>
             <div class="contact-info"> 
@@ -585,762 +1277,1299 @@
       </div>
     </div>
     <main class="main">
-      <section class="box-section box-breadcrumb background-body">
+      <section class="box-section block-banner-tourlist" style="background-image:url(assets/imgs/page/tour/banner5.png)">
         <div class="container"> 
-          <ul class="breadcrumbs"> 
-            <li> <a href="index-2.html">Home</a><span class="arrow-right"> 
-                <svg width="7" height="12" viewbox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 11L6 6L1 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg></span></li>
-            <li> <a href="destination.html">Tours</a><span class="arrow-right"> 
-                <svg width="7" height="12" viewbox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 11L6 6L1 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg></span></li>
-            <li> <span class="text-breadcrumb">
-                Maharashtra: Food Tastings and Culture Tour </span></li>
-          </ul>
-        </div>
+          <div class="text-center"> 
+            <h3>Journey with Travo - Begin Your Story!</h3>
+            <h6 class="heading-6-medium">Easily search for top tours offered by our AI and community</h6>
+          </div>
+          </div>
       </section>
-      <section class="box-section box-content-tour-detail background-body"> 
-        <div class="container mb-65"> 
-          <div class="tour-header"> 
-            <div class="tour-rate"> 
-              <div class="rate-element"><span class="rating">4.96 <span class="text-sm-medium neutral-500">(672 reviews)</span></span></div>
-            </div>
-            <div class="row">   
-              <div class="col-lg-8"> 
-                <div class="tour-title-main"> 
-                  <h4 class="neutral-1000"> Maharashtra: Food Tastings and Culture Tour </h4>
-                </div>
-              </div>
-            </div>
-            <div class="tour-metas"> 
-              <div class="tour-meta-left"> 
-                <p class="text-md-medium neutral-500 mr-20 tour-location"> 
-                  <svg width="12" height="16" viewbox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.99967 0C2.80452 0 0.205078 2.59944 0.205078 5.79456C0.205078 9.75981 5.39067 15.581 5.61145 15.8269C5.81883 16.0579 6.18089 16.0575 6.38789 15.8269C6.60867 15.581 11.7943 9.75981 11.7943 5.79456C11.7942 2.59944 9.1948 0 5.99967 0ZM5.99967 8.70997C4.39211 8.70997 3.0843 7.40212 3.0843 5.79456C3.0843 4.187 4.39214 2.87919 5.99967 2.87919C7.6072 2.87919 8.91502 4.18703 8.91502 5.79459C8.91502 7.40216 7.6072 8.70997 5.99967 8.70997Z" fill=""></path>
-                  </svg>GOA, INDIA
-                </p><!--<a class="text-md-medium neutral-1000 mr-30" href="#">Show on map</a>-->
-                <p class="text-md-medium neutral-500 tour-code mr-15"> 
-                  <svg width="20" height="18" viewbox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2729 0.273646C13.4097 0.238432 13.5538 0.24262 13.6884 0.28573L18.5284 1.83572L18.5474 1.84209C18.8967 1.96436 19.1936 2.19167 19.4024 2.4875C19.5891 2.75202 19.7309 3.08694 19.7489 3.46434C19.7494 3.47622 19.7497 3.4881 19.7497 3.49998V15.5999C19.7625 15.8723 19.7102 16.1395 19.609 16.3754C19.6059 16.3827 19.6026 16.39 19.5993 16.3972C19.476 16.6613 19.3017 16.8663 19.1098 17.0262C19.1023 17.0324 19.0947 17.0385 19.087 17.0445C18.8513 17.2258 18.5774 17.3363 18.2988 17.3734L18.2927 17.3743C18.0363 17.4063 17.7882 17.3792 17.5622 17.3133C17.5379 17.3081 17.5138 17.3016 17.4901 17.294L13.4665 16.0004L6.75651 17.7263C6.62007 17.7614 6.47649 17.7574 6.34221 17.7147L1.47223 16.1647C1.46543 16.1625 1.45866 16.1603 1.45193 16.1579C1.0871 16.0302 0.813939 15.7971 0.613929 15.5356C0.608133 15.528 0.602481 15.5203 0.596973 15.5125C0.395967 15.2278 0.277432 14.8905 0.260536 14.5357C0.259972 14.5238 0.259689 14.5119 0.259689 14.5V2.39007C0.246699 2.11286 0.301239 1.83735 0.420015 1.58283C0.544641 1.31578 0.724533 1.10313 0.942417 0.93553C1.17424 0.757204 1.45649 0.6376 1.7691 0.61312C2.03626 0.583264 2.30621 0.616234 2.56047 0.712834L6.56277 1.99963L13.2729 0.273646ZM13.437 1.78025L6.72651 3.50634C6.58929 3.54162 6.44493 3.53736 6.31011 3.49398L2.08011 2.13402C2.06359 2.1287 2.04725 2.12282 2.03113 2.11637C2.00054 2.10413 1.96854 2.09972 1.93273 2.10419C1.91736 2.10611 1.90194 2.10756 1.88649 2.10852C1.88649 2.10852 1.88436 2.10866 1.88088 2.11001C1.8771 2.11149 1.86887 2.11532 1.85699 2.12447C1.81487 2.15686 1.79467 2.18421 1.77929 2.21715C1.76189 2.25446 1.75611 2.28942 1.75823 2.32321C1.7592 2.33879 1.75969 2.35439 1.75969 2.36999V14.4772C1.76448 14.5336 1.78316 14.5879 1.81511 14.6367C1.86704 14.7014 1.90866 14.7272 1.94108 14.7398L6.59169 16.2199L13.3028 14.4937C13.44 14.4584 13.5844 14.4626 13.7192 14.506L17.8938 15.8482C17.9184 15.8537 17.9428 15.8605 17.9669 15.8685C18.0209 15.8865 18.0669 15.8902 18.1034 15.8862C18.1214 15.8833 18.1425 15.8759 18.1629 15.8623C18.1981 15.8309 18.2196 15.8024 18.2346 15.7738C18.2473 15.7399 18.2533 15.7014 18.2511 15.6668C18.2502 15.6512 18.2497 15.6356 18.2497 15.62V3.52464C18.2453 3.48222 18.2258 3.42174 18.1769 3.3525C18.147 3.3102 18.1062 3.2784 18.0582 3.26022L13.437 1.78025Z" fill=""></path>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.55957 2.02002C6.97375 2.02002 7.30957 2.3558 7.30957 2.77002V16.92C7.30957 17.3343 6.97375 17.67 6.55957 17.67C6.14533 17.67 5.80957 17.3343 5.80957 16.92V2.77002C5.80957 2.3558 6.14533 2.02002 6.55957 2.02002Z" fill=""></path>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4893 0.330078C13.9035 0.330078 14.2393 0.665862 14.2393 1.08008V15.2301C14.2393 15.6443 13.9035 15.9801 13.4893 15.9801C13.0751 15.9801 12.7393 15.6443 12.7393 15.2301V1.08008C12.7393 0.665862 13.0751 0.330078 13.4893 0.330078Z" fill=""></path>
-                  </svg>Tour Code:
-                </p><a class="text-md-medium neutral-1000" href="#">LVA-4125</a>
-              </div>
-              <div class="tour-meta-right"> <a class="btn btn-share" href="#">
-                  <svg width="16" height="18" viewbox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13 11.5332C12.012 11.5332 11.1413 12.0193 10.5944 12.7584L5.86633 10.3374C5.94483 10.0698 6 9.79249 6 9.49989C6 9.10302 5.91863 8.72572 5.77807 8.37869L10.7262 5.40109C11.2769 6.04735 12.0863 6.46655 13 6.46655C14.6543 6.46655 16 5.12085 16 3.46655C16 1.81225 14.6543 0.466553 13 0.466553C11.3457 0.466553 10 1.81225 10 3.46655C10 3.84779 10.0785 4.20942 10.2087 4.54515L5.24583 7.53149C4.69563 6.90442 3.8979 6.49989 3 6.49989C1.3457 6.49989 0 7.84559 0 9.49989C0 11.1542 1.3457 12.4999 3 12.4999C4.00433 12.4999 4.8897 11.9996 5.4345 11.2397L10.147 13.6529C10.0602 13.9331 10 14.2249 10 14.5332C10 16.1875 11.3457 17.5332 13 17.5332C14.6543 17.5332 16 16.1875 16 14.5332C16 12.8789 14.6543 11.5332 13 11.5332Z" fill=""></path>
-                  </svg>Share</a><a class="btn btn-wishlish" href="#">
-                  <svg width="20" height="18" viewbox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.2222 2.3638C4.34203 0.243977 7.65342 0.0419426 10.0004 1.7577C12.3473 0.0419426 15.6587 0.243977 17.7786 2.3638C20.1217 4.70695 20.1217 8.50594 17.7786 10.8491L12.1217 16.5059C10.9501 17.6775 9.05063 17.6775 7.87906 16.5059L2.2222 10.8491C-0.120943 8.50594 -0.120943 4.70695 2.2222 2.3638Z" fill=""></path>
-                  </svg>Wishlish</a></div>
-            </div>
-          </div>
-        </div>
-        <section class="section-box box-banner-home2 box-banner-tour-detail-2 background-body">
-          <div class="box-banner-tour-detail-2-inner">
-            <div class="container-top"> 
-              <div class="container"></div>
-            </div>
-            <div class="container-banner"> 
-              <div class="banner-main">
-                <div class="banner-slide">
-                  <div class="banner-image"></div>
-                </div>
-                <div class="banner-slide">
-                  <div class="banner-image"></div>
-                </div>
-                <div class="banner-slide">
-                  <div class="banner-image"></div>
-                </div>
-                <div class="banner-slide">
-                  <div class="banner-image"></div>
-                </div>
-              </div>
-              <div class="slider-thumnail"> 
-                <div class="slider-nav-thumbnails">
-                  <div class="banner-slide"><img src="assets/imgs/page/tour-detail/banner-thumb.png" alt="Travila"></div>
-                  <div class="banner-slide"><img src="assets/imgs/page/tour-detail/banner-thumb2.png" alt="Travila"></div>
-                  <div class="banner-slide"><img src="assets/imgs/page/tour-detail/banner-thumb3.png" alt="Travila"></div>
-                  <div class="banner-slide"><img src="assets/imgs/page/tour-detail/banner-thumb2.png" alt="Travila"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <div class="container">
-          <div class="row mt-65">   
-            <div class="col-lg-8"> 
-              <div class="box-info-tour"> 
-                <div class="tour-info-group"> 
-                  <div class="icon-item"> 
-                    <svg width="18" height="19" viewbox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14.5312 1.8828H13.8595V1.20312C13.8595 0.814789 13.5448 0.5 13.1564 0.5C12.7681 0.5 12.4533 0.814789 12.4533 1.20312V1.8828H5.55469V1.20312C5.55469 0.814789 5.2399 0.5 4.85156 0.5C4.46323 0.5 4.14844 0.814789 4.14844 1.20312V1.8828H3.47678C1.55967 1.8828 0 3.44247 0 5.35954V15.0232C0 16.9403 1.55967 18.5 3.47678 18.5H14.5313C16.4483 18.5 18.008 16.9403 18.008 15.0232V5.35954C18.008 3.44247 16.4483 1.8828 14.5312 1.8828ZM3.47678 3.28905H4.14844V4.66014C4.14844 5.04848 4.46323 5.36327 4.85156 5.36327C5.2399 5.36327 5.55469 5.04848 5.55469 4.66014V3.28905H12.4533V4.66014C12.4533 5.04848 12.7681 5.36327 13.1565 5.36327C13.5448 5.36327 13.8596 5.04848 13.8596 4.66014V3.28905H14.5313C15.6729 3.28905 16.6018 4.21788 16.6018 5.35954V6.03124H1.40625V5.35954C1.40625 4.21788 2.33508 3.28905 3.47678 3.28905ZM14.5312 17.0938H3.47678C2.33508 17.0938 1.40625 16.1649 1.40625 15.0232V7.43749H16.6018V15.0232C16.6018 16.1649 15.6729 17.0938 14.5312 17.0938ZM6.24611 10.2031C6.24611 10.5915 5.93132 10.9062 5.54298 10.9062H4.16018C3.77184 10.9062 3.45705 10.5915 3.45705 10.2031C3.45705 9.81479 3.77184 9.5 4.16018 9.5H5.54298C5.93128 9.5 6.24611 9.81479 6.24611 10.2031ZM14.551 10.2031C14.551 10.5915 14.2362 10.9062 13.8479 10.9062H12.4651C12.0767 10.9062 11.7619 10.5915 11.7619 10.2031C11.7619 9.81479 12.0767 9.5 12.4651 9.5H13.8479C14.2362 9.5 14.551 9.81479 14.551 10.2031ZM10.3945 10.2031C10.3945 10.5915 10.0798 10.9062 9.69142 10.9062H8.30862C7.92028 10.9062 7.60549 10.5915 7.60549 10.2031C7.60549 9.81479 7.92028 9.5 8.30862 9.5H9.69142C10.0797 9.5 10.3945 9.81479 10.3945 10.2031ZM6.24611 14.3516C6.24611 14.7399 5.93132 15.0547 5.54298 15.0547H4.16018C3.77184 15.0547 3.45705 14.7399 3.45705 14.3516C3.45705 13.9632 3.77184 13.6484 4.16018 13.6484H5.54298C5.93128 13.6484 6.24611 13.9632 6.24611 14.3516ZM14.551 14.3516C14.551 14.7399 14.2362 15.0547 13.8479 15.0547H12.4651C12.0767 15.0547 11.7619 14.7399 11.7619 14.3516C11.7619 13.9632 12.0767 13.6484 12.4651 13.6484H13.8479C14.2362 13.6484 14.551 13.9632 14.551 14.3516ZM10.3945 14.3516C10.3945 14.7399 10.0798 15.0547 9.69142 15.0547H8.30862C7.92028 15.0547 7.60549 14.7399 7.60549 14.3516C7.60549 13.9632 7.92028 13.6484 8.30862 13.6484H9.69142C10.0797 13.6484 10.3945 13.9632 10.3945 14.3516Z" fill=""></path>
-                    </svg>
-                  </div>
-                  <div class="info-item"> 
-                    <p class="text-sm-medium neutral-600">Duration</p>
-                    <p class="text-lg-bold neutral-1000">5-7 days</p>
-                  </div>
-                </div>
-                <div class="tour-info-group"> 
-                  <div class="icon-item background-1"> 
-                    <svg width="24" height="25" viewbox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M21.183 11.3508H18.5179V9.21402C18.5179 8.82514 18.2025 8.50986 17.8135 8.50986H14.0067C13.6537 7.43248 12.637 6.65961 11.4551 6.65961H10.2332V1.20416C10.2332 0.815281 9.91791 0.5 9.52894 0.5H4.61077C4.2218 0.5 3.90642 0.815281 3.90642 1.20416V6.65966H2.68458C1.20431 6.65966 0 7.86359 0 9.34348V21.8161C0 23.296 1.20431 24.5 2.68458 24.5H21.183C22.7363 24.5 24 23.2366 24 21.6838V14.167C24 12.6141 22.7363 11.3508 21.183 11.3508ZM22.5914 14.167V18.6203H8.66423V14.167C8.66423 13.3907 9.29602 12.759 10.0726 12.759H21.183C21.9596 12.759 22.5914 13.3906 22.5914 14.167ZM17.1092 11.3508H14.1464V9.91817H17.1092V11.3508ZM5.31506 1.90827H8.82459V6.65961H5.31506V1.90827ZM1.40864 21.8161V9.34348C1.40864 8.64012 1.98103 8.06792 2.68458 8.06792H11.4551C12.1261 8.06792 12.6855 8.59147 12.7283 9.25986C12.73 9.28592 12.7333 9.31147 12.7377 9.33659V11.3508H10.0725C8.51925 11.3508 7.25555 12.6141 7.25555 14.167V21.6838C7.25555 22.1965 7.39397 22.6772 7.63444 23.0917H2.68458C1.98103 23.0917 1.40864 22.5195 1.40864 21.8161ZM21.183 23.0917H11.4551H10.0726C9.29602 23.0917 8.66423 22.4601 8.66423 21.6838V20.0286H22.5914V21.6838C22.5914 22.4601 21.9596 23.0917 21.183 23.0917Z" fill=""></path>
-                    </svg>
-                  </div>
-                  <div class="info-item"> 
-                    <p class="text-sm-medium neutral-600">Group Size</p>
-                    <p class="text-lg-bold neutral-1000">06 people</p>
-                  </div>
-                </div>
-                <div class="tour-info-group"> 
-                  <div class="icon-item background-7"> 
-                    <svg width="21" height="21" viewbox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M13 2.25C13.4142 2.25 13.75 1.91421 13.75 1.5C13.75 1.08579 13.4142 0.75 13 0.75H9.9548C8.1182 0.74999 6.67861 0.74999 5.53648 0.87373C4.37094 1.00001 3.42656 1.26232 2.62024 1.84815C2.13209 2.20281 1.70281 2.63209 1.34815 3.12023C0.76232 3.92656 0.50001 4.87094 0.37373 6.03648C0.24999 7.17861 0.24999 8.6182 0.25 10.4548V10.5452C0.24999 12.3818 0.24999 13.8214 0.37373 14.9635C0.50001 16.1291 0.76232 17.0734 1.34815 17.8798C1.70281 18.3679 2.13209 18.7972 2.62023 19.1518C3.42656 19.7377 4.37094 20 5.53648 20.1263C6.67859 20.25 8.1182 20.25 9.9547 20.25H10.0453C11.8818 20.25 13.3214 20.25 14.4635 20.1263C15.6291 20 16.5734 19.7377 17.3798 19.1518C17.8679 18.7972 18.2972 18.3679 18.6518 17.8798C19.2377 17.0734 19.5 16.1291 19.6263 14.9635C19.75 13.8214 19.75 12.3818 19.75 10.5453V7.5C19.75 7.08579 19.4142 6.75 19 6.75C18.5858 6.75 18.25 7.08579 18.25 7.5V10.5C18.25 12.3916 18.249 13.75 18.135 14.802C18.0225 15.8399 17.8074 16.4901 17.4383 16.9981C17.1762 17.3589 16.8589 17.6762 16.4981 17.9383C15.9901 18.3074 15.3399 18.5225 14.302 18.635C13.25 18.749 11.8916 18.75 10 18.75C8.1084 18.75 6.74999 18.749 5.69804 18.635C4.66013 18.5225 4.00992 18.3074 3.50191 17.9383C3.14111 17.6762 2.82382 17.3589 2.56168 16.9981C2.19259 16.4901 1.97745 15.8399 1.865 14.802C1.75103 13.75 1.75 12.3916 1.75 10.5C1.75 8.6084 1.75103 7.24999 1.865 6.19805C1.97745 5.16013 2.19259 4.50992 2.56168 4.00191C2.82382 3.64111 3.14111 3.32382 3.50191 3.06168C4.00992 2.69259 4.66013 2.47745 5.69805 2.365C6.74999 2.25103 8.1084 2.25 10 2.25H13Z" fill=""></path>
-                      <path d="M4.32682 13.0267C4.1444 13.3986 4.29799 13.848 4.66987 14.0304C5.04175 14.2128 5.4911 14.0592 5.67352 13.6873L7.13386 10.7103C7.58649 9.78749 8.91687 9.83259 9.30597 10.7839C10.1852 12.9329 13.1906 13.0347 14.2132 10.9501L15.6736 7.97305C15.856 7.60116 15.7024 7.15181 15.3305 6.9694C14.9586 6.78698 14.5093 6.94057 14.3268 7.31245L12.8665 10.2895C12.4139 11.2123 11.0835 11.1672 10.6944 10.2159C9.81517 8.06687 6.80972 7.96506 5.78715 10.0497L4.32682 13.0267Z" fill=""></path>
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 2.5C15.5 3.88071 16.6193 5 18 5C19.3807 5 20.5 3.88071 20.5 2.5C20.5 1.11929 19.3807 0 18 0C16.6193 0 15.5 1.11929 15.5 2.5ZM17 2.5C17 3.05228 17.4477 3.5 18 3.5C18.5523 3.5 19 3.05228 19 2.5C19 1.94772 18.5523 1.5 18 1.5C17.4477 1.5 17 1.94772 17 2.5Z" fill=""></path>
-                    </svg>
-                  </div>
-                  <div class="info-item"> 
-                    <p class="text-sm-medium neutral-600">Tour Type</p>
-                    <p class="text-lg-bold neutral-1000">Daily Tour</p>
-                  </div>
-                </div>
-                <div class="tour-info-group"> 
-                  <div class="icon-item background-3"> 
-                    <svg width="24" height="25" viewbox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g clip-path="url(#clip0_652_10262)">
-                        <path d="M21.5993 9.98724C22.2546 8.57953 22.7344 7.10443 22.7344 5.80109C22.7344 2.87799 20.3571 0.5 17.4351 0.5C15.3765 0.5 13.5884 1.6803 12.7114 3.39984C12.4056 3.37347 12.0963 3.35938 11.7891 3.35938C5.9469 3.35938 1.21875 8.08698 1.21875 13.9297C1.21875 19.7719 5.94635 24.5 11.7891 24.5C17.6312 24.5 22.3594 19.7724 22.3594 13.9297C22.3594 12.6126 22.123 11.2964 21.5993 9.98724ZM17.4351 1.90625C19.5817 1.90625 21.3281 3.65344 21.3281 5.80109C21.3281 8.57275 18.605 12.5386 17.4124 14.1425C15.8795 12.0587 13.5421 8.38324 13.5421 5.80109C13.5419 3.65344 15.2884 1.90625 17.4351 1.90625ZM5.05829 7.71765L9.77563 10.0762L9.23492 12.7796L7.3678 14.0244C7.17224 14.1547 7.05469 14.3743 7.05469 14.6094V17.6237L3.9613 18.6904C3.11389 17.3019 2.625 15.6719 2.625 13.9297C2.625 11.5349 3.54895 9.35187 5.05829 7.71765ZM4.82538 19.8799L7.98706 18.7897C8.27069 18.6919 8.46094 18.4249 8.46094 18.125V14.9857L10.2572 13.7881C10.4123 13.6847 10.5201 13.5239 10.5566 13.341L11.2597 9.82538C11.322 9.51447 11.1683 9.20044 10.8847 9.05872L6.16553 6.69904C7.888 5.35632 10.0206 4.67059 12.2355 4.77679C11.7907 7.03979 13.0248 9.73877 14.1724 11.7544L12.2307 13.365C11.9421 13.6045 11.8922 14.0282 12.1172 14.3281L13.3828 16.0156H10.5703C10.1819 16.0156 9.86719 16.3304 9.86719 16.7188V20.9375C9.86719 21.3259 10.1819 21.6406 10.5703 21.6406H13.7891L14.4481 22.6999C11.0292 23.7385 7.24127 22.703 4.82538 19.8799ZM15.7798 22.1782L14.7766 20.566C14.6483 20.3598 14.4227 20.2344 14.1797 20.2344H11.2734V17.4219H14.7891C15.3671 17.4219 15.6989 16.7599 15.3516 16.2969L13.6439 14.02L14.9059 12.9731C15.8904 14.5264 16.7787 15.6379 16.8618 15.741C17.1422 16.0889 17.6722 16.0903 17.9544 15.7439C18.0595 15.615 19.4385 13.909 20.6884 11.7328C20.8641 12.4469 20.9531 13.1819 20.9531 13.9297C20.9531 17.5532 18.8392 20.692 15.7798 22.1782Z" fill="black"></path>
-                        <path d="M17.436 8.2724C18.7959 8.2724 19.9022 7.16571 19.9022 5.8056C19.9022 4.44531 18.7957 3.33862 17.436 3.33862C16.076 3.33862 14.9697 4.44531 14.9697 5.8056C14.9697 7.16571 16.076 8.2724 17.436 8.2724ZM17.436 4.74487C18.0204 4.74487 18.496 5.22076 18.496 5.8056C18.496 6.39026 18.0204 6.86615 17.436 6.86615C16.8515 6.86615 16.376 6.39026 16.376 5.8056C16.376 5.22076 16.8515 4.74487 17.436 4.74487Z" fill="black"></path>
-                      </g>
-                      <defs>
-                        <clippath id="clip0_652_10262">
-                          <rect width="24" height="24" fill="white" transform="translate(0 0.5)"></rect>
-                        </clippath>
-                      </defs>
-                    </svg>
-                  </div>
-                  <div class="info-item"> 
-                    <p class="text-sm-medium neutral-600">Languages</p>
-                    <p class="text-lg-bold neutral-1000">English</p>
-                  </div>
-                </div>
-              </div>
-              <div class="box-collapse-expand"> 
-                <div class="group-collapse-expand"> 
-                  <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOverview" aria-expanded="false" aria-controls="collapseOverview">
-                    <h6>Overview</h6>
-                    <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                  </button>
-                  <div class="collapse show" id="collapseOverview">
-                    <div class="card card-body">
-                      <p> Maharashtra: Food Tastings and Culture Tour</p>
-                      <p>Experience the soul of this diverse state as you journey through its traditional flavors, art, and history, all woven together to create an unforgettable exploration. Whether you are a foodie or a culture enthusiast, this tour is a gateway to Maharashtra’s rich legacy and warm hospitality.</p>
 
-                      </div>
+            <div class="container-2025">
+              
+                 <input type="button" value="Create a new Trip" onclick="toggleSlide()" class="toggle-button" style="width:50%">
+                 <input type="button" onclick="launchApp()" value="Build a trip with AI"  style="width:49%; margin-left:1%; float:right;" href="../tourism-recommender 3/templates/index.html">
+                 <script>
+                    function launchApp() {
+                        fetch('/launch_app', {
+                            method: 'POST'
+                        })
+                        .then(response => response.text())
+                        .then(data => {
+                            console.log('App launched:', data);
+                            alert('Tourism recommender app launched!');
+                            window.location.href="../tourism-recommender 3/templates/index.html";
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error launching app');
+                        });
+                    }
+                </script>
+                    <div id="slideDiv" class="slide-content" style="background-color:white">
+                    <h5>Choose Trip Type:</h5>
+                    <div class="modal-buttons">
+                          <button class="modal-button public-button" onclick="openTravelModal()" style="width:50%">
+                            Public Trip
+                        </button><br><div style="padding: 10px;"></div>
+                        <button class="modal-button private-button" onclick="openModal()" style="width:50%;  float:left;">
+                            Private Trip
+                        </button>
+                    </div>
                   </div>
-                </div>
-                <div class="group-collapse-expand"> 
-                  <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHighlight" aria-expanded="false" aria-controls="collapseHighlight">
-                    <h6>Highlight</h6>
-                    <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                  </button>
-                  <div class="collapse show" id="collapseHighlight">
-                    <div class="card card-body">
-                      <p>From bustling local markets to serene village settings, this tour takes you on a sensory adventure. Savor authentic Maharashtrian cuisine, crafted with age-old recipes that bring out the best of local ingredients and spices. As you indulge in these culinary delights, gain insight into the stories behind the dishes and the communities that have kept these traditions alive.
 
-                      </p>
-                      <p>Along the way, witness Maharashtra's cultural vibrancy through live folk performances, workshops, and interactions with local artisans. Marvel at the intricate craftsmanship of Paithani sarees, Warli paintings, or Kolhapuri chappals, each representing the state's artistic pride. Engage in storytelling sessions, where history, mythology, and modern life intersect, leaving you with a deeper appreciation of the region’s essence.
+            
+                  <div id="travelModal" class="travel_modal_pub">
+                    <div class="travel_modal_pub_content">
+                        <span class="travel_modal_pub_close" onclick="closeTravelModal()">&times;</span>
 
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="group-collapse-expand"> 
-                  <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIncluded" aria-expanded="false" aria-controls="collapseIncluded">
-                    <h6>Included/Excluded</h6>
-                    <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                  </button>
-                  <div class="collapse show" id="collapseIncluded">
-                    <div class="card card-body">
-                      <div class="row"> 
-                        <div class="col-lg-6"> 
-                          <p class="text-md-bold">Included:</p>
-                          <ul>
-                            <li>Guided tour with expert local hosts.</li>
-                            <li>.Food tastings featuring a variety of authentic Maharashtrian dishes.</li>
-                            <li>Live folk music and dance performances.</li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-6"> 
-                          <p class="text-md-bold">Excluded:</p>
-                          <ul>
-                            <li>Transportation to and from the starting location.</li>
-                            <li>Food and beverages.</li>
-                            <li>Souvenirs and merchandise</li>
-                            <li>Additional activities or attractions</li>
-                          </ul>
-                        </div>
+                    <div class="travel_stepper_pub_container">
+                      <div class="travel_progress_pub_bar">
+                          <div class="travel_progress_pub_line"></div>
+                          <div class="travel_progress_pub_step active">1</div>
+                          <div class="travel_progress_pub_step">2</div>
+                          <div class="travel_progress_pub_step">3</div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="group-collapse-expand"> 
-                  <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDuration" aria-expanded="false" aria-controls="collapseDuration">
-                    <h6>Duration</h6>
-                    <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                  </button>
-                  <div class="collapse show" id="collapseDuration">
-                    <div class="card card-body">
-                      <p>Your adventure aboard The High Roller at The LINQ is divided into six distinct moments, totaling 110 minutes of unforgettable experiences:</p>
-                      <ul class="list-number"> 
-                        <li> <strong>Boarding: </strong><span>Begin your journey with a warm Maharashtrian welcome, complete with a traditional arti and tilak ceremony.</span></li>
-                        <li> <strong>Ascent: </strong><span>Cruise along the calm waters, taking in the sights of Goa’s riverscape and coastline.</span></li>
-                        <li> <strong>Entertainment & Relaxation </strong><span>Delight in live performances or simply unwind on the deck.</span></li>
-                       
-                        <li> <strong>Return to Dock </strong><span>Conclude your journey with cherished memories of an unforgettable evening.</span></li>
-                      </ul>
-                      <p>With each moment contributing to a seamless and awe-inspiring experience, The High Roller promises to be the highlight of your Las Vegas adventure.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="group-collapse-expand"> 
-                  <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuestion" aria-expanded="false" aria-controls="collapseQuestion">
-                    <h6>Question & Answers</h6>
-                    <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                  </button>
-                  <div class="collapse show" id="collapseQuestion">
-                    <div class="card card-body">
-                      <div class="list-questions">
-                        <div class="item-question"> 
-                          <div class="head-question"> 
-                            <p class="text-md-bold neutral-1000">Is the Sunset/Twilight Boat Cruise suitable for all ages?</p>
-                          </div>
-                          <div class="content-question"> 
-                            <p class="text-sm-medium neutral-800">Absolutely! This cruise offers a family-friendly experience, and all are welcome. Children must be accompanied by an adult.</p>
-                          </div>
+                      <form id="travel_booking_form_pub_20250202">
+                        <!-- Step 1 -->
+                        <div class="travel_step_pub_panel active" id="travel_step1_panel_pub_20250202">
+                            <div class="travel_form_pub_group">
+                                <label for="travel_name_input_pub_20250202">Trip Name:</label>
+                                <input type="text" id="travel_name_input_pub_20250202" required>
+                                <div class="travel_error_pub_message" id="travel_name_error_pub_20250202">Please enter your name</div>
+                            </div>
+                            <div class="travel_form_pub_group">
+                                <label for="travel_destination_select_pub_20250202">Destination:</label>
+                                <select id="travel_destination_select_pub_20250202" required>
+                                    <option value="">Select a country</option>
+                                </select>
+                                <div class="travel_error_pub_message" id="travel_destination_error_pub_20250202">Please select a destination</div>
+                            </div>
+                            <div class="travel_button_pub_group">
+                                <button type="button" class="travel_next_pub_btn" onclick="travelNextStepPub(1)">Next</button>
+                            </div>
                         </div>
-                        <div class="item-question active"> 
-                          <div class="head-question"> 
-                            <p class="text-md-bold neutral-1000">Can I bring food or drinks aboard The High Roller?</p>
+            
+                        <!-- Step 2 -->
+                        <div class="travel_step_pub_panel" id="travel_step2_panel_pub_20250202">
+                            
+                            <div class="travel_form_pub_group">
+                              <label for="travel_start_date_pub_20250202">Start Date:</label>
+                              <input type="date" id="travel_start_date_pub_20250202" required>
+                              <div class="travel_error_pub_message" id="travel_start_date_error_pub_20250202">Please select a start date</div>
                           </div>
-                          <div class="content-question"> 
-                            <p class="text-sm-medium neutral-800">Outside food and beverages are not permitted. However, there are nearby dining options at The LINQ Promenade where you can enjoy a meal before or after your ride.</p>
+                          <div class="travel_form_pub_group">
+                              <label for="travel_end_date_pub_20250202">End Date:</label>
+                              <input type="date" id="travel_end_date_pub_20250202" required>
+                              <div class="travel_error_pub_message" id="travel_end_date_error_pub_20250202">Please select an end date</div>
                           </div>
+                          <div class="travel_form_pub_group">
+                              <label for="travel_days_calc_pub_20250202">Number of Days:</label>
+                              <input type="text" id="travel_days_calc_pub_20250202" readonly>
+                          </div>
+                          <div class="travel_form_pub_group">
+                            <label for="travel_budge_pub_20250202">Budget (Per Person):</label>
+                            <input type="number" id="trip-budget-input" class="trip-form-input" style="width: 100px;" required min="0" step="25">
+                            <select id="trip-currency-select" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                                <option value="JPY">JPY</option>
+                                <option value="INR">INR</option>
+                            </select>
+                            <div class="travel_error_pub_message" id="budget-error" style="display: none; color: red;">Invalid budget amount</div>
                         </div>
-                        <div class="item-question"> 
-                          <div class="head-question"> 
-                            <p class="text-md-bold neutral-1000">Is the cruise wheelchair accessible?</p>
-                          </div>
-                          <div class="content-question"> 
-                            <p class="text-sm-medium neutral-800">Yes, the boat is wheelchair accessible, ensuring that everyone can enjoy this serene experience.</p>
-                          </div>
+                        
+                          <div id="day-activities-container" class="form-group"></div>
+
+                          
+                            <div class="travel_button_pub_group">
+                                <button type="button" class="travel_prev_pub_btn" onclick="travelPrevStepPub(2)">Previous</button>
+                                <button type="button" class="travel_next_pub_btn" onclick="travelNextStepPub(2)">Next</button>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="group-collapse-expand"> 
-                  <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReviews" aria-expanded="false" aria-controls="collapseReviews">
-                    <h6>Rate & Reviews</h6>
-                    <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                  </button>
-                  <div class="collapse show" id="collapseReviews">
-                    <div class="card card-body">
-                      <div class="head-reviews"> 
-                        <div class="review-left">   
-                          <div class="review-info-inner">
-                            <h6 class="neutral-1000">4.95 / 5</h6>
-                            <p class="text-sm-medium neutral-400">(672 reviews)</p>
-                            <div class="review-rate"> <img src="assets/imgs/page/tour-detail/star.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star.svg" alt="Travila"></div>
-                          </div>
-                        </div>
-                        <div class="review-right">
-                          <div class="review-progress"> 
-                            <div class="item-review-progress"> 
-                              <div class="text-rv-progress"> 
-                                <p class="text-sm-bold">Price</p>
-                              </div>
-                              <div class="bar-rv-progress"> 
-                                <div class="progress">
-                                  <div class="progress-bar" style="width: 90%"> </div>
+                        
+                        <!-- Step 3 -->
+                        <div class="travel_step_pub_panel" id="travel_step3_panel_pub_20250202">
+                            <div class="travel_form_pub_group">
+                                <label for="travel_max_people_pub_20250202">Maximum Number of People:</label>
+                                <input type="number" id="travel_max_people_pub_20250202" min="1" required>
+                                <div class="travel_error_pub_message" id="travel_people_error_pub_20250202">Please enter number of people</div>
+                            </div>
+                            <div class="travel_form_pub_group">
+                                <label>Select Gender:</label>
+                                <div class="travel_gender_pub_group">
+                                    <div class="travel_gender_pub_option">
+                                        <input type="checkbox" id="travel_gender_male_pub_20250202">
+                                        <label for="travel_gender_male_pub_20250202">Male</label>
+                                    </div>
+                                    <div class="travel_gender_pub_option">
+                                        <input type="checkbox" id="travel_gender_female_pub_20250202">
+                                        <label for="travel_gender_female_pub_20250202">Female</label>
+                                    </div>
+                                    <div class="travel_gender_pub_option">
+                                        <input type="checkbox" id="travel_gender_other_pub_20250202">
+                                        <label for="travel_gender_other_pub_20250202">Other</label>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="text-avarage"> 
-                                <p>4.8/5</p>
-                              </div>
+                                <div class="travel_error_pub_message" id="travel_gender_error_pub_20250202">Please select at least one gender</div>
                             </div>
-                            <div class="item-review-progress"> 
-                              <div class="text-rv-progress"> 
-                                <p class="text-sm-bold">Service</p>
+                               <div class="travel_form_pub_group">
+                              <button class="pub-essen-toggle-btn" id="pub-essen-toggle-btn">Show/Hide Essentials</button>
+                              <div id="pub-essen-essentials-list" class="pub-essen-essentials-list">
+                                  <div id="pub-essen-essentials-container"></div>
+                                  <button class="pub-essen-save-btn" id="pub-essen-save-btn">Save Selected Items</button>
                               </div>
-                              <div class="bar-rv-progress"> 
-                                <div class="progress">
-                                  <div class="progress-bar" style="width: 90%"> </div>
-                                </div>
-                              </div>
-                              <div class="text-avarage"> 
-                                <p>4.2/5</p>
-                              </div>
-                            </div>
-                            <div class="item-review-progress"> 
-                              <div class="text-rv-progress"> 
-                                <p class="text-sm-bold">Safety</p>
-                              </div>
-                              <div class="bar-rv-progress"> 
-                                <div class="progress">
-                                  <div class="progress-bar" style="width: 95%"> </div>
-                                </div>
-                              </div>
-                              <div class="text-avarage"> 
-                                <p>4.9/5</p>
-                              </div>
-                            </div>
-                            <div class="item-review-progress"> 
-                              <div class="text-rv-progress"> 
-                                <p class="text-sm-bold">Entertainment</p>
-                              </div>
-                              <div class="bar-rv-progress"> 
-                                <div class="progress">
-                                  <div class="progress-bar" style="width: 85%"> </div>
-                                </div>
-                              </div>
-                              <div class="text-avarage"> 
-                                <p>4.7/5</p>
-                              </div>
-                            </div>
-                            <div class="item-review-progress"> 
-                              <div class="text-rv-progress"> 
-                                <p class="text-sm-bold">Accessibility</p>
-                              </div>
-                              <div class="bar-rv-progress"> 
-                                <div class="progress">
-                                  <div class="progress-bar" style="width: 100%"> </div>
-                                </div>
-                              </div>
-                              <div class="text-avarage"> 
-                                <p>5/5</p>
-                              </div>
-                            </div>
-                            <div class="item-review-progress"> 
-                              <div class="text-rv-progress"> 
-                                <p class="text-sm-bold">Support</p>
-                              </div>
-                              <div class="bar-rv-progress"> 
-                                <div class="progress">
-                                  <div class="progress-bar" style="width: 100%"></div>
-                                </div>
-                              </div>
-                              <div class="text-avarage"> 
-                                <p>5/5</p>
-                              </div>
-                            </div>
+                              <div id="pub-essen-saved-items"></div>
                           </div>
+
+                            <div class="travel_form_pub_group">
+                                <label for="travel_apply_date_pub_20250202">Last Apply by Date:</label>
+                                <input type="date" id="travel_apply_date_pub_20250202" required>
+                                <div class="travel_error_pub_message" id="travel_apply_date_error_pub_20250202">Please select last apply by date</div>
+                            </div>
+                            <div class="travel_button_pub_group">
+                                <button type="button" class="travel_prev_pub_btn" onclick="travelPrevStepPub(3)">Previous</button>
+                                <button type="button" class="travel_submit_pub_btn" onclick="publb">Submit</button>
+                            </div>
                         </div>
-                      </div>
-                      <div class="list-reviews"> 
-                        <div class="item-review"> 
-                          <div class="head-review"> 
-                            <div class="author-review"> <img src="assets/imgs/page/tour-detail/avatar.png" alt="Travila">
-                              <div class="author-info"> 
-                                <p class="text-lg-bold">Sarah Johnson</p>
-                                <p class="text-sm-medium neutral-500">December 4, 2024 at 3:12 pm</p>
-                              </div>
-                            </div>
-                            <div class="rate-review"> <img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"></div>
-                          </div>
-                          <div class="content-review"> 
-                            <p class="text-sm-medium neutral-800">The views from The High Roller were absolutely stunning! It's a fantastic way to see the Strip and the surrounding area. The cabins are spacious and comfortable, and the audio commentary adds an extra layer of enjoyment. Highly recommend!</p>
-                          </div>
-                        </div>
-                        <div class="item-review"> 
-                          <div class="head-review"> 
-                            <div class="author-review"> <img src="assets/imgs/page/tour-detail/avatar.png" alt="Travila">
-                              <div class="author-info"> 
-                                <p class="text-lg-bold">Sarah Johnson</p>
-                                <p class="text-sm-medium neutral-500">December 4, 2024 at 3:12 pm</p>
-                              </div>
-                            </div>
-                            <div class="rate-review"> <img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"></div>
-                          </div>
-                          <div class="content-review"> 
-                            <p class="text-sm-medium neutral-800">The views from The High Roller were absolutely stunning! It's a fantastic way to see the Strip and the surrounding area. The cabins are spacious and comfortable, and the audio commentary adds an extra layer of enjoyment. Highly recommend!</p>
-                          </div>
-                        </div>
-                        <div class="item-review"> 
-                          <div class="head-review"> 
-                            <div class="author-review"> <img src="assets/imgs/page/tour-detail/avatar.png" alt="Travila">
-                              <div class="author-info"> 
-                                <p class="text-lg-bold">Sarah Johnson</p>
-                                <p class="text-sm-medium neutral-500">December 4, 2024 at 3:12 pm</p>
-                              </div>
-                            </div>
-                            <div class="rate-review"> <img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"></div>
-                          </div>
-                          <div class="content-review"> 
-                            <p class="text-sm-medium neutral-800">The views from The High Roller were absolutely stunning! It's a fantastic way to see the Strip and the surrounding area. The cabins are spacious and comfortable, and the audio commentary adds an extra layer of enjoyment. Highly recommend!</p>
-                          </div>
-                        </div>
-                      </div>
-                      <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                          <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"> 
-                                <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M6.00016 1.33325L1.3335 5.99992M1.3335 5.99992L6.00016 10.6666M1.3335 5.99992H10.6668" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg></span></a></li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link active" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item"><a class="page-link" href="#">4</a></li>
-                          <li class="page-item"><a class="page-link" href="#">5</a></li>
-                          <li class="page-item"><a class="page-link" href="#">...</a></li>
-                          <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true"> 
-                                <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M5.99967 10.6666L10.6663 5.99992L5.99968 1.33325M10.6663 5.99992L1.33301 5.99992" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg></span></a></li>
-                        </ul>
-                      </nav>
+                    </form>
                     </div>
                   </div>
                 </div>
-                <div class="group-collapse-expand"> 
-                  <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddReview" aria-expanded="false" aria-controls="collapseAddReview">
-                    <h6>Add a review</h6>
-                    <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                  </button>
-                  <div class="collapse show" id="collapseAddReview">
-                    <div class="card card-body">
-                      <div class="box-type-reviews"> 
-                        <div class="row"> 
-                          <div class="col-lg-4">
-                            <div class="box-type-review"> 
-                              <p class="text-sm-bold text-type-rv">Price</p>
-                              <p class="rate-type-review"> <img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"></p>
-                            </div>
-                            <div class="box-type-review"> 
-                              <p class="text-sm-bold text-type-rv">Service</p>
-                              <p class="rate-type-review"> <img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"></p>
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="box-type-review"> 
-                              <p class="text-sm-bold text-type-rv">Safety</p>
-                              <p class="rate-type-review"> <img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"></p>
-                            </div>
-                            <div class="box-type-review"> 
-                              <p class="text-sm-bold text-type-rv">Entertainment</p>
-                              <p class="rate-type-review"> <img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"></p>
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="box-type-review"> 
-                              <p class="text-sm-bold text-type-rv">Accessibility</p>
-                              <p class="rate-type-review"> <img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"></p>
-                            </div>
-                            <div class="box-type-review"> 
-                              <p class="text-sm-bold text-type-rv">Support</p>
-                              <p class="rate-type-review"> <img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"><img src="assets/imgs/page/tour-detail/star-big.svg" alt="Travila"></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="box-form-reviews"> 
-                        <h6 class="text-md-bold neutral-1000 mb-15">Leave feedback</h6>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group"> 
-                              <input class="form-control" type="text" placeholder="Your name">
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group"> 
-                              <input class="form-control" type="text" placeholder="Email address">
-                            </div>
-                          </div>
-                          <div class="col-md-12">
-                            <div class="form-group"> 
-                              <textarea class="form-control" placeholder="Your comment"></textarea>
-                            </div>
-                          </div>
-                          <div class="col-md-12">
-                            <buttuon class="btn btn-black-lg-square">Submit review 
-                              <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                              </svg>
-                            </buttuon>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="booking-form"> 
-                <div class="head-booking-form"> 
-                  <p class="text-xl-bold neutral-1000">Booking Form</p>
-                </div>
-                <div class="content-booking-form"> 
-                  <div class="item-line-booking"> <strong class="text-md-bold neutral-1000">From:</strong>
-                    <div class="input-calendar">
-                      <input class="form-control calendar-date" type="text" value="17/02/2024">
-                      <svg width="18" height="18" viewbox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14.5312 1.3828H13.8595V0.703125C13.8595 0.314789 13.5448 0 13.1564 0C12.7681 0 12.4533 0.314789 12.4533 0.703125V1.3828H5.55469V0.703125C5.55469 0.314789 5.2399 0 4.85156 0C4.46323 0 4.14844 0.314789 4.14844 0.703125V1.3828H3.47678C1.55967 1.3828 0 2.94247 0 4.85954V14.5232C0 16.4403 1.55967 18 3.47678 18H14.5313C16.4483 18 18.008 16.4403 18.008 14.5232V4.85954C18.008 2.94247 16.4483 1.3828 14.5312 1.3828ZM3.47678 2.78905H4.14844V4.16014C4.14844 4.54848 4.46323 4.86327 4.85156 4.86327C5.2399 4.86327 5.55469 4.54848 5.55469 4.16014V2.78905H12.4533V4.16014C12.4533 4.54848 12.7681 4.86327 13.1565 4.86327C13.5448 4.86327 13.8596 4.54848 13.8596 4.16014V2.78905H14.5313C15.6729 2.78905 16.6018 3.71788 16.6018 4.85954V5.53124H1.40625V4.85954C1.40625 3.71788 2.33508 2.78905 3.47678 2.78905ZM14.5312 16.5938H3.47678C2.33508 16.5938 1.40625 15.6649 1.40625 14.5232V6.93749H16.6018V14.5232C16.6018 15.6649 15.6729 16.5938 14.5312 16.5938ZM6.24611 9.70312C6.24611 10.0915 5.93132 10.4062 5.54298 10.4062H4.16018C3.77184 10.4062 3.45705 10.0915 3.45705 9.70312C3.45705 9.31479 3.77184 9 4.16018 9H5.54298C5.93128 9 6.24611 9.31479 6.24611 9.70312ZM14.551 9.70312C14.551 10.0915 14.2362 10.4062 13.8479 10.4062H12.4651C12.0767 10.4062 11.7619 10.0915 11.7619 9.70312C11.7619 9.31479 12.0767 9 12.4651 9H13.8479C14.2362 9 14.551 9.31479 14.551 9.70312ZM10.3945 9.70312C10.3945 10.0915 10.0798 10.4062 9.69142 10.4062H8.30862C7.92028 10.4062 7.60549 10.0915 7.60549 9.70312C7.60549 9.31479 7.92028 9 8.30862 9H9.69142C10.0797 9 10.3945 9.31479 10.3945 9.70312ZM6.24611 13.8516C6.24611 14.2399 5.93132 14.5547 5.54298 14.5547H4.16018C3.77184 14.5547 3.45705 14.2399 3.45705 13.8516C3.45705 13.4632 3.77184 13.1484 4.16018 13.1484H5.54298C5.93128 13.1484 6.24611 13.4632 6.24611 13.8516ZM14.551 13.8516C14.551 14.2399 14.2362 14.5547 13.8479 14.5547H12.4651C12.0767 14.5547 11.7619 14.2399 11.7619 13.8516C11.7619 13.4632 12.0767 13.1484 12.4651 13.1484H13.8479C14.2362 13.1484 14.551 13.4632 14.551 13.8516ZM10.3945 13.8516C10.3945 14.2399 10.0798 14.5547 9.69142 14.5547H8.30862C7.92028 14.5547 7.60549 14.2399 7.60549 13.8516C7.60549 13.4632 7.92028 13.1484 8.30862 13.1484H9.69142C10.0797 13.1484 10.3945 13.4632 10.3945 13.8516Z" fill=""></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="item-line-booking"> <strong class="text-md-bold neutral-1000">Time:</strong>
-                    <div class="line-booking-right"> 
-                      <label>
-                        <input type="radio" name="time">12:00
-                      </label>
-                      <label>
-                        <input type="radio" name="time">17:00 
-                      </label>
-                    </div>
-                  </div>
-                  <div class="item-line-booking"> 
-                    <div class="box-tickets"><strong class="text-md-bold neutral-1000">Tickets:</strong>
-                      <div class="line-booking-tickets"> 
-                        <div class="item-ticket"> 
-                          <p class="text-md-medium neutral-500 mr-30">Adult (18+ years)</p>
-                          <p class="text-md-medium neutral-500">$42.50 </p>
-                        </div>
-                        <div class="dropdown-quantity"> 
-                          <div class="dropdown">
-                            <button class="btn dropdown-toggle" id="dropdownTicket" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"><span>01</span>
-                              <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                              </svg>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownTicket">
-                              <li><a class="dropdown-item active" href="#">01</a></li>
-                              <li><a class="dropdown-item" href="#">02</a></li>
-                              <li><a class="dropdown-item" href="#">03</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="line-booking-tickets"> 
-                        <div class="item-ticket"> 
-                          <p class="text-md-medium neutral-500 mr-30">Adult (18+ years)</p>
-                          <p class="text-md-medium neutral-500">$42.50 </p>
-                        </div>
-                        <div class="dropdown-quantity"> 
-                          <div class="dropdown">
-                            <button class="btn dropdown-toggle" id="dropdownTicketYouth" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"><span>01</span>
-                              <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                              </svg>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownTicketYouth">
-                              <li><a class="dropdown-item active" href="#">01</a></li>
-                              <li><a class="dropdown-item" href="#">02</a></li>
-                              <li><a class="dropdown-item" href="#">03</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item-line-booking"> 
-                    <div class="box-tickets"><strong class="text-md-bold neutral-1000">Add Extra:</strong>
-                      <div class="line-booking-tickets"> 
-                        <div class="item-ticket"> 
-                          <ul class="list-filter-checkbox"> 
-                            <li> 
-                              <label class="cb-container">
-                                <input type="checkbox"><span class="text-sm-medium">Add service per Booking </span><span class="checkmark"></span>
-                              </label>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="include-price">
-                          <p class="text-md-bold neutral-1000">$32.00</p>
-                        </div>
-                      </div>
-                      <div class="line-booking-tickets"> 
-                        <div class="item-ticket"> 
-                          <ul class="list-filter-checkbox"> 
-                            <li> 
-                              <label class="cb-container">
-                                <input type="checkbox"><span class="text-sm-medium">Add service per Personal </span><span class="checkmark"></span>
-                              </label>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="include-price"> 
-                          <p class="text-md-bold neutral-1000">$24.00</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item-line-booking last-item"> <strong class="text-md-bold neutral-1000">Total:</strong>
-                    <div class="line-booking-right"> 
-                      <p class="text-xl-bold neutral-1000">$124.00</p>
-                    </div>
-                  </div>
-                  <div class="box-button-book"> <a class="btn btn-book" href="#">Book Now 
-                      <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                      </svg></a></div>
-                  <div class="box-need-help"> <a href="help-center.html"> 
-                      <svg width="12" height="14" viewbox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.83366 3.66667C2.83366 1.92067 4.25433 0.5 6.00033 0.5C7.74633 0.5 9.16699 1.92067 9.16699 3.66667C9.16699 5.41267 7.74633 6.83333 6.00033 6.83333C4.25433 6.83333 2.83366 5.41267 2.83366 3.66667ZM8.00033 7.83333H4.00033C1.88699 7.83333 0.166992 9.55333 0.166992 11.6667C0.166992 12.678 0.988992 13.5 2.00033 13.5H10.0003C11.0117 13.5 11.8337 12.678 11.8337 11.6667C11.8337 9.55333 10.1137 7.83333 8.00033 7.83333Z" fill=""></path>
-                      </svg>Need some help?</a></div>
-                </div>
-              </div>
-              <div class="sidebar-left border-1 background-body"> 
-                <h6 class="text-lg-bold neutral-1000">Popular Tours</h6>
-                <div class="box-popular-posts box-popular-posts-md"> 
-                  <ul> 
-                    <li> 
-                      <div class="card-post"> 
-                        <div class="card-image"> <a href="#"> <img src="assets/imgs/page/tour/post.png" alt="Travila"></a></div>
-                        <div class="card-info"> <a class="text-xs-bold" href="#">Singapore Skylines: Urban Exploration</a><span class="price text-sm-bold neutral-1000">$48.25</span><span class="price-through text-sm-bold neutral-500">$60.75</span></div>
-                      </div>
-                    </li>
-                    <li> 
-                      <div class="card-post"> 
-                        <div class="card-image"> <a href="#"> <img src="assets/imgs/page/tour/post2.png" alt="Travila"></a></div>
-                        <div class="card-info"> <a class="text-xs-bold" href="#">Singapore Skylines: Urban Exploration</a><span class="price text-sm-bold neutral-1000">$48.25</span><span class="price-through text-sm-bold neutral-500">$60.75</span></div>
-                      </div>
-                    </li>
-                    <li> 
-                      <div class="card-post"> 
-                        <div class="card-image"> <a href="#"> <img src="assets/imgs/page/tour/post3.png" alt="Travila"></a></div>
-                        <div class="card-info"> <a class="text-xs-bold" href="#">Singapore Skylines: Urban Exploration</a><span class="price text-sm-bold neutral-1000">$48.25</span><span class="price-through text-sm-bold neutral-500">$60.75</span></div>
-                      </div>
-                    </li>
-                    <li> 
-                      <div class="card-post"> 
-                        <div class="card-image"> <a href="#"> <img src="assets/imgs/page/tour/post4.png" alt="Travila"></a></div>
-                        <div class="card-info"> <a class="text-xs-bold" href="#">Singapore Skylines: Urban Exploration</a><span class="price text-sm-bold neutral-1000">$48.25</span><span class="price-through text-sm-bold neutral-500">$60.75</span></div>
-                      </div>
-                    </li>
-                    <li> 
-                      <div class="card-post"> 
-                        <div class="card-image"> <a href="#"> <img src="assets/imgs/page/tour/post5.png" alt="Travila"></a></div>
-                        <div class="card-info"> <a class="text-xs-bold" href="#">Singapore Skylines: Urban Exploration</a><span class="price text-sm-bold neutral-1000">$48.25</span><span class="price-through text-sm-bold neutral-500">$60.75</span></div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="sidebar-banner"> <a href="#"><img src="assets/imgs/page/tour-detail/banner-ads.png" alt="Travila"></a></div>
-              <div class="sidebar-banner"> <a href="#"><img src="assets/imgs/page/tour-detail/banner-ads2.png" alt="Travila"></a></div>
-            </div>
+                <script type="module">
+                // Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
+    authDomain: "ty-project-80ab7.firebaseapp.com",
+    projectId: "ty-project-80ab7",
+    storageBucket: "ty-project-80ab7.firebasestorage.app",
+    messagingSenderId: "491495110151",
+    appId: "1:491495110151:web:035795af4bc8eebff79ca2",
+    measurementId: "G-XFS1VYTHSM",
+    databaseURL: "https://ty-project-80ab7-default-rtdb.firebaseio.com/"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// Update the onclick handler for the submit button
+document.querySelector('.travel_submit_pub_btn').onclick = function() {
+    if (validateTravelStepPub(3)) {
+        saveToFirebase();
+    }
+};
+
+/*async function saveToFirebase() {
+    try {
+        // Get user email from local storage
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            alert('User email not found. Please login first.');
+            return;
+        }
+
+        // Get form data using the modified collection function
+        const formData = collectTravelFormData();
+
+        // Add additional fields
+        formData.userEmail = userEmail;
+        formData.timestamp = Date.now();
+
+        // Sanitize the email for use as a Firebase key
+        const sanitizedEmail = userEmail.replace(/\./g, ",");
+
+        // Save data under travel-bookings/userEmail/public-trips
+        const newBookingRef = push(ref(database, `travel-bookings/${sanitizedEmail}/public-trips`));
+        
+        await set(newBookingRef, formData);
+
+        // Success handling
+        console.log('Booking saved successfully with ID:', newBookingRef.key);
+        alert('Booking saved successfully!');
+
+        // Reset form and UI
+        document.getElementById('travel_booking_form_pub_20250202').reset();
+        if (document.getElementById('pub-essen-saved-items')) {
+            document.getElementById('pub-essen-saved-items').innerHTML = '';
+        }
+        if (document.getElementById('day-activities-container')) {
+            document.getElementById('day-activities-container').innerHTML = '';
+        }
+        currentTravelStepPub = 1;
+        showTravelStepPub(1);
+
+    } catch (error) {
+        console.error('Error saving booking:', error);
+        alert('Error saving booking: ' + error.message);
+    }
+}
+*/
+
+async function saveToFirebase() {
+    try {
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            alert('Please login first');
+            return;
+        }
+
+        const formData = collectTravelFormData();
+        
+        // Add timestamp and participants array
+        formData.timestamp = Date.now();
+        formData.participants = [userEmail]; // Creator is first participant
+        
+        const sanitizedEmail = userEmail.replace(/\./g, ',');
+        const newTripRef = push(ref(database, `travel-bookings/${sanitizedEmail}/public-trips`));
+        
+        await set(newTripRef, formData);
+        
+        alert('Trip saved successfully!');
+        retrieveAndDisplayTrips(); // Refresh the display
+        
+    } catch (error) {
+        console.error('Error saving trip:', error);
+        alert('Error saving trip: ' + error.message);
+    }
+}
+
+// Ensure the form doesn't submit normally
+document.getElementById('travel_booking_form_pub_20250202').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (validateTravelStepPub(3)) {
+        saveToFirebase();
+    }
+});
+
+
+
+// Function to validate and move to the next step
+function nextTripStep() {
+    const currentStep = document.querySelector('.trip-form-step.active');
+    const nextStep = currentStep.nextElementSibling;
+    
+    if (nextStep) {
+        currentStep.classList.remove('active');
+        nextStep.classList.add('active');
+    }
+}
+
+// Function to go back to the previous step
+function prevTripStep() {
+    const currentStep = document.querySelector('.trip-form-step.active');
+    const prevStep = currentStep.previousElementSibling;
+
+    if (prevStep) {
+        currentStep.classList.remove('active');
+        prevStep.classList.add('active');
+    }
+}
+
+// Function to reset form to specific step
+function resetToStep(stepNumber) {
+    const steps = document.querySelectorAll('.trip-form-step');
+    steps.forEach((step, index) => {
+        if (index + 1 === stepNumber) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
+        }
+    });
+}
+
+// Handle the form submission
+document.querySelector('#trip-submit-button').onclick = function(e) {
+    e.preventDefault();
+    if (validateTripForm()) {
+        saveTripToFirebase();
+    }
+};
+
+async function saveTripToFirebase() {
+    try {
+        // Get user email from local storage
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            alert('User email not found. Please login first.');
+            return;
+        }
+
+        // Collect form data
+        const formData = collectTripFormData();
+
+        // Add additional fields
+        formData.userEmail = userEmail;
+        formData.timestamp = Date.now();
+
+        // Sanitize the email for use as a Firebase key
+        const sanitizedEmail = userEmail.replace(/\./g, ",");
+
+        // Save data under trip-bookings-userEmail/public
+        const newTripRef = push(ref(database, `travel-bookings/${sanitizedEmail}/private-trips`));
+        
+        await set(newTripRef, formData);
+
+        // Success handling
+        console.log('Trip saved successfully with ID:', newTripRef.key);
+        alert('Trip saved successfully!');
+
+        // Reset form and UI
+        document.getElementById('trip-planning-form').reset();
+        resetToStep(1); // Reset to first step using the new function
+
+    } catch (error) {
+        console.error('Error saving trip:', error);
+        alert('Error saving trip: ' + error.message);
+    }
+}
+
+// Function to collect form data
+function collectTripFormData() {
+    return {
+        tripName: document.getElementById('trip-name-input').value,
+        destination: document.getElementById('trip-destination-select').value,
+        startDate: document.getElementById('trip-start-date').value,
+        endDate: document.getElementById('trip-end-date').value,
+        duration: document.getElementById('trip-duration-display').value,
+        activities: document.getElementById('trip-activities-input').value,
+        essentials: document.getElementById('trip-essentials-text').value,
+        budget: document.getElementById('trip-budget-input').value,
+        currency: document.getElementById('trip-currency-select').value
+    };
+}
+
+// Validate the form before submitting
+function validateTripForm() {
+    // Add custom validation for each step if needed
+    const currentStep = document.querySelector('.trip-form-step.active');
+    switch (currentStep.id) {
+        case 'trip-form-step-1':
+            if (!document.getElementById('trip-name-input').value || !document.getElementById('trip-destination-select').value) {
+                alert('Please complete step 1: Basic Info');
+                return false;
+            }
+            break;
+        case 'trip-form-step-2':
+            if (!document.getElementById('trip-start-date').value || !document.getElementById('trip-end-date').value) {
+                alert('Please complete step 2: Dates');
+                return false;
+            }
+            break;
+        case 'trip-form-step-3':
+            if (!document.getElementById('trip-activities-input').value) {
+                alert('Please complete step 3: Activities');
+                return false;
+            }
+            break;
+        case 'trip-form-step-4':
+            if (!document.getElementById('trip-budget-input').value || !document.getElementById('trip-currency-select').value) {
+                alert('Please complete step 4: Budget');
+                return false;
+            }
+            break;
+        default:
+            break;
+    }
+    return true;
+}
+
+// Ensure the form doesn't submit normally
+document.getElementById('trip-planning-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (validateTripForm()) {
+        saveTripToFirebase();
+    }
+});
+                </script>
+              
+              <script>
+                  /*public Form Script*/
+    /*public Form Script*/
+  function openTravelModal() {
+    document.getElementById('travelModal').style.display = 'block';
+  }
+
+  function closeTravelModal() {
+    document.getElementById('travelModal').style.display = 'none';
+  }
+
+  // Close modal when clicking outside of it
+  window.onclick = function(event) {
+    let modal = document.getElementById('travelModal');
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  const essentials = [
+    {
+      category: 'Documents',
+      items: [
+        'Passport', 'Visa', 'Travel Insurance', 
+        'Flight Tickets', 'Hotel Reservations', 
+        'Driver\'s License', 'Copies of Important Documents'
+      ]
+    },
+    {
+      category: 'Clothing',
+      items: [
+        'Underwear', 'Socks', 'T-Shirts', 'Pants/Shorts', 
+        'Jacket', 'Swimwear', 'Sleepwear', 'Comfortable Shoes'
+      ]
+    },
+    {
+      category: 'Electronics',
+      items: [
+        'Phone', 'Phone Charger', 'Power Bank', 
+        'Camera', 'Laptop', 'Universal Adapter', 
+        'Headphones', 'Kindle/Tablet'
+      ]
+    },
+    {
+      category: 'Toiletries',
+      items: [
+        'Toothbrush', 'Toothpaste', 'Deodorant', 'Shampoo', 
+        'Soap', 'Razor', 'Sunscreen', 'First Aid Kit', 
+        'Personal Medications', 'Hand Sanitizer'
+      ]
+    },
+    {
+      category: 'Accessories',
+      items: [
+        'Sunglasses', 'Hat', 'Scarf', 'Watch', 
+        'Water Bottle', 'Daypack', 'Money Belt', 
+        'Travel Pillow'
+      ]
+    },
+    {
+      category: 'Miscellaneous',
+      items: [
+        'Cash', 'Credit Cards', 'Snacks', 
+        'Travel Umbrella', 'Portable Charger', 
+        'Notebook', 'Pen', 'Travel Journal'
+      ]
+    }
+  ];
+
+  const toggleBtn = document.getElementById('pub-essen-toggle-btn');
+  const essentialsList = document.getElementById('pub-essen-essentials-list');
+  const essentialsContainer = document.getElementById('pub-essen-essentials-container');
+  const saveBtn = document.getElementById('pub-essen-save-btn');
+  const savedItems = document.getElementById('pub-essen-saved-items');
+
+  function renderEssentials() {
+    essentialsContainer.innerHTML = essentials.map(category => `
+      <div class="pub-essen-essentials-category">
+        <h3>${category.category}</h3>
+        ${category.items.map(item => `
+          <div class="pub-essen-essentials-item">
+            <input type="checkbox" id="pub-essen-${item.toLowerCase().replace(/\s+/g, '-')}" name="${item}">
+            <label for="pub-essen-${item.toLowerCase().replace(/\s+/g, '-')}">${item}</label>
           </div>
+        `).join('')}
+      </div>
+    `).join('');
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    essentialsList.style.display = 
+      essentialsList.style.display === 'none' ? 'block' : 'none';
+  });
+
+  saveBtn.addEventListener('click', () => {
+    const selected = Array.from(
+      essentialsList.querySelectorAll('input:checked')
+    ).map(cb => cb.nextElementSibling.textContent);
+
+    savedItems.innerHTML = selected.length 
+      ? `<strong>Selected Items:</strong><br>${selected.join(', ')}` 
+      : 'No items selected';
+
+    essentialsList.style.display = 'none';
+  });
+
+  renderEssentials();
+
+  // Initialize countries dropdown
+  const travelCountriesPub = ["USA", "Canada", "UK", "France", "Germany", "Japan", "Australia", "India", "Brazil", "Spain"];
+  const travelDestinationSelectPub = document.getElementById('travel_destination_select_pub_20250202');
+  travelCountriesPub.forEach(country => {
+    const option = document.createElement('option');
+    option.value = country;
+    option.textContent = country;
+    travelDestinationSelectPub.appendChild(option);
+  });
+
+  const travelStartDatePub = document.getElementById('travel_start_date_pub_20250202');
+  const travelEndDatePub = document.getElementById('travel_end_date_pub_20250202');
+  const travelNumDaysPub = document.getElementById('travel_days_calc_pub_20250202');
+
+
+  function calculateTravelDaysPub() {
+    if (travelStartDatePub.value && travelEndDatePub.value) {
+      const start = new Date(travelStartDatePub.value);
+      const end = new Date(travelEndDatePub.value);
+      
+      // Validate end date is not before start date
+      if (end < start) {
+        alert('End date cannot be before start date');
+        travelEndDatePub.value = '';
+        travelNumDaysPub.value = '';
+        return;
+      }
+      
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Including both start and end days
+      travelNumDaysPub.value = diffDays;
+    }
+  }
+  document.getElementById("travel_start_date_pub_20250202").addEventListener("change", calculateDays);
+    document.getElementById("travel_end_date_pub_20250202").addEventListener("change", calculateDays);
+    ///new aditi code
+    function calculateDays() {
+        const startDate = new Date(document.getElementById("travel_start_date_pub_20250202").value);
+        const endDate = new Date(document.getElementById("travel_end_date_pub_20250202").value);
+        
+        if (!isNaN(startDate) && !isNaN(endDate) && endDate >= startDate) {
+            const timeDiff = endDate - startDate;
+            const numberOfDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1;
+            document.getElementById("travel_days_calc_pub_20250202").value = numberOfDays;
+            generateDayActivities(numberOfDays);
+        } else {
+            document.getElementById("travel_days_calc_pub_20250202").value = "";
+            document.getElementById("day-activities-container").innerHTML = "";
+        }
+    }
+    
+    function generateDayActivities(numberOfDays) {
+        const dayActivitiesContainer = document.getElementById("day-activities-container");
+        dayActivitiesContainer.innerHTML = "";
+        
+        for (let i = 1; i <= numberOfDays; i++) {
+            const dayActivityField = document.createElement("div");
+            dayActivityField.classList.add("form-group");
+            dayActivityField.innerHTML = `
+                <label for="day${i}-activities">Day ${i} Activities:</label>
+                <textarea id="day${i}-activities" rows="4" placeholder="Enter activities for Day ${i}"></textarea>
+            `;
+            dayActivitiesContainer.appendChild(dayActivityField);
+        }
+    }
+  function validateApplyByDate() {
+    const startDatePub = document.getElementById('travel_start_date_pub_20250202');
+    const applyDatePub = document.getElementById('travel_apply_date_pub_20250202');
+    const currentDate = new Date();
+
+    // Ensure apply by date is set
+    if (!applyDatePub.value) return false;
+
+    const startDate = new Date(startDatePub.value);
+    const applyDate = new Date(applyDatePub.value);
+
+    // Check if apply by date is after start date
+    if (applyDate >= startDate) {
+      alert('Last apply by date must be before the start date');
+      applyDatePub.value = ''; // Clear the invalid date
+      return false;
+    }
+
+    // Check if apply by date is in the past
+    if (applyDate < currentDate) {
+      alert('Last apply by date cannot be in the past');
+      applyDatePub.value = ''; // Clear the invalid date
+      return false;
+    }
+
+    return true;
+  }
+
+  travelStartDatePub.addEventListener('change', calculateTravelDaysPub);
+  travelEndDatePub.addEventListener('change', calculateTravelDaysPub);
+  document.getElementById('travel_apply_date_pub_20250202').addEventListener('change', validateApplyByDate);
+
+  // Form navigation
+  let currentTravelStepPub = 1;
+  const travelFormPub = document.getElementById('travel_booking_form_pub_20250202');
+
+  function showTravelStepPub(step) {
+    document.querySelectorAll('.travel_step_pub_panel').forEach(s => s.classList.remove('active'));
+    document.getElementById(`travel_step${step}_panel_pub_20250202`).classList.add('active');
+    
+    document.querySelectorAll('.travel_progress_pub_step').forEach((s, index) => {
+      if (index + 1 <= step) {
+        s.classList.add('active');
+      } else {
+        s.classList.remove('active');
+      }
+    });
+  }
+  document.querySelectorAll('input[type="date"]').forEach(input => {
+        input.addEventListener('click', () => {
+            input.showPicker(); // Opens the date picker
+        });
+    });
+
+  function validateTravelStepPub(step) {
+    const errors = [];
+    
+    if (step === 1) {
+      const name = document.getElementById('travel_name_input_pub_20250202').value;
+      const destination = document.getElementById('travel_destination_select_pub_20250202').value;
+      
+      if (!name) errors.push('travel_name');
+      if (!destination) errors.push('travel_destination');
+    }
+    else if (step === 2) {
+      const startDate = document.getElementById('travel_start_date_pub_20250202').value;
+      const endDate = document.getElementById('travel_end_date_pub_20250202').value;
+      
+      if (!startDate) errors.push('travel_start_date');
+      if (!endDate) errors.push('travel_end_date');
+
+    }
+    else if (step === 3) {
+      const maxPeople = document.getElementById('travel_max_people_pub_20250202').value;
+      const genders = [
+        document.getElementById('travel_gender_male_pub_20250202').checked,
+        document.getElementById('travel_gender_female_pub_20250202').checked,
+        document.getElementById('travel_gender_other_pub_20250202').checked
+      ];
+      const applyBy = document.getElementById('travel_apply_date_pub_20250202').value;
+      const startDate = document.getElementById('travel_start_date_pub_20250202').value;
+      
+      if (!maxPeople) errors.push('travel_people');
+      if (!genders.some(g => g)) errors.push('travel_gender');
+      if (!applyBy) errors.push('travel_apply_date');
+      
+      // Additional validation for apply by date
+      if (applyBy && startDate) {
+        const applyDate = new Date(applyBy);
+        const startDateObj = new Date(startDate);
+        const currentDate = new Date();
+        
+        if (applyDate >= startDateObj) {
+          errors.push('travel_apply_date');
+          alert('Last apply by date must be before the start date');
+        }
+        
+        if (applyDate < currentDate) {
+          errors.push('travel_apply_date');
+          alert('Last apply by date cannot be in the past');
+        }
+      }
+    }
+
+    document.querySelectorAll('.travel_error_pub_message').forEach(msg => msg.style.display = 'none');
+    errors.forEach(error => {
+      document.getElementById(`${error}_error_pub_20250202`).style.display = 'block';
+    });
+
+    return errors.length === 0;
+  }
+
+  function travelNextStepPub(step) {
+    if (validateTravelStepPub(step)) {
+      currentTravelStepPub++;
+      showTravelStepPub(currentTravelStepPub);
+    }
+  }
+
+  function travelPrevStepPub(step) {
+    currentTravelStepPub--;
+    showTravelStepPub(currentTravelStepPub);
+  }
+
+
+  travelFormPub.addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (validateTravelStepPub(3)) {
+    const travelFormData = {
+      travelerName: document.getElementById('travel_name_input_pub_20250202').value,
+      destination: document.getElementById('travel_destination_select_pub_20250202').value,
+      startDate: document.getElementById('travel_start_date_pub_20250202').value,
+      endDate: document.getElementById('travel_end_date_pub_20250202').value,
+      numDays: document.getElementById('travel_days_calc_pub_20250202').value,
+      maxPeople: document.getElementById('travel_max_people_pub_20250202').value,
+      gender: {
+      male: document.getElementById('travel_gender_male_pub_20250202').checked,
+      female: document.getElementById('travel_gender_female_pub_20250202').checked,
+      other: document.getElementById('travel_gender_other_pub_20250202').checked
+      },
+      applyBy: document.getElementById('travel_apply_date_pub_20250202').value,
+      essentials: document.getElementById('pub-essen-saved-items').textContent
+    };
+  }
+});
+  document.querySelector('.travel_submit_pub_btn').addEventListener('click', function() {
+    if (validateTravelStepPub(3)) {
+      alert('Travel Form submitted successfully!');
+    
+    }
+  });
+
+
+
+// Add submit event listener to the form
+document.getElementById('travel_booking_form_pub_20250202').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form submission
+    collectTravelFormData();
+});
+
+// Update the onclick handler for the submit button
+document.querySelector('.travel_submit_pub_btn').onclick = function() {
+    collectTravelFormData();
+};
+
+
+// Update the collectTravelFormData function to include day activities
+function collectTravelFormData() {
+    const formData = {
+        travelerName: document.getElementById('travel_name_input_pub_20250202').value,
+        destination: document.getElementById('travel_destination_select_pub_20250202').value,
+        startDate: document.getElementById('travel_start_date_pub_20250202').value,
+        endDate: document.getElementById('travel_end_date_pub_20250202').value,
+        numberOfDays: document.getElementById('travel_days_calc_pub_20250202').value,
+        maxPeople: document.getElementById('travel_max_people_pub_20250202').value,
+        gender: {
+            male: document.getElementById('travel_gender_male_pub_20250202').checked,
+            female: document.getElementById('travel_gender_female_pub_20250202').checked,
+            other: document.getElementById('travel_gender_other_pub_20250202').checked
+        },
+        savedEssentials: document.getElementById('pub-essen-saved-items') 
+            ? document.getElementById('pub-essen-saved-items').textContent 
+            : 'No essentials saved',
+        applyByDate: document.getElementById('travel_apply_date_pub_20250202').value,
+        
+        // Add day activities
+        dayActivities: {}
+    };
+
+    // Collect activities for each day
+    const numberOfDays = parseInt(document.getElementById('travel_days_calc_pub_20250202').value) || 0;
+    for (let i = 1; i <= numberOfDays; i++) {
+        const dayActivity = document.getElementById(`day${i}-activities`);
+        if (dayActivity && dayActivity.value.trim()) {
+            formData.dayActivities[`day${i}`] = dayActivity.value.trim();
+        }
+    }
+    
+    // Update the display card if needed
+    if (typeof updateTripCard === 'function') {
+        updateTripCard(formData);
+    }
+    
+    console.log('Travel Form Data:', formData);
+    return formData;
+}
+  
+  
+  </script>
+
+    <!--private form-->        
+    <div class="priv-modal-overlay" id="priv-modal-overlay"></div>
+    <div class="priv-modal-container" id="priv-modal-container">
+        <button class="priv-close-button" onclick="closeModal()">X</button>
+    <div class="trip-planner-container">
+        <div class="trip-progress-stepper">
+            <div class="trip-progress-step active" id="trip-step-indicator-1">1</div>
+            <div class="trip-progress-step" id="trip-step-indicator-2">2</div>
+            <div class="trip-progress-step" id="trip-step-indicator-3">3</div>
+            <div class="trip-progress-step" id="trip-step-indicator-4">4</div>
         </div>
-      </section>
-      <section class="section-box box-news background-body">
-        <div class="container"> 
-          <div class="row align-items-end">
-            <div class="col-md-6 mb-30 wow fadeInLeft">
-              <h2 class="neutral-1000">News, Tips & Guides</h2>
-              <p class="text-xl-medium neutral-500">Favorite destinations based on customer reviews</p>
-            </div>
-            <div class="col-md-6 mb-30 wow fadeInRight">
-              <div class="d-flex justify-content-center justify-content-md-end"><a class="btn btn-black-lg" href="#">View More 
-                  <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg></a></div>
-            </div>
-          </div>
-          <div class="box-list-news wow fadeInUp"> 
-            <div class="box-swiper mt-30">
-              <div class="swiper-container swiper-group-3">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div class="card-news background-card hover-up">
-                      <div class="card-image"> 
-                        <label class="label">Cultural</label><a class="wish" href="#">
-                          <svg width="20" height="18" viewbox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a><img src="assets/imgs/page/homepage1/news.png" alt="Travila">
-                      </div>
-                      <div class="card-info"> 
-                        <div class="card-meta"> <span class="post-date neutral-1000">18 Sep 2024</span><span class="post-time neutral-1000">6 mins</span><span class="post-comment neutral-1000">38 comments</span></div>
-                        <div class="card-title"> <a class="text-xl-bold neutral-1000" href="blog-detail.html">Ultimate Travel Planning Guide: 10 Tips for a Seamless Journey</a></div>
-                        <div class="card-program"> 
-                          <div class="endtime"> 
-                            <div class="card-author"> <img src="assets/imgs/page/homepage1/avatar.png" alt="Travila">
-                              <p class="text-sm-bold neutral-1000">Jimmy Dave</p>
-                            </div>
-                            <div class="card-button"> <a class="btn btn-gray" href="blog-detail.html">Keep Reading</a></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card-news background-card hover-up">
-                      <div class="card-image"> 
-                        <label class="label">Travel</label><a class="wish" href="#">
-                          <svg width="20" height="18" viewbox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a><img src="assets/imgs/page/homepage1/news2.png" alt="Travila">
-                      </div>
-                      <div class="card-info"> 
-                        <div class="card-meta"> <span class="post-date neutral-1000">18 Sep 2024</span><span class="post-time neutral-1000">6 mins</span><span class="post-comment neutral-1000">38 comments</span></div>
-                        <div class="card-title"> <a class="text-xl-bold neutral-1000" href="blog-detail.html">Top 10 Travel Hacks for Budget-Conscious Adventurers</a></div>
-                        <div class="card-program"> 
-                          <div class="endtime"> 
-                            <div class="card-author"> <img src="assets/imgs/page/homepage1/avatar.png" alt="Travila">
-                              <p class="text-sm-bold neutral-1000">Jimmy Dave</p>
-                            </div>
-                            <div class="card-button"> <a class="btn btn-gray" href="blog-detail.html">Keep Reading</a></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card-news background-card hover-up">
-                      <div class="card-image"> 
-                        <label class="label">Discovery</label><a class="wish" href="#">
-                          <svg width="20" height="18" viewbox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg></a><img src="assets/imgs/page/homepage1/news3.png" alt="Travila">
-                      </div>
-                      <div class="card-info"> 
-                        <div class="card-meta"> <span class="post-date neutral-1000">18 Sep 2024</span><span class="post-time neutral-1000">6 mins</span><span class="post-comment neutral-1000">38 comments</span></div>
-                        <div class="card-title"> <a class="text-xl-bold neutral-1000" href="blog-detail.html">Discovering Hidden Gems: 10 Off-the-Beaten-Path Travel Tips</a></div>
-                        <div class="card-program"> 
-                          <div class="endtime"> 
-                            <div class="card-author"> <img src="assets/imgs/page/homepage1/avatar.png" alt="Travila">
-                              <p class="text-sm-bold neutral-1000">Jimmy Dave</p>
-                            </div>
-                            <div class="card-button"> <a class="btn btn-gray" href="blog-detail.html">Keep Reading</a></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+        <form id="trip-planning-form">
+          <!-- Step 1: Basic Info -->
+          <div class="trip-form-step active" id="trip-form-step-1">
+              <div class="trip-form-group">
+                  <label class="trip-form-label" for="trip-name-input">Name Your Trip</label>
+                  <input type="text" id="trip-name-input" class="trip-form-input" required>
               </div>
-            </div>
+              <div class="trip-form-group">
+                  <label class="trip-form-label" for="trip-destination-select">Destination(s)</label>
+                  <select id="trip-destination-select" class="trip-form-select" required>
+                      <option value="">Select a country</option>
+                  </select>
+              </div>
+              <div class="trip-form-navigation">
+                  <div></div>
+                  <button type="button" class="trip-form-button" id="trip-next-button-1" onclick="nextTripStep()">Next</button>
+              </div>
           </div>
+
+          <!-- Step 2: Dates -->
+          <div class="trip-form-step" id="trip-form-step-2">
+              <div class="trip-form-group">
+                  <label class="trip-form-label">Trip Dates</label>
+                  <div class="trip-date-container">
+                      <input type="date" id="trip-start-date" class="trip-form-input" required>
+                      <input type="date" id="trip-end-date" class="trip-form-input" required>
+                  </div>
+              </div>
+              <div class="trip-form-group">
+                  <label class="trip-form-label">Trip Duration (days)</label>
+                  <input type="number" id="trip-duration-display" class="trip-form-input" readonly>
+              </div>
+              <div class="trip-form-navigation">
+                  <button type="button" class="trip-form-button" id="trip-prev-button-2" onclick="prevTripStep()">Previous</button>
+                  <button type="button" class="trip-form-button" id="trip-next-button-2" onclick="nextTripStep()">Next</button>
+              </div>
+          </div>
+
+          <!-- Step 3: Activities -->
+          <div class="trip-form-step" id="trip-form-step-3">
+              <div class="trip-form-group">
+  <label class="trip-form-label" for="trip-activities-input">Activities/Attractions</label>
+  <textarea id="trip-activities-input" class="trip-form-input" required></textarea>
+</div>
+              <div class="trip-essentials-area">
+                <h3>Travel Essentials</h3>
+                <textarea id="trip-essentials-text" placeholder="Enter your travel essentials here..."></textarea>
+            </div>
+              <div class="trip-form-navigation">
+                  <button type="button" class="trip-form-button" id="trip-prev-button-3" onclick="prevTripStep()">Previous</button>
+                  <button type="button" class="trip-form-button" id="trip-next-button-3" onclick="nextTripStep()">Next</button>
+              </div>
+          </div>
+
+          <!-- Step 4: Budget -->
+          <div class="trip-form-step" id="trip-form-step-4">
+              <div class="trip-form-group">
+                  <label class="trip-form-label">Trip Budget</label>
+                  <div class="trip-date-container">
+                      <input type="number" id="trip-budget-input" class="trip-form-input" required>
+                      <select id="trip-currency-select-pub" style="width:50%; border-radius:5px; border:1px solid #ddd;">
+                          <option value="USD">USD</option>
+                          <option value="EUR">EUR</option>
+                          <option value="GBP">GBP</option>
+                          <option value="JPY">JPY</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="trip-form-navigation">
+                  <button type="button" class="trip-form-button" id="trip-prev-button-4" onclick="prevTripStep()">Previous</button>
+                 <!-- <button type="submit" class="trip-form-button" id="trip-submit-button" onclick="privb">Submit</button>-->
+                  <button type="submit" class="trip-form-button" id="trip-submit-button" onclick="return validateTripForm()">Submit</button>
+              </div>
+          </div>
+      </form>
+    </div>
+
+</div>
+</div>
+
+<script>
+  function openModal() {
+           document.getElementById('priv-modal-container').style.display = 'block';
+           document.getElementById('priv-modal-overlay').style.display = 'block';
+       }
+       function closeModal() {
+           document.getElementById('priv-modal-container').style.display = 'none';
+           document.getElementById('priv-modal-overlay').style.display = 'none';
+       }
+
+       // Countries data
+       const tripDestinations = [
+           "United States", "Canada", "United Kingdom", "France", "Germany",
+           "Italy", "Spain", "Japan", "Australia", "Brazil", "India"
+       ];
+
+       // Populate countries dropdown
+       const tripDestinationSelect = document.getElementById('trip-destination-select');
+       tripDestinations.forEach(country => {
+           const option = document.createElement('option');
+           option.value = country;
+           option.textContent = country;
+           tripDestinationSelect.appendChild(option);
+       });
+
+       let currentTripStep = 1;
+       const totalTripSteps = 4;
+
+       function updateTripSteps() {
+           document.querySelectorAll('.trip-progress-step').forEach((step, index) => {
+               if (index + 1 <= currentTripStep) {
+                   step.classList.add('active');
+               } else {
+                   step.classList.remove('active');
+               }
+           });
+
+           document.querySelectorAll('.trip-form-step').forEach((step, index) => {
+               if (index + 1 === currentTripStep) {
+                   step.classList.add('active');
+               } else {
+                   step.classList.remove('active');
+               }
+           });
+       }
+
+       function nextTripStep() {
+           if (currentTripStep < totalTripSteps) {
+               currentTripStep++;
+               updateTripSteps();
+           }
+       }
+
+       function prevTripStep() {
+           if (currentTripStep > 1) {
+               currentTripStep--;
+               updateTripSteps();
+           }
+       }
+
+    document.getElementById('trip-start-date').addEventListener('change', validateDates);
+    document.getElementById('trip-end-date').addEventListener('change', validateDates);
+
+    function validateDates() {
+        const startDateInput = document.getElementById('trip-start-date');
+        const endDateInput = document.getElementById('trip-end-date');
+        const durationDisplay = document.getElementById('trip-duration-display');
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Reset time to avoid mismatches
+        
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+
+        // Check if start date is in the past or today
+        if (startDate <= today) {
+            alert('Start date must be a future date!');
+            startDateInput.value = ''; // Clear invalid date
+            durationDisplay.value = '';
+            return;
+        }
+
+        // Check if end date is before start date
+        if (endDate < startDate) {
+            alert('End date cannot be before the start date!');
+            endDateInput.value = ''; // Clear invalid date
+            durationDisplay.value = '';
+            return;
+        }
+
+        // Calculate trip duration
+        if (startDate && endDate) {
+            const duration = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+            durationDisplay.value = duration > 0 ? duration : 0;
+        }
+    }
+
+    document.querySelectorAll('.trip-form-input').forEach(input => {
+    input.addEventListener('click', () => {
+      input.showPicker(); // Opens the date picker
+    });
+  });
+
+       // Form submission
+      document.getElementById('trip-planning-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const tripFormData = {
+            tripName: document.getElementById('trip-name-input').value,
+            destination: document.getElementById('trip-destination-select').value,
+            startDate: document.getElementById('trip-start-date').value,
+            endDate: document.getElementById('trip-end-date').value,
+            duration: document.getElementById('trip-duration-display').value,
+            activities: document.getElementById('trip-activities-input').value,
+            essentials: document.getElementById('trip-essentials-text').value,
+            budget: document.getElementById('trip-budget-input').value,
+            currency: document.getElementById('trip-currency-select').value
+        };
+
+        document.getElementById('card-trip-name').textContent = tripFormData.tripName;
+        document.getElementById('priv-card-destination').textContent = tripFormData.destination;
+        document.getElementById('priv-card-start-date').textContent = tripFormData.startDate;
+        document.getElementById('priv-card-end-date').textContent = tripFormData.endDate;
+        document.getElementById('priv-card-duration').textContent = tripFormData.duration;
+        document.getElementById('card-activities').textContent = tripFormData.activities;
+        document.getElementById('priv-card-essentials').textContent = tripFormData.essentials;
+        document.getElementById('card-budget').textContent = tripFormData.budget;
+        document.getElementById('card-currency').textContent = tripFormData.currency;
+
+        document.getElementById('trip-card-container').style.display = 'block';
+    });
+
+
+    document.body.insertAdjacentHTML('beforeend', cardHTML);
+    function updateTripCard(formData) {
+    // Show the section
+    document.getElementById('public-trip-section').style.display = 'block';
+    
+    // Update all fields
+    document.getElementById('card-traveler-name').textContent = formData.travelerName;
+    document.getElementById('card-destination').textContent = formData.destination;
+    document.getElementById('card-start-date').textContent = formData.startDate;
+    document.getElementById('card-end-date').textContent = formData.endDate;
+    document.getElementById('card-duration').textContent = formData.numberOfDays;
+    document.getElementById('card-max-people').textContent = formData.maxPeople;
+    
+    // Format gender selections
+    const selectedGenders = [];
+    if (formData.gender.male) selectedGenders.push('Male');
+    if (formData.gender.female) selectedGenders.push('Female');
+    if (formData.gender.other) selectedGenders.push('Other');
+    document.getElementById('card-gender').textContent = selectedGenders.join(', ') || 'None selected';
+    
+    document.getElementById('card-essentials').textContent = formData.savedEssentials;
+    document.getElementById('card-apply-date').textContent = formData.applyByDate;
+}
+
+// Modify the existing collectTravelFormData function to update the card
+
+
+
+
+// Add CSS styles
+const styles = `
+    .section-1 {
+        margin: 20px;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+    }
+    
+    .trip-card {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .trip-card h4 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .trip-card p {
+        margin: 10px 0;
+        line-height: 1.5;
+    }
+    
+    .trip-card strong {
+        color: #555;
+        min-width: 150px;
+        display: inline-block;
+    }
+`;
+
+// Add the styles to the page
+const styleSheet = document.createElement('style');
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
+   </script>
+
+  <script>
+      function toggleSlide() {
+          var div = document.getElementById("slideDiv");
+          div.classList.toggle("show");
+      }
+  </script>
+
+<div class="container-2025">
+      <h1 class="h1-2025"> Created By You</h1>
+</div>
+              <!-- Navigation Bar -->
+    <nav class="navbar-1">
+
+<div class="nav-container-1 ">
+  <center>
+          <div class="nav-buttons-1">
+              <button class="nav-btn-1  active-1" id="publb" onclick="showSection1('public-section-1')">Public</button>
+              <button class="nav-btn-1" id="privb" onclick="showSection1('private-section-1')">Private</button>
+          </div>
+        </center>
         </div>
-      </section>
+  </nav>
+
+  <!-- Content Sections -->
+
+  <section id="public-section-1" class="section-1 active-1">
+      <h2>Your Public Trips</h2>
+      <br>
+  
+<section id="public-trip-section" class="section-1" style="display: none;">
+  
+   <div id="public-trip-card" class="trip-card">
+        <p><strong>Trip Name:</strong> <span id="card-traveler-name"></span></p>
+        <p><strong>Destination:</strong> <span id="card-destination"></span></p>
+        <p><strong>Start Date:</strong> <span id="card-start-date"></span></p>
+        <p><strong>End Date:</strong> <span id="card-end-date"></span></p>
+        <p><strong>Duration (Days):</strong> <span id="card-duration"></span></p>
+        <p><strong>Maximum People:</strong> <span id="card-max-people"></span></p>
+        <p><strong>Gender Options:</strong> <span id="card-gender"></span></p>
+        <p><strong>Travel Essentials:</strong> <span id="card-essentials"></span></p>
+        <p><strong>Last Apply Date:</strong> <span id="card-apply-date"></span></p>
+        
+    </div>
+</section>
+<div class="slider-container">
+ 
+  <div id="trip-container"></div>
+</div>
+
+</section>
+<section id="private-section-1" class="section-1"> 
+    <h4>Private Trips</h4>
+    <div id="trip-card-container" class="trip-card" style="display:none;">
+      <h4>Your Trip Details</h4>
+      <p><strong>Trip Name:</strong> <span id="card-trip-name"></span></p>
+      <p><strong>Destination:</strong> <span id="priv-card-destination"></span></p>
+      <p><strong>Start Date:</strong> <span id="priv-card-start-date"></span></p>
+      <p><strong>End Date:</strong> <span id="priv-card-end-date"></span></p>
+      <p><strong>Duration (Days):</strong> <span id="priv-card-duration"></span></p>
+      <p><strong>Activities/Attractions:</strong> <span id="card-activities"></span></p>
+      <p><strong>Travel Essentials:</strong> <span id="priv-card-essentials"></span></p>
+      <p><strong>Budget:</strong> <span id="card-budget"></span></p>
+      <p><strong>Currency:</strong> <span id="card-currency"></span></p>
+  </div>
+  <div class="slider-container">
+    <div class="slider-container">
+ 
+      <div id="trip-container"></div>
+    </div>
+    <div id="trip-container1"></div>
+  </div>
+</section>
+
+<style>
+  /* Slider Container */
+  .slider-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 20px;
+  }
+
+  /* Scrollable Trip Container */
+  #trip-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 20px;
+      scroll-behavior: smooth;
+      white-space: nowrap;
+  }
+
+  /* Trip Card Styling */
+  .trip-card {
+      flex: 0 0 300px;
+      min-width: 250px;
+      max-width: 350px;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .trip-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .trip-card p {
+      margin: 8px 0;
+      line-height: 1.4;
+      word-wrap: break-word;
+  }
+
+  .trip-card strong {
+      color: #333;
+      display: inline-block;
+      margin-right: 5px;
+  }
+
+  .trip-card span {
+      color: #666;
+      display: inline-block;
+  }
+
+  .trip-card .essentials {
+      word-break: break-word;
+  }
+
+  /* Custom Scrollbar */
+  #trip-container::-webkit-scrollbar {
+      height: 8px;
+  }
+
+  #trip-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 5px;
+  }
+
+  #trip-container::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 5px;
+  }
+
+  #trip-container::-webkit-scrollbar-thumb:hover {
+      background: #555;
+  }
+
+  /* Navigation Buttons */
+  .slider-nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px auto;
+      width: 95%;
+  }
+
+  .nav-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+  }
+
+  .nav-btn:hover {
+      background: #0056b3;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+      #trip-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          padding: 10px;
+      }
+
+      .trip-card {
+          min-width: 250px;
+          max-width: 100%;
+          padding: 15px;
+      }
+  }
+</style>
+
+
+ 
+  
+  <script type="module" src="retrieve.js"></script>
+
+
+            
+
+          
+  
+   
+      <section class="box-section block-content-tourlist background-body">
+        <div class="container-2025"></div>
+</section>
+
+
       <section class="section-box box-media background-body"> 
         <div class="container-media wow fadeInUp"> <img src="assets/imgs/page/homepage5/media.png" alt="Travila"><img src="assets/imgs/page/homepage5/media2.png" alt="Travila"><img src="assets/imgs/page/homepage5/media3.png" alt="Travila"><img src="assets/imgs/page/homepage5/media4.png" alt="Travila"><img src="assets/imgs/page/homepage5/media5.png" alt="Travila"><img src="assets/imgs/page/homepage5/media6.png" alt="Travila"><img src="assets/imgs/page/homepage5/media7.png" alt="Travila"></div>
       </section>
@@ -1440,115 +2669,49 @@
         </div>
       </div>
     </footer>
-    <div class="popup-firstload"> 
-      <div class="popup-container"> 
-        <div class="popup-content"> <a class="close-popup"></a>
-          <div class="popup-left">
-            <div class="logo-area"> <img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></div>
-            <h3 class="title-popup">Book, Pack, Go! Your Ultimate Travel Companion</h3><a class="btn btn-black-lg" href="#">Exploring Now 
-              <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg></a>
-          </div>
-          <div class="popup-right"> 
-            <div class="box-price"> 
-              <div class="box-price-inner"> <span class="text-price-1">SAVE 39%</span><span class="text-price-2">$899</span><a class="text-price-3" href="#">BOOK NOW</a></div>
-            </div><img alt="Travila" src="assets/imgs/template/img-popup.png">
-            <div class="button-area"> <a class="btn btn-next" href="#">
-                <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5.99992 10.6668L10.6666 6.00016L5.99992 1.3335M10.6666 6.00016L1.33325 6.00016" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg></a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="popup-signin"> 
-      <div class="popup-container"> 
-        <div class="popup-content"> <a class="close-popup-signin"></a>
-          <div class="d-flex gap-2 align-items-center"><a href="#"><img src="assets/imgs/template/popup/logo.svg" alt="Travila"></a>
-            <h4 class="neutral-1000">Hello there !</h4>
-          </div>
-          <div class="box-button-logins"> <a class="btn btn-login btn-google mr-10" href="#"><img src="assets/imgs/template/popup/google.svg" alt="Travila"><span class="text-sm-bold">Sign in with Google</span></a><a class="btn btn-login mr-10" href="#"><img src="assets/imgs/template/popup/facebook.svg" alt="Travila"></a><a class="btn btn-login" href="#"><img src="assets/imgs/template/popup/apple.svg" alt="Travila"></a></div>
-          <div class="form-login"> 
-            <form action="#">
-              <div class="form-group"> 
-                <label class="text-sm-medium">User name</label>
-                <input class="form-control username" type="text" placeholder="Email / Username">
-              </div>
-              <div class="form-group"> 
-                <label class="text-sm-medium">Password</label>
-                <input class="form-control password" type="password" placeholder="">
-              </div>
-              <div class="form-group"> 
-                <div class="box-remember-forgot">   
-                  <div class="remeber-me">
-                    <label class="text-xs-medium neutral-500"> 
-                      <input class="cb-remember" type="checkbox">Remember me
-                    </label>
-                  </div>
-                  <div class="forgotpass"> <a class="text-xs-medium neutral-500" href="#">Forgot  password?</a></div>
-                </div>
-              </div>
-              <div class="form-group mt-45 mb-30"> <a class="btn btn-black-lg" href="#">Login 
-                  <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg></a></div>
-              <p class="text-sm-medium neutral-500">Don’t have an account? <a class="neutral-1000 btn-signup" href="#">Register Here !</a></p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="popup-signup"> 
-      <div class="popup-container"> 
-        <div class="popup-content"> <a class="close-popup-signup"></a>
-          <div class="d-flex gap-2 align-items-center"><a href="#"><img src="assets/imgs/template/popup/logo.svg" alt="Travila"></a>
-            <h4 class="neutral-1000">Register</h4>
-          </div>
-          <div class="box-button-logins"> <a class="btn btn-login btn-google mr-10" href="#"><img src="assets/imgs/template/popup/google.svg" alt="Travila"><span class="text-sm-bold">Sign up with Google</span></a><a class="btn btn-login mr-10" href="#"><img src="assets/imgs/template/popup/facebook.svg" alt="Travila"></a><a class="btn btn-login" href="#"><img src="assets/imgs/template/popup/apple.svg" alt="Travila"></a></div>
-          <div class="form-login"> 
-            <form action="#">
-              <div class="form-group"> 
-                <label class="text-sm-medium">Username *</label>
-                <input class="form-control username" type="text" placeholder="Email / Username">
-              </div>
-              <div class="form-group"> 
-                <label class="text-sm-medium">Your email *</label>
-                <input class="form-control email" type="text" placeholder="Email / Username">
-              </div>
-              <div class="row"> 
-                <div class="col-6">
-                  <div class="form-group"> 
-                    <label class="text-sm-medium">Password *</label>
-                    <input class="form-control password" type="password" placeholder="***********">
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group"> 
-                    <label class="text-sm-medium">Confirm Password *</label>
-                    <input class="form-control password" type="password" placeholder="***********">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group"> 
-                <div class="box-remember-forgot">   
-                  <div class="remeber-me">
-                    <label class="text-xs-medium neutral-500"> 
-                      <input class="cb-remember" type="checkbox">I agree to term and conditions
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group mt-45 mb-30"> <a class="btn btn-black-lg" href="#">Create New Account 
-                  <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg></a></div>
-              <p class="text-sm-medium neutral-500">Already have an account  <a class="neutral-1000 btn-signin" href="#">Login Here !</a></p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    
+    <script>
+      const modal = document.getElementById('tripModal');
+        const createButton = document.querySelector('.create-button-2025');
+
+        createButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+    function showSection1(sectionId) {
+      // Hide all sections
+      const sections = document.querySelectorAll('.section-1');
+      sections.forEach(section => {
+          section.classList.remove('active-1');
+      });
+
+      // Show selected section
+      const selectedSection = document.getElementById(sectionId);
+      selectedSection.classList.add('active-1');
+
+      // Update button states
+      const buttons = document.querySelectorAll('.nav-btn-1');
+      buttons.forEach(button => {
+          button.classList.remove('active-1');
+          if (button.textContent.toLowerCase() === sectionId.split('-')[0]) {
+              button.classList.add('active-1');
+          }
+      });
+  }
+
+  // Add active class to "All" button on page load
+  document.addEventListener('DOMContentLoaded', () => {
+      const allButton = document.querySelector('.nav-btn-1');
+      allButton.classList.add('active-1');
+  });
+</script>
     <!--Vendors Scripts-->
     <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
     <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>

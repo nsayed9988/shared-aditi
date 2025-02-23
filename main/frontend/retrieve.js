@@ -5,7 +5,7 @@ import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebase
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
-    authDomain: "ty-project-80ab7.firebaseapp.com",
+    authDomain: "ty-project-80ab7.firebaseapp.com", 
     projectId: "ty-project-80ab7",
     storageBucket: "ty-project-80ab7.firebasestorage.app",
     messagingSenderId: "491495110151",
@@ -242,7 +242,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Function to retrieve and display public trips from all users
+
 // Function to retrieve and display public trips from the logged-in user only
 function retrieveAndDisplayPublicTrips() {
   console.log('Fetching your public trips...');
@@ -315,6 +315,7 @@ function retrieveAndDisplayPublicTrips() {
           const startDate = trip.startDate ? new Date(trip.startDate).toLocaleDateString() : 'N/A';
           const endDate = trip.endDate ? new Date(trip.endDate).toLocaleDateString() : 'N/A';
           const applyDate = trip.applyByDate ? new Date(trip.applyByDate).toLocaleDateString() : 'N/A';
+   
           
           // Format gender options if they exist
           const genderOptions = trip.gender ? Object.entries(trip.gender)
@@ -323,11 +324,12 @@ function retrieveAndDisplayPublicTrips() {
               .join(', ') : 'None specified';
           
           cardDiv.innerHTML = `
-              <p><strong>Traveler Name:</strong> <span>${trip.travelerName || 'N/A'}</span></p>
+              <p><strong>Trip Name:</strong> <span>${trip.travelerName || 'N/A'}</span></p>
               <p><strong>Destination:</strong> <span>${trip.destination || 'N/A'}</span></p>
               <p><strong>Start Date:</strong> <span>${startDate}</span></p>
               <p><strong>End Date:</strong> <span>${endDate}</span></p>
               <p><strong>Duration:</strong> <span>${trip.numberOfDays || 'N/A'} days</span></p>
+              <p><strong>Estimated Budget (Per Person):</strong> <span>${trip.budget || 'N/A'} ${trip.currency} </span></p>
               <p><strong>Max People:</strong> <span>${trip.maxPeople || 'N/A'}</span></p>
               <p><strong>Gender Options:</strong> <span>${genderOptions}</span></p>
               <p><strong>Travel Essentials:</strong> <span>${trip.savedEssentials || 'None selected'}</span></p>
@@ -352,7 +354,7 @@ function retrieveAndDisplayPublicTrips() {
       tripContainer.innerHTML = '<p class="error-message">Error loading your trips. Please try again later.</p>';
   });
 }
-// Function to open modal and display trip details and activities
+
 // Modify the openTripModal function to handle both public and private trips
 function openTripModal(tripIdOrData, userEmail) {
     const modal = document.getElementById('trip-modal');
@@ -473,12 +475,6 @@ function displayTripInModal(tripData, container) {
     container.innerHTML = activitiesHTML;
 }
 
-// Update the event listener in retrievePrivateTrips function
-// Replace this line in retrievePrivateTrips():
-// button.addEventListener('click', function() {
-//     const tripData = JSON.parse(this.getAttribute('data-trip'));
-//     openTripModal(tripData);
-// });
 // Ensure modal exists
 function ensureModalExists() {
     if (!document.getElementById('trip-modal')) {

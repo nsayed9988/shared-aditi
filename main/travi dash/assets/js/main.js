@@ -366,140 +366,8 @@
 
 // script.js
 
-// Mock data (replace with dynamic data from your backend or API)
-const tripData = {
-    totalTrips: 12,
-    upcomingTrips: 3,
-    pastTrips: 8,
-    activeTrip: "Beach"
-  };
-  
-  // Populate the dashboard stats
-  document.getElementById("total-trips").textContent = tripData.totalTrips;
-  document.getElementById("upcoming-trips").textContent = tripData.upcomingTrips;
-  document.getElementById("past-trips").textContent = tripData.pastTrips;
-  document.getElementById("active-trip").textContent = tripData.activeTrip || "None";
-
-  
 
 
-// script.js
-
-
-  
-  // Function to save edits when input loses focus
-  function saveEdit(input) {
-    const newValue = input.value.trim();
-    const parent = input.parentElement;
-  
-    // Update the parent element with the new value, preserving styles
-    parent.textContent = newValue || 'N/A';
-    parent.style.fontSize = '1.8rem';
-    parent.style.color = '#4caf50';
-    parent.style.margin = '0';
-    parent.style.fontWeight = 'bold'; // Bold style for saved value
-  }
-// Function to enable editing of the Trip Overview cards
-function editOverview() {
-    const cards = document.querySelectorAll('.stat-card h3');
-    document.getElementById('save-btn').disabled = false;
-  
-  
-    cards.forEach((card) => {
-      if (card.querySelector('input')) return;
-  
-      const currentValue = card.textContent;
-      card.innerHTML = `<input type="text" value="${currentValue}" onblur="saveEdit(this)" class="edit-input" />`;
-  
-      const input = card.querySelector('input');
-      input.style.fontSize = '1.8rem';
-      input.style.color = '#4caf50';
-      input.style.margin = '0';
-      input.style.textAlign = 'center';
-      input.style.width = '100%';
-      input.style.border = 'none';
-      input.style.background = 'transparent';
-      input.style.outline = 'none';
-      input.style.fontWeight = 'bold';
-    });
-  }
-  
-  // Function to save edits when input loses focus
-  function saveEdit(input) {
-    const newValue = input.value.trim();
-    const parent = input.parentElement;
-    parent.textContent = newValue || 'N/A';
-    parent.style.fontSize = '1.8rem';
-    parent.style.color = '#4caf50';
-    parent.style.margin = '0';
-    parent.style.fontWeight = 'bold';
-  }
-  
-  // Save the changes when Save button is clicked
-  function saveChanges() {
-    const cards = document.querySelectorAll('.stat-card input');
-    cards.forEach((input) => {
-      saveEdit(input); // Save each change in the input fields
-    });
-    alert("Trip Overview Updated"); // Optional: Add a confirmation message
-  }
-// Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see the error "The Geolocation service
-// failed.", it means you probably did not give permission for the browser to
-// locate you.
-let map, infoWindow;
-
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 6,
-  });
-  infoWindow = new google.maps.InfoWindow();
-
-  const locationButton = document.createElement("button");
-
-  locationButton.textContent = "Pan to Current Location";
-  locationButton.classList.add("custom-map-control-button");
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(
-    locationButton
-  );
-  locationButton.addEventListener("click", () => {
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-
-          infoWindow.setPosition(pos);
-          infoWindow.setContent("Location found.");
-          infoWindow.open(map);
-          map.setCenter(pos);
-        },
-        () => {
-          handleLocationError(true, infoWindow, map.getCenter());
-        }
-      );
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
-    }
-  });
-}
-
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(
-    browserHasGeolocation
-      ? "Error: The Geolocation service failed."
-      : "Error: Your browser doesn't support geolocation."
-  );
-  infoWindow.open(map);
-}
-
-window.initMap = initMap;
 //myprofile changes
 document.getElementById('profileForm').addEventListener('submit', function (event) {
     // Check all form elements
@@ -515,6 +383,7 @@ document.getElementById('profileForm').addEventListener('submit', function (even
     }
   });
 
+  
   // Save the profile data to local storage
   function saveProfile() {
     // Get form values
@@ -1008,3 +877,9 @@ document.getElementById("saveChangesBtn").addEventListener("click", function () 
         option.textContent = country;
         destinationSelect.appendChild(option);
     });
+
+
+
+
+
+

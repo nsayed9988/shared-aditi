@@ -87,6 +87,7 @@ TABLE CONTENT
   --bs-color-grey-2: #F0F0F0;
   --bs-neutral-950: #1E1E1E;
 }
+
 .btntrip{
 
   padding-top: 20px;
@@ -7647,18 +7648,7 @@ select {
     display: none;
   }
 }
-#country{
-  border-radius: 10px;
-  height: 50px;
-}
-#addBudget{
-  color: #000;
-  background-color: #FEFA17 ;
-  margin-top: 10px;
-}
-#addExpense{
-  color: #000;
-  background-color: #FEFA17 ;
-  margin-top: 10px;
-}
+
+
+
 /*# sourceMappingURL=style.css.map */
