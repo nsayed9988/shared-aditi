@@ -175,13 +175,25 @@ function loadTripParticipants(tripId, email) {
 
     participantsContainer.innerHTML = '<div class="loading-final">Loading participants...</div>';
 
+    // First, get the current user's data
+    const currentUser = {
+        email: email,
+        joinedAt: Date.now(),
+        status: 'owner',  // Mark the user as owner
+        authUid: email.replace(/[.@]/g, '_')  // Create a consistent ID for the user
+    };
+
     onValue(participantsRef, (snapshot) => {
-        if (!snapshot.exists()) {
-            participantsContainer.innerHTML = '<div class="no-participants-final">No confirmed participants yet.</div>';
-            return;
+        let participants = {};
+        
+        // Add the current user first
+        participants[currentUser.authUid] = currentUser;
+
+        // Add other participants
+        if (snapshot.exists()) {
+            participants = { ...participants, ...snapshot.val() };
         }
 
-        const participants = snapshot.val();
         let participantsHTML = `
             <table class="participants-table-final">
                 <thead>
@@ -194,11 +206,9 @@ function loadTripParticipants(tripId, email) {
                 <tbody>
         `;
 
-        let hasParticipants = false;
         Object.keys(participants).forEach(authUid => {
             const participant = participants[authUid];
             if (participant.email) {
-                hasParticipants = true;
                 const joinDate = new Date(participant.joinedAt).toLocaleDateString();
                 const status = participant.status || 'pending';
                 participantsHTML += `
@@ -216,11 +226,17 @@ function loadTripParticipants(tripId, email) {
             </table>
         `;
 
-        if (!hasParticipants) {
-            participantsContainer.innerHTML = '<div class="no-participants-final">No participants found.</div>';
-        } else {
-            participantsContainer.innerHTML = participantsHTML;
-        }
+        participantsContainer.innerHTML = participantsHTML;
+
+        // Store the updated participants list in the trip data
+        const tripRef = ref(database, `travel-bookings/${formattedEmail}/public-trips/${tripId}`);
+        get(tripRef).then((tripSnapshot) => {
+            if (tripSnapshot.exists()) {
+                const tripData = tripSnapshot.val();
+                tripData.participants = participants;
+                set(tripRef, tripData);
+            }
+        });
     });
 }
 
@@ -345,11 +361,7 @@ function saveExpense(tripId, tripData) {
     const formattedEmail = userEmail.replace('.', ',');
     const tripExpensesRef = ref(database, `travel-bookings/${formattedEmail}/public-trips/${tripId}/expenses/${expenseData.id}`);
     console.log('saveExpense called at:', Date.now());
-    // Add detailed logging
-    console.log('saveExpense called at:', Date.now());
-    console.log('Call stack:', new Error().stack);
-    console.log('Event type:', event?.type);
-    console.log('Trip ID:', tripId);
+    
     set(tripExpensesRef, expenseData)
         .then(() => {
             document.getElementById('expense-form-final').reset();
