@@ -31,7 +31,6 @@ const participantsContainer = document.getElementById('participants-container-fi
 
 // Check for logged in user
 let userEmail = localStorage.getItem('userEmail');
-
 if (!userEmail) {
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -166,7 +165,6 @@ function loadAllTrips(userEmail) {
     });
 }
 
-
 // Modified openTripModal function to handle trips where user is participant
 function openTripModal(tripId, tripData, ownerEmail) {
     const modalBackdrop = document.getElementById('modal-backdrop-final');
@@ -205,6 +203,7 @@ function openTripModal(tripId, tripData, ownerEmail) {
     loadTripParticipants(tripId, ownerEmail);
     initBudgetTracker(tripId, tripData, ownerEmail);
 }
+
 
 
 function loadTripParticipants(tripId, email) {
@@ -448,7 +447,10 @@ function renderExpenseList(expenses, participants) {
     let expensesHTML = '';
 
     expenses.forEach(expense => {
-        const paidByUser = participants[expense.paidBy] || { email: 'Unknown' };
+        // Find the participant by their ID and get their email
+        const paidByEmail = participants[expense.paidBy]?.email || 
+                           Object.values(participants).find(p => p.uid === expense.paidBy)?.email || 
+                           'Unknown';
         const formattedDate = new Date(expense.createdAt).toLocaleDateString();
 
         expensesHTML += `
@@ -458,7 +460,7 @@ function renderExpenseList(expenses, participants) {
                     <span class="expense-amount-final">${expense.currency} ${expense.amount.toFixed(2)}</span>
                 </div>
                 <div class="expense-details-final">
-                    <span class="paid-by-final">Paid by: ${paidByUser.email}</span>
+                    <span class="paid-by-final">Paid by: ${paidByEmail}</span>
                     <span class="expense-date-final">${formattedDate}</span>
                 </div>
                 <button class="btn-info-final view-expense-details">Details</button>
@@ -468,12 +470,6 @@ function renderExpenseList(expenses, participants) {
 
     expensesList.innerHTML = expensesHTML;
 
-
-
-
-
-
-    
     document.querySelectorAll('.view-expense-details').forEach(button => {
         button.addEventListener('click', (e) => {
             const expenseId = e.target.closest('.expense-item-final').getAttribute('data-expense-id');
@@ -481,7 +477,7 @@ function renderExpenseList(expenses, participants) {
             showExpenseDetailsModal(expense, participants);
         });
     });
-    }
+}
 
 
 
@@ -755,88 +751,4 @@ callback(expenses);
 console.error("Error fetching expenses:", error);
 callback([]);
 });
-}
-
-
-
-
-function updateExpenseStats(expenses) {
-    if (!expenses || expenses.length === 0) {
-        return;
-    }
-
-    // Calculate basic statistics
-    const totalExpenses = expenses.reduce((sum, exp) => sum + exp.amount, 0);
-    const averageExpense = totalExpenses / expenses.length;
-    const largestExpense = Math.max(...expenses.map(exp => exp.amount));
-
-    // Update stat cards
-    document.getElementById('total-expenses-final').textContent = 
-        `${expenses[0].currency} ${totalExpenses.toFixed(2)}`;
-    document.getElementById('average-expense-final').textContent = 
-        `${expenses[0].currency} ${averageExpense.toFixed(2)}`;
-    document.getElementById('largest-expense-final').textContent = 
-        `${expenses[0].currency} ${largestExpense.toFixed(2)}`;
-
-    // Update bar chart with last 5 expenses
-    const lastFiveExpenses = expenses.slice(-5).reverse();
-    const barContainer = document.getElementById('expense-bars-final');
-    barContainer.innerHTML = '';
-
-    // Find max amount for scaling
-    const maxAmount = Math.max(...lastFiveExpenses.map(exp => exp.amount));
-
-    lastFiveExpenses.forEach(expense => {
-        const barHeight = (expense.amount / maxAmount) * 140; // Max height 140px
-        const bar = document.createElement('div');
-        bar.className = 'bar-final';
-        bar.style.height = `${barHeight}px`;
-
-        const barLabel = document.createElement('div');
-        barLabel.className = 'bar-label-final';
-        barLabel.textContent = expense.name.slice(0, 10) + (expense.name.length > 10 ? '...' : '');
-
-        const barValue = document.createElement('div');
-        barValue.className = 'bar-value-final';
-        barValue.textContent = `${expense.currency} ${expense.amount.toFixed(0)}`;
-
-        bar.appendChild(barLabel);
-        bar.appendChild(barValue);
-        barContainer.appendChild(bar);
-    });
-}
-
-// Modify your loadExpenses function to include the statistics update
-function loadExpenses(tripId) {
-    const userEmail = localStorage.getItem('userEmail');
-    const formattedEmail = userEmail.replace('.', ',');
-    const expensesRef = ref(database, `travel-bookings/${formattedEmail}/public-trips/${tripId}/expenses`);
-
-    onValue(expensesRef, (snapshot) => {
-        const expensesList = document.getElementById('expenses-list-final');
-
-        if (!snapshot.exists()) {
-            expensesList.innerHTML = `
-                <div class="expense-item-final" style="text-align: center; color: #888;">
-                    No expenses added yet.
-                </div>
-            `;
-            return;
-        }
-
-        const expenses = [];
-        snapshot.forEach((childSnapshot) => {
-            expenses.push(childSnapshot.val());
-        });
-
-        expenses.sort((a, b) => b.createdAt - a.createdAt);
-
-        get(ref(database, `travel-bookings/${formattedEmail}/public-trips/${tripId}`))
-            .then((tripSnapshot) => {
-                const tripData = tripSnapshot.val();
-                renderExpenseList(expenses, tripData.participants || {});
-                renderBalanceSummary(expenses, tripData.participants || {});
-                updateExpenseStats(expenses); // Add this line
-            });
-    });
 }
