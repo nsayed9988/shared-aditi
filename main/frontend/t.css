@@ -875,3 +875,24 @@ input:focus, select:focus {
         .slide-up {
           animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+
+        .trip-role-badge-final {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          font-weight: bold;
+      }
+      
+      .creator-badge {
+          background-color: #4CAF50;
+          color: white;
+      }
+      
+      .participant-badge {
+          background-color: #2196F3;
+          color: white;
+      }

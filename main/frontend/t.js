@@ -38,7 +38,7 @@ if (!userEmail) {
             userEmail = user.email;
             localStorage.setItem('userEmail', userEmail);
             displayUserInfo(userEmail);
-            loadTrips(userEmail);
+            loadAllTrips(userEmail);  // Changed from loadTrips
         } else {
             tripsContainer.innerHTML = `
                 <div class="no-trips-final">
@@ -49,7 +49,7 @@ if (!userEmail) {
     });
 } else {
     displayUserInfo(userEmail);
-    loadTrips(userEmail);
+    loadAllTrips(userEmail);  // Changed from loadTrips
 }
 
 function displayUserInfo(email) {
@@ -58,58 +58,106 @@ function displayUserInfo(email) {
     }
 }
 
-function loadTrips(email) {
-    if (!email) return;
+function loadAllTrips(userEmail) {
+    if (!userEmail) return;
     
-    const formattedEmail = email.replace('.', ',');
-    const publicTripsRef = ref(database, `travel-bookings/${formattedEmail}/public-trips`);
+    const formattedEmail = userEmail.replace('.', ',');
+    const database = getDatabase();
+    const tripsContainer = document.getElementById('trips-container-final');
+    tripsContainer.innerHTML = '<div class="loading-final">Loading trips...</div>';
     
-    onValue(publicTripsRef, (snapshot) => {
-        tripsContainer.innerHTML = '';
-        
-        if (!snapshot.exists()) {
+    // Object to store all unique trips
+    const allTrips = new Map();
+    
+    // First, get trips created by the user
+    const userTripsRef = ref(database, `travel-bookings/${formattedEmail}/public-trips`);
+    
+    // Function to process and display trips
+    const processAndDisplayTrips = () => {
+        if (allTrips.size === 0) {
             tripsContainer.innerHTML = `
                 <div class="no-trips-final">
-                    You don't have any public trips yet.
+                    No trips found.
                 </div>
             `;
             return;
         }
         
-        const trips = snapshot.val();
-        
-        Object.keys(trips).forEach(tripId => {
-            const tripRef = ref(database, `travel-bookings/${formattedEmail}/public-trips/${tripId}`);
+        tripsContainer.innerHTML = '';
+        allTrips.forEach((tripData, tripKey) => {
+            const [ownerEmail, tripId] = tripKey.split('|');
+            const tripCard = document.createElement('div');
+            tripCard.className = 'trip-card-final';
+            tripCard.dataset.tripId = tripId;
+            tripCard.dataset.ownerEmail = ownerEmail;
             
-            get(tripRef).then((tripSnapshot) => {
-                if (tripSnapshot.exists()) {
-                    const tripData = tripSnapshot.val();
-                    
-                    const tripCard = document.createElement('div');
-                    tripCard.className = 'trip-card-final';
-                    tripCard.dataset.tripId = tripId;
-                    
-                    tripCard.innerHTML = `
-                    <div class="trip-destination-final">Trip Name: ${tripData.travelerName || 'Unknown Destination'}</div>
-                        <div class="trip-destination-final">Country :${tripData.destination || 'Unknown Destination'}</div>
-                        <div class="trip-budget-final">${tripData.currency || '$'} ${tripData.budget || '0'}</div>
-                        <div class="trip-date-final">Apply by: ${tripData.applyByDate || 'Not specified'}</div>
-                    
-                    `;
-                    
-                    tripCard.addEventListener('click', () => {
-                        openTripModal(tripId, tripData);
-                        loadTripParticipants(tripId);
-                    });
-                    
-                    tripsContainer.appendChild(tripCard);
-                }
-            }).catch(error => {
-                console.error("Error getting trip data:", error);
+            const role = ownerEmail === formattedEmail ? 'Creator' : 'Participant';
+            
+            tripCard.innerHTML = `
+                <div class="trip-role-badge-final ${role.toLowerCase()}-badge">${role}</div>
+                <div class="trip-destination-final">Trip Name: ${tripData.travelerName || 'Unknown Destination'}</div>
+                <div class="trip-destination-final">Country: ${tripData.destination || 'Unknown Destination'}</div>
+                <div class="trip-budget-final">${tripData.currency || '$'} ${tripData.budget || '0'}</div>
+                <div class="trip-date-final">Apply by: ${tripData.applyByDate || 'Not specified'}</div>
+            `;
+            
+            tripCard.addEventListener('click', () => {
+                openTripModal(tripId, tripData, ownerEmail);
             });
+            
+            tripsContainer.appendChild(tripCard);
         });
-    }, (error) => {
-        console.error("Error fetching trips:", error);
+    };
+
+    // Get all trips in the database to check for participation
+    const allTripsRef = ref(database, 'travel-bookings');
+    
+    // First, get user's own trips
+    get(userTripsRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            snapshot.forEach((tripSnapshot) => {
+                allTrips.set(`${formattedEmail}|${tripSnapshot.key}`, tripSnapshot.val());
+            });
+        }
+        
+        // Then get all trips to check for participation
+        return get(allTripsRef);
+    }).then((snapshot) => {
+        if (snapshot.exists()) {
+            const promises = [];
+            
+            snapshot.forEach((userSnapshot) => {
+                const ownerEmail = userSnapshot.key;
+                if (userSnapshot.hasChild('public-trips')) {
+                    userSnapshot.child('public-trips').forEach((tripSnapshot) => {
+                        const tripId = tripSnapshot.key;
+                        const participantsRef = ref(database, `travel-bookings/${ownerEmail}/public-trips/${tripId}/participants`);
+                        
+                        // Check if current user is a participant
+                        promises.push(
+                            get(participantsRef).then((participantsSnapshot) => {
+                                if (participantsSnapshot.exists()) {
+                                    const participants = participantsSnapshot.val();
+                                    const isParticipant = Object.values(participants).some(
+                                        participant => participant.email === userEmail
+                                    );
+                                    
+                                    if (isParticipant && ownerEmail !== formattedEmail) {
+                                        allTrips.set(`${ownerEmail}|${tripId}`, tripSnapshot.val());
+                                    }
+                                }
+                            })
+                        );
+                    });
+                }
+            });
+            
+            return Promise.all(promises);
+        }
+    }).then(() => {
+        processAndDisplayTrips();
+    }).catch((error) => {
+        console.error("Error loading trips:", error);
         tripsContainer.innerHTML = `
             <div class="no-trips-final">
                 Error loading trips. Please try again later.
@@ -118,7 +166,9 @@ function loadTrips(email) {
     });
 }
 
-function openTripModal(tripId, tripData) {
+
+// Modified openTripModal function to handle trips where user is participant
+function openTripModal(tripId, tripData, ownerEmail) {
     const modalBackdrop = document.getElementById('modal-backdrop-final');
     const modalTitle = document.getElementById('modal-title-final');
     const modalContent = document.getElementById('modal-content-final');
@@ -128,41 +178,33 @@ function openTripModal(tripId, tripData) {
     modalContent.innerHTML = `
         <div class="budget-box-final">
             <h6>Estimated Budget:<h7> ${tripData.currency || '$'} ${tripData.budget || '0'}</h7></h6>
-            <!--<div class="budget-amount-final">${tripData.currency || '$'} ${tripData.budget || '0'}</div>-->
             <br>
         </div>
-        
-        
         <p class="apply-date-final"><strong>Application Deadline:</strong> ${tripData.applyByDate || 'Not specified'}</p>
         <br>
     `;
     
     modalBackdrop.style.display = 'flex';
     
-    // Handle modal closing
     const closeModal = document.getElementById('close-modal-final');
     const closeModalFunction = () => {
         modalBackdrop.style.display = 'none';
     };
     
-    // Remove existing event listeners to prevent duplicates
     closeModal.removeEventListener('click', closeModalFunction);
     modalBackdrop.removeEventListener('click', closeModalFunction);
     
-    // Add click event listener to close button
     closeModal.addEventListener('click', closeModalFunction);
     
-    // Add click event listener to backdrop for closing when clicking outside
     modalBackdrop.addEventListener('click', (e) => {
         if (e.target === modalBackdrop) {
             closeModalFunction();
         }
     });
     
-    loadTripParticipants(tripId);
-    initBudgetTracker(tripId, tripData);
+    loadTripParticipants(tripId, ownerEmail);
+    initBudgetTracker(tripId, tripData, ownerEmail);
 }
-
 
 
 function loadTripParticipants(tripId, email) {
@@ -175,25 +217,13 @@ function loadTripParticipants(tripId, email) {
 
     participantsContainer.innerHTML = '<div class="loading-final">Loading participants...</div>';
 
-    // First, get the current user's data
-    const currentUser = {
-        email: email,
-        joinedAt: Date.now(),
-        status: 'owner',  // Mark the user as owner
-        authUid: email.replace(/[.@]/g, '_')  // Create a consistent ID for the user
-    };
-
     onValue(participantsRef, (snapshot) => {
-        let participants = {};
-        
-        // Add the current user first
-        participants[currentUser.authUid] = currentUser;
-
-        // Add other participants
-        if (snapshot.exists()) {
-            participants = { ...participants, ...snapshot.val() };
+        if (!snapshot.exists()) {
+            participantsContainer.innerHTML = '<div class="no-participants-final">No confirmed participants yet.</div>';
+            return;
         }
 
+        const participants = snapshot.val();
         let participantsHTML = `
             <table class="participants-table-final">
                 <thead>
@@ -206,9 +236,11 @@ function loadTripParticipants(tripId, email) {
                 <tbody>
         `;
 
+        let hasParticipants = false;
         Object.keys(participants).forEach(authUid => {
             const participant = participants[authUid];
             if (participant.email) {
+                hasParticipants = true;
                 const joinDate = new Date(participant.joinedAt).toLocaleDateString();
                 const status = participant.status || 'pending';
                 participantsHTML += `
@@ -226,17 +258,11 @@ function loadTripParticipants(tripId, email) {
             </table>
         `;
 
-        participantsContainer.innerHTML = participantsHTML;
-
-        // Store the updated participants list in the trip data
-        const tripRef = ref(database, `travel-bookings/${formattedEmail}/public-trips/${tripId}`);
-        get(tripRef).then((tripSnapshot) => {
-            if (tripSnapshot.exists()) {
-                const tripData = tripSnapshot.val();
-                tripData.participants = participants;
-                set(tripRef, tripData);
-            }
-        });
+        if (!hasParticipants) {
+            participantsContainer.innerHTML = '<div class="no-participants-final">No participants found.</div>';
+        } else {
+            participantsContainer.innerHTML = participantsHTML;
+        }
     });
 }
 
@@ -360,7 +386,7 @@ function saveExpense(tripId, tripData) {
     const userEmail = localStorage.getItem('userEmail');
     const formattedEmail = userEmail.replace('.', ',');
     const tripExpensesRef = ref(database, `travel-bookings/${formattedEmail}/public-trips/${tripId}/expenses/${expenseData.id}`);
-    console.log('saveExpense called at:', Date.now());
+ console.log('saveExpense called at:', Date.now());
     
     set(tripExpensesRef, expenseData)
         .then(() => {
@@ -732,3 +758,85 @@ callback([]);
 }
 
 
+
+
+function updateExpenseStats(expenses) {
+    if (!expenses || expenses.length === 0) {
+        return;
+    }
+
+    // Calculate basic statistics
+    const totalExpenses = expenses.reduce((sum, exp) => sum + exp.amount, 0);
+    const averageExpense = totalExpenses / expenses.length;
+    const largestExpense = Math.max(...expenses.map(exp => exp.amount));
+
+    // Update stat cards
+    document.getElementById('total-expenses-final').textContent = 
+        `${expenses[0].currency} ${totalExpenses.toFixed(2)}`;
+    document.getElementById('average-expense-final').textContent = 
+        `${expenses[0].currency} ${averageExpense.toFixed(2)}`;
+    document.getElementById('largest-expense-final').textContent = 
+        `${expenses[0].currency} ${largestExpense.toFixed(2)}`;
+
+    // Update bar chart with last 5 expenses
+    const lastFiveExpenses = expenses.slice(-5).reverse();
+    const barContainer = document.getElementById('expense-bars-final');
+    barContainer.innerHTML = '';
+
+    // Find max amount for scaling
+    const maxAmount = Math.max(...lastFiveExpenses.map(exp => exp.amount));
+
+    lastFiveExpenses.forEach(expense => {
+        const barHeight = (expense.amount / maxAmount) * 140; // Max height 140px
+        const bar = document.createElement('div');
+        bar.className = 'bar-final';
+        bar.style.height = `${barHeight}px`;
+
+        const barLabel = document.createElement('div');
+        barLabel.className = 'bar-label-final';
+        barLabel.textContent = expense.name.slice(0, 10) + (expense.name.length > 10 ? '...' : '');
+
+        const barValue = document.createElement('div');
+        barValue.className = 'bar-value-final';
+        barValue.textContent = `${expense.currency} ${expense.amount.toFixed(0)}`;
+
+        bar.appendChild(barLabel);
+        bar.appendChild(barValue);
+        barContainer.appendChild(bar);
+    });
+}
+
+// Modify your loadExpenses function to include the statistics update
+function loadExpenses(tripId) {
+    const userEmail = localStorage.getItem('userEmail');
+    const formattedEmail = userEmail.replace('.', ',');
+    const expensesRef = ref(database, `travel-bookings/${formattedEmail}/public-trips/${tripId}/expenses`);
+
+    onValue(expensesRef, (snapshot) => {
+        const expensesList = document.getElementById('expenses-list-final');
+
+        if (!snapshot.exists()) {
+            expensesList.innerHTML = `
+                <div class="expense-item-final" style="text-align: center; color: #888;">
+                    No expenses added yet.
+                </div>
+            `;
+            return;
+        }
+
+        const expenses = [];
+        snapshot.forEach((childSnapshot) => {
+            expenses.push(childSnapshot.val());
+        });
+
+        expenses.sort((a, b) => b.createdAt - a.createdAt);
+
+        get(ref(database, `travel-bookings/${formattedEmail}/public-trips/${tripId}`))
+            .then((tripSnapshot) => {
+                const tripData = tripSnapshot.val();
+                renderExpenseList(expenses, tripData.participants || {});
+                renderBalanceSummary(expenses, tripData.participants || {});
+                updateExpenseStats(expenses); // Add this line
+            });
+    });
+}
