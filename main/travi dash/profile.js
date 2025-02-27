@@ -23,10 +23,30 @@ window.onload = function () {
   const email = localStorage.getItem("userEmail");
   if (email) {
     document.getElementById("email").value = email;
-    fetchUserProfileByEmail();  // Fetch the profile if email is found in localStorage
+    // Only fetch if we have an email in localStorage
+    fetchUserProfileByEmail();
+  } else {
+    console.log("No user email found, please log in first");
+    // You might want to redirect to a login page here
   }
 };
-
+// Add this after your initialization code
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in
+    localStorage.setItem('userEmail', user.email);
+    fetchUserProfileByEmail();
+  } else {
+    // User is signed out
+    localStorage.removeItem('userEmail');
+    // Clear form fields
+    const fields = [fullNameField, emailField, bioField, languagesField, nationalityField, 
+                   instagramField, twitterField, facebookField];
+    fields.forEach(field => {
+      if (field) field.value = '';
+    });
+  }
+});
 // Helper function to toggle field states
 function toggleFields(disable) {
   const fields = [
@@ -37,13 +57,15 @@ function toggleFields(disable) {
     "nationality",
     "insta",
     "twit",
-    "face",
+    "face"
   ];
 
   fields.forEach((fieldId) => {
     const field = document.getElementById(fieldId);
     if (field) {
       field.disabled = disable;
+    } else {
+      console.warn(`Field with ID "${fieldId}" not found in the document.`);
     }
   });
 }
@@ -142,45 +164,47 @@ const instagramField = document.getElementById('insta');
 
 
 
-// Fetch user email from localStorage
-const userEmail = localStorage.getItem('userEmail');
-
 
 // Function to fetch user profile based on email
 function fetchUserProfileByEmail() {
   const userEmail = localStorage.getItem('userEmail');
   
-  if (userEmail) {
-    const sanitizedEmail = userEmail.replace(/\./g, ','); // Sanitize email for Firebase
-
-    // Reference to the user's profile data in Firebase
-    const userRef = ref(db, `User Profile/${sanitizedEmail}`);
-
-    // Use onValue for listening to changes
-    onValue(userRef, (snapshot) => {
-      const userProfile = snapshot.val();
-      
-      if (userProfile) {
-        // Fill the form fields with the fetched data
-        if (userProfile.AboutUser) {
-          fullNameField.value = userProfile.AboutUser.name;
-          emailField.value = userProfile.AboutUser.email;
-          bioField.value = userProfile.AboutUser.bio;
-          languagesField.value = userProfile.AboutUser.languages;
-          nationalityField.value = userProfile.AboutUser.nationality;
-        }
-
-        // Check and fill the social media fields
-        if (userProfile["User Socials"]) {
-          instagramField.value = userProfile["User Socials"].Instagram || '';
-          twitterField.value = userProfile["User Socials"].Twitter || '';
-          facebookField.value = userProfile["User Socials"].Facebook || '';
-        }
-      } else {
-        console.log('User profile not found');
-      }
-    });
-  } else {
+  if (!userEmail) {
     console.log('No user email found in localStorage');
+    return;
   }
+  
+  const sanitizedEmail = userEmail.replace(/\./g, ',');
+  const userRef = ref(db, `User Profile/${sanitizedEmail}`);
+
+  onValue(userRef, (snapshot) => {
+    const userProfile = snapshot.val();
+    
+    if (!userProfile) {
+      console.log('User profile not found');
+      return;
+    }
+
+    try {
+      // Fill the form fields with the fetched data
+      if (userProfile.AboutUser) {
+        fullNameField.value = userProfile.AboutUser.name || '';
+        emailField.value = userProfile.AboutUser.email || '';
+        bioField.value = userProfile.AboutUser.bio || '';
+        languagesField.value = userProfile.AboutUser.languages || '';
+        nationalityField.value = userProfile.AboutUser.nationality || '';
+      }
+
+      // Check and fill the social media fields
+      if (userProfile["User Socials"]) {
+        instagramField.value = userProfile["User Socials"].Instagram || '';
+        twitterField.value = userProfile["User Socials"].Twitter || '';
+        facebookField.value = userProfile["User Socials"].Facebook || '';
+      }
+    } catch (error) {
+      console.error('Error filling form fields:', error);
+    }
+  }, (error) => {
+    console.error('Error fetching user profile:', error);
+  });
 }

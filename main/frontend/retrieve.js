@@ -1,7 +1,7 @@
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
-
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
@@ -17,7 +17,27 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const auth = getAuth(app);
 
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in
+      const userEmail = user.email;
+      // Store in localStorage only as a convenience, not for authentication
+      localStorage.setItem('userEmail', userEmail);
+      // Display user's trips
+      retrieveAndDisplayPublicTrips();
+      retrievePrivateTrips();
+    } else {
+      // User is signed out
+      localStorage.removeItem('userEmail');
+      // Update UI to show user is not logged in
+      const tripContainer = document.getElementById('trip-container');
+      if (tripContainer) {
+          tripContainer.innerHTML = '<p class="error-message">Please log in to view trips.</p>';
+      }
+    }
+  });
 // Add styles
 const style = document.createElement('style');
 style.textContent = `
@@ -248,18 +268,19 @@ function retrieveAndDisplayPublicTrips() {
   console.log('Fetching your public trips...');
   
   // Get current user email from localStorage
-  const currentUserEmail = localStorage.getItem('userEmail');
-  if (!currentUserEmail) {
-      console.error('User not logged in or email not found in localStorage');
-      const tripContainer = document.getElementById('trip-container');
-      if (tripContainer) {
-          tripContainer.innerHTML = '<p class="error-message">Please log in to view your trips.</p>';
-      }
-      return;
+  const currentUser = auth.currentUser;
+  if (!currentUser) {
+    console.error('No user is signed in');
+    return;
   }
+  const currentUserEmail = currentUser.email;
+  
+  // Format email to match database structure
+  const formattedEmail = currentUserEmail.replace(/\./g, ',');
+
   
   // Format email to match database structure (if needed)
-  const formattedEmail = currentUserEmail.replace(/\./g, ',');
+ 
   
   const userTripsRef = ref(database, `travel-bookings/${formattedEmail}/public-trips`);
   const tripContainer = document.getElementById('trip-container');
@@ -703,12 +724,21 @@ function retrievePrivateTrips() {
     });
 }
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Initializing public trips display...');
+    console.log('Initializing trip displays...');
     ensurePublicSectionExists();
+    ensurePrivateSectionExists();
     ensureModalExists();
-    retrieveAndDisplayPublicTrips();
-    retrievePrivateTrips(); // Add this line
+    
+    // Check if user is authenticated
+    const user = auth.currentUser;
+    if (user) {
+        retrieveAndDisplayPublicTrips();
+        retrievePrivateTrips();
+    } else {
+        console.log('User not authenticated, waiting for auth state change');
+    }
 });
+
 function ensurePrivateSectionExists() {
     if (!document.getElementById('private-section-1')) {
         const privateSection = document.createElement('div');
@@ -724,6 +754,17 @@ function ensurePrivateSectionExists() {
         wrapper.appendChild(privateSection);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Initializing public trips display...');
     ensurePublicSectionExists();

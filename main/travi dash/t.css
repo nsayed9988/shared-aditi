@@ -896,3 +896,255 @@ input:focus, select:focus {
           background-color: #2196F3;
           color: white;
       }
+      /* Trip Modal Enhancements */
+.trip-banner-final {
+  position: relative;
+  height: 120px;
+  background-color: #3498db;
+  background-image: linear-gradient(135deg, #3498db, #1abc9c);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-overlay-final {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.banner-icon-final {
+  position: relative;
+  z-index: 1;
+  color: white;
+  font-size: 48px;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.trip-info-cards-final {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.info-card-final {
+  flex: 1 1 calc(33.333% - 15px);
+  min-width: 120px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.card-icon-final {
+  width: 40px;
+  height: 40px;
+  background: #f0f8ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  color: #3498db;
+}
+
+.card-content-final h6 {
+  margin: 0 0 5px;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+.card-content-final p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+/* Expense Modal Enhancements */
+.expense-details-modal {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.details-header {
+  position: relative;
+  background: #3498db;
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.expense-icon-container {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.details-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.close-details-final {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.close-details-final:hover {
+  opacity: 1;
+}
+
+.expense-amount-badge {
+  background: #2ecc71;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 15px;
+  border-radius: 0 0 8px 8px;
+  margin: -5px auto 15px;
+  width: fit-content;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.details-body {
+  padding: 20px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.detail-icon {
+  width: 30px;
+  color: #7f8c8d;
+}
+
+.detail-label {
+  width: 80px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.detail-value {
+  flex: 1;
+  color: #2c3e50;
+}
+
+.details-body h4 {
+  margin: 20px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #34495e;
+}
+
+.split-details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.split-details-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.split-details-list li:last-child {
+  border-bottom: none;
+}
+
+.split-user {
+  font-weight: 500;
+}
+
+.split-amount {
+  font-weight: 600;
+  color: #e74c3c;
+}
+
+/* Additional styles for the expense list */
+.expense-item-final {
+  border-left: 3px solid #3498db;
+}
+
+.expense-item-final.settlement-expense {
+  border-left-color: #2ecc71;
+}
+
+/* Fade in animation for modals */
+.details-modal-container-final {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.details-modal-container-final.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.expense-details-content {
+  transform: translateY(20px);
+  transition: transform 0.3s;
+}
+
+.details-modal-container-final.active .expense-details-content {
+  transform: translateY(0);
+}
+.disabled-btn {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}

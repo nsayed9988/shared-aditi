@@ -1,30 +1,57 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
-import {
-  getDatabase,
-  ref,
-  set,
-} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
   authDomain: "ty-project-80ab7.firebaseapp.com",
+  databaseURL: "https://ty-project-80ab7-default-rtdb.firebaseio.com/", // Your database URL
   projectId: "ty-project-80ab7",
-  storageBucket: "ty-project-80ab7.firebasestorage.app",
+  storageBucket: "ty-project-80ab7.appspot.com",
   messagingSenderId: "491495110151",
   appId: "1:491495110151:web:035795af4bc8eebff79ca2",
   measurementId: "G-XFS1VYTHSM",
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const auth = getAuth(app);
+
 window.onload = function () {
   const email = localStorage.getItem("userEmail");
   if (email) {
     document.getElementById("email").value = email;
+    fetchUserProfileByEmail();  // Fetch the profile if email is found in localStorage
   }
 };
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+
+// Helper function to toggle field states
+function toggleFields(disable) {
+  const fields = [
+    "fullName",
+    "email",
+    "bio",
+    "languages",
+    "nationality",
+    "insta",
+    "twit",
+    "face",
+  ];
+
+  fields.forEach((fieldId) => {
+    const field = document.getElementById(fieldId);
+    if (field) {
+      field.disabled = disable;
+    }
+  });
+}
+
+// Disable fields initially
+toggleFields(true);
+
+// Save profile event listener
 document.getElementById("saveprofile").addEventListener("click", function (e) {
   e.preventDefault();
 
@@ -41,7 +68,7 @@ document.getElementById("saveprofile").addEventListener("click", function (e) {
   }
 
   const emailKey = email.replace(/\./g, ",");
-  
+
   // Save to Firebase
   set(ref(db, `User Profile/${emailKey}/AboutUser`), {
     name: fullName,
@@ -52,42 +79,20 @@ document.getElementById("saveprofile").addEventListener("click", function (e) {
   })
     .then(() => {
       alert("Profile Updated");
-      document.getElementById("fullName").disabled = true;
-      document.getElementById("email").disabled = true;
-      document.getElementById("bio").disabled = true;
-      document.getElementById("nationality").disabled = true;
-      document.getElementById("languages").disabled = true;
-      // Rebuilding the profile view after update
-      //userdisplay.innerHTML = `
-      /* <h3>Profile Summary</h3>
-        <br>
-      </br>  <h6>
-          <p><strong>Name:</strong> ${fullName}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Bio:</strong> ${bio}</p>
-          <p><strong>Languages:</strong> ${languages}</p>
-          <p><strong>Nationality:</strong> ${nationality}</p>
-        </h6>
-        <br>
-       
-      `;*/
-      // Attach event listener to Edit Profile button after updating profile
-     
+      toggleFields(true); // Disable fields after saving
     })
     .catch((error) => {
       alert("Error saving changes: " + error.message);
     });
 });
 
+// Edit profile event listener
 document.getElementById("editProfile").addEventListener("click", function (e) {
   e.preventDefault();
-  document.getElementById("fullName").disabled = false;
-  document.getElementById("email").disabled = false;
-  document.getElementById("bio").disabled = false;
-  document.getElementById("nationality").disabled = false;
-  document.getElementById("languages").disabled = false;
+  toggleFields(false); // Enable fields for editing
 });
-// Social media link saving
+
+// Save social media links
 document.getElementById("savelink").addEventListener("click", function (e) {
   e.preventDefault();
 
@@ -104,78 +109,78 @@ document.getElementById("savelink").addEventListener("click", function (e) {
   const twitter = document.getElementById("twit").value.trim();
   const facebook = document.getElementById("face").value.trim();
 
-  
   // Save social media links to Firebase
   set(ref(db, `User Profile/${emailKey}/User Socials`), {
-    Instagram: insta || null,  // if empty, save null to avoid saving empty strings
+    Instagram: insta || null, // if empty, save null to avoid saving empty strings
     Twitter: twitter || null,
     Facebook: facebook || null,
   })
     .then(() => {
-      alert("Changes saved successfully.");
-      document.getElementById("insta").disabled = true;
-      document.getElementById("twit").disabled = true;
-      document.getElementById("face").disabled = true;
+      alert("Social Media Links Updated");
+      toggleFields(true); // Disable fields after saving
     })
     .catch((error) => {
       alert("Error saving changes: " + error.message);
     });
 });
 
+// Edit social media links event listener
 document.getElementById("editlink").addEventListener("click", function (e) {
   e.preventDefault();
-  document.getElementById("insta").disabled =false;
-  document.getElementById("twit").disabled = false;
-  document.getElementById("face").disabled = false;
+  toggleFields(false); // Enable fields for editing
 });
+// Reference to the form elements
+const fullNameField = document.getElementById('fullName');
+const emailField = document.getElementById('email');
+const bioField = document.getElementById('bio');
+const languagesField = document.getElementById('languages');
+const nationalityField = document.getElementById('nationality');
+const instagramField = document.getElementById('insta');
 
 
 
-// Fetch user profile dynamically
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    console.log("User logged in:", user.email);
 
-    // Replace '.' in the email with ',' as Firebase keys don't allow '.'
-    const sanitizedEmail = user.email.replace(/\./g, ",");
-    console.log("Sanitized Email:", sanitizedEmail);
 
-    // Fetch the user's profile using the sanitized email
-    fetchUserProfile(sanitizedEmail);
+
+// Fetch user email from localStorage
+const userEmail = localStorage.getItem('userEmail');
+
+
+// Function to fetch user profile based on email
+function fetchUserProfileByEmail() {
+  const userEmail = localStorage.getItem('userEmail');
+  
+  if (userEmail) {
+    const sanitizedEmail = userEmail.replace(/\./g, ','); // Sanitize email for Firebase
+
+    // Reference to the user's profile data in Firebase
+    const userRef = ref(db, `User Profile/${sanitizedEmail}`);
+
+    // Use onValue for listening to changes
+    onValue(userRef, (snapshot) => {
+      const userProfile = snapshot.val();
+      
+      if (userProfile) {
+        // Fill the form fields with the fetched data
+        if (userProfile.AboutUser) {
+          fullNameField.value = userProfile.AboutUser.name;
+          emailField.value = userProfile.AboutUser.email;
+          bioField.value = userProfile.AboutUser.bio;
+          languagesField.value = userProfile.AboutUser.languages;
+          nationalityField.value = userProfile.AboutUser.nationality;
+        }
+
+        // Check and fill the social media fields
+        if (userProfile["User Socials"]) {
+          instagramField.value = userProfile["User Socials"].Instagram || '';
+          twitterField.value = userProfile["User Socials"].Twitter || '';
+          facebookField.value = userProfile["User Socials"].Facebook || '';
+        }
+      } else {
+        console.log('User profile not found');
+      }
+    });
   } else {
-    alert("No user is logged in.");
-    console.log("No user is logged in.");
-    // Redirect to login page or handle unauthenticated state
-   
+    console.log('No user email found in localStorage');
   }
-});
-
-// Fetch user profile data
-function fetchUserProfile(emailKey) {
-  const userRef = ref(db, `User Profile/${emailKey}`);
-
-  onValue(userRef, (snapshot) => {
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      console.log("User Profile:", data);
-
-      // Display the profile on the page
-      displayUserProfile(data);
-    } else {
-      console.log("No profile found for this user.");
-    }
-  });
-}
-
-// Display the user profile on the page
-function displayUserProfile(data) {
-  const container = document.getElementById("user-profile-container");
-  container.innerHTML = `
-    <h2>${data.AboutUser.name}'s Profile</h2>
-    <p><strong>Email:</strong> ${data.AboutUser.email}</p>
-    <p><strong>Bio:</strong> ${data.AboutUser.bio}</p>
-    <p><strong>Languages:</strong> ${data.AboutUser.languages}</p>
-    <p><strong>Nationality:</strong> ${data.AboutUser.nationality}</p>
-    <p><strong>Instagram:</strong> ${data["User Socials"].Instagram}</p>
-  `;
 }

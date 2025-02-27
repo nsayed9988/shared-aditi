@@ -373,7 +373,7 @@ function getParticipantCount(path) {
     });
 }
       // Function to open modal and display trip details
-      function openModal(tripId) {
+function openModal(tripId) {
           console.log("openModal function triggered with tripId:", tripId);
   
           const dailyActivitiesContainer = modal.querySelector('.daily-activities');
@@ -521,153 +521,12 @@ function getParticipantCount(path) {
           retrieveAndDisplayTrips();
       }
 
-
-
-// Make joinTrip function available globally
-/*window.joinTrip = async function(tripId) {
+ window.joinTrip = async function(tripId) {
     const currentUser = auth.currentUser;
     if (!currentUser) {
         alert('Please log in to join trips');
         return;
     }
-
-    try {
-        const tripsRef = ref(database, 'travel-bookings');
-        
-        // Find trip creator's email
-        let tripCreatorEmail = null;
-        const snapshot = await get(tripsRef);
-        const allData = snapshot.val();
-        
-        // Debug logs
-        console.log('Current user email:', currentUser.email);
-        
-        Object.keys(allData).forEach(userEmail => {
-            if (allData[userEmail]?.['public-trips']?.[tripId]) {
-                tripCreatorEmail = userEmail;
-                console.log('Found trip creator email:', tripCreatorEmail);
-            }
-        });
-
-        if (!tripCreatorEmail) {
-            throw new Error('Trip not found');
-        }
-
-        // Sanitize and normalize emails for comparison
-        function sanitizeEmail(email) {
-            // Replace commas with periods (fixes the common typo)
-            let sanitized = email.replace(/,/g, '.');
-            // Convert to lowercase and trim whitespace
-            sanitized = sanitized.toLowerCase().trim();
-            // Basic email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(sanitized)) {
-                console.warn(`Potentially invalid email format: ${sanitized}`);
-            }
-            return sanitized;
-        }
-
-        const normalizedUserEmail = sanitizeEmail(currentUser.email);
-        const normalizedCreatorEmail = sanitizeEmail(tripCreatorEmail);
-
-        // Log normalized emails for debugging
-        console.log('Normalized current user email:', normalizedUserEmail);
-        console.log('Normalized trip creator email:', normalizedCreatorEmail);
-        console.log('Are emails equal?', normalizedUserEmail === normalizedCreatorEmail);
-
-        // Check if the current user is the trip creator
-        if (normalizedUserEmail === normalizedCreatorEmail) {
-            console.log('Self-join attempt prevented');
-            alert('You cannot request to join your own trip');
-            return;
-        }
-
-        const requestData = {
-            requesterId: currentUser.uid,
-            requesterEmail: currentUser.email,
-            tripId: tripId,
-            status: 'pending',
-            timestamp: new Date().toISOString()
-        };
-
-        // Log the request data
-        console.log('Creating request with data:', requestData);
-
-        const requestRef = ref(
-            database,
-            `travel-bookings/${tripCreatorEmail}/public-trips/${tripId}/requests/${currentUser.uid}`
-        );
-
-        await set(requestRef, requestData);
-        console.log('Request successfully created');
-        alert('Your request to join has been submitted!');
-
-    } catch (error) {
-        console.error('Error joining trip:', error);
-        alert('Failed to submit join request. Please try again.');
-    }
-};
- */
- // Enhanced joinTrip function with stepper form
-window.joinTrip = async function(tripId) {
-    const currentUser = auth.currentUser;
-    if (!currentUser) {
-        alert('Please log in to join trips');
-        return;
-    }
-    // Gets human-readable text describing accepted genders from gender requirement object
-function getAcceptedGendersText(genderReq) {
-    // If gender is a string (legacy format or "Any")
-    if (typeof genderReq === 'string') {
-        return genderReq === 'Any' ? 'all' : genderReq;
-    }
-    
-    // If gender is an object with boolean flags
-    const acceptedGenders = [];
-    if (genderReq.female === true) acceptedGenders.push('Female');
-    if (genderReq.male === true) acceptedGenders.push('Male');
-    if (genderReq.other === true) acceptedGenders.push('Non-binary');
-    
-    if (acceptedGenders.length === 0) return 'all';
-    if (acceptedGenders.length === 3) return 'all';
-    
-    if (acceptedGenders.length === 1) {
-        return acceptedGenders[0];
-    } else {
-        return acceptedGenders.join(' or ');
-    }
-}
-
-// Validates if user's gender meets trip requirements
-function isGenderValid(userGender, genderReq) {
-    // If requirement is "Any" or not specified, all genders are valid
-    if (!genderReq || (typeof genderReq === 'string' && genderReq === 'Any')) {
-        return true;
-    }
-    
-    // Handle case where user selected "Prefer not to say"
-    if (userGender === 'Prefer not to say') {
-        // This is a policy decision - you might want to block or allow based on your app rules
-        return false; // Blocking as default - require explicit gender selection for restricted trips
-    }
-    
-    // If genderReq is a string (legacy format)
-    if (typeof genderReq === 'string') {
-        return userGender === genderReq;
-    }
-    
-    // If genderReq is an object with boolean flags
-    switch (userGender) {
-        case 'Female':
-            return genderReq.female === true;
-        case 'Male':
-            return genderReq.male === true;
-        case 'Non-binary':
-            return genderReq.other === true;
-        default:
-            return false;
-    }
-}
     
     try {
         // First fetch trip details to validate against
@@ -700,11 +559,71 @@ function isGenderValid(userGender, genderReq) {
         const normalizedUserEmail = sanitizeEmail(currentUser.email);
         const normalizedCreatorEmail = sanitizeEmail(tripCreatorEmail);
         
+        // Log normalized emails for debugging
+        console.log('Normalized current user email:', normalizedUserEmail);
+        console.log('Normalized trip creator email:', normalizedCreatorEmail);
+        console.log('Are emails equal?', normalizedUserEmail === normalizedCreatorEmail);
+        
+        // Check if the current user is the trip creator
         if (normalizedUserEmail === normalizedCreatorEmail) {
+            console.log('Self-join attempt prevented');
             alert('You cannot request to join your own trip');
             return;
         }
         
+        // Gets human-readable text describing accepted genders from gender requirement object
+        function getAcceptedGendersText(genderReq) {
+            // If gender is a string (legacy format or "Any")
+            if (typeof genderReq === 'string') {
+                return genderReq === 'Any' ? 'all' : genderReq;
+            }
+            
+            // If gender is an object with boolean flags
+            const acceptedGenders = [];
+            if (genderReq.female === true) acceptedGenders.push('Female');
+            if (genderReq.male === true) acceptedGenders.push('Male');
+            if (genderReq.other === true) acceptedGenders.push('Non-binary');
+            
+            if (acceptedGenders.length === 0) return 'all';
+            if (acceptedGenders.length === 3) return 'all';
+            
+            if (acceptedGenders.length === 1) {
+                return acceptedGenders[0];
+            } else {
+                return acceptedGenders.join(' or ');
+            }
+        }
+        
+        // Validates if user's gender meets trip requirements
+        function isGenderValid(userGender, genderReq) {
+            // If requirement is "Any" or not specified, all genders are valid
+            if (!genderReq || (typeof genderReq === 'string' && genderReq === 'Any')) {
+                return true;
+            }
+            
+            // Handle case where user selected "Prefer not to say"
+            if (userGender === 'Prefer not to say') {
+                // This is a policy decision - you might want to block or allow based on your app rules
+                return false; // Blocking as default - require explicit gender selection for restricted trips
+            }
+            
+            // If genderReq is a string (legacy format)
+            if (typeof genderReq === 'string') {
+                return userGender === genderReq;
+            }
+            
+            // If genderReq is an object with boolean flags
+            switch (userGender) {
+                case 'Female':
+                    return genderReq.female === true;
+                case 'Male':
+                    return genderReq.male === true;
+                case 'Others': // Match UI option with validation logic
+                    return genderReq.other === true;
+                default:
+                    return false;
+            }
+        }
         
         // Create modal for stepper form
         const modal = document.createElement('div');
@@ -725,15 +644,15 @@ function isGenderValid(userGender, genderReq) {
         const modalContent = document.createElement('div');
         modalContent.className = 'modal-content';
         modalContent.style.cssText = `
-             background-color: #fefefe;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 800px;
-    position: relative;
-    transition: all 0.3s ease;
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+            transition: all 0.3s ease;
         `;
         
         // Step indicator
@@ -747,18 +666,18 @@ function isGenderValid(userGender, genderReq) {
         
         const steps = ['Personal Info', 'Trip Type', 'Confirmation'];
         steps.forEach((step, index) => {
-    const stepEl = document.createElement('div');
-    stepEl.className = 'step';
-    stepEl.textContent = `${index + 1}. ${step}`;
-    stepEl.style.cssText = `
-        padding: 5px 10px;
-        border-radius: 15px;
-        background-color: ${index === 0 ? '#00d2ff' : '#ccc'}; /* Different color for inactive steps */
-        font-weight: ${index === 0 ? 'bold' : 'normal'};
-        color: ${index === 0 ? 'white' : 'black'};
-    `;
-    stepIndicator.appendChild(stepEl);
-})
+            const stepEl = document.createElement('div');
+            stepEl.className = 'step';
+            stepEl.textContent = `${index + 1}. ${step}`;
+            stepEl.style.cssText = `
+                padding: 5px 10px;
+                border-radius: 15px;
+                background-color: ${index === 0 ? '#00d2ff' : '#ccc'}; /* Different color for inactive steps */
+                font-weight: ${index === 0 ? 'bold' : 'normal'};
+                color: ${index === 0 ? 'white' : 'black'};
+            `;
+            stepIndicator.appendChild(stepEl);
+        });
         
         modalContent.appendChild(stepIndicator);
         
@@ -827,456 +746,459 @@ function isGenderValid(userGender, genderReq) {
         }
         
         function showPersonalInfoStep() {
-    const form = document.createElement('form');
-    form.id = 'personal-info-form';
-    
-    // Name field
-    const nameInput = document.createElement('input');
-    nameInput.type = 'text';
-    nameInput.id = 'user-name';
-    nameInput.name = 'name';
-    nameInput.required = true;
-    nameInput.placeholder = 'Enter your full name';
-    nameInput.value = formData.name || '';
-    nameInput.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-        color:black;
-    `;
-    form.appendChild(createFormGroup('Full Name', nameInput));
-    
-    // Age field
-    const ageInput = document.createElement('input');
-    ageInput.type = 'number';
-    ageInput.id = 'user-age';
-    ageInput.name = 'age';
-    ageInput.min = '18';
-    ageInput.max = '80';
-    ageInput.required = true;
-    ageInput.placeholder = 'Enter your age';
-    ageInput.value = formData.age || '';
-    ageInput.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-        color:black;
-    `;
-    form.appendChild(createFormGroup('Age', ageInput));
-    
-    // Gender field
-    const genderSelect = document.createElement('select');
-    genderSelect.id = 'user-gender';
-    genderSelect.name = 'gender';
-    genderSelect.required = true;
-    genderSelect.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-    `;
-    
-    const genderOptions = ['Select Gender', 'Male', 'Female', 'Others'];
-    genderOptions.forEach(option => {
-        const optionEl = document.createElement('option');
-        optionEl.value = option === 'Select Gender' ? '' : option;
-        optionEl.textContent = option;
-        genderSelect.appendChild(optionEl);
-    });
-    
-    if (formData.gender) {
-        genderSelect.value = formData.gender;
-    }
-    
-    // Add gender requirement notice if trip has gender specification
-    const genderFormGroup = createFormGroup('Gender', genderSelect);
-    form.appendChild(genderFormGroup);
-    
-    // Show gender requirement information, if any
-    if (tripDetails.gender && tripDetails.gender !== 'Any') {
-    const genderNotice = document.createElement('div');
-    genderNotice.textContent = `Note: This trip requires ${getAcceptedGendersText(tripDetails.gender)} participants.`;
-    genderNotice.style.color = 'red';
-    genderNotice.style.fontSize = '0.8rem';
-    genderNotice.style.marginTop = '5px';
-    genderFormGroup.appendChild(genderNotice);
-}
-    formContainer.appendChild(form);
-    
-    // Next button
-    const nextButton = document.createElement('button');
-    nextButton.textContent = 'Next';
-    nextButton.style.cssText = `
-        padding: 8px 16px;
-        background-color: #00d2ff;
-        color:white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      
-    `;
-    
-    nextButton.addEventListener('click', () => {
-        // Validate form
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
+            const form = document.createElement('form');
+            form.id = 'personal-info-form';
+            
+            // Name field
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.id = 'user-name';
+            nameInput.name = 'name';
+            nameInput.required = true;
+            nameInput.placeholder = 'Enter your full name';
+            nameInput.value = formData.name || '';
+            nameInput.style.cssText = `
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+                color:black;
+            `;
+            form.appendChild(createFormGroup('Full Name', nameInput));
+            
+            // Age field
+            const ageInput = document.createElement('input');
+            ageInput.type = 'number';
+            ageInput.id = 'user-age';
+            ageInput.name = 'age';
+            ageInput.min = '18';
+            ageInput.max = '80';
+            ageInput.required = true;
+            ageInput.placeholder = 'Enter your age';
+            ageInput.value = formData.age || '';
+            ageInput.style.cssText = `
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+                color:black;
+            `;
+            form.appendChild(createFormGroup('Age', ageInput));
+            
+            // Gender field
+            const genderSelect = document.createElement('select');
+            genderSelect.id = 'user-gender';
+            genderSelect.name = 'gender';
+            genderSelect.required = true;
+            genderSelect.style.cssText = `
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+            `;
+            
+            const genderOptions = ['Select Gender', 'Male', 'Female', 'Others'];
+            genderOptions.forEach(option => {
+                const optionEl = document.createElement('option');
+                optionEl.value = option === 'Select Gender' ? '' : option;
+                optionEl.textContent = option;
+                genderSelect.appendChild(optionEl);
+            });
+            
+            if (formData.gender) {
+                genderSelect.value = formData.gender;
+            }
+            
+            // Add gender requirement notice if trip has gender specification
+            const genderFormGroup = createFormGroup('Gender', genderSelect);
+            form.appendChild(genderFormGroup);
+            
+            // Show gender requirement information, if any
+            if (tripDetails.gender && tripDetails.gender !== 'Any') {
+                const genderNotice = document.createElement('div');
+                genderNotice.textContent = `Note: This trip requires ${getAcceptedGendersText(tripDetails.gender)} participants.`;
+                genderNotice.style.color = 'red';
+                genderNotice.style.fontSize = '0.8rem';
+                genderNotice.style.marginTop = '5px';
+                genderFormGroup.appendChild(genderNotice);
+            }
+            formContainer.appendChild(form);
+            
+            // Next button
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Next';
+            nextButton.style.cssText = `
+                padding: 8px 16px;
+                background-color: #00d2ff;
+                color:white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            `;
+            
+            nextButton.addEventListener('click', () => {
+                // Validate form
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                // Gender validation - only if user has made a selection and there's a requirement
+                if (genderSelect.value && tripDetails.gender && tripDetails.gender !== 'Any') {
+                    if (!isGenderValid(genderSelect.value, tripDetails.gender)) {
+                        alert(`This trip is only for ${getAcceptedGendersText(tripDetails.gender)} participants.`);
+                        return;
+                    }
+                }
+                // Save form data
+                formData.name = nameInput.value;
+                formData.age = ageInput.value;
+                formData.gender = genderSelect.value;
+                
+                // Go to next step
+                currentStep++;
+                showStep(currentStep);
+            });
+            
+            // Cancel button
+            const cancelButton = document.createElement('button');
+            cancelButton.textContent = 'Cancel';
+            cancelButton.style.cssText = `
+                padding: 8px 16px;
+                background-color: #f44336;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            `;
+            
+            cancelButton.addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+            
+            buttonContainer.appendChild(cancelButton);
+            buttonContainer.appendChild(nextButton);
         }
         
-        // Gender validation - only if user has made a selection and there's a requirement
-        if (genderSelect.value && tripDetails.gender && tripDetails.gender !== 'Any') {
-    if (!isGenderValid(genderSelect.value, tripDetails.gender)) {
-        alert(`This trip is only for ${getAcceptedGendersText(tripDetails.gender)} participants.`);
-        return;
-    }
-}
-        // Save form data
-        formData.name = nameInput.value;
-        formData.age = ageInput.value;
-        formData.gender = genderSelect.value;
-        
-        // Go to next step
-        currentStep++;
-        showStep(currentStep);
-    });
-    
-    // Cancel button
-    const cancelButton = document.createElement('button');
-    cancelButton.textContent = 'Cancel';
-    cancelButton.style.cssText = `
-        padding: 8px 16px;
-        background-color: #f44336;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    `;
-    
-    cancelButton.addEventListener('click', () => {
-        document.body.removeChild(modal);
-    });
-    
-    buttonContainer.appendChild(cancelButton);
-    buttonContainer.appendChild(nextButton);
-}
-function showTripTypeStep() {
-    const tripTypeForm = document.createElement('div');
-    
-    // Show trip destination information
-    const tripInfo = document.createElement('div');
-    tripInfo.innerHTML = `
-        <h3>Trip Details</h3>
-        <br>
-        <p><strong>Destination:</strong> ${tripDetails.destination}</p>
-        <p><strong>Start Date:</strong> ${tripDetails.startDate}</p>
-        <p><strong>End Date:</strong> ${tripDetails.endDate}</p>
-    `;
-    tripTypeForm.appendChild(tripInfo);
-    
-    // Add trip type selection
-    const tripTypeDiv = document.createElement('div');
-    tripTypeDiv.style.marginTop = '20px';
-    tripTypeDiv.style.marginBottom = '20px';
-    
-    const tripTypeLabel = document.createElement('label');
-    tripTypeLabel.textContent = 'Select Trip Type:';
-    tripTypeLabel.style.display = 'block';
-    tripTypeLabel.style.marginBottom = '10px';
-    tripTypeLabel.style.fontWeight = 'bold';
-    tripTypeLabel.style.color = 'black';
-    
-    const tripTypeSelect = document.createElement('select');
-    tripTypeSelect.id = 'trip-type-select';
-    tripTypeSelect.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-bottom: 15px;
-        color:black;
-    `;
-    
-    // Add options for domestic and international
-    const domesticOption = document.createElement('option');
-    domesticOption.value = 'domestic';
-    domesticOption.textContent = 'Domestic Trip';
-    
-    const internationalOption = document.createElement('option');
-    internationalOption.value = 'international';
-    internationalOption.textContent = 'International Trip';
-    
-    tripTypeSelect.appendChild(domesticOption);
-    tripTypeSelect.appendChild(internationalOption);
-    
-    // Set default selection based on stored data if available
-    if (formData.tripType) {
-        tripTypeSelect.value = formData.tripType;
-    }
-    
-    tripTypeDiv.appendChild(tripTypeLabel);
-    tripTypeDiv.appendChild(tripTypeSelect);
-    tripTypeForm.appendChild(tripTypeDiv);
-    
-    // Create containers for domestic and international forms
-    const domesticFormContainer = document.createElement('div');
-    domesticFormContainer.id = 'domestic-form';
-    domesticFormContainer.style.display = 'none';
-    
-    const internationalFormContainer = document.createElement('div');
-    internationalFormContainer.id = 'international-form';
-    internationalFormContainer.style.display = 'none';
-    
-// Alternative approach
-// Complete redesign of the terms container
-const termsContainer = document.createElement('div');
-termsContainer.style.position = 'relative';
-termsContainer.style.display = 'flex';
-termsContainer.style.alignItems = 'center';
-termsContainer.style.width = '100%';
-termsContainer.style.marginTop = '20px';
-termsContainer.style.marginBottom = '20px';
-
-const checkboxContainer = document.createElement('div');
-checkboxContainer.style.display = 'inline-block';
-checkboxContainer.style.verticalAlign = 'middle';
-checkboxContainer.style.marginRight = '10px';
-
-const termsCheckbox = document.createElement('input');
-termsCheckbox.type = 'checkbox';
-termsCheckbox.id = 'terms-checkbox';
-termsCheckbox.required = true;
-termsCheckbox.style.margin = '0';
-if (formData.termsAccepted) {
-  termsCheckbox.checked = true;
-}
-
-const termsText = document.createElement('span');
-termsText.innerHTML = 'I agree to the <a href="#" style="color: blue;">domestic travel terms and conditions.</a>';
-
-// Wrap both elements in a single label for better accessibility
-const termsLabel = document.createElement('label');
-termsLabel.htmlFor = 'terms-checkbox';
-termsLabel.style.display = 'flex';
-termsLabel.style.alignItems = 'center';
-termsLabel.style.cursor = 'pointer';
-termsLabel.style.width = 'fit-content';
-termsLabel.style.color = 'black';
-
-checkboxContainer.appendChild(termsCheckbox);
-termsLabel.appendChild(checkboxContainer);
-termsLabel.appendChild(termsText);
-termsContainer.appendChild(termsLabel);
-
-// Remove any existing terms container first
-const existingTerms = document.getElementById('terms-container');
-if (existingTerms) {
-  existingTerms.remove();
-}
-
-termsContainer.id = 'terms-container';
-domesticFormContainer.appendChild(termsContainer);
-    // International trip form elements
-    const passportDiv = document.createElement('div');
-    passportDiv.innerHTML = '<h4>International Travel Requirements</h4><br>';
-    
-    // Passport number
-    const passportInput = document.createElement('input');
-    passportInput.type = 'text';
-    passportInput.id = 'passport-number';
-    passportInput.name = 'passportNumber';
-    passportInput.placeholder = 'Enter passport number';
-    passportInput.value = formData.passportNumber || '';
-    passportInput.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-    `;
-    passportDiv.appendChild(createFormGroup('Passport Number', passportInput));
-    
-    // Passport expiry date
-    const expiryInput = document.createElement('input');
-    expiryInput.type = 'date';
-    expiryInput.id = 'passport-expiry';
-    expiryInput.name = 'passportExpiry';
-    expiryInput.value = formData.passportExpiry || '';
-    expiryInput.style.cssText = `
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-    `;
-    passportDiv.appendChild(createFormGroup('Passport Expiry Date', expiryInput));
-    
-    internationalFormContainer.appendChild(passportDiv);
-    
-    // International terms checkbox
-const intlTermsContainer = document.createElement('div');
-intlTermsContainer.style.position = 'relative';
-intlTermsContainer.style.display = 'flex';
-intlTermsContainer.style.alignItems = 'center';
-intlTermsContainer.style.marginTop = '20px';
-intlTermsContainer.style.marginBottom = '20px';
-
-const intlTermsCheckbox = document.createElement('input');
-intlTermsCheckbox.type = 'checkbox';
-intlTermsCheckbox.id = 'intl-terms-checkbox';
-intlTermsCheckbox.style.margin = '0';
-intlTermsCheckbox.style.marginRight = '8px';
-if (formData.intlTermsAccepted) {
-  intlTermsCheckbox.checked = true;
-}
-
-const intlTermsLabel = document.createElement('label');
-intlTermsLabel.htmlFor = 'intl-terms-checkbox';
-intlTermsLabel.style.display = 'flex';
-intlTermsLabel.style.alignItems = 'center';
-intlTermsLabel.style.cursor = 'pointer';
-
-const checkboxSpan = document.createElement('span');
-checkboxSpan.appendChild(intlTermsCheckbox);
-
-const textSpan = document.createElement('span');
-textSpan.innerHTML = 'I agree to the <a href="#" style="color: blue;">international travel terms and conditions</a>';
-
-intlTermsLabel.appendChild(checkboxSpan);
-intlTermsLabel.appendChild(textSpan);
-intlTermsContainer.appendChild(intlTermsLabel);
-
-// Remove any existing terms container first
-const existingIntlTerms = document.getElementById('intl-terms-container');
-if (existingIntlTerms) {
-  existingIntlTerms.remove();
-}
-
-intlTermsContainer.id = 'intl-terms-container';
-internationalFormContainer.appendChild(intlTermsContainer);
-    // Add both form containers to main form
-    tripTypeForm.appendChild(domesticFormContainer);
-    tripTypeForm.appendChild(internationalFormContainer);
-    
-    // Function to toggle form display based on selection
-    function updateFormDisplay() {
-        const selectedType = tripTypeSelect.value;
-        
-        if (selectedType === 'domestic') {
-            domesticFormContainer.style.display = 'block';
+        function showTripTypeStep() {
+            const tripTypeForm = document.createElement('div');
+            
+            // Show trip destination information
+            const tripInfo = document.createElement('div');
+            tripInfo.innerHTML = `
+                <h3>Trip Details</h3>
+                <br>
+                <p><strong>Destination:</strong> ${tripDetails.destination}</p>
+                <p><strong>Start Date:</strong> ${tripDetails.startDate}</p>
+                <p><strong>End Date:</strong> ${tripDetails.endDate}</p>
+            `;
+            tripTypeForm.appendChild(tripInfo);
+            
+            // Add trip type selection
+            const tripTypeDiv = document.createElement('div');
+            tripTypeDiv.style.marginTop = '20px';
+            tripTypeDiv.style.marginBottom = '20px';
+            
+            const tripTypeLabel = document.createElement('label');
+            tripTypeLabel.textContent = 'Select Trip Type:';
+            tripTypeLabel.style.display = 'block';
+            tripTypeLabel.style.marginBottom = '10px';
+            tripTypeLabel.style.fontWeight = 'bold';
+            tripTypeLabel.style.color = 'black';
+            
+            const tripTypeSelect = document.createElement('select');
+            tripTypeSelect.id = 'trip-type-select';
+            tripTypeSelect.style.cssText = `
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-bottom: 15px;
+                color:black;
+            `;
+            
+            // Add options for domestic and international
+            const domesticOption = document.createElement('option');
+            domesticOption.value = 'domestic';
+            domesticOption.textContent = 'Domestic Trip';
+            
+            const internationalOption = document.createElement('option');
+            internationalOption.value = 'international';
+            internationalOption.textContent = 'International Trip';
+            
+            tripTypeSelect.appendChild(domesticOption);
+            tripTypeSelect.appendChild(internationalOption);
+            
+            // Set default selection based on stored data if available
+            if (formData.tripType) {
+                tripTypeSelect.value = formData.tripType;
+            }
+            
+            tripTypeDiv.appendChild(tripTypeLabel);
+            tripTypeDiv.appendChild(tripTypeSelect);
+            tripTypeForm.appendChild(tripTypeDiv);
+            
+            // Create containers for domestic and international forms
+            const domesticFormContainer = document.createElement('div');
+            domesticFormContainer.id = 'domestic-form';
+            domesticFormContainer.style.display = 'none';
+            
+            const internationalFormContainer = document.createElement('div');
+            internationalFormContainer.id = 'international-form';
             internationalFormContainer.style.display = 'none';
             
-            // Update requirements
+            // Alternative approach
+            // Complete redesign of the terms container
+            const termsContainer = document.createElement('div');
+            termsContainer.style.position = 'relative';
+            termsContainer.style.display = 'flex';
+            termsContainer.style.alignItems = 'center';
+            termsContainer.style.width = '100%';
+            termsContainer.style.marginTop = '20px';
+            termsContainer.style.marginBottom = '20px';
+            
+            const checkboxContainer = document.createElement('div');
+            checkboxContainer.style.display = 'inline-block';
+            checkboxContainer.style.verticalAlign = 'middle';
+            checkboxContainer.style.marginRight = '10px';
+            
+            const termsCheckbox = document.createElement('input');
+            termsCheckbox.type = 'checkbox';
+            termsCheckbox.id = 'terms-checkbox';
             termsCheckbox.required = true;
-            passportInput.required = false;
-            expiryInput.required = false;
-            intlTermsCheckbox.required = false;
-        } else {
-            domesticFormContainer.style.display = 'none';
-            internationalFormContainer.style.display = 'block';
+            termsCheckbox.style.margin = '0';
+            if (formData.termsAccepted) {
+                termsCheckbox.checked = true;
+            }
             
-            // Update requirements
-            termsCheckbox.required = false;
-            passportInput.required = true;
-            expiryInput.required = true;
-            intlTermsCheckbox.required = true;
+            const termsText = document.createElement('span');
+            termsText.innerHTML = 'I agree to the <a href="#" style="color: blue;">domestic travel terms and conditions.</a>';
+            
+            // Wrap both elements in a single label for better accessibility
+            const termsLabel = document.createElement('label');
+            termsLabel.htmlFor = 'terms-checkbox';
+            termsLabel.style.display = 'flex';
+            termsLabel.style.alignItems = 'center';
+            termsLabel.style.cursor = 'pointer';
+            termsLabel.style.width = 'fit-content';
+            termsLabel.style.color = 'black';
+            
+            checkboxContainer.appendChild(termsCheckbox);
+            termsLabel.appendChild(checkboxContainer);
+            termsLabel.appendChild(termsText);
+            termsContainer.appendChild(termsLabel);
+            
+            // Remove any existing terms container first
+            const existingTerms = document.getElementById('terms-container');
+            if (existingTerms) {
+                existingTerms.remove();
+            }
+            
+            termsContainer.id = 'terms-container';
+            domesticFormContainer.appendChild(termsContainer);
+            
+            // International trip form elements
+            const passportDiv = document.createElement('div');
+            passportDiv.innerHTML = '<h4>International Travel Requirements</h4><br>';
+            
+            // Passport number
+            const passportInput = document.createElement('input');
+            passportInput.type = 'text';
+            passportInput.id = 'passport-number';
+            passportInput.name = 'passportNumber';
+            passportInput.placeholder = 'Enter passport number';
+            passportInput.value = formData.passportNumber || '';
+            passportInput.style.cssText = `
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+            `;
+            passportDiv.appendChild(createFormGroup('Passport Number', passportInput));
+            
+            // Passport expiry date
+            const expiryInput = document.createElement('input');
+            expiryInput.type = 'date';
+            expiryInput.id = 'passport-expiry';
+            expiryInput.name = 'passportExpiry';
+            expiryInput.value = formData.passportExpiry || '';
+            expiryInput.style.cssText = `
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+            `;
+            passportDiv.appendChild(createFormGroup('Passport Expiry Date', expiryInput));
+            
+            internationalFormContainer.appendChild(passportDiv);
+            
+            // International terms checkbox
+            const intlTermsContainer = document.createElement('div');
+            intlTermsContainer.style.position = 'relative';
+            intlTermsContainer.style.display = 'flex';
+            intlTermsContainer.style.alignItems = 'center';
+            intlTermsContainer.style.marginTop = '20px';
+            intlTermsContainer.style.marginBottom = '20px';
+            
+            const intlTermsCheckbox = document.createElement('input');
+            intlTermsCheckbox.type = 'checkbox';
+            intlTermsCheckbox.id = 'intl-terms-checkbox';
+            intlTermsCheckbox.style.margin = '0';
+            intlTermsCheckbox.style.marginRight = '8px';
+            if (formData.intlTermsAccepted) {
+                intlTermsCheckbox.checked = true;
+            }
+            
+            const intlTermsLabel = document.createElement('label');
+            intlTermsLabel.htmlFor = 'intl-terms-checkbox';
+            intlTermsLabel.style.display = 'flex';
+            intlTermsLabel.style.alignItems = 'center';
+            intlTermsLabel.style.cursor = 'pointer';
+            
+            const checkboxSpan = document.createElement('span');
+            checkboxSpan.appendChild(intlTermsCheckbox);
+            
+            const textSpan = document.createElement('span');
+            textSpan.innerHTML = 'I agree to the <a href="#" style="color: blue;">international travel terms and conditions</a>';
+            
+            intlTermsLabel.appendChild(checkboxSpan);
+            intlTermsLabel.appendChild(textSpan);
+            intlTermsContainer.appendChild(intlTermsLabel);
+            
+            // Remove any existing terms container first
+            const existingIntlTerms = document.getElementById('intl-terms-container');
+            if (existingIntlTerms) {
+                existingIntlTerms.remove();
+            }
+            
+            intlTermsContainer.id = 'intl-terms-container';
+            internationalFormContainer.appendChild(intlTermsContainer);
+            
+            // Add both form containers to main form
+            tripTypeForm.appendChild(domesticFormContainer);
+            tripTypeForm.appendChild(internationalFormContainer);
+            
+            // Function to toggle form display based on selection
+            function updateFormDisplay() {
+                const selectedType = tripTypeSelect.value;
+                
+                if (selectedType === 'domestic') {
+                    domesticFormContainer.style.display = 'block';
+                    internationalFormContainer.style.display = 'none';
+                    
+                    // Update requirements
+                    termsCheckbox.required = true;
+                    passportInput.required = false;
+                    expiryInput.required = false;
+                    intlTermsCheckbox.required = false;
+                } else {
+                    domesticFormContainer.style.display = 'none';
+                    internationalFormContainer.style.display = 'block';
+                    
+                    // Update requirements
+                    termsCheckbox.required = false;
+                    passportInput.required = true;
+                    expiryInput.required = true;
+                    intlTermsCheckbox.required = true;
+                }
+            }
+            
+            // Set initial display based on stored value or default to domestic
+            tripTypeSelect.value = formData.tripType || 'domestic';
+            updateFormDisplay();
+            
+            // Add event listener for changes
+            tripTypeSelect.addEventListener('change', updateFormDisplay);
+            
+            formContainer.appendChild(tripTypeForm);
+            
+            // Back button
+            const backButton = document.createElement('button');
+            backButton.textContent = 'Back';
+            backButton.style.cssText = `
+                padding: 8px 16px;
+                background-color: #808080;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            `;
+            
+            backButton.addEventListener('click', () => {
+                currentStep--;
+                showStep(currentStep);
+            });
+            
+            // Next button
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Next';
+            nextButton.style.cssText = `
+                padding: 8px 16px;
+                background-color: #00d2ff;
+                color:white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            `;
+            
+            nextButton.addEventListener('click', () => {
+                // Get selected trip type
+                const selectedType = tripTypeSelect.value;
+                formData.tripType = selectedType;
+                
+                // Validate based on trip type
+                if (selectedType === 'domestic') {
+                    if (!termsCheckbox.checked) {
+                        alert('You must accept the domestic travel terms and conditions to proceed.');
+                        return;
+                    }
+                    formData.termsAccepted = true;
+                } else {
+                    // International trip validation
+                    if (!passportInput.value) {
+                        alert('Please enter your passport number.');
+                        return;
+                    }
+                    
+                    if (!expiryInput.value) {
+                        alert('Please enter your passport expiry date.');
+                        return;
+                    }
+                    
+                    if (!intlTermsCheckbox.checked) {
+                        alert('You must accept the international travel terms and conditions to proceed.');
+                        return;
+                    }
+                    
+                    // Check if passport expires before trip end date
+                    const expiryDate = new Date(expiryInput.value);
+                    const tripEndDate = new Date(tripDetails.endDate);
+                    
+                    if (expiryDate < tripEndDate) {
+                        alert('Your passport expires before the trip end date. You cannot join this trip.');
+                        return;
+                    }
+                    
+                    formData.passportNumber = passportInput.value;
+                    formData.passportExpiry = expiryInput.value;
+                    formData.intlTermsAccepted = true;
+                }
+                
+                // Go to next step
+                currentStep++;
+                showStep(currentStep);
+            });
+            
+            buttonContainer.appendChild(backButton);
+            buttonContainer.appendChild(nextButton);
         }
-    }
-    
-    // Set initial display based on stored value or default to domestic
-    tripTypeSelect.value = formData.tripType || 'domestic';
-    updateFormDisplay();
-    
-    // Add event listener for changes
-    tripTypeSelect.addEventListener('change', updateFormDisplay);
-    
-    formContainer.appendChild(tripTypeForm);
-    
-    // Back button
-    const backButton = document.createElement('button');
-    backButton.textContent = 'Back';
-    backButton.style.cssText = `
-        padding: 8px 16px;
-        background-color: #808080;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    `;
-    
-    backButton.addEventListener('click', () => {
-        currentStep--;
-        showStep(currentStep);
-    });
-    
-    // Next button
-    const nextButton = document.createElement('button');
-    nextButton.textContent = 'Next';
-    nextButton.style.cssText = `
-        padding: 8px 16px;
-        background-color: #00d2ff;
-        color:white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    `;
-    
-    nextButton.addEventListener('click', () => {
-        // Get selected trip type
-        const selectedType = tripTypeSelect.value;
-        formData.tripType = selectedType;
         
-        // Validate based on trip type
-        if (selectedType === 'domestic') {
-            if (!termsCheckbox.checked) {
-                alert('You must accept the domestic travel terms and conditions to proceed.');
-                return;
-            }
-            formData.termsAccepted = true;
-        } else {
-            // International trip validation
-            if (!passportInput.value) {
-                alert('Please enter your passport number.');
-                return;
-            }
-            
-            if (!expiryInput.value) {
-                alert('Please enter your passport expiry date.');
-                return;
-            }
-            
-            if (!intlTermsCheckbox.checked) {
-                alert('You must accept the international travel terms and conditions to proceed.');
-                return;
-            }
-            
-            // Check if passport expires before trip end date
-            const expiryDate = new Date(expiryInput.value);
-            const tripEndDate = new Date(tripDetails.endDate);
-            
-            if (expiryDate < tripEndDate) {
-                alert('Your passport expires before the trip end date. You cannot join this trip.');
-                return;
-            }
-            
-            formData.passportNumber = passportInput.value;
-            formData.passportExpiry = expiryInput.value;
-            formData.intlTermsAccepted = true;
-        }
-        
-        // Go to next step
-        currentStep++;
-        showStep(currentStep);
-    });
-    
-    buttonContainer.appendChild(backButton);
-    buttonContainer.appendChild(nextButton);
-}
         function showConfirmationStep() {
             const confirmationDiv = document.createElement('div');
             
@@ -1384,9 +1306,10 @@ internationalFormContainer.appendChild(intlTermsContainer);
     }
 };
 
-
-
  
+
+
+
  </script>
   <style>
     .chat-button {
@@ -1464,11 +1387,12 @@ internationalFormContainer.appendChild(intlTermsContainer);
   color: #666;
 }
   </style>
-  </head>
+  
 
+</head>
   <body>
 
-    <!DOCTYPE html>
+  
    
     <div class="overlay"></div>
 
@@ -1762,6 +1686,16 @@ internationalFormContainer.appendChild(intlTermsContainer);
           <div class="box-author-testimonials"> <img src="assets/imgs/page/homepage1/testimonial.png" alt="Travila"><img src="assets/imgs/page/homepage1/testimonial2.png" alt="Travila"><img src="assets/imgs/page/homepage1/testimonial3.png" alt="Travila">Testimonials</div>
           <h2 class="mt-8 mb-25 neutral-1000">Don't take our word for it</h2>
         </div>
+
+
+        <div class="past-trips-container">
+hey
+        </div>
+
+
+
+
+
         <div class="block-testimonials">
           <div class="container-testimonials"> 
             <div class="container-slider">
@@ -1769,76 +1703,16 @@ internationalFormContainer.appendChild(intlTermsContainer);
                 <div class="swiper-container swiper-group-animate swiper-group-journey">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                      <div class="card-testimonial background-card"> 
-                        <div class="card-info"> 
-                          <p class="text-xl-bold card-title neutral-1000">The best booking system</p>
-                          <p class="neutral-500">I've been using the hotel booking system for several years now, and it's become my go-to platform for planning my trips. The interface is user-friendly, and I appreciate the detailed information and real-time availability of hotels.</p>
-                        </div>
-                        <div class="card-top">
-                          <div class="card-author"> 
-                            <div class="card-image"> <img src="assets/imgs/page/homepage1/author.png" alt="Travila"></div>
-                            <div class="card-info"> 
-                              <p class="text-lg-bold neutral-1000">Sara Mohamed</p>
-                              <p class="text-sm neutral-1000">Jakatar</p>
-                            </div>
-                          </div>
-                          <div class="card-rate"> <img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"></div>
-                        </div>
-                      </div>
+                   
                     </div>
                     <div class="swiper-slide">
-                      <div class="card-testimonial background-card"> 
-                        <div class="card-info"> 
-                          <p class="text-xl-bold card-title neutral-1000">The best booking system</p>
-                          <p class="neutral-500">I've been using the hotel booking system for several years now, and it's become my go-to platform for planning my trips. The interface is user-friendly, and I appreciate the detailed information and real-time availability of hotels.</p>
-                        </div>
-                        <div class="card-top">
-                          <div class="card-author"> 
-                            <div class="card-image"> <img src="assets/imgs/page/homepage1/author2.png" alt="Travila"></div>
-                            <div class="card-info"> 
-                              <p class="text-lg-bold neutral-1000">Atend John</p>
-                              <p class="text-sm neutral-1000">Califonia</p>
-                            </div>
-                          </div>
-                          <div class="card-rate"> <img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"></div>
-                        </div>
-                      </div>
+                     
                     </div>
                     <div class="swiper-slide">
-                      <div class="card-testimonial background-card"> 
-                        <div class="card-info"> 
-                          <p class="text-xl-bold card-title neutral-1000">The best booking system</p>
-                          <p class="neutral-500">I've been using the hotel booking system for several years now, and it's become my go-to platform for planning my trips. The interface is user-friendly, and I appreciate the detailed information and real-time availability of hotels.</p>
-                        </div>
-                        <div class="card-top">
-                          <div class="card-author"> 
-                            <div class="card-image"> <img src="assets/imgs/page/homepage1/author.png" alt="Travila"></div>
-                            <div class="card-info"> 
-                              <p class="text-lg-bold neutral-1000">Sara Mohamed</p>
-                              <p class="text-sm neutral-1000">Jakatar</p>
-                            </div>
-                          </div>
-                          <div class="card-rate"> <img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"></div>
-                        </div>
-                      </div>
+                     
                     </div>
                     <div class="swiper-slide">
-                      <div class="card-testimonial background-card"> 
-                        <div class="card-info"> 
-                          <p class="text-xl-bold card-title neutral-1000">The best booking system</p>
-                          <p class="neutral-500">I've been using the hotel booking system for several years now, and it's become my go-to platform for planning my trips. The interface is user-friendly, and I appreciate the detailed information and real-time availability of hotels.</p>
-                        </div>
-                        <div class="card-top">
-                          <div class="card-author"> 
-                            <div class="card-image"> <img src="assets/imgs/page/homepage1/author2.png" alt="Travila"></div>
-                            <div class="card-info"> 
-                              <p class="text-lg-bold neutral-1000">Sara Mohamed</p>
-                              <p class="text-sm neutral-1000">Jakatar</p>
-                            </div>
-                          </div>
-                          <div class="card-rate"> <img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"><img src="assets/imgs/template/icons/star.svg" alt="Travila"></div>
-                        </div>
-                      </div>
+                    
                     </div>
                   </div>
                 </div>

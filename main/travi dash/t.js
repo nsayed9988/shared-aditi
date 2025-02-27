@@ -30,7 +30,7 @@ const userInfoElement = document.getElementById('user-info-final');
 const participantsContainer = document.getElementById('participants-container-final');
 
 // Check for logged in user
-let userEmail = localStorage.getItem('userEmail');
+/*let userEmail = localStorage.getItem('userEmail');
 if (!userEmail) {
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -49,7 +49,32 @@ if (!userEmail) {
 } else {
     displayUserInfo(userEmail);
     loadAllTrips(userEmail);  // Changed from loadTrips
-}
+}*/
+
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in
+      const userEmail = user.email;
+      // Store user info if needed
+      localStorage.setItem('userEmail', userEmail);
+      // Display user info and load data
+      displayUserInfo(userEmail);
+      loadAllTrips(userEmail);
+    } else {
+      // User is not signed in
+      localStorage.removeItem('userEmail'); // Clear any stored data
+      // Show sign-in message
+      const tripsContainer = document.getElementById('tripsContainer');
+      tripsContainer.innerHTML = `
+        <div class="no-trips-final">
+          Please sign in to view your trips.
+        </div>
+      `;
+      // Redirect to login page if needed
+      // window.location.href = '/login.html';
+    }
+  });
 
 function displayUserInfo(email) {
     if (email) {
@@ -179,6 +204,7 @@ function openTripModal(tripId, tripData, ownerEmail) {
             <br>
         </div>
         <p class="apply-date-final"><strong>Application Deadline:</strong> ${tripData.applyByDate || 'Not specified'}</p>
+        <p class="start-date"><strong>Start Date:</strong> ${tripData.startDate || 'Not specified'}</p>
         <br>
     `;
     
@@ -269,51 +295,121 @@ function loadTripParticipants(tripId, email) {
 let currentTripData = null;
 let currentTripId = null;
 
+/*
+function initBudgetTracker(tripId, tripData) {
+ currentTripId = tripId;
+currentTripData = tripData;
+const showAddExpenseBtn = document.getElementById('show-add-expense-final');
+const expenseFormContainer = document.getElementById('expense-form-container-final');
+const expenseForm = document.getElementById('expense-form-final');
+const cancelExpenseBtn = document.getElementById('cancel-expense-final');
+// Setup tab navigation
+document.querySelectorAll('.tab-button-final').forEach(button => {
+button.addEventListener('click', () => {
+document.querySelectorAll('.tab-button-final').forEach(btn => btn.classList.remove('active'));
+document.querySelectorAll('.tab-content-final').forEach(content => content.classList.remove('active'));
+button.classList.add('active');
+const tabId = button.getAttribute('data-tab');
+document.getElementById(tabId).classList.add('active');
+if (tabId === 'summary-tab-final') {
+getTripExpenses(tripId, (expenses) => {
+renderBalanceSummary(expenses, tripData.participants || {});
+ });
+ }
+ });
+ });
+showAddExpenseBtn.addEventListener('click', () => {
+populateParticipantDropdowns(tripData.participants || {});
+expenseFormContainer.style.display = 'block';
+showAddExpenseBtn.style.display = 'none';
+ });
+cancelExpenseBtn.addEventListener('click', () => {
+expenseFormContainer.style.display = 'none';
+showAddExpenseBtn.style.display = 'block';
+expenseForm.reset();
+ });
+expenseForm.addEventListener('submit', (e) => {
+e.preventDefault();
+saveExpense(tripId, tripData);
+ });
+loadExpenses(tripId);
+} 
+
+
+
+
+*/
+
 function initBudgetTracker(tripId, tripData) {
     currentTripId = tripId;
     currentTripData = tripData;
-
     const showAddExpenseBtn = document.getElementById('show-add-expense-final');
     const expenseFormContainer = document.getElementById('expense-form-container-final');
     const expenseForm = document.getElementById('expense-form-final');
     const cancelExpenseBtn = document.getElementById('cancel-expense-final');
-
+    
+    // Check if Add Expense button should be disabled
+    checkAndUpdateAddExpenseButton(tripData, showAddExpenseBtn);
+    
     // Setup tab navigation
     document.querySelectorAll('.tab-button-final').forEach(button => {
-        button.addEventListener('click', () => {
-            document.querySelectorAll('.tab-button-final').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content-final').forEach(content => content.classList.remove('active'));
-            
-            button.classList.add('active');
-            const tabId = button.getAttribute('data-tab');
-            document.getElementById(tabId).classList.add('active');
-            
-            if (tabId === 'summary-tab-final') {
-                getTripExpenses(tripId, (expenses) => {
-                    renderBalanceSummary(expenses, tripData.participants || {});
-                });
-            }
-        });
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button-final').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content-final').forEach(content => content.classList.remove('active'));
+        button.classList.add('active');
+        const tabId = button.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+        if (tabId === 'summary-tab-final') {
+          getTripExpenses(tripId, (expenses) => {
+            renderBalanceSummary(expenses, tripData.participants || {});
+          });
+        }
+      });
     });
-
+    
     showAddExpenseBtn.addEventListener('click', () => {
-        populateParticipantDropdowns(tripData.participants || {});
-        expenseFormContainer.style.display = 'block';
-        showAddExpenseBtn.style.display = 'none';
+      populateParticipantDropdowns(tripData.participants || {});
+      expenseFormContainer.style.display = 'block';
+      showAddExpenseBtn.style.display = 'none';
     });
-
+    
     cancelExpenseBtn.addEventListener('click', () => {
-        expenseFormContainer.style.display = 'none';
-        showAddExpenseBtn.style.display = 'block';
-        expenseForm.reset();
+      expenseFormContainer.style.display = 'none';
+      showAddExpenseBtn.style.display = 'block';
+      expenseForm.reset();
     });
-
+    
     expenseForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        saveExpense(tripId, tripData);
+      e.preventDefault();
+      saveExpense(tripId, tripData);
     });
-
+    
     loadExpenses(tripId);
+}
+  
+  // Helper function to check conditions and update add expense button
+function checkAndUpdateAddExpenseButton(tripData, button) {
+    const hasParticipants = tripData.participants && Object.keys(tripData.participants).length > 0;
+    const isTripInFuture = tripData.startDate ? new Date(tripData.startDate) > new Date() : false;
+    
+    if (!hasParticipants || isTripInFuture) {
+      button.disabled = true;
+      button.classList.add('disabled-btn');
+      
+      // Add tooltip to explain why button is disabled
+      let tooltipText = "";
+      if (!hasParticipants) {
+        tooltipText = "Add participants to enable expense tracking";
+      } else if (isTripInFuture) {
+        tooltipText = "Expenses can only be added once the trip has started";
+      }
+      
+      button.setAttribute('title', tooltipText);
+    } else {
+      button.disabled = false;
+      button.classList.remove('disabled-btn');
+      button.removeAttribute('title');
+    }
 }
 
 function populateParticipantDropdowns(participants) {
@@ -434,7 +530,25 @@ function loadExpenses(tripId) {
 
 function renderExpenseList(expenses, participants) {
     const expensesList = document.getElementById('expenses-list-final');
-
+    
+    // Get participants from the dropdown instead
+    const paidByDropdown = document.getElementById('paid-by-final');
+    const participantsFromDropdown = {};
+    
+    // Extract participants information from the dropdown options
+    if (paidByDropdown) {
+        Array.from(paidByDropdown.options).forEach(option => {
+            if (option.value) {
+                participantsFromDropdown[option.value] = {
+                    id: option.value,
+                    email: option.text || option.value
+                };
+            }
+        });
+    }
+    
+    console.log("Participants from dropdown:", participantsFromDropdown);
+    
     if (expenses.length === 0) {
         expensesList.innerHTML = `
             <div class="expense-item-final" style="text-align: center; color: #888;">
@@ -443,16 +557,22 @@ function renderExpenseList(expenses, participants) {
         `;
         return;
     }
-
+    
     let expensesHTML = '';
-
+    
     expenses.forEach(expense => {
-        // Find the participant by their ID and get their email
-        const paidByEmail = participants[expense.paidBy]?.email || 
-                           Object.values(participants).find(p => p.uid === expense.paidBy)?.email || 
-                           'Unknown';
+        // Try to get email from the dropdown data
+        let paidByEmail = 'Unknown';
+        
+        if (participantsFromDropdown[expense.paidBy]) {
+            paidByEmail = participantsFromDropdown[expense.paidBy].email;
+        } else {
+            // Fallback to just showing the ID
+            paidByEmail = expense.paidBy;
+        }
+        
         const formattedDate = new Date(expense.createdAt).toLocaleDateString();
-
+        
         expensesHTML += `
             <div class="expense-item-final" data-expense-id="${expense.id}">
                 <div class="expense-header-final">
@@ -467,19 +587,17 @@ function renderExpenseList(expenses, participants) {
             </div>
         `;
     });
-
+    
     expensesList.innerHTML = expensesHTML;
-
+    
     document.querySelectorAll('.view-expense-details').forEach(button => {
         button.addEventListener('click', (e) => {
             const expenseId = e.target.closest('.expense-item-final').getAttribute('data-expense-id');
             const expense = expenses.find(exp => exp.id === expenseId);
-            showExpenseDetailsModal(expense, participants);
+            showExpenseDetailsModal(expense, participantsFromDropdown);
         });
     });
 }
-
-
 
 
 // Function to show expense details modal

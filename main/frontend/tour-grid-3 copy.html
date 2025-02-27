@@ -1785,8 +1785,8 @@ function collectTravelFormData() {
               <div class="trip-form-group">
                   <label class="trip-form-label">Trip Budget</label>
                   <div class="trip-date-container">
-                      <input type="number" id="trip-budget-input" class="trip-form-input" required>
-                      <select id="trip-currency-select-pub" style="width:50%; border-radius:5px; border:1px solid #ddd;">
+                      <input type="number" id="trip-budget-priv" class="trip-form-input" required>
+                      <select id="trip-currency-select" style="width:50%; border-radius:5px; border:1px solid #ddd;">
                           <option value="USD">USD</option>
                           <option value="EUR">EUR</option>
                           <option value="GBP">GBP</option>
@@ -1921,7 +1921,7 @@ function collectTravelFormData() {
             duration: document.getElementById('trip-duration-display').value,
             activities: document.getElementById('trip-activities-input').value,
             essentials: document.getElementById('trip-essentials-text').value,
-            budget: document.getElementById('trip-budget-input').value,
+            budget: document.getElementById('trip-budget-priv').value,
             currency: document.getElementById('trip-currency-select').value
         };
 
