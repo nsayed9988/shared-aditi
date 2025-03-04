@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Trips Review System</title>
+    <style>
+      
+
+        .past-trips-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header-review {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #212529;
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .section-description-review {
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        .slider-container-review {
+            position: relative;
+            padding: 0 40px;
+        }
+
+        .slider-wrapper-review {
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+            padding: 20px 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .slider-wrapper-review::-webkit-scrollbar { 
+            display: none;
+        }
+
+        .trip-card-review {
+            min-width: 280px;
+            max-width: 320px;
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            flex: 0 0 auto;
+            position: relative;
+            padding: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .trip-card-review:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .trip-destinatio-review {
+            font-weight: 700;
+            font-size: 22px;
+            color: #212529;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .trip-destination-review::before {
+            content: '✈️';
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .trip-date-review {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .trip-date-review::before {
+            content: '📅';
+            margin-right: 8px;
+        }
+
+        .trip-user-review {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .user-avatar-review {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #4dabf7;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .user-name-review {
+            font-size: 15px;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .trip-budget-review {
+            display: flex;
+            align-items: center;
+            color: #495057;
+            font-size: 14px;
+            margin-bottom: 15px;
+            padding: 6px 12px;
+            background-color: rgba(0, 123, 255, 0.08);
+            border-radius: 6px;
+            width: fit-content;
+        }
+
+        .trip-budget-review::before {
+            content: '💰';
+            margin-right: 8px;
+        }
+
+        .trip-stats-review {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-item-review{
+            text-align: center;
+        }
+
+        .stat-value-review {
+            font-weight: 600;
+            font-size: 16px;
+            color: #212529;
+        }
+
+        .stat-label-review {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .rating-display-review {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stars-review {
+            display: flex;
+            margin-right: 10px;
+        }
+
+        .star-review {
+            color: #e2e5e9;
+            font-size: 18px;
+        }
+
+        .star.filled-review {
+            color: #ffc107;
+        }
+
+        .rating-value-review {
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .review-count-review {
+            font-size: 13px;
+            color: #6c757d;
+            margin-left: 5px;
+        }
+
+        .trip-review-review {
+            background-color: rgba(0, 0, 0, 0.02);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #495057;
+            margin-bottom: 15px;
+            max-height: 80px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .trip-review-review::before {
+            content: '"';
+            font-size: 24px;
+            color: rgba(0, 0, 0, 0.1);
+            position: absolute;
+            left: 5px;
+            top: 0;
+        }
+
+        .trip-review-review::after {
+            content: '"';
+            font-size: 24px;
+            color: rgba(0, 0, 0, 0.1);
+            position: absolute;
+            right: 5px;
+            bottom: 0;
+        }
+
+        .trip-checklist-review {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .checklist-item-review {
+            background-color: rgba(108, 117, 125, 0.08);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .action-buttons-review {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn-review {
+            flex: 1;
+            padding: 8px 5px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .view-btn-review {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .view-btn-review:hover {
+            background-color: #dee2e6;
+        }
+
+        .review-btn-review {
+            background-color: #4dabf7;
+            color: white;
+        }
+
+        .review-btn-review:hover {
+            background-color: #339af0;
+        }
+
+        .nav-button-review {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.2s;
+        }
+
+        .nav-button-review:hover {
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .prev-button-review {
+            left: 0;
+        }
+
+        .next-button-review {
+            right: 0;
+        }
+
+        .nav-button-review i {
+            border: solid #495057;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+        }
+
+        .prev-button-review i {
+            transform: rotate(135deg);
+        }
+
+        .next-button-review i {
+            transform: rotate(-45deg);
+        }
+
+        .empty-state-review {
+            padding: 60px 40px;
+            text-align: center;
+            color: #6c757d;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .empty-state-review h3 {
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+
+        /* Review modal */
+        .modal-review {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content-review {
+            background-color: white;
+            padding: 30px;
+            border-radius: 16px;
+            width: 500px;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header-review {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title-review {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .close-modal-review {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #adb5bd;
+            transition: color 0.2s;
+        }
+
+        .close-modal-review:hover {
+            color: #495057;
+        }
+
+        .rating-input-review {
+            margin-bottom: 20px;
+        }
+
+        .rating-input-title-review {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+
+        .rating-input-review .stars-review {
+            cursor: pointer;
+        }
+
+        .rating-input-review .star-review {
+            font-size: 24px;
+            margin-right: 5px;
+            transition: color 0.2s;
+        }
+
+        .rating-input-review .star-review:hover,
+        .rating-input-review .star-review:hover ~ .star-review {
+            color: #ffc107;
+        }
+
+        textarea-review {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 120px;
+            margin-bottom: 20px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        textarea-review:focus {
+            outline: none;
+            border-color: #4dabf7;
+            box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.25);
+        }
+
+        .submit-review-review {
+            background-color: #4dabf7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            width: 100%;
+        }
+
+        .submit-review-review:hover {
+            background-color: #339af0;
+        }
+
+        @media (max-width: 768px) {
+            .slider-container {
+                padding: 0 30px;
+            }
+
+            .trip-card-review {
+                min-width: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="past-trips-container-review">
+        <div class="section-header-review">
+            <h2>Discover Past Adventures</h2>
+            <p class="section-description">Explore and review trips from our travel community</p>
+        </div>
+        
+        <div class="slider-container-review">
+            <button class="nav-button-review prev-button-review" aria-label="Previous trips">
+                <i></i>
+            </button>
+            
+            <div class="slider-wrapper-review" id="trips-slider-review">
+                <!-- Trip cards will be populated by JavaScript -->
+            </div>
+            
+            <button class="nav-button next-button-review" aria-label="Next trips">
+                <i></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal-review" id="review-modal">
+        <div class="modal-content-review">
+            <div class="modal-header-review">
+                <h3 class="modal-title-review">Write Your Review</h3>
+                <button class="close-modal-review">&times;</button>
+            </div>
+            <div class="rating-input-review">
+                <p class="rating-input-title-review">Rate this trip:</p>
+                <div class="stars-review" id="rating-stars-review">
+                    <span class="star-review" data-value="1">★</span>
+                    <span class="star-review" data-value="2">★</span>
+                    <span class="star-review" data-value="3">★</span>
+                    <span class="star-review" data-value="4">★</span>
+                    <span class="star-review" data-value="5">★</span>
+                </div>
+            </div>
+            <textarea id="review-text-review" placeholder="Share your thoughts on this destination..."></textarea>
+            <button class="submit-review-review">Submit Review</button>
+        </div>
+    </div>
+
+    <script type="module">
+    // Uncomment the import for initializeApp
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getDatabase, ref, onValue, get, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
+    authDomain: "ty-project-80ab7.firebaseapp.com",
+    projectId: "ty-project-80ab7",
+    storageBucket: "ty-project-80ab7.firebasestorage.app",
+    messagingSenderId: "491495110151",
+    appId: "1:491495110151:web:035795af4bc8eebff79ca2",
+    measurementId: "G-XFS1VYTHSM",
+    databaseURL: "https://ty-project-80ab7-default-rtdb.firebaseio.com/"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// Make Firebase available globally
+window.db = db;
+window.dbRef = ref;
+window.dbGet = get;
+
+// Function to fetch past public trips
+// Modify your fetchPastPublicTrips function to include more debugging
+async function fetchPastPublicTrips() {
+  try {
+    // Get current date for comparison
+    const currentDate = new Date();
+    console.log('Current date:', currentDate);
+    
+    // Get all users
+    const usersRef = ref(db, 'travel-bookings');
+    const usersSnapshot = await get(usersRef);
+    
+    let pastPublicTrips = [];
+    
+    // Check if users exist at all
+    if (!usersSnapshot.exists()) {
+      console.error('No users found in travel-bookings');
+      return [];
+    }
+    
+    const users = usersSnapshot.val();
+    console.log('Found users:', Object.keys(users));
+    
+    // Loop through each user
+    for (const userEmail in users) {
+      console.log(`Checking user: ${userEmail}`);
+      
+      // Check if this user has public trips
+      const publicTripsRef = ref(db, `travel-bookings/${userEmail}/public-trips`);
+      const publicTripsSnapshot = await get(publicTripsRef);
+      
+      if (!publicTripsSnapshot.exists()) {
+        console.log(`No public-trips node found for user: ${userEmail}`);
+        continue;
+      }
+      
+      const publicTrips = publicTripsSnapshot.val();
+      console.log(`User ${userEmail} has ${Object.keys(publicTrips).length} public trips`);
+      
+      // Process each public trip
+      for (const tripId in publicTrips) {
+        const trip = publicTrips[tripId];
+        console.log(`Examining trip ${tripId}:`, trip);
+        
+        // Check if the trip has the required date fields
+        if (!trip.startDate && !trip.applyByDate) {
+          console.log(`Trip ${tripId} is missing both startDate and applyByDate`);
+          continue;
+        }
+        
+        if (!trip.endDate) {
+          console.log(`Trip ${tripId} is missing endDate`);
+          // You might want to include these trips anyway by setting a default endDate
+          // trip.endDate = new Date().toISOString(); // Set to today
+          continue;
+        }
+        
+        // For debugging - show all date checks
+        const tripStartDate = new Date(trip.startDate || trip.applyByDate);
+        const tripEndDate = new Date(trip.endDate);
+        console.log(`Trip dates: start=${tripStartDate}, end=${tripEndDate}`);
+        console.log(`Is this trip in the past? ${tripEndDate < currentDate}`);
+        
+        // TEMPORARY: Remove date filtering for testing
+        // if (tripEndDate < currentDate) {
+          // Add user information to the trip object
+          trip.id = tripId;
+          trip.user = userEmail;
+          trip.userInitial = userEmail.charAt(0).toUpperCase();
+          
+          // Add default values for rating and reviews if not present
+          if (!trip.rating) trip.rating = 0;
+          if (!trip.reviewCount) trip.reviewCount = 0;
+          if (!trip.reviews) trip.reviews = [];
+          if (!trip.highlights) trip.highlights = 0;
+          
+          // Calculate trip duration using available dates
+          const startDate = new Date(trip.startDate || trip.applyByDate);
+          const endDate = new Date(trip.endDate);
+          const durationTime = endDate.getTime() - startDate.getTime();
+          trip.duration = Math.ceil(durationTime / (1000 * 3600 * 24)) || 1; // Convert to days, default to 1
+          
+          pastPublicTrips.push(trip);
+          console.log(`Added trip ${tripId} to results`);
+        // } else {
+        //  console.log(`Trip ${tripId} is in the future, skipping`);
+        // }
+      }
+    }
+    
+    console.log('Final past public trips count:', pastPublicTrips.length);
+    console.log('Trips found:', pastPublicTrips);
+    return pastPublicTrips;
+    
+  } catch (error) {
+    console.error('Error fetching past trips:', error);
+    throw error;
+  }
+}
+// Function to format dates nicely
+function formatDateRange(startDate, endDate) {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    const start = new Date(startDate).toLocaleDateString('en-US', options);
+    const end = new Date(endDate).toLocaleDateString('en-US', options);
+    return `${start} - ${end}`;
+}
+
+// Function to display trips
+// Update the displayTrips function to pass the correct trip user information
+function displayTrips(trips) {
+    const sliderElement = document.getElementById('trips-slider-review');
+    sliderElement.innerHTML = ''; // Clear existing content first
+    
+    console.log('Displaying trips:', trips);
+    
+    if (trips.length === 0) {
+        sliderElement.innerHTML = `
+            <div class="empty-state">
+                <h3>No past trips available</h3>
+                <p>Check back later for community shared travel experiences</p>
+            </div>
+        `;
+        return;
+    }
+    
+    trips.forEach(trip => {
+        // Create checklist items HTML
+        let checklistHTML = '';
+        if (trip.checkedItems) {
+            const items = Object.keys(trip.checkedItems).filter(key => trip.checkedItems[key]);
+            // Display max 3 items to save space
+            const displayItems = items.slice(0, 3);
+            
+            displayItems.forEach(item => {
+                checklistHTML += `<span class="checklist-item">${item}</span>`;
+            });
+            
+            // Show "more" indicator if there are additional items
+            if (items.length > 3) {
+                checklistHTML += `<span class="checklist-item">+${items.length - 3} more</span>`;
+            }
+        }
+        
+        // Create rating stars HTML
+        let starsHTML = '';
+        for (let i = 1; i <= 5; i++) {
+            if (i <= Math.floor(trip.rating)) {
+                starsHTML += '<span class="star filled">★</span>';
+            } else if (i - 0.5 <= trip.rating && i > Math.floor(trip.rating)) {
+                starsHTML += '<span class="star filled">★</span>'; // For simplicity using full stars
+            } else {
+                starsHTML += '<span class="star">★</span>';
+            }
+        }
+        
+        // Get a random review to display (if available)
+        let reviewHTML = '';
+        if (trip.reviews && trip.reviews.length > 0) {
+            const randomIndex = Math.floor(Math.random() * trip.reviews.length);
+            const review = trip.reviews[randomIndex];
+            reviewHTML = `
+                <div class="trip-review">
+                    <p class="review-text">${review.text}</p>
+                    <p class="review-author">- ${review.displayName || 'Anonymous'}</p>
+                </div>
+            `;
+        }
+        
+        const tripCard = document.createElement('div');
+        tripCard.className = 'trip-card-review';
+        tripCard.innerHTML = `
+            <h3 class="trip-destination">${trip.destination}</h3>
+            <p class="trip-date">${formatDateRange(trip.startDate || trip.applyByDate, trip.endDate)}</p>
+            <div class="trip-user">
+                <div class="user-avatar">${trip.userInitial}</div>
+                <span class="user-name">${trip.user}</span>
+            </div>
+            <div class="trip-budget">
+                ${trip.currency || '$'} ${trip.budget || 'N/A'}
+            </div>
+            <div class="trip-stats">
+                <div class="stat-item">
+                    <div class="stat-value">${trip.duration}</div>
+                    <div class="stat-label">Days</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${trip.reviewCount || 0}</div>
+                    <div class="stat-label">Reviews</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${trip.highlights || 0}</div>
+                    <div class="stat-label">Highlights</div>
+                </div>
+            </div>
+            <div class="rating-display">
+                <div class="stars">${starsHTML}</div>
+                <span class="rating-value">${(trip.rating || 0).toFixed(1)}</span>
+                <span class="review-count">(${trip.reviewCount || 0})</span>
+            </div>
+            ${reviewHTML}
+            <div class="trip-checklist">
+                ${checklistHTML}
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn view-btn" data-id="${trip.id}" data-user="${trip.user}">View Details</button>
+                <button class="action-btn review-btn" data-id="${trip.id}" data-user="${trip.user}">Write Review</button>
+            </div>
+        `;
+        
+        sliderElement.appendChild(tripCard);
+    });
+    
+    // Add event listeners to buttons
+    document.querySelectorAll('.review-btn-review').forEach(btn => {
+        btn.addEventListener('click', function() {
+            openReviewModal(this.getAttribute('data-id'));
+        });
+    });
+    
+    document.querySelectorAll('.view-btn-review').forEach(btn => {
+        btn.addEventListener('click', function() {
+            console.log('View details for trip:', this.getAttribute('data-id'));
+            // Implement view details functionality
+        });
+    });
+}
+
+// Function to check if the current user is logged in
+function checkUserLogin() {
+    const auth = getAuth();
+    return new Promise((resolve) => {
+        auth.onAuthStateChanged((user) => {
+            resolve(user !== null);
+        });
+    });
+}
+
+// Function to open the review modal
+function openReviewModal(tripId) {
+    // Find the trip data to get the user
+    const tripCards = document.querySelectorAll('.trip-card-review');
+    let tripUser = null;
+    
+    tripCards.forEach(card => {
+        const cardTripId = card.querySelector('.action-btn').getAttribute('data-id');
+        if (cardTripId === tripId) {
+            const userElement = card.querySelector('.user-name');
+            if (userElement) {
+                // Extract email from the displayed username + @ + domain
+                const displayName = userElement.textContent.trim();
+                tripUser = displayName.includes('@') ? displayName : displayName + '@example.com';
+            }
+        }
+    });
+    
+    if (!tripUser) {
+        console.error('Could not find trip user information');
+        alert('Error: Could not determine trip owner. Please try again.');
+        return;
+    }
+    
+    // Reset the modal inputs
+    document.getElementById('review-text-review').value = '';
+    document.querySelectorAll('#rating-stars-review .star-review').forEach(star => {
+        star.classList.remove('filled');
+    });
+    
+    // Store the current trip ID and user
+    const modal = document.getElementById('review-modal-review');
+    modal.setAttribute('data-trip-id', tripId);
+    modal.setAttribute('data-trip-user', tripUser);
+    
+    // Check if user is logged in
+    const auth = getAuth();
+    if (!auth.currentUser) {
+        alert('You must be logged in to write a review.');
+        return;
+    }
+    
+    // Show the modal
+    modal.style.display = 'flex';
+}
+// Navigation buttons functionality
+function setupNavigation() {
+    const sliderWrapper = document.querySelector('.slider-wrapper-review');
+    const prevButton = document.querySelector('.prev-button-review');
+    const nextButton = document.querySelector('.next-button-review');
+    
+    // Scroll amount - approximately one card width plus gap
+    const scrollAmount = 320;
+    
+    prevButton.addEventListener('click', () => {
+        sliderWrapper.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+    
+    nextButton.addEventListener('click', () => {
+        sliderWrapper.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+}
+// Function to submit a review
+async function submitReview(tripId, tripUser, rating, reviewText) {
+  try {
+    // Get auth information
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+    
+    if (!currentUser) {
+      alert("You must be logged in to submit a review");
+      return false;
+    }
+    
+    // Reference to the specific public trip
+    const tripRef = ref(db, `travel-bookings/${tripUser}/public-trips/${tripId}`);
+    const tripSnapshot = await get(tripRef);
+    
+    if (!tripSnapshot.exists()) {
+      console.error("Trip not found");
+      return false;
+    }
+    
+    const trip = tripSnapshot.val();
+    
+    // Check if user is a participant (if participant data exists)
+    if (trip.participants) {
+      const isParticipant = trip.participants.includes(currentUser.email);
+      if (!isParticipant) {
+        alert("Only participants can review this trip");
+        return false;
+      }
+    }
+    
+    // Create review object
+    const review = {
+      rating: rating,
+      text: reviewText,
+      timestamp: new Date().toISOString(),
+      userId: currentUser.uid,
+      userEmail: currentUser.email,
+      displayName: currentUser.displayName || currentUser.email.split('@')[0]
+    };
+    
+    // Initialize reviews array if it doesn't exist
+    if (!trip.reviews) {
+      trip.reviews = [];
+    }
+    
+    // Add the new review
+    trip.reviews.push(review);
+    
+    // Update review count
+    trip.reviewCount = (trip.reviewCount || 0) + 1;
+    
+    // Calculate new average rating
+    const totalRating = trip.reviews.reduce((sum, rev) => sum + rev.rating, 0);
+    trip.rating = totalRating / trip.reviews.length;
+    
+    // Save the updated trip back to Firebase
+    await set(tripRef, trip);
+    
+    console.log("Review saved successfully");
+    return true;
+  } catch (error) {
+    console.error("Error saving review:", error);
+    return false;
+  }
+}
+
+
+// Setup review modal functionality
+// Update the setupReviewModal function to use our new submitReview function
+function setupReviewModal() {
+    const modal = document.getElementById('review-modal-review');
+    const closeBtn = document.querySelector('.close-modal-review');
+    const submitBtn = document.querySelector('.submit-review'-review);
+    const stars = document.querySelectorAll('#rating-stars-review .star-review');
+    
+    // Close modal
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
+    // Star rating functionality
+    let currentRating = 0;
+    
+    stars.forEach(star => {
+        // Click to set rating
+        star.addEventListener('click', function() {
+            const value = parseInt(this.getAttribute('data-value'));
+            currentRating = value;
+            
+            // Update stars display
+            stars.forEach(s => {
+                const starValue = parseInt(s.getAttribute('data-value'));
+                if (starValue <= value) {
+                    s.classList.add('filled');
+                } else {
+                    s.classList.remove('filled');
+                }
+            });
+        });
+    });
+    
+    // Submit review
+    submitBtn.addEventListener('click', async () => {
+        const tripId = modal.getAttribute('data-trip-id');
+        const tripUser = modal.getAttribute('data-trip-user');
+        const reviewText = document.getElementById('review-text-review').value;
+        
+        if (currentRating === 0) {
+            alert('Please select a star rating');
+            return;
+        }
+        
+        if (reviewText.trim() === '') {
+            alert('Please write a review');
+            return;
+        }
+        
+        try {
+            // Show loading state
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Use our new function to submit the review
+            const success = await submitReview(tripId, tripUser, currentRating, reviewText);
+            
+            if (success) {
+                // Close the modal
+                modal.style.display = 'none';
+                
+                // Provide feedback to the user
+                alert('Thank you for your review!');
+                
+                // Reload trips to show the updated data
+                const pastTrips = await fetchPastPublicTrips();
+                displayTrips(pastTrips);
+            } else {
+                alert('Failed to submit review. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error submitting review:', error);
+            alert('Failed to submit review: ' + error.message);
+        } finally {
+            // Reset button state
+            submitBtn.textContent = 'Submit Review';
+            submitBtn.disabled = false;
+        }
+    });
+}
+// Function to display a user's reviews for a trip
+async function displayUserReviews(tripId, tripUser) {
+    try {
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
+        
+        if (!currentUser) {
+            return;
+        }
+        
+        const tripRef = ref(db, `travel-bookings/${tripUser}/public-trips/${tripId}`);
+        const tripSnapshot = await get(tripRef);
+        
+        if (!tripSnapshot.exists()) {
+            return;
+        }
+        
+        const trip = tripSnapshot.val();
+        
+        if (!trip.reviews) {
+            return;
+        }
+        
+        // Find reviews by the current user
+        const userReviews = trip.reviews.filter(review => 
+            review.userId === currentUser.uid || review.userEmail === currentUser.email
+        );
+        
+        if (userReviews.length === 0) {
+            return;
+        }
+        
+        // Display the user's reviews in a section
+        const reviewsContainer = document.createElement('div');
+        reviewsContainer.className = 'user-reviews-container';
+        reviewsContainer.innerHTML = `
+            <h3>Your Reviews</h3>
+            <div class="user-reviews-list">
+                ${userReviews.map(review => `
+                    <div class="user-review-item">
+                        <div class="review-rating">
+                            ${Array(5).fill().map((_, i) => 
+                                i < review.rating ? 
+                                '<span class="star filled">★</span>' : 
+                                '<span class="star">★</span>'
+                            ).join('')}
+                        </div>
+                        <div class="review-text">${review.text}</div>
+                        <div class="review-date">${new Date(review.timestamp).toLocaleDateString()}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        
+        // Find the trip card and append the reviews
+        const tripCards = document.querySelectorAll('.trip-card-review');
+        tripCards.forEach(card => {
+            const cardTripId = card.querySelector('.action-btn').getAttribute('data-id');
+            if (cardTripId === tripId) {
+                card.appendChild(reviewsContainer);
+            }
+        });
+    } catch (error) {
+        console.error('Error displaying user reviews:', error);
+    }
+}
+// Initialize everything when the page loads
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        console.log('DOM loaded, initializing trip display');
+        
+        // Get past trips
+        const pastTrips = await fetchPastPublicTrips();
+        console.log('Fetched past trips:', pastTrips);
+        
+        // Display them in the slider
+        displayTrips(pastTrips);
+        
+        // Setup navigation
+        setupNavigation();
+        
+        // Setup review modal
+        setupReviewModal();
+    } catch (error) {
+        console.error('Error loading trips:', error);
+        document.getElementById('trips-slider-review').innerHTML = `
+            <div class="empty-state">
+                <h3>Oops! Something went wrong.</h3>
+                <p>We couldn't load the past trips. Please try again later.</p>
+                <p class="error-details">Error: ${error.message}</p>
+            </div>
+        `;
+    }
+}); </script>
+</body>
+</html>
