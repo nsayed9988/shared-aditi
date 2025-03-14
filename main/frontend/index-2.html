@@ -11,6 +11,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.css') }}">
     <title>Travi</title>
    
     
@@ -1480,12 +1481,12 @@ function openModal(tripId) {
                   </li>
                   <li  class="mega-li-small"><a href="#featured"><strong>Iternaries</strong></a>         
                   </li>
-                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html"><strong> My Iternaries</strong></a>         
+                  <li  class="mega-li-small"><a href="tour-gridmain.html"><strong> My Iternaries</strong></a>         
                   </li>
                  
                  
-                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login"><strong>Profile</strong></a></li>
-                  <li><a href="../travi dash/index.html"><strong>Dashboard</strong></a></li>
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi-dash/my-profile.html" class="check-login"><strong>Profile</strong></a></li>
+                  <li><a href="../travi-dash/index.html"><strong>Dashboard</strong></a></li>
                   <li class="mega-li-small"><a href="gallery.html" class="check-login"><strong>Gallery</strong></a></li>
     
                   <li class="mega-li-small"><a href="blog-grid.html" class="check-login"><strong>Blog</strong></a></li>
@@ -1505,7 +1506,7 @@ function openModal(tripId) {
           </div>
           <div class="header-right">
             
-           <a href="../travi dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
+           <a href="../travi-dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
               Login
             </button></a> 
             <button class="chat-button" onclick="openChat()">Live Chat</button>
@@ -2228,6 +2229,7 @@ background-color: #333;
             </div>
         </div>
     
+        <script src="{{ url_for('static', filename='review.js') }}"></script>
 
 <script src="review.js" type="module"></script>  
 
@@ -2392,7 +2394,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (addButton) {
             addButton.addEventListener('click', (event) => {
                 handleProtectedAction(() => {
-                  window.location.href = "tour-grid-3 copy.html";
+                  window.location.href = "tour-gridmain.html";
                 });
             });
         }
@@ -2416,7 +2418,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (publicButton) {
             publicButton.addEventListener('click', (event) => {
                 handleProtectedAction(() => {
-                    window.location.href = '../travi dash/public.html';
+                    window.location.href = '../travi-dash/public.html';
                 });
             });
         }
@@ -2424,7 +2426,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (privateButton) {
             privateButton.addEventListener('click', (event) => {
                 handleProtectedAction(() => {
-                    window.location.href = '../travi dash/private.html';
+                    window.location.href = '../travi-dash/private.html';
                 });
             });
         }

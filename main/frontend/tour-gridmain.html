@@ -154,7 +154,7 @@
         .container-2025 {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
           
         }
 
@@ -172,12 +172,7 @@
             color: #4834d4;
         }
 
-       
-        h1-2025 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
+      
         .create-trip-options-2025 {
             display: flex;
             gap: 1rem;
@@ -261,299 +256,488 @@
         }    
    </style>
 
-   <style>
-    .slide-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-        background: rgb(243, 241, 241);
-        padding: 0 20px;
-        margin-top: 10px;
-        border-radius: 5px;
-        width:auto;
-        
-    }
-    .show {
-        max-height: 200px; /* Adjust height as needed */
-        padding: 20px;
-    }
-</style>
 
 <style>
-  /* Modal styles */
-  /*public */
-  .travel_modal_pub {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-  }
-
-  .travel_modal_pub_content {
-      background-color: #fff;
-      margin: 5% auto;
-      padding: 20px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 800px;
-      position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
-  }
-
-  .travel_close_pub_btn {
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #6c757d;
-  }
-
-  /* Form styles */
-  .travel_stepper_pub_container {
-      max-width: 800px;
-      margin: 30px auto;
-      font-family: Arial, sans-serif;
-  }
-
-  .travel_step_pub_panel {
-      display: none;
-      padding: 20px;
-      background-color: #eeeaea;
-      border-radius: 8px;
-      margin-bottom: 20px;
-  }
-
-  .travel_step_pub_panel.active {
-      display: block;
-  }
-
-  .travel_progress_pub_bar {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 30px;
-      position: relative;
-  }
-
-  .travel_progress_pub_step {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-  }
-
-  .travel_progress_pub_step.active {
-      background-color: #15646c;
-      color: white;
-  }
-
-  .travel_progress_pub_line {
-      position: absolute;
-      top: 15px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background-color: #ddd;
-      z-index: 1;
-  }
-
-  .travel_form_pub_group {
-      margin-bottom: 20px;
-  }
-
-  label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #000!important;
-  }
-
-  input[type="text"],
-  input[type="date"],
-  input[type="number"],
-  select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-sizing: border-box;
-  }
-
-  .travel_gender_pub_group {
-      display: flex;
-      gap: 20px;
-  }
-
-  .travel_gender_pub_option {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-  }
-
-  .travel_button_pub_group {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-  }
-
-  button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-  }
-
-  .travel_prev_pub_btn {
-      background-color: #6c757d;
-      color: white;
-  }
-
-  .travel_next_pub_btn {
-      background-color: #15646c;
-      color: white;
-  }
-
-  .travel_submit_pub_btn {
-      background-color: #15646c;
-      color: white;
-  }
-
-  .travel_error_pub_message {
-      color: red;
-      font-size: 14px;
-      margin-top: 5px;
-      display: none;
-  }
+/* Modal styles */
 .travel_modal_pub {
-display: none;
-position: fixed;
-z-index: 1000;
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(25, 42, 86, 0.7);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
 }
 
 .travel_modal_pub_content {
-background-color: white;
-margin: 5% auto;
-padding: 20px;
-border-radius: 10px;
-max-width: 800px;
+  background-color: #f8f9fa;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: modalFadeIn 0.4s ease;
 }
 
-.travel_modal_pub_close {
-float: right;
-font-size: 28px;
-cursor: pointer;
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.pub-essen-essentials-category input { width:auto!important;}
-.pub-essen-essentials-item {width:25%; float: left;}
-.pub-essen-essentials-category {overflow: hidden;}
-.pub-essen-essentials-item {margin:0px!important}
-:root {
-      --pub-essen-primary-color: #2c3e50;
-      --pub-essen-secondary-color: #3498db;
-      --pub-essen-background-color: #f4f6f7;
-      --pub-essen-text-color: #333;
+.travel_modal_pub_close {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  font-size: 32px;
+  cursor: pointer;
+  color: #495057;
+  transition: color 0.2s ease;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(240, 240, 240, 0.5);
+  z-index: 10;
+}
+
+.travel_modal_pub_close:hover {
+  color: #15646c;
+  background-color: rgba(21, 100, 108, 0.1);
+}
+/* Close button - bigger and more to the right */
+.travel_close_pub_btn {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  font-size: 32px;
+  cursor: pointer;
+  color: #495057;
+  transition: color 0.2s ease;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(240, 240, 240, 0.5);
+  z-index: 10;
+}
+
+.travel_close_pub_btn:hover {
+  color: #15646c;
+  background-color: rgba(21, 100, 108, 0.1);
+}
+/* Form styles */
+.travel_stepper_pub_container {
+  max-width: 800px;
+  margin: 30px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.travel_step_pub_panel {
+  display: none;
+  padding: 30px;
+  background-color: #f5f7fa;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.travel_step_pub_panel.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
- 
-  .pub-essen-container {
-      background-color: rgba(216, 221, 226, 0.86);
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      padding: 20px;
-width: auto;
+  to {
+    opacity: 1;
   }
-  .pub-essen-toggle-btn {
-      width:auto;
-      padding: 10px;
-      background-color: var(--pub-essen-primary-color);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-bottom: 15px;
-      transition: background-color 0.3s ease;
-  }
-  .pub-essen-toggle-btn:hover {
-      background-color: #34495e;
-  }
-  .pub-essen-essentials-list {
-      display: none;
-      max-height: 1400px;
-      overflow-y: auto;
-  }
-  textarea {min-height: 100px!important;}
-  input[type="text"], input[type="date"], input[type="number"], select, textarea {background-color: white!important;border: 1px solid #ddd!important;}
-  .pub-essen-essentials-category {
-      margin-bottom: 15px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 10px;
-  }
-  .pub-essen-essentials-category h3 {
-      margin-bottom: 10px;
-      color: var(--pub-essen-secondary-color);
-  }
+}
+
+.travel_progress_pub_bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  position: relative;
+  padding: 0 15px;
+}
+
+.travel_progress_pub_step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  color: #495057;
+  border: 2px solid transparent;
+}
+
+.travel_progress_pub_step.active {
+  background-color: #15646c;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(21, 100, 108, 0.3);
+}
+
+.travel_progress_pub_line {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  right: 50px;
+  height: 3px;
+  background-color: #e9ecef;
+  z-index: 1;
+}
+
+.travel_form_pub_group {
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #343a40 !important;
+  letter-spacing: 0.3px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 16px;
+  background-color: #fff;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: #15646c;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(21, 100, 108, 0.2);
+}
+
+.travel_gender_pub_group {
+  display: flex;
+  gap: 30px;
+  margin-top: 10px;
+}
+
+.travel_gender_pub_option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.travel_gender_pub_option input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #15646c;
+}
+
+.travel_button_pub_group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.travel_prev_pub_btn {
+  background-color: #6c757d;
+  color: white;
+  box-shadow: 0 3px 6px rgba(108, 117, 125, 0.2);
+}
+
+.travel_prev_pub_btn:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(108, 117, 125, 0.3);
+}
+
+.travel_next_pub_btn,
+.travel_submit_pub_btn {
+  background-color: #15646c;
+  color: white;
+  box-shadow: 0 3px 6px rgba(21, 100, 108, 0.2);
+}
+
+.travel_next_pub_btn:hover,
+.travel_submit_pub_btn:hover {
+  background-color: #124f56;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(21, 100, 108, 0.3);
+}
+
+.travel_error_pub_message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 8px;
+  display: none;
+  padding: 5px 0 5px 5px;
+  border-left: 3px solid #dc3545;
+}
+
+/* Selected items panel */
+#travel_selected_pub_items {
+  background-color: #e8f4f5;
+  padding: 15px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #15646c;
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#travel_selected_pub_items strong {
+  color: #15646c;
+}
+/* Base Container */
+.pub-essen-container {
+  background-color: rgba(255, 250, 240, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  padding: 25px;
+  width: auto;
+  margin: 15px auto;
+  border: 3px solid #FF9F43;
+}
+
+/* Toggle Button */
+.pub-essen-toggle-btn {
+  width: auto;
+  padding: 12px 20px;
+  background-color: #FF6B6B;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  font-weight: 700;
+  box-shadow: 0 4px 8px rgba(255, 107, 107, 0.4);
+}
+
+.pub-essen-toggle-btn:hover {
+  background-color: #FF4757;
+  transform: translateY(-3px) scale(1.03);
+}
+
+.pub-essen-toggle-btn::before {
+  content: "✈️ ";
+}
+
+/* Essentials List */
+.pub-essen-essentials-list {
+  display: none;
+  max-height: 1400px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Category Styling */
+.pub-essen-essentials-category {
+  margin-bottom: 30px;
+  border-bottom: 2px dashed #54A0FF;
+  padding-bottom: 15px;
+  overflow: hidden;
+}
+
+.pub-essen-essentials-category h3 {
+  margin-bottom: 15px;
+  color: #5758BB;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+/* Add emoji to category headers with ::before */
+.pub-essen-essentials-category h3::before {
+  margin-right: 8px;
+}
+.pub-essen-essentials-category:nth-child(1) h3::before {
+  content: "📄 ";
+}
+.pub-essen-essentials-category:nth-child(2) h3::before {
+  content: "👕 ";
+}
+.pub-essen-essentials-category:nth-child(3) h3::before {
+  content: "📱 ";
+}
+
+/* Items Styling */
+.pub-essen-essentials-item {
+  width: 25%;
+  float: left;
+  margin: 0px !important;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  transition: transform 0.2s ease;
+}
+
+.pub-essen-essentials-item:hover {
+  transform: translateX(5px);
+  color: #FF6B6B;
+}
+
+.pub-essen-essentials-item input {
+  width: auto !important;
+  margin-right: 10px;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.pub-essen-essentials-item label {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Save Button */
+.pub-essen-save-btn {
+  width: auto;
+  padding: 14px 28px;
+  background-color: #2ED573;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  font-weight: 700;
+  box-shadow: 0 4px 8px rgba(46, 213, 115, 0.4);
+}
+
+.pub-essen-save-btn:hover {
+  background-color: #26BE60;
+  transform: translateY(-3px) scale(1.03);
+}
+
+.pub-essen-save-btn::before {
+  content: "🎒 ";
+}
+
+/* Saved Items Display */
+#pub-essen-saved-items {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #F9F9FF;
+  border-radius: 10px;
+  border-left: 6px solid #5758BB;
+  box-shadow: 0 4px 12px rgba(87, 88, 187, 0.2);
+}
+
+/* Form Element Styling */
+textarea {
+  min-height: 100px !important;
+  resize: vertical;
+  border-radius: 8px !important;
+}
+
+input[type="text"], 
+input[type="date"], 
+input[type="number"], 
+select, 
+textarea {
+  background-color: white !important;
+  border: 2px solid #A3BFFA !important;
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(163, 191, 250, 0.2) !important;
+}
+
+input[type="text"]:focus, 
+input[type="date"]:focus, 
+input[type="number"]:focus, 
+select:focus, 
+textarea:focus {
+  border-color: #5758BB !important;
+  outline: none !important;
+  box-shadow: 0 0 8px rgba(87, 88, 187, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  accent-color: #FF6B6B;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .pub-essen-essentials-item {
-      display: flex;
-      align-items: center;
-      margin: 8px 0;
+    width: 50%;
   }
-  .pub-essen-essentials-item input {
-      margin-right: 10px;
+}
+
+@media (max-width: 480px) {
+  .pub-essen-essentials-item {
+    width: 100%;
   }
-  .pub-essen-save-btn {
-      width: auto;
-      padding: 10px;
-      background-color: var(--pub-essen-secondary-color);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 15px;
-      transition: background-color 0.3s ease;
-  }
-  .pub-essen-save-btn:hover {
-      background-color: #2980b9;
-  }
-  #pub-essen-saved-items {
-      margin-top: 15px;
-      padding: 10px;
-      background-color: #f1f8ff;
-      border-radius: 5px;
-  }
+}
 </style>
 
+
+
+
    <style>
-    /*private form*/
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-    }
 
     .trip-planner-container {
         width: 100%;
         max-width: 900px;
-        background: #eeeaea;
-        border-radius: 10px;
+        background: hsl(0, 0%, 100%);
+        border-radius: 20px;
         padding: 20px;
         color: #000;
-  height: auto;
+        height: auto;
+        box-shadow: #495057;
+
 
 
     }
@@ -564,21 +748,30 @@ width: auto;
         margin-bottom: 30px;
     }
 
-    .trip-progress-step {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: #9f9a9a;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        color: white;
-    }
+    .trip-progress-step  {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  color: #495057;
+  border: 2px solid transparent;
+}
+
 
     .trip-progress-step.active {
-        background: #15646c;
-    }
+      background-color: #15646c;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(21, 100, 108, 0.3);
+}
 
     .trip-progress-step::after {
         content: '';
@@ -687,25 +880,44 @@ width: auto;
         max-width: 800px;
         z-index: 99999;
     }
+
+    
     .priv-modal-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        z-index: 999;
-    }
+      display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(25, 42, 86, 0.7);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
     .priv-close-button {
-        background: rgb(104, 100, 100);
-        color: white;
-        padding: 5px 10px;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-        float: right;
-    }
+      position: absolute;
+  right: 10px;
+  top: 15px;
+  font-size: 32px;
+  cursor: pointer;
+  color: #495057;
+  transition: color 0.2s ease;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(240, 240, 240, 0.5);
+  z-index: 10;
+}
+.priv-close-button:hover{
+color: #15646c;
+  background-color: rgba(21, 100, 108, 0.1);
+}
+
+
+
     trip-essentials-area {
   background: white;
   padding: 20px;
@@ -951,34 +1163,20 @@ width: auto;
 
             <div class="container-2025">
               
-                 <input type="button" value="Create a new Trip" onclick="toggleSlide()" class="toggle-button" style="width:50%">
-                 <input type="button" onclick="launchApp()" value="Build a trip with AI"  style="width:49%; margin-left:1%; float:right;" href="../tourism-recommender 3/templates/index.html">
-                 <script>
-                    function launchApp() {
-                        fetch('/launch_app', {
-                            method: 'POST'
-                        })
-                        .then(response => response.text())
-                        .then(data => {
-                            console.log('App launched:', data);
-                            alert('Tourism recommender app launched!');
-                            window.location.href="../tourism-recommender 3/templates/index.html";
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Error launching app');
-                        });
-                    }
-                </script>
+               
+               
                     <div id="slideDiv" class="slide-content" style="background-color:white">
                     <h5>Choose Trip Type:</h5>
                     <div class="modal-buttons">
-                          <button class="modal-button public-button" onclick="openTravelModal()" style="width:50%">
+                      <div style="display: flex; justify-content: space-between; gap: 10px;">
+                        <button class="modal-button public-button" onclick="openTravelModal()" style="width: 48%;">
                             Public Trip
-                        </button><br><div style="padding: 10px;"></div>
-                        <button class="modal-button private-button" onclick="openModal()" style="width:50%;  float:left;">
+                        </button>
+                        <button class="modal-button private-button" onclick="openModal()" style="width: 48%;">
                             Private Trip
                         </button>
+                    </div>
+                    
                     </div>
                   </div>
 
@@ -1045,7 +1243,7 @@ width: auto;
                         </div>
                         
                           <div id="day-activities-container" class="form-group"></div>
-
+                          <button type="button" class="ai-assist-btn" id="ai-assist-btn" >AI Assist</button>
                           
                             <div class="travel_button_pub_group">
                                 <button type="button" class="travel_prev_pub_btn" onclick="travelPrevStepPub(2)">Previous</button>
@@ -1097,10 +1295,26 @@ width: auto;
                                 <button type="button" class="travel_submit_pub_btn" onclick="publb">Submit</button>
                             </div>
                         </div>
+
+                       
+
+
+                               
+
+
+
+                        
                     </form>
+
+                    
                     </div>
                   </div>
                 </div>
+
+
+
+
+
                 <script type="module">
                 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
@@ -1258,7 +1472,7 @@ function collectTripFormData() {
         duration: document.getElementById('trip-duration-display').value,
         activities: document.getElementById('trip-activities-input').value,
         essentials: document.getElementById('trip-essentials-text').value,
-        budget: document.getElementById('trip-budget-input').value,
+        budget: document.getElementById('trip-budget-priv').value,
         currency: document.getElementById('trip-currency-select').value
     };
 }
@@ -1287,7 +1501,7 @@ function validateTripForm() {
             }
             break;
         case 'trip-form-step-4':
-            if (!document.getElementById('trip-budget-input').value || !document.getElementById('trip-currency-select').value) {
+            if (!document.getElementById('trip-budget-priv').value || !document.getElementById('trip-currency-select').value) {
                 alert('Please complete step 4: Budget');
                 return false;
             }
@@ -1642,6 +1856,7 @@ document.getElementById("pub-essen-save-btn").addEventListener("click", function
       female: document.getElementById('travel_gender_female_pub_20250202').checked,
       other: document.getElementById('travel_gender_other_pub_20250202').checked
       },
+      budget:document.getElementById("trip-budget-input").value,
       applyBy: document.getElementById('travel_apply_date_pub_20250202').value,
       essentials: document.getElementById('pub-essen-saved-items').textContent
     };
@@ -1785,7 +2000,8 @@ function collectTravelFormData() {
               <div class="trip-form-group">
                   <label class="trip-form-label">Trip Budget</label>
                   <div class="trip-date-container">
-                      <input type="number" id="trip-budget-priv" class="trip-form-input" required>
+                    <input type="number" id="trip-budget-priv" class="trip-form-input">
+                     
                       <select id="trip-currency-select" style="width:50%; border-radius:5px; border:1px solid #ddd;">
                           <option value="USD">USD</option>
                           <option value="EUR">EUR</option>
@@ -1804,7 +2020,1650 @@ function collectTravelFormData() {
     </div>
 
 </div>
+
+
+
+<div id="ai-assist-popup" class="ai-assist-popup">
+  <div class="ai-assist-popup-content">
+    <div class="ai-assist-popup-header" id="ai-assist-popup-header">
+      <h3>Trip Genie</h3>
+      <span class="ai-assist-popup-close">&times;</span>
+    </div>
+    <div class="ai-assist-loading" id="ai-assist-loading">
+      <!--<div class="ai-assist-spinner"></div>
+      <p>Analyzing your travel preferences...</p>
+    </div>-->
+    <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-4 sm:p-6 mb-6">
+      <div class="mb-6">
+         <label class="block text-sm font-medium mb-2 text-gray-700">Select Country</label>
+         <select id="country" class="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow">
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="Albania">Albania</option>
+          <option value="Algeria">Algeria</option>
+
+
+          
+          </select>
+      
+      </div>
+
+      <div class="mb-6" >
+          <label class="block text-sm font-medium mb-3">Select Activities by Category</label>
+          
+          <div class="space-y-6" >
+              <!-- Culture & History -->
+              <div>
+              <div class="category-header">  🏛️  Culture and History</div>
+                  <div class="flex flex-wrap gap-2" data-category="culture-history">
+                      <div class="activity-chip" data-activity="culture">Culture</div>
+                      <div class="activity-chip" data-activity="history">History</div>
+                      <div class="activity-chip" data-activity="architecture">Architecture</div>
+                      <div class="activity-chip" data-activity="religion">Religion</div>
+                  </div>
+              </div>
+
+              <!-- Nature & Adventure -->
+              <div>
+                  <div class="category-header">🏞️ Nature and Adventure</div>
+                  <div class="flex flex-wrap gap-2" data-category="nature-adventure">
+                      <div class="activity-chip" data-activity="nature">Nature</div>
+                      <div class="activity-chip" data-activity="wildlife">Wildlife</div>
+                      <div class="activity-chip" data-activity="hiking">Hiking</div>
+                      <div class="activity-chip" data-activity="beach">Beach</div>
+                      <div class="activity-chip" data-activity="mountain">Mountain</div>
+                  </div>
+              </div>
+
+              <!-- Arts & Entertainment -->
+              <div>
+                  <div class="category-header">🎭 Arts and Entertainment</div>
+                  <div class="flex flex-wrap gap-2" data-category="arts">
+                      <div class="activity-chip" data-activity="art">Art</div>
+                  </div>
+              </div>
+
+              <!-- Leisure & Relaxation -->
+              <div>
+                  <div class="category-header">🛍️ Leisure and Relaxation</div>
+                  <div class="flex flex-wrap gap-2" data-category="leisure">
+                      <div class="activity-chip" data-activity="relaxation">Relaxation</div>
+                      <div class="activity-chip" data-activity="shopping">Shopping</div>
+                      <div class="activity-chip" data-activity="dining">Dining</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+<br><br>
+
+      <button onclick="getRecommendations()" class="getRecommendations">
+          Get Recommendations
+      </button>
+  </div>
+  <br><br>
+  <div id="results-container" class="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+      <p class="text-gray-500 text-center">Select a country and activities to get recommendations</p>
+  </div>
+    <div class="ai-assist-results" id="ai-assist-results">
+      
+    </div>
+  </div>
 </div>
+
+<style>
+/* AI Assist Popup Styles */
+.ai-assist-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  max-width: 90%;
+  max-height: 80vh;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 1100;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ai-assist-popup.active {
+  display: block;
+  opacity: 1;
+}
+
+.ai-assist-popup-content {
+  padding: 0 20px 20px 20px;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.ai-assist-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: rgba(0, 128, 128, 0.05);
+  cursor: move;
+  border-bottom: 2px solid rgba(0, 128, 128, 0.1);
+  margin: 0 -20px 15px -20px;
+  user-select: none;
+}
+
+.ai-assist-popup-header h3 {
+  color: #008080;
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.ai-assist-popup-close {
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.ai-assist-popup-close:hover {
+  color: #008080;
+}
+
+.ai-assist-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.ai-assist-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 128, 128, 0.1);
+  border-top: 5px solid #008080;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.ai-assist-results {
+  display: none;
+}
+
+.ai-suggestions-container {
+  margin-bottom: 20px;
+}
+
+.ai-suggestions-container h4 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.ai-suggested-activities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.ai-activity-chip {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: #f3f4f6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+  font-size: 0.875rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.ai-activity-chip:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.ai-activity-chip.selected {
+  background: #008080;
+  color: white;
+  border-color: #008080;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.ai-recommended-itinerary {
+  margin-top: 15px;
+}
+
+.ai-itinerary-day {
+  background: rgba(0, 128, 128, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 4px solid #008080;
+}
+
+.ai-itinerary-day h5 {
+  color: #008080;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.ai-itinerary-day ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.ai-itinerary-day li {
+  margin-bottom: 5px;
+}
+
+.ai-apply-suggestions-btn {
+  background: #008080;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+.ai-apply-suggestions-btn:hover {
+  background: #006666;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 128, 128, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ai-assist-popup {
+    left: 50%;
+    width: 90%;
+    max-height: 85vh;
+  }
+}
+</style>
+<style>
+ 
+
+  .recommendation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .place-image-container {
+    position: relative;
+  }
+  
+  .photo-credit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 2px 5px;
+    border-top-left-radius: 4px;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+         
+          /* Enhanced Category Headers */
+  .category-header {
+      font-weight: 700;
+      margin-top: 20px;
+      margin-bottom: 16px;
+      color: #2d3748;
+      font-size: 1.1rem;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+  }
+  
+  .category-header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #008080;
+      transition: width 0.3s ease;
+  }
+  
+  .category-header:hover::after {
+      width: 100%;
+  }
+  
+  /* Enhanced Activity Chips */
+  .activity-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 18px;
+      margin: 6px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid #e2e8f0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #4a5568;
+      box-shadow: 
+          0 2px 4px rgba(0, 0, 0, 0.05),
+          0 1px 2px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+  }
+  
+  .activity-chip::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+  }
+  
+  .activity-chip:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+          0 4px 6px rgba(0, 0, 0, 0.08),
+          0 2px 4px rgba(0, 0, 0, 0.12);
+      border-color: #008080;
+      color: #008080;
+  }
+  
+  .activity-chip:hover::before {
+      transform: translateX(100%);
+  }
+  
+  .activity-chip.selected {
+      background: linear-gradient(145deg, #009696, #008080);
+      color: white;
+      border-color: transparent;
+      box-shadow: 
+          0 4px 6px rgba(0, 128, 128, 0.2),
+          0 2px 4px rgba(0, 128, 128, 0.1);
+      transform: translateY(-1px);
+  }
+  
+  .activity-chip.selected:hover {
+      background: linear-gradient(145deg, #008080, #006666);
+      transform: translateY(-2px);
+  }
+  
+  /* Category Container Enhancement */
+  .space-y-6 {
+      /*background: linear-gradient(to bottom, #ffffff, #f8fafc);*/
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 
+          0 4px 6px rgba(0, 0, 0, 0.02),
+          0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Activity Category Groups */
+  [data-category] {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      /*background: rgba(255, 255, 255, 0.6);*/
+      backdrop-filter: blur(8px);
+  }
+  
+  [data-category]:hover {
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Animation for Selection */
+  @keyframes selectPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+  }
+  
+  .activity-chip.selected {
+      animation: selectPop 0.3s ease-out;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 640px) {
+      .activity-chip {
+          padding: 8px 14px;
+          font-size: 0.875rem;
+      }
+  
+      .category-header {
+          font-size: 1rem;
+          margin-top: 16px;
+          margin-bottom: 12px;
+      }
+  
+      [data-category] {
+          padding: 8px;
+      }
+  }
+          .addSuggestedPlaces,
+          .getRecommendations {
+              background: #008080;
+              color: white;
+              border-color: #008080;
+              box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+              border-radius: 20px;
+              padding: 12px 24px;
+              transition: all 0.3s ease;
+          }
+      
+          .addSuggestedPlaces:hover,
+          .getRecommendations:hover {
+              transform: translateY(-2px);
+              background: #006666;
+          }
+      
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+      
+          .activity-chip {
+              display: inline-block;
+              padding: 8px 16px;
+              margin: 4px;
+              border-radius: 20px;
+              background: #f3f4f6;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              border: 1px solid #e5e7eb;
+              font-size: 0.875rem;
+              box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+          }
+      
+          .activity-chip:hover {
+              background: #e5e7eb;
+              transform: translateY(-1px);
+          }
+      
+          .activity-chip.selected {
+              background: #008080;
+              color: white;
+              border-color: #008080;
+              box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+          }
+      
+          .category-header {
+              font-weight: 700;
+              margin-top: 16px;
+              margin-bottom: 16px;
+              color: #4b5563;
+              font-size: 1rem;
+              border-bottom: 2px solid #e5e7eb;
+              padding-bottom: 4px;
+          }
+      
+          /* Enhanced Card Styles */
+          .recommendation-card {
+              position: relative;
+              background: white;
+              border-radius: 16px;
+              padding: 1.5rem;
+              margin-bottom: 1.5rem;
+              border: 1px solid #e5e7eb;
+              transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+          }
+      
+          .recommendation-card:hover {
+              transform: translateY(-4px);
+              box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+              border-color: #008080;
+          }
+      
+          .recommendation-card h3 {
+              color: #1f2937;
+              font-size: 1.25rem;
+              font-weight: 600;
+              margin-bottom: 0.75rem;
+              transition: color 0.3s ease;
+          }
+      
+          .recommendation-card:hover h3 {
+              color: #008080;
+          }
+      
+          .recommendation-card p {
+              color: #4b5563;
+              line-height: 1.6;
+              margin-bottom: 1rem;
+          }
+      
+          .activity-tag {
+              display: inline-block;
+              background: #e8f5f5;
+              color: #008080;
+              padding: 0.25rem 0.75rem;
+              border-radius: 9999px;
+              font-size: 0.875rem;
+              margin: 0.25rem;
+              transition: all 0.3s ease;
+          }
+      
+          .activity-tag:hover {
+              background: #008080;
+              color: white;
+          }
+      
+          .rating-container {
+              display: flex;
+              align-items: center;
+              margin-top: 1rem;
+              padding-top: 0.75rem;
+              border-top: 1px solid #e5e7eb;
+          }
+      
+          .rating-stars {
+              color: #008080;
+              margin-right: 0.5rem;
+          }
+      
+          .rating-count {
+              color: #6b7280;
+              font-size: 0.875rem;
+          }
+      
+          
+      
+          @keyframes cardAppear {
+              from {
+                  opacity: 0;
+                  transform: translateY(20px);
+              }
+              to {
+                  opacity: 1;
+                  transform: translateY(0);
+              }
+          }
+      
+          .recommendation-card {
+      position: relative;
+      background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 1.75rem;
+      border: 1px solid rgba(0, 128, 128, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 
+          0 4px 6px rgba(0, 128, 128, 0.05),
+          0 10px 15px rgba(0, 0, 0, 0.03);
+      backdrop-filter: blur(8px);
+  }
+  
+  .recommendation-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 
+          0 12px 24px rgba(0, 128, 128, 0.12),
+          0 20px 30px rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 128, 128, 0.3);
+  }
+  
+  /* Enhanced Header Styles */
+  .recommendation-card {
+      position: relative;
+      background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 1.75rem;
+      border: 1px solid rgba(0, 128, 128, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 
+          0 4px 6px rgba(0, 128, 128, 0.05),
+          0 10px 15px rgba(0, 0, 0, 0.03);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+  }
+  
+  /* Add decorative background pattern */
+  .recommendation-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+          radial-gradient(circle at 0% 0%, rgba(0, 128, 128, 0.03) 0%, transparent 50%),
+          radial-gradient(circle at 100% 100%, rgba(0, 128, 128, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+  }
+  
+  .recommendation-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 
+          0 12px 24px rgba(0, 128, 128, 0.12),
+          0 20px 30px rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 128, 128, 0.3);
+  }
+  
+  /* Add shine effect on hover */
+  .recommendation-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+          45deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.1) 45%,
+          rgba(255, 255, 255, 0.2) 50%,
+          rgba(255, 255, 255, 0.1) 55%,
+          transparent 100%
+      );
+      transform: translate(-100%, -100%) rotate(45deg);
+      transition: transform 0.6s;
+      pointer-events: none;
+      z-index: 1;
+  }
+  
+  .recommendation-card:hover::after {
+      transform: translate(100%, 100%) rotate(45deg);
+  }
+  
+  /* Enhanced Header Styles */
+  .recommendation-card h3 {
+      color: #1f2937;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(0, 128, 128, 0.1);
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 2;
+  }
+  
+  .recommendation-card:hover h3 {
+      color: #008080;
+      border-bottom-color: rgba(0, 128, 128, 0.3);
+      text-shadow: 2px 2px 4px rgba(0, 128, 128, 0.1);
+  }
+  
+  /* Enhanced Description Text */
+  .recommendation-card p {
+      color: #4b5563;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      letter-spacing: 0.015em;
+      position: relative;
+      z-index: 2;
+      transition: color 0.3s ease;
+  }
+  
+  .recommendation-card:hover p {
+      color: #374151;
+  }
+  
+  /* Refined Activity Tags */
+  .activity-tag {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(0, 128, 128, 0.08);
+      color: #008080;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      margin: 0.35rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 128, 128, 0.1);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 2;
+      
+  }
+  
+  .activity-tag:hover {
+      background: #008080;
+      color: white;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 128, 128, 0.2);
+  }
+  
+  /* Add pulse animation for tags */
+  @keyframes tagPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+  }
+  
+  .activity-tag:active {
+      animation: tagPulse 0.3s ease-in-out;
+  }
+  
+  /* Enhanced Rating Section */
+  .rating-container {
+      display: flex;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid rgba(0, 128, 128, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+  }
+  
+  .recommendation-card:hover .rating-container {
+      border-top-color: rgba(0, 128, 128, 0.3);
+      background: linear-gradient(to right, rgba(0, 128, 128, 0.03), transparent);
+      border-radius: 0 0 20px 20px;
+  }
+  
+  .rating-stars {
+      color: #008080;
+      margin-right: 0.75rem;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      text-shadow: 0 2px 4px rgba(0, 128, 128, 0.1);
+      transition: all 0.3s ease;
+  }
+  
+  .recommendation-card:hover .rating-stars {
+      transform: scale(1.05);
+      letter-spacing: 0.15em;
+  }
+  
+  .rating-count {
+      color: #6b7280;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+  }
+  
+  .recommendation-card:hover .rating-count {
+      color: #4b5563;
+  }
+  
+ 
+  
+  
+  /* Improved Card Animation */
+  @keyframes cardAppear {
+      0% {
+          opacity: 0;
+          transform: translateY(30px) scale(0.98) rotate(-1deg);
+      }
+      100% {
+          opacity: 1;
+          transform: translateY(0) scale(1) rotate(0);
+      }
+  }
+  
+  .recommendation-card {
+      animation: cardAppear 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  
+  /* Loading State */
+  .recommendation-card.loading {
+      position: relative;
+      overflow: hidden;
+  }
+  
+  .recommendation-card.loading::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.2) 50%,
+          transparent 100%
+      );
+      animation: loadingShimmer 1.5s infinite;
+  }
+  
+  @keyframes loadingShimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+  }
+  
+  /* Enhanced Responsive Design */
+  @media (max-width: 640px) {
+      .recommendation-card {
+          padding: 1.5rem;
+          margin-bottom: 1.25rem;
+      }
+  
+      .recommendation-card h3 {
+          font-size: 1.25rem;
+      }
+  
+      
+  
+      .activity-tag {
+          padding: 0.4rem 0.8rem;
+          font-size: 0.85rem;
+      }
+  
+     
+      
+  }
+  
+  /* Print styles */
+  @media print {
+      .recommendation-card {
+          break-inside: avoid;
+          box-shadow: none;
+          border: 1px solid #ccc;
+      }
+  
+     
+  }
+  
+  
+</style>
+          <!--for recommender-->
+          <script>
+            // Activity categories mapping
+            const categoryMapping = {
+                'culture-history': ['culture', 'history', 'architecture', 'religion'],
+                'nature-adventure': ['nature', 'wildlife', 'hiking', 'beach', 'mountain'],
+                'arts': ['art'],
+                'leisure': ['relaxation', 'shopping', 'dining']
+            };
+    
+            // Initialize activity selection
+            document.querySelectorAll('.activity-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    chip.classList.toggle('selected');
+                });
+            });
+    
+            // Calculate category-based match score
+            function calculateCategoryScores(placeActivities, selectedActivities) {
+                const placeActivitySet = new Set(placeActivities);
+                const categoryScores = {};
+                let selectedCategories = 0;
+                
+                for (const [category, activities] of Object.entries(categoryMapping)) {
+                    const selectedInCategory = selectedActivities.filter(activity => 
+                        activities.includes(activity)
+                    );
+                    
+                    if (selectedInCategory.length > 0) {
+                        selectedCategories++;
+                        const matchingActivities = selectedInCategory.filter(activity => 
+                            placeActivitySet.has(activity)
+                        );
+                        categoryScores[category] = matchingActivities.length / selectedInCategory.length;
+                    }
+                }
+    
+                // Calculate overall score as average of category scores
+                const overallScore = selectedCategories > 0 
+                    ? Object.values(categoryScores).reduce((a, b) => a + b, 0) / selectedCategories
+                    : 0;
+    
+                return {
+                    categoryScores,
+                    overallScore
+                };
+            }
+    
+            function getScoreColor(score) {
+                if (score >= 0.8) return '#4CAF50';
+                if (score >= 0.6) return '#8BC34A';
+                if (score >= 0.4) return '#FFC107';
+                if (score >= 0.2) return '#FF9800';
+                return '#F44336';
+            }
+    
+            async function getRecommendations() {
+                const country = document.getElementById('country').value;
+                const selectedActivities = Array.from(document.querySelectorAll('.activity-chip.selected'))
+                    .map(chip => chip.dataset.activity);
+    
+                if (selectedActivities.length === 0) {
+                    alert('Please select at least one activity');
+                    return;
+                }
+    
+                try {
+                    const response = await fetch('http://127.0.0.1:5000/api/recommendations', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            country,
+                            activities: selectedActivities
+                        })
+                    });
+    
+                    const data = await response.json();
+                    
+                    if (data.recommendations) {
+                        const scoredRecommendations = data.recommendations
+                            .map(place => {
+                                const scores = calculateCategoryScores(
+                                    place.activities,
+                                    selectedActivities
+                                );
+                                return {
+                                    ...place,
+                                    ...scores
+                                };
+                            })
+                            .sort((a, b) => b.overallScore - a.overallScore);
+                        displayRecommendations(scoredRecommendations);
+                    } else {
+                        throw new Error('No recommendations found');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    document.getElementById('results-container').innerHTML = `
+                        <p class="text-red-500">Error getting recommendations. Please try again.</p>
+                    `;
+                }
+            }
+    
+            function displayRecommendations(recommendations) {
+                const container = document.getElementById('results-container');
+    
+                if (recommendations.length === 0) {
+                    container.innerHTML = `
+                        <p class="text-gray-500">No recommendations found for the selected criteria</p>
+                    `;
+                    return;
+                }
+    
+                /*container.innerHTML = `
+                    <h2 class="text-xl font-bold mb-4">Recommended Places</h2>
+                    <div class="grid grid-cols-1 gap-4">
+                        ${recommendations.map(place => `
+                            <div class="recommendation-card border rounded-lg p-4 hover:shadow-lg transition-shadow">
+                                <div class="flex justify-between items-start mb-3">
+                                    <h3 class="font-semibold text-lg">${place.place_name}</h3>
+                                </div>
+                                
+                                <p class="text-sm text-gray-600 mb-3">
+                                    ${place.description}
+                                </p>
+    
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    ${place.activities.map(activity => 
+                                        `<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                                            ${activity}
+                                        </span>`
+                                    ).join('')}
+                                </div>
+    
+                                ${place.rating ? `
+                                    <div class="mt-2 text-sm text-gray-500">
+                                        <strong>Rating:</strong> ${place.rating}/5 
+                                        (${place.user_ratings_total} reviews)
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }*/
+            container.innerHTML = `<h2 class="text-xl font-bold mb-4">Recommended Places</h2>
+        <div class="grid grid-cols-1 gap-4">
+            ${recommendations.map(place => `
+                <div class="recommendation-card border rounded-lg p-4 hover:shadow-lg transition-shadow relative">
+                    <div class="absolute top-2 left-2">
+                       
+                    </div>
+                    <div class="absolute top-2 right-2">
+                        <!--<button class="addSuggestedPlaces" text-white text-xs px-3 py-1">
+                            Bookmark 
+                        </button>-->
+                        <button onclick='bookmarkPlace(${JSON.stringify(place).replace(/"/g, "&quot;")})'
+            class="addSuggestedPlaces text-white text-xs px-3 py-1">
+        Bookmark
+    </button>
+    
+                    </div>
+    
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-semibold text-lg">${place.place_name}</h3>
+                    </div>
+                    
+                    <p class="text-sm text-gray-600 mb-3">
+                        ${place.description}
+                    </p>
+    
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        ${place.activities.map(activity => 
+                            `<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                                ${activity}
+                            </span>`
+                        ).join('')}
+                    </div>
+    
+                    ${place.rating ? `
+                        <div class="mt-2 text-sm text-gray-500">
+                            <strong>Rating:</strong> ${place.rating}/5 
+                            (${place.user_ratings_total} reviews)
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('')}
+        </div>
+    `};
+    function bookmarkPlace(placeData) {
+        let bookmarks = JSON.parse(localStorage.getItem('bookmarkedPlaces')) || [];
+        bookmarks.push(placeData);
+        localStorage.setItem('bookmarkedPlaces', JSON.stringify(bookmarks));
+       window.location.href = '/bookmarks';
+    
+    }
+    
+    /*function displayRecommendations(recommendations) {
+                const container = document.getElementById('results-container');
+                
+                container.innerHTML = `
+                    <h2 class="text-xl font-bold mb-4">Recommended Places</h2>
+                    <div class="grid grid-cols-1 gap-4">
+                        ${recommendations.map((place, index) => `
+                            <div class="recommendation-card" style="animation-delay: ${index * 0.1}s">
+                                <button onclick='bookmarkPlace(${JSON.stringify(place).replace(/"/g, "&quot;")})'
+                                        class="bookmark-button">
+                                    Bookmark
+                                </button>
+                                
+                                <h3>${place.place_name}</h3>
+                                <p>${place.description}</p>
+                                
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    ${place.activities.map(activity => 
+                                        `<span class="activity-tag">
+                                            ${activity}
+                                        </span>`
+                                    ).join('')}
+                                </div>
+                                
+                                ${place.rating ? `
+                                    <div class="rating-container">
+                                        <div class="rating-stars">
+                                            ${'★'.repeat(Math.round(place.rating))}${'☆'.repeat(5 - Math.round(place.rating))}
+                                        </div>
+                                        <div class="rating-count">
+                                            ${place.rating}/5 (${place.user_ratings_total.toLocaleString()} reviews)
+                                        </div>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `).join('')}
+                    </div>`;
+            }
+    */
+    function displayRecommendations(recommendations) {
+      const container = document.getElementById('results-container');
+      container.innerHTML = `
+        <h2 class="text-xl font-bold mb-4">Recommended Places</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          ${recommendations.map((place, index) => `
+            <div class="recommendation-card" style="animation-delay: ${index * 0.1}s">
+              ${place.image ? `
+                <div class="place-image-container">
+                  <img src="${place.image.small_url}" alt="${place.image.alt_description || place.place_name}" 
+                    class="place-image w-full h-48 object-cover rounded-t-lg">
+                  <div class="photo-credit text-xs text-gray-500 italic">
+                    Photo by <a href="${place.image.photographer_url}" target="_blank" class="underline">${place.image.photographer}</a> on Unsplash
+                  </div>
+                </div>
+              ` : `
+                <div class="place-image-container bg-gray-200 h-48 flex items-center justify-center rounded-t-lg">
+                  <span class="text-gray-400">No image available</span>
+                </div>
+              `}
+              <div class="p-4">
+                <div class="flex justify-between items-start">
+                  <h3 class="text-lg font-bold">${place.place_name}</h3>
+                  <button onclick='bookmarkPlace(${JSON.stringify(place).replace(/"/g, "&quot;")})'
+                    class="bookmark-button p-1 rounded hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                    </svg>
+                  </button>
+                </div>
+                
+                <div class="flex flex-wrap gap-2 my-3">
+                  ${place.activities.map(activity =>
+                    `<span class="activity-tag bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                      ${activity}
+                    </span>`
+                  ).join('')}
+                </div>
+                
+                <p class="text-sm text-gray-700 mb-3">${place.description.length > 150 ? 
+                  place.description.substring(0, 150) + '...' : 
+                  place.description}</p>
+                
+                ${place.rating ? `
+                  <div class="rating-container">
+                    <div class="rating-stars text-yellow-400">
+                      ${'★'.repeat(Math.round(place.rating))}${'☆'.repeat(5 - Math.round(place.rating))}
+                    </div>
+                    <div class="rating-count text-sm text-gray-600">
+                      ${place.rating}/5 (${place.user_ratings_total.toLocaleString()} reviews)
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>`;
+    }
+    
+    
+    
+    async function getRecommendations() {
+        const country = document.getElementById('country').value;
+        const selectedActivities = Array.from(document.querySelectorAll('.activity-chip.selected'))
+            .map(chip => chip.dataset.activity);
+    
+        if (selectedActivities.length === 0) {
+            alert('Please select at least one activity');
+            return;
+        }
+    
+        try {
+            const response = await fetch('/api/recommendations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    country,
+                    activities: selectedActivities
+                })
+            });
+    
+            const data = await response.json();
+            
+            if (data.recommendations) {
+                const scoredRecommendations = data.recommendations
+                    .map(place => {
+                        const scores = calculateCategoryScores(
+                            place.activities,
+                            selectedActivities
+                        );
+                        return {
+                            ...place,
+                            ...scores
+                        };
+                    })
+                    .sort((a, b) => b.overallScore - a.overallScore);
+                displayRecommendations(scoredRecommendations);
+            } else {
+                throw new Error('No recommendations found');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('results-container').innerHTML = `
+                <p class="text-red-500">Error getting recommendations. Please try again.</p>
+            `;
+        }
+    }
+    // Add to existing JavaScript
+    function recordInteraction(placeId, liked = true) {
+        fetch('/api/record_interaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_id: 'current_user', // Replace with actual user identification
+                place_id: placeId,
+                liked: liked
+            })
+        });
+    }
+    
+    // Modify bookmarkPlace function to record interaction
+    function bookmarkPlace(placeData) {
+        let bookmarks = JSON.parse(localStorage.getItem('bookmarkedPlaces')) || [];
+        bookmarks.push(placeData);
+        localStorage.setItem('bookmarkedPlaces', JSON.stringify(bookmarks));
+        
+        // Record positive interaction
+        recordInteraction(placeData.place_id, true);
+        
+        window.location.href = '/bookmarks';
+    }
+    </script>
+
+<script>
+// JavaScript to handle the AI Assist functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const aiAssistBtn = document.getElementById('ai-assist-btn');
+  const aiAssistPopup = document.getElementById('ai-assist-popup');
+  const aiAssistPopupHeader = document.getElementById('ai-assist-popup-header');
+  const aiAssistClose = document.querySelector('.ai-assist-popup-close');
+  const aiAssistLoading = document.getElementById('ai-assist-loading');
+  const aiAssistResults = document.getElementById('ai-assist-results');
+  const aiSuggestedActivities = document.getElementById('ai-suggested-activities');
+  const aiRecommendedItinerary = document.getElementById('ai-recommended-itinerary');
+  const aiApplySuggestionsBtn = document.getElementById('ai-apply-suggestions-btn');
+  
+  // Sample activities by category (these would be dynamically generated based on destination)
+  const sampleActivities = {
+    'Cultural': ['Museums', 'Historical Sites', 'Local Markets', 'Art Galleries', 'Traditional Shows'],
+    'Adventure': ['Hiking', 'Scuba Diving', 'Zip-lining', 'Rafting', 'Paragliding'],
+    'Relaxation': ['Beach Day', 'Spa Visit', 'Scenic Drive', 'Sunset Watching', 'Yoga Sessions'],
+    'Culinary': ['Food Tours', 'Cooking Classes', 'Wine Tasting', 'Street Food', 'Fine Dining'],
+    'Nature': ['National Parks', 'Wildlife Watching', 'Botanical Gardens', 'Bird Watching', 'Stargazing']
+  };
+  
+  // Sample itinerary suggestions (would be AI-generated based on preferences)
+  const sampleItinerary = [
+    {
+      day: 'Day 1',
+      activities: [
+        'Start with a guided city tour to get oriented',
+        'Visit the main historical sites in the morning',
+        'Have lunch at a local restaurant',
+        'Explore the central market in the afternoon',
+        'Evening cultural show with traditional dinner'
+      ]
+    },
+    {
+      day: 'Day 2',
+      activities: [
+        'Day trip to nearby natural attraction',
+        'Hiking in the morning, picnic lunch',
+        'Visit to local craft village',
+        'Return to city for dinner at recommended restaurant'
+      ]
+    },
+    {
+      day: 'Day 3',
+      activities: [
+        'Museum and art gallery visits',
+        'Lunch at famous local spot',
+        'Shopping for souvenirs',
+        'Sunset view from recommended viewpoint',
+        'Food tour in the evening'
+      ]
+    }
+  ];
+  
+  // Open AI Assist popup
+  aiAssistBtn.addEventListener('click', function() {
+    aiAssistPopup.classList.add('active');
+    aiAssistLoading.style.display = 'flex';
+    aiAssistResults.style.display = 'none';
+    
+    // Initial position when opening (centered on screen)
+    aiAssistPopup.style.top = '50%';
+    aiAssistPopup.style.left = '60%';
+    aiAssistPopup.style.transform = 'translate(-50%, -50%)';
+    
+    // Simulate loading/processing time
+    setTimeout(function() {
+      generateAIRecommendations();
+      aiAssistLoading.style.display = 'none';
+      aiAssistResults.style.display = 'block';
+    }, 2000);
+  });
+  
+  // Close popup
+  aiAssistClose.addEventListener('click', function() {
+    aiAssistPopup.classList.remove('active');
+  });
+  
+  // Make the popup draggable
+  makeDraggable(aiAssistPopup, aiAssistPopupHeader);
+  
+  function makeDraggable(element, handle) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    
+    if (handle) {
+      // If a handle is specified, use it to drag the element
+      handle.onmousedown = dragMouseDown;
+    } else {
+      // Otherwise, move from anywhere inside the DIV
+      element.onmousedown = dragMouseDown;
+    }
+    
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // Get the mouse cursor position at startup
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      // Call a function whenever the cursor moves
+      document.onmousemove = elementDrag;
+      
+      // Add a dragging class for visual feedback
+      element.classList.add('dragging');
+    }
+    
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // Calculate the new cursor position
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      
+      // Remove transform property to make manual positioning work
+      element.style.transform = 'none';
+      
+      // Set the element's new position
+      element.style.top = (element.offsetTop - pos2) + "px";
+      element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+    
+    function closeDragElement() {
+      // Stop moving when mouse button is released
+      document.onmouseup = null;
+      document.onmousemove = null;
+      
+      // Remove the dragging class
+      element.classList.remove('dragging');
+    }
+  }
+  
+  // Generate AI recommendations
+  function generateAIRecommendations() {
+    // Clear previous results
+    aiSuggestedActivities.innerHTML = '';
+    aiRecommendedItinerary.innerHTML = '';
+    
+    // Generate activity suggestions
+    Object.keys(sampleActivities).forEach(category => {
+      const categoryDiv = document.createElement('div');
+      categoryDiv.innerHTML = `<div class="category-header">${category}</div>`;
+      
+      const activitiesDiv = document.createElement('div');
+      activitiesDiv.style.display = 'flex';
+      activitiesDiv.style.flexWrap = 'wrap';
+      activitiesDiv.style.gap = '8px';
+      
+      sampleActivities[category].forEach(activity => {
+        const chip = document.createElement('div');
+        chip.className = 'ai-activity-chip';
+        chip.textContent = activity;
+        chip.addEventListener('click', function() {
+          this.classList.toggle('selected');
+        });
+        activitiesDiv.appendChild(chip);
+      });
+      
+      categoryDiv.appendChild(activitiesDiv);
+      aiSuggestedActivities.appendChild(categoryDiv);
+    });
+    
+    // Generate itinerary recommendations
+    sampleItinerary.forEach(day => {
+      const dayDiv = document.createElement('div');
+      dayDiv.className = 'ai-itinerary-day';
+      
+      const dayTitle = document.createElement('h5');
+      dayTitle.textContent = day.day;
+      dayDiv.appendChild(dayTitle);
+      
+      const activitiesList = document.createElement('ul');
+      day.activities.forEach(activity => {
+        const listItem = document.createElement('li');
+        listItem.textContent = activity;
+        activitiesList.appendChild(listItem);
+      });
+      
+      dayDiv.appendChild(activitiesList);
+      aiRecommendedItinerary.appendChild(dayDiv);
+    });
+  }
+  
+  // Apply selected suggestions to the main form
+  aiApplySuggestionsBtn.addEventListener('click', function() {
+    const selectedActivities = document.querySelectorAll('.ai-activity-chip.selected');
+    const activitiesList = Array.from(selectedActivities).map(el => el.textContent);
+    
+    // Here you would implement the logic to update the main form with selected activities
+    console.log('Selected activities:', activitiesList);
+    
+    // Get trip details to personalize the experience
+    const destination = document.getElementById('travel_destination_select_pub_20250202').value;
+    const startDate = document.getElementById('travel_start_date_pub_20250202').value;
+    const endDate = document.getElementById('travel_end_date_pub_20250202').value;
+    
+    // You could update the day activities container or other form elements here
+    const dayActivitiesContainer = document.getElementById('day-activities-container');
+    if (dayActivitiesContainer) {
+      // Example of how you might update the main form
+      // This would be customized based on your specific form structure
+      updateMainFormWithActivities(activitiesList);
+    }
+    
+    // Close the popup after applying
+    aiAssistPopup.classList.remove('active');
+    
+    // Show success notification
+    showNotification('AI suggestions applied successfully!');
+  });
+  
+  function updateMainFormWithActivities(activities) {
+    // This function would update your main form with the selected activities
+    // Implementation depends on your specific form structure
+    
+    // Example: Create activity fields in the day-activities-container
+    const dayActivitiesContainer = document.getElementById('day-activities-container');
+    if (dayActivitiesContainer) {
+      dayActivitiesContainer.innerHTML = '<h4>Selected Activities:</h4>';
+      
+      activities.forEach((activity, index) => {
+        const activityDiv = document.createElement('div');
+        activityDiv.className = 'activity-chip selected';
+        activityDiv.textContent = activity;
+        dayActivitiesContainer.appendChild(activityDiv);
+      });
+    }
+  }
+  
+  function showNotification(message) {
+    // Create a notification element
+    const notification = document.createElement('div');
+    notification.className = 'ai-notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    // Style the notification
+    Object.assign(notification.style, {
+      position: 'fixed',
+      bottom: '20px',
+      right: '20px',
+      backgroundColor: '#008080',
+      color: 'white',
+      padding: '10px 20px',
+      borderRadius: '8px',
+      boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+      zIndex: '2000',
+      opacity: '0',
+      transform: 'translateY(20px)',
+      transition: 'opacity 0.3s ease, transform 0.3s ease'
+    });
+    
+    // Animate in
+    setTimeout(() => {
+      notification.style.opacity = '1';
+      notification.style.transform = 'translateY(0)';
+    }, 10);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 300);
+    }, 3000);
+  }
+  
+  // Close if clicked outside the popup (except when dragging)
+  window.addEventListener('click', function(event) {
+    if (event.target == aiAssistPopup && !aiAssistPopup.classList.contains('dragging')) {
+      aiAssistPopup.classList.remove('active');
+    }
+  });
+});
+// Make the modal draggable
+function makeDraggable(element) {
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  
+  // Create a handle for dragging at the top of the modal
+  const dragHandle = document.createElement('div');
+  dragHandle.className = 'drag-handle';
+  dragHandle.style.cursor = 'move';
+  dragHandle.style.padding = '10px';
+  dragHandle.style.backgroundColor = '#008080';
+  dragHandle.style.color = 'white';
+  dragHandle.style.borderTopLeftRadius = '8px';
+  dragHandle.style.borderTopRightRadius = '8px';
+  dragHandle.style.textAlign = 'center';
+  dragHandle.innerHTML = 'Click here to move';
+  
+  // Add the drag handle as the first child of the modal content
+  const modalContent = element.querySelector('.travelModal');
+  modalContent.insertBefore(dragHandle, modalContent.firstChild);
+  
+  // Mouse down event to start dragging
+  dragHandle.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // Get the mouse cursor position at startup
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // Call a function whenever the cursor moves
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // Calculate the new cursor position
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // Set the element's new position
+    element.style.top = (element.offsetTop - pos2) + "px";
+    element.style.left = (element.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // Stop moving when mouse button is released
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+  
+  // Add necessary styles to make dragging work correctly
+  element.style.position = 'absolute';
+  element.style.zIndex = '1000';
+  
+  // Position the modal in the center of the screen initially
+  const centerPosition = () => {
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+    const modalHeight = element.offsetHeight;
+    const modalWidth = element.offsetWidth;
+    
+    element.style.top = Math.max(0, (windowHeight - modalHeight) / 2) + 'px';
+    element.style.left = Math.max(0, (windowWidth - modalWidth) / 2) + 'px';
+  };
+  
+  // Set initial position
+  centerPosition();
+  
+  // Adjust position on window resize
+  window.addEventListener('resize', centerPosition);
+}
+
+// Initialize draggable functionality when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('travelModal');
+  if (modal) {
+    makeDraggable(modal);
+  } else {
+    // If the modal isn't in the DOM yet, set up a mutation observer to watch for it
+    const observer = new MutationObserver(function(mutations) {
+      const addedModal = document.getElementById('travelModal');
+      if (addedModal) {
+        makeDraggable(addedModal);
+        observer.disconnect();
+      }
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+});
+
+// Add additional styles to make the modal look better when draggable
+const style = document.createElement('style');
+style.textContent = `
+  .travel_modal_pub {
+    transition: none; /* Remove any transitions that might interfere with dragging */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add shadow for better visibility */
+  }
+  
+  .travelModal{
+    cursor: default;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .drag-handle {
+    user-select: none;
+  }
+`;
+document.head.appendChild(style);
+</script>
+
+</div>
+
+
+
+
+
+
+
 
 <script>
   function openModal() {
@@ -1912,19 +3771,22 @@ function collectTravelFormData() {
        // Form submission
       document.getElementById('trip-planning-form').addEventListener('submit', function(e) {
         e.preventDefault();
-
-        const tripFormData = {
-            tripName: document.getElementById('trip-name-input').value,
-            destination: document.getElementById('trip-destination-select').value,
-            startDate: document.getElementById('trip-start-date').value,
-            endDate: document.getElementById('trip-end-date').value,
-            duration: document.getElementById('trip-duration-display').value,
-            activities: document.getElementById('trip-activities-input').value,
-            essentials: document.getElementById('trip-essentials-text').value,
-            budget: document.getElementById('trip-budget-priv').value,
-            currency: document.getElementById('trip-currency-select').value
-        };
-
+        const budget = document.getElementById('trip-budget-priv').value;
+    if (!budget || budget <= 0) {
+        alert("Please enter a valid budget greater than 0.");
+        return; // Stop execution if validation fails
+    }
+    const tripFormData = {
+        tripName: document.getElementById('trip-name-input').value,
+        destination: document.getElementById('trip-destination-select').value,
+        startDate: document.getElementById('trip-start-date').value,
+        endDate: document.getElementById('trip-end-date').value,
+        duration: document.getElementById('trip-duration-display').value,
+        activities: document.getElementById('trip-activities-input').value,
+        essentials: document.getElementById('trip-essentials-text').value,
+        budget: budget,
+        currency: document.getElementById('trip-currency-select').value
+    };
         document.getElementById('card-trip-name').textContent = tripFormData.tripName;
         document.getElementById('priv-card-destination').textContent = tripFormData.destination;
         document.getElementById('priv-card-start-date').textContent = tripFormData.startDate;
@@ -2013,12 +3875,12 @@ document.head.appendChild(styleSheet);
           div.classList.toggle("show");
       }
   </script>
+<br>
+<h2 class="h1-2025"> Created By You</h2>
+<br>
 
-<div class="container-2025">
-      <h1 class="h1-2025"> Created By You</h1>
-</div>
               <!-- Navigation Bar -->
-    <nav class="navbar-1">
+<nav class="navbar-1">
 
 <div class="nav-container-1 ">
   <center>
@@ -2033,7 +3895,7 @@ document.head.appendChild(styleSheet);
   <!-- Content Sections -->
 
   <section id="public-section-1" class="section-1 active-1">
-      <h2>Your Public Trips</h2>
+     
       <br>
   
 <section id="public-trip-section" class="section-1" style="display: none;">
@@ -2058,7 +3920,7 @@ document.head.appendChild(styleSheet);
 
 </section>
 <section id="private-section-1" class="section-1"> 
-    <h4>Private Trips</h4>
+
     <div id="trip-card-container" class="trip-card" style="display:none;">
       <h4>Your Trip Details</h4>
       <p><strong>Trip Name:</strong> <span id="card-trip-name"></span></p>

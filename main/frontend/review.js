@@ -1,5 +1,4 @@
 
-    // Uncomment the import for initializeApp
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
     import { getDatabase, ref, onValue, get, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
     import { getAuth } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
@@ -88,8 +87,8 @@
             console.log(`Trip dates: start=${tripStartDate}, end=${tripEndDate}`);
             console.log(`Is this trip in the past? ${tripEndDate < currentDate}`);
             
-            // TEMPORARY: Remove date filtering for testing
-            // if (tripEndDate < currentDate) {
+   
+     if (tripEndDate < currentDate) {
               // Add user information to the trip object
               trip.id = tripId;
               trip.user = userEmail;
@@ -99,7 +98,11 @@
               if (!trip.rating) trip.rating = 0;
               if (!trip.reviewCount) trip.reviewCount = 0;
               if (!trip.reviews) trip.reviews = [];
-              if (!trip.highlights) trip.highlights = 0;
+              if (trip.participants) {
+                trip.participantCount = Object.keys(trip.participants).length;
+              } else {
+                trip.participantCount = 0;
+              }
               
               // Calculate trip duration using available dates
               const startDate = new Date(trip.startDate || trip.applyByDate);
@@ -109,9 +112,9 @@
               
               pastPublicTrips.push(trip);
               console.log(`Added trip ${tripId} to results`);
-            // } else {
-            //  console.log(`Trip ${tripId} is in the future, skipping`);
-            // }
+          } else {
+           console.log(`Trip ${tripId} is in the future, skipping`);
+         }
           }
         }
         
@@ -131,6 +134,14 @@
         const end = new Date(endDate).toLocaleDateString('en-US', options);
         return `${start} - ${end}`;
     }
+    function normalizeEmail(email) {
+        // If the email already contains @, return it (maybe with comma replaced by dot)
+        if (email.includes('@')) {
+            return email.replace(',', '.');
+        }
+        // Otherwise add the domain
+        return email + '@gmail.com';
+    }
     
     // Function to display trips
     // Update the displayTrips function to pass the correct trip user information
@@ -149,7 +160,7 @@
             `;
             return;
         }
-        
+         
         trips.forEach(trip => {
             // Create checklist items HTML
             let checklistHTML = '';
@@ -232,8 +243,8 @@
                         <div class="stat-label-review">Reviews</div>
                     </div>
                     <div class="stat-item-review">
-                        <div class="stat-value-review">${trip.highlights || 0}</div>
-                        <div class="stat-label-review">Highlights</div>
+                        <div class="stat-value-review">${trip.participantCount || 0}</div>
+                        <div class="stat-label-review">Participants</div>
                     </div>
                 </div>
                 <div class="rating-display-review">
@@ -336,60 +347,111 @@
         });
     }
     // Function to check if the current user is logged in
-    /*function checkUserLogin() {
+    function checkUserLogin() {
         const auth = getAuth();
         return new Promise((resolve) => {
             auth.onAuthStateChanged((user) => {
                 resolve(user !== null);
             });
         });
-    }*/
-    
-    // Function to open the review modal
-    function openReviewModal(tripId) {
-        // Find the trip data to get the user
-        const tripCards = document.querySelectorAll('.trip-card-review');
-        let tripUser = null;
-        
-        tripCards.forEach(card => {
-            const cardTripId = card.querySelector('.action-btn-review').getAttribute('data-id');
-            if (cardTripId === tripId) {
-                const userElement = card.querySelector('.user-name-review');
-                if (userElement) {
-                    // Extract email from the displayed username + @ + domain
-                    const displayName = userElement.textContent.trim();
-                    tripUser = displayName.includes('@') ? displayName : displayName + '@example.com';
-                }
-            }
-        });
-        
-        if (!tripUser) {
-            console.error('Could not find trip user information');
-            alert('Error: Could not determine trip owner. Please try again.');
-            return;
-        }
-        
-        // Reset the modal inputs
-        document.getElementById('review-text-review').value = '';
-        document.querySelectorAll('#rating-stars-review .star-review').forEach(star => {
-            star.classList.remove('filled-review');
-        });
-        
-        // Store the current trip ID and user
-        const modal = document.getElementById('review-modal-review');
-        modal.setAttribute('data-trip-id', tripId);
-        modal.setAttribute('data-trip-user', tripUser);
-        
-        // Check if user is logged in
-        /*const auth = getAuth();
-        if (!auth.currentUser) {
-            alert('You must be logged in to write a review.');
-            return;
-        }*/
-        
-        // Show the modal
-        modal.style.display = 'flex';
     }
+    
+    // Check if current user is a participant of the trip
+    async function isUserTripParticipant(tripId, tripUser) {
+        try {
+          const auth = getAuth();
+          const currentUser = auth.currentUser;
+          
+          if (!currentUser) {
+            console.log('No user is logged in');
+            return false;
+          }
+          
+          // Get the trip participants
+          const participantsRef = ref(db, `travel-bookings/${tripUser}/public-trips/${tripId}/participants`);
+          const participantsSnapshot = await get(participantsRef);
+          
+          if (!participantsSnapshot.exists()) {
+            console.log('No participants found for this trip');
+            return false;
+          }
+          
+          const participants = participantsSnapshot.val();
+          const currentUserEmail = currentUser.email;
+          
+          // Loop through participants and check if current user's email matches
+          for (const participantId in participants) {
+            const participant = participants[participantId];
+            
+            // Compare with the email stored in the participant object
+            // Handle both normal format and comma format
+            if ((participant.email === currentUserEmail || 
+                 participant.email === currentUserEmail.replace('.', ',')) && 
+                 participant.status === "confirmed") {
+              console.log('User is a confirmed participant!');
+              return true;
+            }
+          }
+          
+          console.log('User is not a participant or not confirmed');
+          return false;
+        } catch (error) {
+          console.error('Error checking participant status:', error);
+          return false;
+        }
+      }
+    // Function to open the review modal
+    // Function to open the review modal
+async function openReviewModal(tripId) {
+    // Find the trip data to get the user
+    const tripCards = document.querySelectorAll('.trip-card-review');
+    let tripUser = null;
+    
+    tripCards.forEach(card => {
+        const cardTripId = card.querySelector('.action-btn-review').getAttribute('data-id');
+        if (cardTripId === tripId) {
+            const userElement = card.querySelector('.user-name-review');
+            if (userElement) {
+                const displayName = userElement.textContent.trim();
+                tripUser = normalizeEmail(displayName);
+            }
+        }
+    });
+    
+    if (!tripUser) {
+        console.error('Could not find trip user information');
+        alert('Error: Could not determine trip owner. Please try again.');
+        return;
+    }
+    
+    // Check if user is logged in
+    const auth = getAuth();
+    if (!auth.currentUser) {
+        alert('You must be logged in to write a review.');
+        return;
+    }
+    
+    // Check if the current user is a participant of this trip
+    const isParticipant = await isUserTripParticipant(tripId, tripUser);
+    if (!isParticipant) {
+        alert('Only participants of this trip can write reviews.');
+        return;
+    }
+    
+    // Reset the modal inputs
+    document.getElementById('review-text-review').value = '';
+    document.querySelectorAll('#rating-stars-review .star-review').forEach(star => {
+        star.classList.remove('filled-review');
+    });
+    
+    // Store the current trip ID and user
+    const modal = document.getElementById('review-modal-review');
+    modal.setAttribute('data-trip-id', tripId);
+    modal.setAttribute('data-trip-user', tripUser);
+    
+    // Show the modal
+    modal.style.display = 'flex';
+}
     // Navigation buttons functionality
     function setupNavigation() {
         const sliderWrapper = document.querySelector('.slider-wrapper-review');
@@ -414,54 +476,59 @@
         });
     }
     // Function to submit a review
-    async function submitReview(tripId, tripUser, rating, reviewText) {
-      try {
-        // Reference to the specific public trip
-        const tripRef = ref(db, `travel-bookings/${tripUser}/public-trips/${tripId}`);
-        const tripSnapshot = await get(tripRef);
-        
-        if (!tripSnapshot.exists()) {
-          console.error("Trip not found");
-          return false;
-        }
-        
-        const trip = tripSnapshot.val();
-        
-        // Create review object with anonymous user info
-        const review = {
-          rating: rating,
-          text: reviewText,
-          timestamp: new Date().toISOString(),
-          userId: "anonymous",
-          userEmail: "anonymous@user.com",
-          displayName: "Guest Reviewer"
-        };
-        
-        // Initialize reviews array if it doesn't exist
-        if (!trip.reviews) {
-          trip.reviews = [];
-        }
-        
-        // Add the new review
-        trip.reviews.push(review);
-        
-        // Update review count
-        trip.reviewCount = (trip.reviewCount || 0) + 1;
-        
-        // Calculate new average rating
-        const totalRating = trip.reviews.reduce((sum, rev) => sum + rev.rating, 0);
-        trip.rating = totalRating / trip.reviews.length;
-        
-        // Save the updated trip back to Firebase
-        await set(tripRef, trip);
-        
-        console.log("Review saved successfully");
-        return true;
-      } catch (error) {
-        console.error("Error saving review:", error);
+   // Function to submit a review
+async function submitReview(tripId, tripUser, rating, reviewText) {
+    try {
+      // Reference to the specific public trip
+      const tripRef = ref(db, `travel-bookings/${tripUser}/public-trips/${tripId}`);
+      const tripSnapshot = await get(tripRef);
+      
+      if (!tripSnapshot.exists()) {
+        console.error("Trip not found");
         return false;
       }
+      
+      const trip = tripSnapshot.val();
+      
+      // Get current user info
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
+      
+      // Create review object with actual user info
+      const review = {
+        rating: rating,
+        text: reviewText,
+        timestamp: new Date().toISOString(),
+        userId: currentUser.uid,
+        userEmail: currentUser.email,
+        displayName: currentUser.displayName || currentUser.email.split('@')[0]
+      };
+      
+      // Initialize reviews array if it doesn't exist
+      if (!trip.reviews) {
+        trip.reviews = [];
+      }
+      
+      // Add the new review
+      trip.reviews.push(review);
+      
+      // Update review count
+      trip.reviewCount = (trip.reviewCount || 0) + 1;
+      
+      // Calculate new average rating
+      const totalRating = trip.reviews.reduce((sum, rev) => sum + rev.rating, 0);
+      trip.rating = totalRating / trip.reviews.length;
+      
+      // Save the updated trip back to Firebase
+      await set(tripRef, trip);
+      
+      console.log("Review saved successfully");
+      return true;
+    } catch (error) {
+      console.error("Error saving review:", error);
+      return false;
     }
+  }
     
     
     
