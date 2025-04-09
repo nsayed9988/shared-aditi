@@ -12,7 +12,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
     <title>Blog</title>
-    <script src="blog copy.js" type="module"></script>
+    <script type="module" src="{{ url_for('static', filename='blog copy.js') }}"></script>
+
+    
     <style>
 
 .overlay-wrapper {
@@ -362,7 +364,114 @@
 .form-group {
     display: flex;
     flex-direction: column;
-} </style>
+} /* Main Section Styling */
+.blogging-tips-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 80px;
+  background-color: #f7f9fc;
+  font-family: Arial, Helvetica, sans-serif;
+  gap: 50px;
+}
+
+/* Columns */
+.tips-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  width: 100%;
+}
+
+.column {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+  width: 50%;
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: #004A7F;
+  margin-bottom: 20px;
+}
+
+/* Individual Tips */
+.tip {
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  background-color: #eaf3fc;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.tip strong {
+  color: #004A7F;
+}
+
+/* Glowing Button */
+#custom_trigger_button_2024 {
+  background-color: #004A7F;
+  border-radius: 8px;
+  border: none;
+  color: #FFFFFF;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#custom_trigger_button_2024:hover {
+  background-color: #0073e6;
+  box-shadow: 0 0 15px #00BFFF;
+}
+
+/* Form Modal Styling */
+#custom_overlay_background_2024 {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+
+#custom_form_container_2024 {
+  background-color: white;
+  width: 60%;
+  max-width: 600px;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#custom_submit_button_2024 {
+  background-color: #004A7F;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#custom_submit_button_2024:hover {
+  background-color: #0073e6;
+}
+
+</style>
   </head>
   <body>
     <div id="preloader-active">
@@ -523,7 +632,7 @@
       <div class="container-fluid background-body">
         <div class="main-header">
           <div class="header-left">
-            <div class="header-logo"><a class="d-flex" href="index-2.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
+            <div class="header-logo"><a class="d-flex" href="{{ url_for('home') }}"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
             <div class="header-nav">
               <nav class="nav-main-menu">
                 <ul class="main-menu">
@@ -583,15 +692,40 @@
                   </li>
                   <li  class="mega-li-small"><a href="#featured"><strong>Iternaries</strong></a>         
                   </li>
-                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html"><strong> My Iternaries</strong></a>         
+                  <li  class="mega-li-small"><a href="{{ url_for('tour_grid') }}" onclick="checkLoginStatus(event)">
+                    <strong> My Iternaries</strong></a>         
                   </li>
+                  <script>
+                    function checkLoginStatus(event) {
+                      if (localStorage.getItem("loggedIn") === "true") {
+                        // Redirect if logged in
+                        window.location.href = "tour-gridmain.html";
+                      } else {
+                        // Prevent default action and alert
+                        event.preventDefault();
+                        alert("Please log in to view your itineraries.");
+                      }
+                    }
+                  </script>
                  
-                 
-                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login"><strong>Profile</strong></a></li>
-                  <li><a href="../travi dash/index.html"><strong>Dashboard</strong></a></li>
-                  <li class="mega-li-small"><a href="gallery.html" class="check-login"><strong>Gallery</strong></a></li>
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi-dash/my-profile.html" class="check-login"><strong>Profile</strong></a></li>
+                  <li><a href="../travi-dash/index.html" class="check-login"><strong>Dashboard</strong></a></li>
+                  <script>
+                    document.querySelectorAll('.check-login').forEach(link => {
+                      link.addEventListener('click', function (event) {
+                        if (localStorage.getItem("loggedIn") !== "true") {
+                          event.preventDefault();
+                          alert("Please log in to access this page.");
+                          // Optionally redirect to login page:
+                          // window.location.href = "/login.html";
+                        }
+                      });
+                    });
+                  </script>
+                  
+                  <li class="mega-li-small"><a href="{{ url_for('gallery') }}" class="check-login"><strong>Gallery</strong></a></li>
     
-                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login"><strong>Blog</strong></a></li>
+                  <li class="mega-li-small"><a href="{{ url_for('blog_grid') }}" class="check-login"><strong>Blog</strong></a></li>
                   
                   
       
@@ -600,22 +734,20 @@
                   
               
            
-                  <li><a href="contact.html"><strong>Contact</strong></a></li>
+                  <li><a href="{{ url_for('contact') }}"><strong>Contact</strong></a></li>
                  
               
               </ul>  </nav>
             </div>
           </div>
           <div class="header-right">
-
-           <a href="../travi dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
+            
+           <a href="../travi-dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
               Login
             </button></a> 
-           
-            <div class="burger-icon-2 burger-icon-white"><img src="assets/imgs/template/icons/menu.svg" alt="Travila"></div> 
-            <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
-          </div>
+      
         </div>
+      </div>
       </div>
     </header>
     <main class="main">
@@ -774,30 +906,39 @@ Connection: You can network, collaborate, and build relationships within your ni
 Feedback & Support: Engage with readers and fellow bloggers for advice and encouragement.
 Inspiration & Learning: The community offers endless inspiration and knowledge-sharing.
               </div>
-              <div class="tip"></div>
-              <div class="tip"></div>
-              <div class="tip">
-                <button style="
          
-                background-color: #004A7F;
-                border-radius: 10px;
-                border: none;
-                color: #FFFFFF;
-                cursor: pointer;
-                display: inline-block;
-                font-family: Arial;
-                font-size: 20px;
-                padding: 5px 10px;
-                text-align: center;
-                text-decoration: none;
-                animation: glowing 1500ms infinite;"
+              
+                <button 
+         
+               
                 id="custom_trigger_button_2024" >Create a blog</button></div>
                 <style>
-                  @keyframes glowing {
-              
-                    0% { background-color: #00BFFF; box-shadow: 0 0 5px #00BFFF; } /* Deep Sky Blue */
-  50% { background-color: #1E90FF; box-shadow: 0 0 20px #87CEEB; } /* Dodger Blue with Sky Blue glow */
-  100% { background-color: #4682B4; box-shadow: 0 0 5px #5F9EA0; } /* Steel Blue with a hint of Cadet Blue */}
+                 #custom_trigger_button_2024 {
+  background-color: #004A7F;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.4);
+  animation: glowing 1.5s infinite alternate;
+}
+
+@keyframes glowing {
+  0% { background-color: #00BFFF; box-shadow: 0 0 10px #00BFFF; }
+  50% { background-color: #1E90FF; box-shadow: 0 0 20px #87CEEB; }
+  100% { background-color: #4682B4; box-shadow: 0 0 10px #5F9EA0; }
+}
+
+#custom_trigger_button_2024:hover {
+  transform: scale(1.05);
+  background-color: #1E90FF;
+}
 
                   </style>
                   </div>
@@ -877,7 +1018,7 @@ Inspiration & Learning: The community offers endless inspiration and knowledge-s
               </div>
           </div>
             </div>
-          </div>
+          
     
       </section>
       <div id="blog_cards_container_2024"></div>

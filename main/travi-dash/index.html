@@ -37,7 +37,7 @@
               <form action="">
                 <input class="form-control input-search" type="text" name="keyword" placeholder="What are you looking for?">
               </form>
-            </div><a class="text-sm-bold neutral-1000 ps-5 d-flex align-items-center" href="../frontend/index-2.html" target="_blank">   <span>Visit Site</span><img class="size-16 ms-2 img-invert" alt="Travilla" src="assets/imgs/template/icons/expand-arrows.svg"></a>
+            </div><a class="text-sm-bold neutral-1000 ps-5 d-flex align-items-center" href="{{ url_for('home') }}" target="_blank">   <span>Visit Site</span><img class="size-16 ms-2 img-invert" alt="Travilla" src="assets/imgs/template/icons/expand-arrows.svg"></a>
           </div>
      
           </div>
@@ -315,7 +315,8 @@
                 </div>
       
   </main>
-  <script type="module" src="index.js"></script>
+  <script type="module" src="{{ url_for('travi_dash.static', filename='index.js') }}" defer></script>
+
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu2wDeOzJvQoAu6vR3soZvosMMJd532QI&callback=initMap&v=weekly&solution_channel=GMP_CCS_geolocation_v2"
       defer ></script>

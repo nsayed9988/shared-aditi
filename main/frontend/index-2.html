@@ -1421,7 +1421,7 @@ function openModal(tripId) {
       <div class="container-fluid background-body">
         <div class="main-header">
           <div class="header-left">
-            <div class="header-logo"><a class="d-flex" href="index-2.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
+            <div class="header-logo"><a class="d-flex" href="{{ url_for('home') }}"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
             <div class="header-nav">
               <nav class="nav-main-menu">
                 <ul class="main-menu">
@@ -1481,15 +1481,40 @@ function openModal(tripId) {
                   </li>
                   <li  class="mega-li-small"><a href="#featured"><strong>Iternaries</strong></a>         
                   </li>
-                  <li  class="mega-li-small"><a href="tour-gridmain.html"><strong> My Iternaries</strong></a>         
+                  <li  class="mega-li-small"><a href="{{ url_for('tour_grid') }}" onclick="checkLoginStatus(event)">
+                    <strong> My Iternaries</strong></a>         
                   </li>
-                 
+                  <script>
+                    function checkLoginStatus(event) {
+                      if (localStorage.getItem("loggedIn") === "true") {
+                        // Redirect if logged in
+                        window.location.href = "tour-gridmain.html";
+                      } else {
+                        // Prevent default action and alert
+                        event.preventDefault();
+                        alert("Please log in to view your itineraries.");
+                      }
+                    }
+                  </script>
                  
                   <li id="my-profile-list-item" class="mega-li-small"><a href="../travi-dash/my-profile.html" class="check-login"><strong>Profile</strong></a></li>
-                  <li><a href="../travi-dash/index.html"><strong>Dashboard</strong></a></li>
-                  <li class="mega-li-small"><a href="gallery.html" class="check-login"><strong>Gallery</strong></a></li>
+                  <li><a href="../travi-dash/index.html" class="check-login"><strong>Dashboard</strong></a></li>
+                  <script>
+                    document.querySelectorAll('.check-login').forEach(link => {
+                      link.addEventListener('click', function (event) {
+                        if (localStorage.getItem("loggedIn") !== "true") {
+                          event.preventDefault();
+                          alert("Please log in to access this page.");
+                          // Optionally redirect to login page:
+                          // window.location.href = "/login.html";
+                        }
+                      });
+                    });
+                  </script>
+                  
+                  <li class="mega-li-small"><a href="{{ url_for('gallery') }}" class="check-login"><strong>Gallery</strong></a></li>
     
-                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login"><strong>Blog</strong></a></li>
+                  <li class="mega-li-small"><a href="{{ url_for('blog_grid') }}" class="check-login"><strong>Blog</strong></a></li>
                   
                   
       
@@ -1498,7 +1523,7 @@ function openModal(tripId) {
                   
               
            
-                  <li><a href="contact.html"><strong>Contact</strong></a></li>
+                  <li><a href="{{ url_for('contact') }}"><strong>Contact</strong></a></li>
                  
               
               </ul>  </nav>
@@ -1531,7 +1556,7 @@ function openModal(tripId) {
           <div class="banner-main">
             <div class="banner-slide">
               <div class="banner-image">
-                <div class="container"><span class="btn btn-brand-secondary"><a href="about.html">About Us</a></span>
+                <div class="container"><span class="btn btn-brand-secondary"><a href="{{ url_for('about') }}">About Us</a></span>
                   <h1 class="mt-20 mb-20">Unleash Your Wanderlust<br class="d-none d-lg-block">Plan Your Next Journey</h1>
                   <h6 class="heading-6-medium">Crafting Exceptional Journeys: Your Global Escape Planner. Unleash Your Wanderlust: Seamless Travel, Extraordinary Adventures</h6>
                   
@@ -1657,7 +1682,34 @@ function openModal(tripId) {
         </div>
         <div id="aiplanbtn" class="container-slider box-swiper-padding">
          
-          <button id="addButtonitn" class="check-login">Create Itinerary</button>
+
+          <button id="addButtonitn" class="check-login-btn">Create Itinerary</button>
+          <script>
+            // Apply login check for links
+            document.querySelectorAll('.check-login').forEach(link => {
+              link.addEventListener('click', function (event) {
+                if (localStorage.getItem("loggedIn") !== "true") {
+                  event.preventDefault();
+                  alert("Please log in to access this page.");
+                }
+              });
+            });
+          
+            // Apply login check for buttons
+            document.querySelectorAll('.check-login-btn').forEach(button => {
+              button.addEventListener('click', function (event) {
+                if (localStorage.getItem("loggedIn") !== "true") {
+                  event.preventDefault();
+                  alert("Please log in to create an itinerary.");
+                } else {
+                
+                    window.location.href = "/tour-gridmain";
+
+                }
+              });
+            });
+          </script>
+          
         </div>
       </div></section>
       <br>  <br>  <br>
@@ -2229,9 +2281,11 @@ background-color: #333;
             </div>
         </div>
     
-        <script src="{{ url_for('static', filename='review.js') }}"></script>
 
-<script src="review.js" type="module"></script>  
+    <script type="module" src="{{ url_for('static', filename='review.js') }}"></script>
+
+
+<!--<script src="review.js" type="module"></script>  -->
 
 
 
@@ -2358,7 +2412,7 @@ function openChat() {
 document.addEventListener('DOMContentLoaded', function () {
     // Only check login status when clicking on protected elements
     function initializeLoginChecks() {
-        const addButton = document.getElementById('addButtonitn');
+
         const popup = document.getElementById('popupitn');
         const overlay = document.getElementById('overlayitn');
         const closePopup = document.getElementById('closePopup');

@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, Blueprint, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 import pandas as pd
 from tourist_recommender import TouristPlaceRecommender
@@ -9,11 +9,64 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-
-
+# Create the main Flask app with primary template and static folders
 app = Flask(__name__, 
-            template_folder='frontend',  # Point to your frontend directory
-            static_folder='frontend/assets')    # Static files are also in frontend
+            template_folder='frontend',  # Primary template folder 
+            static_folder='frontend/assets')  # Primary static folder
+
+# Create a Blueprint for Travi Dashboard with its own template and static folders
+travi_dash = Blueprint('travi_dash', __name__, 
+                       template_folder='travi-dash',  # Secondary template folder - NOTE: Changed from travi-dash/templates to just travi-dash
+                       static_folder='travi-dash/assets',  # Secondary static folder
+                       url_prefix='/travi-dash')  # URL prefix matches the folder name
+
+# Define all blueprint routes BEFORE registering the blueprint
+@travi_dash.route('/')
+def dashboard_home():
+    return render_template('budget.html')  # Will look for budget.html in travi-dash folder
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
+@travi_dash.route('/login.html')
+def dashboard_login():
+    return render_template('login.html')  # Will look for login.html in travi-dash folder
+
+@travi_dash.route('/add-tour.html')
+def dashboard_add_tour():
+    return render_template('add-tour.html')  # Will look for add-tour.html in travi-dash folder
+
+@travi_dash.route('/assets/<path:filename>')
+def dashboard_static(filename):
+    return send_from_directory(travi_dash.static_folder, filename)
+
+@app.route('/gallery')
+def gallery():
+    return render_template('gallery.html')
+
+@app.route('/blog-grid')
+def blog_grid():
+    return render_template('blog-grid.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+    
+@travi_dash.route('/my-profile.html')
+def my_profile():
+    return render_template('my-profile.html')
+
+@travi_dash.route('/index.html')
+def travi_index():
+    return render_template('index.html')
+
+# AFTER all blueprint routes are defined, register the blueprint
+app.register_blueprint(travi_dash)  # No need to specify url_prefix again
+
 CORS(app)
 
 # Google Custom Search API configuration
@@ -33,14 +86,14 @@ def initialize_recommender():
 # Initialize the recommender
 recommender = initialize_recommender()
 
-
+# Main app routes - these will use the primary template folder (frontend)
 @app.route('/')
 def home():
-    return render_template('index-2.html')  # Updated to match your main index file
+    return render_template('index-2.html')  # Looks for index-2.html in frontend folder
 
 @app.route('/tour-gridmain')
 def tour_grid():
-    return render_template('tour-gridmain.html')
+    return render_template('tour-gridmain.html')  # Looks for tour-gridmain.html in frontend folder
 
 # Add routes for all your other HTML files
 @app.route('/tour-detail')
@@ -59,20 +112,12 @@ def privacy():
 def terms():
     return render_template('term.html')
 
-
- # Add travi-dash separately
-
-@app.route('/travi-dash/login')
-def travi_dash_login():
-    return render_template('login.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
+# Add 404 error handler
+@app.errorhandler(404)
+def page_not_found(e):
+    # Log the error for debugging
+    print(f"404 Error: {request.path}")
+    return render_template('404.html'), 404  # Create a 404.html template in your frontend folder
 
 def fetch_image_for_place(place_name, country):
     """

@@ -13,7 +13,8 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="assets/css/style.css?version=2.0" rel="stylesheet">
- <script type="module" src="profile.js" defer></script>
+    <script type="module" src="{{ url_for('travi_dash.static', filename='profile.js') }}" defer></script>
+
 
   
     <title>My Profile  </title>
@@ -39,7 +40,7 @@
               <form action="">
                 <input class="form-control input-search" type="text" name="keyword" placeholder="What are you looking for?">
               </form>
-            </div><a class="text-sm-bold neutral-1000 ps-5 d-flex align-items-center" href="../frontend/index-2.html" target="_blank">         <span>Visit Site</span><img class="size-16 ms-2 img-invert" alt="Travilla" src="assets/imgs/template/icons/expand-arrows.svg"></a>
+            </div><a class="text-sm-bold neutral-1000 ps-5 d-flex align-items-center" href="{{ url_for('home') }}" target="_blank">         <span>Visit Site</span><img class="size-16 ms-2 img-invert" alt="Travilla" src="assets/imgs/template/icons/expand-arrows.svg"></a>
           </div>
           <div class="header-right">
             <div class="block-signin">

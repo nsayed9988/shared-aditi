@@ -1054,7 +1054,7 @@ color: #15646c;
       <div class="container-fluid background-body">
         <div class="main-header">
           <div class="header-left">
-            <div class="header-logo"><a class="d-flex" href="index-2.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
+            <div class="header-logo"><a class="d-flex" href="{{ url_for('home') }}"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
             <div class="header-nav">
               <nav class="nav-main-menu">
                 <ul class="main-menu">
@@ -1114,15 +1114,40 @@ color: #15646c;
                   </li>
                   <li  class="mega-li-small"><a href="#featured"><strong>Iternaries</strong></a>         
                   </li>
-                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html"><strong> My Iternaries</strong></a>         
+                  <li  class="mega-li-small"><a href="{{ url_for('tour_grid') }}" onclick="checkLoginStatus(event)">
+                    <strong> My Iternaries</strong></a>         
                   </li>
+                  <script>
+                    function checkLoginStatus(event) {
+                      if (localStorage.getItem("loggedIn") === "true") {
+                        // Redirect if logged in
+                        window.location.href = "tour-gridmain.html";
+                      } else {
+                        // Prevent default action and alert
+                        event.preventDefault();
+                        alert("Please log in to view your itineraries.");
+                      }
+                    }
+                  </script>
                  
-                 
-                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login"><strong>Profile</strong></a></li>
-                  <li><a href="../travi dash/index.html"><strong>Dashboard</strong></a></li>
-                  <li class="mega-li-small"><a href="gallery.html" class="check-login"><strong>Gallery</strong></a></li>
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi-dash/my-profile.html" class="check-login"><strong>Profile</strong></a></li>
+                  <li><a href="../travi-dash/index.html" class="check-login"><strong>Dashboard</strong></a></li>
+                  <script>
+                    document.querySelectorAll('.check-login').forEach(link => {
+                      link.addEventListener('click', function (event) {
+                        if (localStorage.getItem("loggedIn") !== "true") {
+                          event.preventDefault();
+                          alert("Please log in to access this page.");
+                          // Optionally redirect to login page:
+                          // window.location.href = "/login.html";
+                        }
+                      });
+                    });
+                  </script>
+                  
+                  <li class="mega-li-small"><a href="{{ url_for('gallery') }}" class="check-login"><strong>Gallery</strong></a></li>
     
-                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login"><strong>Blog</strong></a></li>
+                  <li class="mega-li-small"><a href="{{ url_for('blog_grid') }}" class="check-login"><strong>Blog</strong></a></li>
                   
                   
       
@@ -1131,15 +1156,15 @@ color: #15646c;
                   
               
            
-                  <li><a href="contact.html"><strong>Contact</strong></a></li>
+                  <li><a href="{{ url_for('contact') }}"><strong>Contact</strong></a></li>
                  
               
               </ul>  </nav>
             </div>
           </div>
           <div class="header-right">
-
-           <a href="../travi dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
+            
+           <a href="../travi-dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
               Login
             </button></a> 
            
@@ -1147,6 +1172,7 @@ color: #15646c;
             <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
           </div>
         </div>
+      </div>
       </div>
     </header>
     
@@ -1217,9 +1243,30 @@ color: #15646c;
                             
                             <div class="travel_form_pub_group">
                               <label for="travel_start_date_pub_20250202">Start Date:</label>
-                              <input type="date" id="travel_start_date_pub_20250202" required>
-                              <div class="travel_error_pub_message" id="travel_start_date_error_pub_20250202">Please select a start date</div>
+                              <input type="date" id="travel_start_date_pub_20250202" required onchange="validateStartDate()">
+
                           </div>
+                          <script>
+                            function validateStartDate() {
+                              const startInput = document.getElementById('travel_start_date_pub_20250202');
+                              
+                              if (!startInput || !startInput.value) return;
+                            
+                              const startDate = new Date(startInput.value);
+                              const today = new Date();
+                              today.setHours(0, 0, 0, 0); // Normalize to midnight
+                            
+                              if (startDate < today) {
+                                alert('Start Date cannot be in the past.');
+                                startInput.value = ''; // Reset the field
+                              }
+                            }
+                            </script>
+                            
+
+
+
+
                           <div class="travel_form_pub_group">
                               <label for="travel_end_date_pub_20250202">End Date:</label>
                               <input type="date" id="travel_end_date_pub_20250202" required>
@@ -1277,10 +1324,11 @@ color: #15646c;
                                 <div class="travel_error_pub_message" id="travel_gender_error_pub_20250202">Please select at least one gender</div>
                             </div>
                                <div class="travel_form_pub_group">
-                              <button class="pub-essen-toggle-btn" id="pub-essen-toggle-btn">Show/Hide Essentials</button>
+                  
+                              <button type="button" class="pub-essen-toggle-btn" id="pub-essen-toggle-btn">Show/Hide Essentials</button>
                               <div id="pub-essen-essentials-list" class="pub-essen-essentials-list">
                                   <div id="pub-essen-essentials-container"></div>
-                                  <button class="pub-essen-save-btn" id="pub-essen-save-btn">Save Selected Items</button>
+                                  <button type="button" class="pub-essen-save-btn" id="pub-essen-save-btn">Save Selected Items</button>
                               </div>
                               <div id="pub-essen-saved-items"></div>
                           </div>
@@ -1292,7 +1340,7 @@ color: #15646c;
                             </div>
                             <div class="travel_button_pub_group">
                                 <button type="button" class="travel_prev_pub_btn" onclick="travelPrevStepPub(3)">Previous</button>
-                                <button type="button" class="travel_submit_pub_btn" onclick="publb">Submit</button>
+                                <button type="button" class="travel_submit_pub_btn" >Submit</button>
                             </div>
                         </div>
 
@@ -1336,12 +1384,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Update the onclick handler for the submit button
-document.querySelector('.travel_submit_pub_btn').onclick = function() {
-    if (validateTravelStepPub(3)) {
-        saveToFirebase();
-    }
-};
+document.querySelector('.travel_submit_pub_btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  if (validateTravelStepPub(3)) {
+    saveToFirebase();
+  }
+});
+
 
 
 async function saveToFirebase() {
@@ -1590,25 +1639,24 @@ document.getElementById('trip-planning-form').addEventListener('submit', (e) => 
     }
   ];
 
-document.getElementById("pub-essen-save-btn").addEventListener("click", function () {
-    const container = document.getElementById("pub-essen-essentials-container");
+  document.getElementById("pub-essen-save-btn").addEventListener("click", function () {
+  const checkedInputs = document.querySelectorAll("#pub-essen-essentials-container input[type='checkbox']:checked");
 
-    // Find only visible and valid items
-    const selectedItems = container.querySelectorAll(".essential-item:not(.hidden)");
+  if (checkedInputs.length === 0) {
+    alert("Please select at least one essential item before saving.");
+  } else {
+    const savedItemsContainer = document.getElementById("pub-essen-saved-items");
+    savedItemsContainer.innerHTML = "<strong>Selected Items:</strong><br>";
 
-    if (selectedItems.length === 0) {
-        alert("Please select at least one essential item before saving.");
-    } else {
-        // Clear previous saved items and add new ones
-        const savedItemsContainer = document.getElementById("pub-essen-saved-items");
-        savedItemsContainer.innerHTML = ""; // Clear old items
+    checkedInputs.forEach(input => {
+      savedItemsContainer.innerHTML += `${input.nextElementSibling.textContent}, `;
+    });
 
-        selectedItems.forEach(item => {
-            savedItemsContainer.appendChild(item.cloneNode(true)); // Copy only valid items
-        });
+    // Remove trailing comma and space
+    savedItemsContainer.innerHTML = savedItemsContainer.innerHTML.replace(/, $/, '');
 
-        alert("Essentials saved successfully!");
-    }
+    alert("Essentials saved successfully!");
+  }
 });
 
 
@@ -1716,7 +1764,8 @@ document.getElementById("pub-essen-save-btn").addEventListener("click", function
             dayActivitiesContainer.appendChild(dayActivityField);
         }
     }
-  function validateApplyByDate() {
+  
+    function validateApplyByDate() {
     const startDatePub = document.getElementById('travel_start_date_pub_20250202');
     const applyDatePub = document.getElementById('travel_apply_date_pub_20250202');
     const currentDate = new Date();
@@ -1743,6 +1792,9 @@ document.getElementById("pub-essen-save-btn").addEventListener("click", function
 
     return true;
   }
+
+
+
 
   travelStartDatePub.addEventListener('change', calculateTravelDaysPub);
   travelEndDatePub.addEventListener('change', calculateTravelDaysPub);
@@ -4060,11 +4112,10 @@ document.head.appendChild(styleSheet);
 
 
  
-  
-  <script type="module" src="retrieve.js"></script>
 
 
-            
+  <script type="module" src="{{ url_for('static', filename='retrieve.js') }}"></script>
+
 
           
   

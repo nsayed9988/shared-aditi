@@ -1322,7 +1322,7 @@ width: auto;
       <div class="container-fluid background-body">
         <div class="main-header">
           <div class="header-left">
-            <div class="header-logo"><a class="d-flex" href="index-2.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
+            <div class="header-logo"><a class="d-flex" href="{{ url_for('home') }}"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
             <div class="header-nav">
               <nav class="nav-main-menu">
                 <ul class="main-menu">
@@ -1382,15 +1382,40 @@ width: auto;
                   </li>
                   <li  class="mega-li-small"><a href="#featured"><strong>Iternaries</strong></a>         
                   </li>
-                  <li  class="mega-li-small"><a href="tour-grid-3 copy.html"><strong> My Iternaries</strong></a>         
+                  <li  class="mega-li-small"><a href="{{ url_for('tour_grid') }}" onclick="checkLoginStatus(event)">
+                    <strong> My Iternaries</strong></a>         
                   </li>
+                  <script>
+                    function checkLoginStatus(event) {
+                      if (localStorage.getItem("loggedIn") === "true") {
+                        // Redirect if logged in
+                        window.location.href = "tour-gridmain.html";
+                      } else {
+                        // Prevent default action and alert
+                        event.preventDefault();
+                        alert("Please log in to view your itineraries.");
+                      }
+                    }
+                  </script>
                  
-                 
-                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi dash/my-profile.html" class="check-login"><strong>Profile</strong></a></li>
-                  <li><a href="../travi dash/index.html"><strong>Dashboard</strong></a></li>
-                  <li class="mega-li-small"><a href="gallery.html" class="check-login"><strong>Gallery</strong></a></li>
+                  <li id="my-profile-list-item" class="mega-li-small"><a href="../travi-dash/my-profile.html" class="check-login"><strong>Profile</strong></a></li>
+                  <li><a href="../travi-dash/index.html" class="check-login"><strong>Dashboard</strong></a></li>
+                  <script>
+                    document.querySelectorAll('.check-login').forEach(link => {
+                      link.addEventListener('click', function (event) {
+                        if (localStorage.getItem("loggedIn") !== "true") {
+                          event.preventDefault();
+                          alert("Please log in to access this page.");
+                          // Optionally redirect to login page:
+                          // window.location.href = "/login.html";
+                        }
+                      });
+                    });
+                  </script>
+                  
+                  <li class="mega-li-small"><a href="{{ url_for('gallery') }}" class="check-login"><strong>Gallery</strong></a></li>
     
-                  <li class="mega-li-small"><a href="blog-grid.html" class="check-login"><strong>Blog</strong></a></li>
+                  <li class="mega-li-small"><a href="{{ url_for('blog_grid') }}" class="check-login"><strong>Blog</strong></a></li>
                   
                   
       
@@ -1399,22 +1424,27 @@ width: auto;
                   
               
            
-                  <li><a href="contact.html"><strong>Contact</strong></a></li>
+                  <li><a href="{{ url_for('contact') }}"><strong>Contact</strong></a></li>
                  
               
               </ul>  </nav>
             </div>
           </div>
           <div class="header-right">
-
-           <a href="../travi dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
+            
+           <a href="../travi-dash/login.html"><button id="login-btn" class="me-4 btn btn-brand-secondary">
               Login
             </button></a> 
-           
+            <button class="chat-button" onclick="openChat()">Live Chat</button>
+
+            <div class="chat-popup" id="chatPopup">
+                <button class="close-btn" onclick="closeChat()">×</button>
+                <iframe class="chat-frame" src="https://organizations.minnit.chat/975468968082014/Main?embed" allow="autoplay"></iframe>
             <div class="burger-icon-2 burger-icon-white"><img src="assets/imgs/template/icons/menu.svg" alt="Travila"></div> 
             <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
           </div>
         </div>
+      </div>
       </div>
     </header>
     
