@@ -89,7 +89,7 @@ recommender = initialize_recommender()
 # Main app routes - these will use the primary template folder (frontend)
 @app.route('/')
 def home():
-    return render_template('index-2.html')  # Looks for index-2.html in frontend folder
+    return render_template('Index.html')  # Looks for Index.html in frontend folder
 
 @app.route('/tour-gridmain')
 def tour_grid():
