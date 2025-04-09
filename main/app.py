@@ -16,9 +16,9 @@ app = Flask(__name__,
 
 # Create a Blueprint for Travi Dashboard with its own template and static folders
 travi_dash = Blueprint('travi_dash', __name__, 
-                       template_folder='travi-dash',  # Secondary template folder - NOTE: Changed from travi-dash/templates to just travi-dash
-                       static_folder='travi-dash/assets',  # Secondary static folder
-                       url_prefix='/travi-dash')  # URL prefix matches the folder name
+                       template_folder='travi-dash', 
+                       static_folder='travi-dash/assets',  
+                       url_prefix='/travi-dash')  
 
 # Define all blueprint routes BEFORE registering the blueprint
 @travi_dash.route('/')
@@ -60,9 +60,9 @@ def contact():
 def my_profile():
     return render_template('my-profile.html')
 
-@travi_dash.route('/index.html')
+@travi_dash.route('/dashindex.html')
 def travi_index():
-    return render_template('index.html')
+    return render_template('dashindex.html')
 
 # AFTER all blueprint routes are defined, register the blueprint
 app.register_blueprint(travi_dash)  # No need to specify url_prefix again
@@ -89,7 +89,7 @@ recommender = initialize_recommender()
 # Main app routes - these will use the primary template folder (frontend)
 @app.route('/')
 def home():
-    return render_template('Index.html')  # Looks for Index.html in frontend folder
+    return render_template('index.html')  # Looks for Index.html in frontend folder
 
 @app.route('/tour-gridmain')
 def tour_grid():
@@ -302,4 +302,4 @@ def train_model():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', port=10000)

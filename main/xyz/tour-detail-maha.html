@@ -1,0 +1,2739 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
+    <link href="assets/css/style.css?v=1.0.0" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400' rel='stylesheet' type='text/css">
+    <title>Tour grid </title>
+   <style>
+    
+     .navbar-1 {
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-container-1 {
+            max-width: 1150px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3436;
+            text-decoration: none;
+        }
+
+        .nav-buttons-1 {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn-1 {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            color: #2d3436;
+        }
+
+        .nav-btn-1:hover {
+            background: #e9ecef;
+        }
+
+        .nav-btn-1.active-1 {
+            background: #00d2ff;
+            color: white;
+        }
+
+        /* Content Sections */
+        .section-1 {
+            display: none;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-1.active-1 {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+      
+
+        /* Responsive Design */
+        @media (max-width: 1008px) {
+            .nav-container-1 {
+                
+                gap: 1rem;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-buttons-1 {
+                width: 100%;
+                justify-content: center;
+                
+            }
+
+            .nav-btn-1 {
+                flex: 1;
+                min-width: 100px;
+                text-align: center;
+                
+            }
+        }
+    
+    .header-2025 {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-2025 {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .logo-2025 img {
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .search-container-2025 {
+            margin-left: 2rem;
+            flex-grow: 1;
+            max-width: 600px;
+        }
+
+        .search-bar-2025 {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 24px;
+            font-size: 1rem;
+            background-color: #f8f8f8;
+        }
+
+        .container-2025 {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+          
+        }
+
+        .notification-banner-2025 {
+            background: linear-gradient(to right, #e8e4ff, #f0e6ff);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-banner-2025 i {
+            color: #4834d4;
+        }
+
+       
+        h1-2025 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .create-trip-options-2025 {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .create-button-2025 {
+            flex: 1;
+            padding: 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .create-button-2025:hover {
+            border-color: #000;
+        }
+
+        .create-button-2025 i {
+            font-size: 1.2rem;
+        }
+
+        .ai-button-2025 {
+            background-color: #f8f8f8;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-buttons {
+
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: auto;
+        }
+
+        .public-button {
+            background-color: #00d2ff;
+            color: white;
+            width: auto;
+        }
+
+        .public-button:hover {
+            background-color: #1b3a42;
+            
+        }
+
+        .private-button {
+            background-color:#00d2ff;
+            border: 1px solid #dee2e6;
+            color: #ffffff;
+            width: auto;
+        }
+
+        .private-button:hover {
+            background-color: #1b3a42;
+        }    
+   </style>
+
+   <style>
+    .slide-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        background: rgb(243, 241, 241);
+        padding: 0 20px;
+        margin-top: 10px;
+        border-radius: 5px;
+        width:auto;
+        
+    }
+    .show {
+        max-height: 200px; /* Adjust height as needed */
+        padding: 20px;
+    }
+</style>
+
+<style>
+  /* Modal styles */
+  /*public */
+  .travel_modal_pub {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .travel_modal_pub_content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 800px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+  }
+
+  .travel_close_pub_btn {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #6c757d;
+  }
+
+  /* Form styles */
+  .travel_stepper_pub_container {
+      max-width: 800px;
+      margin: 30px auto;
+      font-family: Arial, sans-serif;
+  }
+
+  .travel_step_pub_panel {
+      display: none;
+      padding: 20px;
+      background-color: #eeeaea;
+      border-radius: 8px;
+      margin-bottom: 20px;
+  }
+
+  .travel_step_pub_panel.active {
+      display: block;
+  }
+
+  .travel_progress_pub_bar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      position: relative;
+  }
+
+  .travel_progress_pub_step {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+  }
+
+  .travel_progress_pub_step.active {
+      background-color: #15646c;
+      color: white;
+  }
+
+  .travel_progress_pub_line {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #ddd;
+      z-index: 1;
+  }
+
+  .travel_form_pub_group {
+      margin-bottom: 20px;
+  }
+
+  label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #000!important;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+
+  .travel_gender_pub_group {
+      display: flex;
+      gap: 20px;
+  }
+
+  .travel_gender_pub_option {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+  }
+
+  .travel_button_pub_group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+  }
+
+  button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+  }
+
+  .travel_prev_pub_btn {
+      background-color: #6c757d;
+      color: white;
+  }
+
+  .travel_next_pub_btn {
+      background-color: #15646c;
+      color: white;
+  }
+
+  .travel_submit_pub_btn {
+      background-color: #15646c;
+      color: white;
+  }
+
+  .travel_error_pub_message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+  }
+.travel_modal_pub {
+display: none;
+position: fixed;
+z-index: 1000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+}
+
+.travel_modal_pub_content {
+background-color: white;
+margin: 5% auto;
+padding: 20px;
+border-radius: 10px;
+max-width: 800px;
+}
+
+.travel_modal_pub_close {
+float: right;
+font-size: 28px;
+cursor: pointer;
+}
+.pub-essen-essentials-category input { width:auto!important;}
+.pub-essen-essentials-item {width:25%; float: left;}
+.pub-essen-essentials-category {overflow: hidden;}
+.pub-essen-essentials-item {margin:0px!important}
+:root {
+      --pub-essen-primary-color: #2c3e50;
+      --pub-essen-secondary-color: #3498db;
+      --pub-essen-background-color: #f4f6f7;
+      --pub-essen-text-color: #333;
+  }
+ 
+  .pub-essen-container {
+      background-color: rgba(216, 221, 226, 0.86);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+width: auto;
+  }
+  .pub-essen-toggle-btn {
+      width:auto;
+      padding: 10px;
+      background-color: var(--pub-essen-primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 15px;
+      transition: background-color 0.3s ease;
+  }
+  .pub-essen-toggle-btn:hover {
+      background-color: #34495e;
+  }
+  .pub-essen-essentials-list {
+      display: none;
+      max-height: 1400px;
+      overflow-y: auto;
+  }
+  textarea {min-height: 100px!important;}
+  input[type="text"], input[type="date"], input[type="number"], select, textarea {background-color: white!important;border: 1px solid #ddd!important;}
+  .pub-essen-essentials-category {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+  }
+  .pub-essen-essentials-category h3 {
+      margin-bottom: 10px;
+      color: var(--pub-essen-secondary-color);
+  }
+  .pub-essen-essentials-item {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+  }
+  .pub-essen-essentials-item input {
+      margin-right: 10px;
+  }
+  .pub-essen-save-btn {
+      width: auto;
+      padding: 10px;
+      background-color: var(--pub-essen-secondary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+  }
+  .pub-essen-save-btn:hover {
+      background-color: #2980b9;
+  }
+  #pub-essen-saved-items {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #f1f8ff;
+      border-radius: 5px;
+  }
+</style>
+
+   <style>
+    /*private form*/
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    .trip-planner-container {
+        width: 100%;
+        max-width: 900px;
+        background: #eeeaea;
+        border-radius: 10px;
+        padding: 20px;
+        color: #000;
+  height: auto;
+
+
+    }
+
+    .trip-progress-stepper {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    .trip-progress-step {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #9f9a9a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        color: white;
+    }
+
+    .trip-progress-step.active {
+        background: #15646c;
+    }
+
+    .trip-progress-step::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: #e0e0e0;
+        right: -100%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .trip-progress-step:last-child::after {
+        display: none;
+    }
+
+    .trip-form-step {
+        display: none;
+    }
+
+    .trip-form-step.active {
+        display: block;
+    }
+
+    .trip-form-group {
+        margin-bottom: 20px;
+    }
+
+    .trip-form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .trip-form-input, .trip-form-select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .trip-date-container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .trip-date-container input {
+        flex: 1;
+    }
+
+    .trip-form-button {
+        background:  #15646c;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .trip-form-button:hover {
+        background: #083e44;
+    }
+
+    .trip-form-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+   
+    .trip-popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+    }
+.priv-modal-button {
+        background: #15646c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .priv-modal-button:hover {
+        background: #083e44;
+    }
+    .priv-modal-container {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        width: 90%;
+        max-width: 800px;
+        z-index: 99999;
+    }
+    .priv-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+    }
+    .priv-close-button {
+        background: rgb(104, 100, 100);
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        float: right;
+    }
+    trip-essentials-area {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  margin: 20px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.trip-essentials-area h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+#trip-essentials-text {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 150px;
+  background-color: #f8f9fa;
+  transition: border-color 0.3s ease;
+}
+
+#trip-essentials-text:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+.trip-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(249, 250, 251, 0.95));
+    border-radius: 24px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06),
+                0 4px 8px rgba(0, 0, 0, 0.04);
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    border: 1px solid rgba(229, 231, 235, 0.5);
+    overflow: hidden;
+    width: 500px;
+    margin: 1.5rem auto;
+}
+
+.trip-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12),
+                0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.trip-card h4 {
+    color: #1a1f36;
+    margin-bottom: 1.75rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.75rem;
+    letter-spacing: -0.025em;
+}
+
+.trip-card p {
+    margin: 1rem 0;
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.trip-card p strong {
+    color: #2d3748;
+    font-weight: 600;
+    min-width: 140px;
+    display: inline-block;
+}
+
+.trip-card span {
+    color: #4b5563;
+}
+
+/* Add a subtle hover effect for text */
+.trip-card:hover p strong {
+    color: #1a365d;
+}
+
+/* Add some visual hierarchy with a background accent */
+.trip-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, rgba(99, 179, 237, 0.1), rgba(66, 153, 225, 0.05));
+    border-radius: 0 24px 0 100%;
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .trip-card {
+        width: 100%;
+        padding: 1.5rem;
+    }
+    
+    .trip-card h4 {
+        font-size: 1.5rem;
+    }
+    
+    .trip-card p strong {
+        min-width: 550px;
+    }
+}
+
+ 
+</style>
+
+  </head>
+  <body>
+  
+    <header class="header sticky-bar">
+      <div class="top-bar"> 
+        <div class="container-fluid"> 
+          <div class="text-header"> 
+            <div class="text-unlock text-sm-bold">Unlock the Magic of Travel with Travila - Your Gateway to Extraordinary Experiences</div><a class="link-secondary-2" href="#">Get This Now 
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16" fill="none">
+                <path d="M7.99992 12.6666L12.6666 7.99992L7.99992 3.33325M12.6666 7.99992L3.33325 7.99992" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid background-body">
+        <div class="main-header">
+          <div class="header-left">
+            <div class="header-logo"><a class="d-flex" href="Index.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
+            <div class="header-nav">
+              <nav class="nav-main-menu">
+                <ul class="main-menu">
+                  <li class="mega-li has-children"><a class="active" href="Index.html">Home</a>
+                    <div class="mega-menu">
+                      <div class="mega-menu-inner">
+                        <div class="row align-items-center">
+                          <div class="col-lg-10">
+                            <div class="row align-items-center">
+                              <div class="col-lg-4">
+                                <p class="text-md-bold mb-10 neutral-1000">Start Your Journey</p>
+                                <h5 class="mb-45 neutral-1000">Book, Pack, Go! Your Ultimate Travel Companion</h5><a class="btn btn-brand-secondary">Exploring Now 
+                                  <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 15L15 8L8 1M15 8L1 8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"> </path>
+                                  </svg></a>
+                              </div>
+                              <div class="col-lg-4">
+                                <div class="card-home-link background-body"> <a class="card-icon" href="Index.html"> <img src="assets/imgs/template/icons/activity.svg" alt="Travila"></a>
+                                  <div class="card-info"> <!--<a href="index.html">-->
+                                    <h6 class="text-md-bold"> Everything in one space</h6></a>
+                                    <p class="text-xs-medium neutral-500">
+                                      Whether it's your own personalized trip or a bookmarked plan, you'll find everything organized on a single page for your convenience.</p>
+                                  </div>
+                                </div>
+                                <div class="card-home-link background-body"> <a class="card-icon" href="Index.html"> <img src="assets/imgs/template/icons/map.svg" alt="Travila"></a>
+                                  <div class="card-info"> <a href="Index.html">
+                                      <h6 class="text-md-bold"> Our Services</h6></a>
+                                    <p class="text-xs-medium neutral-500">Tours, Activities, Destinations</p>
+                                  </div>
+                                </div>
+                                <div class="card-home-link background-body"> <a class="card-icon" href="index-3.html"> <img src="assets/imgs/template/icons/deck-chair.svg" alt="Travila"></a>
+                                  <div class="card-info"> <!--<a href="index-3.html">-->
+                                      <h6 class="text-md-bold">Adjust your itinerary as needed
+                                      </h6></a>
+                                    <p class="text-xs-medium neutral-500">Seamlessly manage your itinerary all in one page with Wonderplan - from reconfiguring the order of your plans, introducing new destinations to your itinerary, or even discarding plans as needed.</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-4">
+                                <ul class="list-featured">
+                                  <li><h2><a class="tours" href="index-4.html">Tours</a></li></h2>
+                                  <li><h2><a class="activities" href="index-5.html">Activities</a></li></h2>
+                                  <li><h2><a class="destinations" href="index-6.html"> Destinations</a></li></h2><br><br>
+                                  <li><a class="hotels" href="customize.html">Customize Your Own Tour With AI</a></li>
+                               <!--     <li><a class="hotels" href="index-7.html">Hotels</a></li>
+                                  <li><a class="rental-car" href="index-8.html">Rental Car</a></li>
+                                  <li><a class="property" href="index-9.html">Property</a></li>
+                            <li><a class="tickets" href="index-10.html">Tickets</a></li>--> 
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-2"><img src="assets/imgs/template/world.png" alt="Travila"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="mega-li-small "><a href="about.html">Tours</a>
+                    
+                  </li>
+                  <!--<li class="mega-li-small has-children"><a href="service.html">Destinations</a>
+                    <div class="mega-menu">
+                      <div class="mega-menu-inner mega-menu-inner-small mega-menu-inner-destinations">
+                        <h6 class="text-lg-bold neutral-1000">Destinations</h6>
+                        <ul class="sub-menu">-->
+        
+                          <!--<li><a href="destination-2.html">Destinations list 02</a></li>
+                          <li><a href="destination-3.html">Destinations list 03</a></li>
+                                            <li><a href="destination.html">Destinations list </a></li>-->
+                          <!--<li><a href="destination-4.html">Destinations Details page</a></li>-->
+                          <!--<li><a href="destination-5.html">Destinations Details 02</a></li>
+                          <li><a href="destination-6.html">Destinations Details 03</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>-->
+                  <!--<li class="has-children"><a href="#">Activities</a>
+                    <ul class="sub-menu"> 
+                      <li> <a href="activities.html">Activities </a></li>-->
+                      <!--<li> <a href="activities-2.html">Activities List 02</a></li>
+                      <li> <a href="activities-3.html">Activities List 03</a></li>
+                      <li> <a href="activities-4.html">Activities List 04</a></li>
+                      <li> <a href="activities-5.html">Activities List 05</a></li>-->
+                     
+                     <!--<li> <a href="activities-detail-2.html">Activities Single 02</a>
+
+                    </li>--> 
+                      
+                      <!--<li> <a href="activities-detail-4.html">Activities Single 04</a></li>-->
+                    
+                  <!--<li class="has-children"><a href="blog.html">Hotel</a>
+                    <ul class="sub-menu">
+                      <li><a href="hotel-grid.html">Hotel List 01</a></li>
+                      <li><a href="hotel-grid-2.html">Hotel List 02</a></li>
+                      <li><a href="hotel-grid-3.html">Hotel List 03</a></li>
+                      <li><a href="hotel-grid-4.html">Hotel List 04</a></li>
+                      <li><a href="hotel-grid-5.html">Hotel List 05</a></li>
+                      <li><a href="hotel-grid-6.html">Hotel List 06</a></li>
+                      <li><a href="hotel-detail.html">Hotel Details 01</a></li>
+                      <li><a href="hotel-detail-2.html">Hotel Details 02</a></li>
+                    </ul>
+                  </li>-->
+
+                 <!-- <li class="mega-li-small has-children"><a href="#">Rental</a>
+                    <div class="mega-menu">
+                      <div class="mega-menu-inner mega-menu-inner-small">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <h6 class="text-lg-bold neutral-1000">Cars Rental</h6>
+                            <ul class="sub-menu">
+                              <li><a href="rental-car.html">Car Grid</a></li>
+                              <li><a href="rental-car-2.html">Car Grid 02</a></li>
+                              <li><a href="rental-car-3.html">Car Grid 03</a></li>
+                              <li><a href="rental-car-4.html">Car list</a></li>
+                              <li><a href="rental-detail.html">Car Details</a></li>
+                            </ul>
+                          </div>
+                          <div class="col-lg-6">
+                            <h6 class="text-lg-bold neutral-1000">Property Rental</h6>
+                            <ul class="sub-menu">
+                              <li><a href="rental-property.html">Property Grid</a></li>
+                              <li><a href="rental-property-2.html">Property Grid 02</a></li>
+                              <li><a href="rental-property-3.html">Property List</a></li>
+                              <li><a href="property-detail.html">Property Details</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>-->
+                  <li class="has-children"><a href="blog-grid.html">Blog</a>
+                    <ul class="sub-menu">
+                      <li><a href="blog-grid.html">The Blog Vault</a></li>
+                      <li><a href="#">Share Your Thoughts</a></li>
+                      </ul>
+                  </li>
+                  <li class=""><a href="privacy.html">Privacy Notice</a>
+                    
+                  </li>
+                  <!--<li class="has-children"><a href="tickets.html">Tickets</a>
+                    <ul class="sub-menu">
+                      <li><a href="tickets.html">Flight tickets</a></li>
+                      <li><a href="tickets-2.html">Train tickets</a></li>
+                      <li><a href="book-ticket.html">Ticket details</a></li>
+                    </ul>
+                  </li>-->
+                  <li class=""><a href="faq.html">FAQs</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+
+                  <li class="has-children"><a href="javascript:void(0)">#</a>
+                    <ul class="sub-menu">
+                      <!--<li><a href="about.html">About</a></li>
+                      <li><a href="privacy.html">Privacy</a></li>
+                      <li><a href="contact.html">Contact</a></li>
+                     
+                      <li><a href="faq.html">FAQs</a></li>
+                      <li><a href="help-center.html">Help center</a></li>-->
+                      <li><a href="become-expert.html">Become Expert</a></li>
+                      <li><a href="comming-soon.html">Coming soon</a></li>
+                      <li><a href="checkout.html">Checkout</a></li>
+                      <li><a href="confirmation.html">Confirmationn</a></li>
+                      <li><a href="invoice.html">Invoice</a></li>
+                      <li><a href="term.html">Term</a></li>
+                      <li><a href="404.html">404</a></li>
+                    </ul>
+                  </li>
+
+                  
+                
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div class="header-right">
+            <!--<div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-account icon-lang"><span class="text-14-medium arrow-down">EN</span></span>
+              <div class="dropdown-account">
+                <ul>
+                  <li><a class="text-sm-medium" href="#">English</a></li>
+                  <li><a class="text-sm-medium" href="#">French</a></li>
+                  <li><a class="text-sm-medium" href="#">Chinese</a></li>
+                </ul>
+              </div>
+    
+            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-cart"><span class="text-14-medium arrow-down">USD</span></span>
+              <div class="dropdown-cart">
+                <ul>
+                  <li><a class="text-sm-medium" href="#">USD</a></li>
+                  <li><a class="text-sm-medium" href="#">EUR</a></li>
+                  <li><a class="text-sm-medium" href="#">SGP</a></li>
+                </ul>
+              </div>
+            </div>-->
+           
+            <div class="burger-icon-2 burger-icon-white"><img src="assets/imgs/template/icons/menu.svg" alt="Travila"></div>
+            <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar button-bg-2">
+      <div class="mobile-header-wrapper-inner">
+        <div class="mobile-header-logo"> <a class="d-flex" href="index.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a>
+          <div class="burger-icon burger-icon-white"></div>
+        </div>
+        <div class="mobile-header-top">
+          <div class="box-author-profile"> 
+            <div class="card-author"> 
+              <div class="card-image"> <img src="assets/imgs/page/homepage1/author2.png" alt="Travila"></div>
+              <div class="card-info"> 
+                <p class="text-md-bold neutral-1000">Alice Roses</p>
+                <p class="text-xs neutral-1000">London, England</p>
+              </div>
+            </div><a class="btn btn-black" href="#">Logout</a>
+          </div>
+        </div>
+        <div class="mobile-header-content-area">
+          <div class="perfect-scroll">
+            <div class="mobile-menu-wrap mobile-header-border">
+              <nav>
+                <ul class="mobile-menu font-heading">
+                  <li class="has-children"><a class="active" href="Index.html">Home</a>
+                    <ul class="sub-menu">
+                      <li><a href="index-5.html">Tours</a></li>
+                      <li><a href="index-6.html"> Activities</a></li>
+                      <li><a href="index-7.html">Destinations</a></li>
+                      <li><a href="customize.html"> Customize Your Own Tour With AI</a></li>
+                      <!---<li><a href="index.html">Home 1 - All services</a></li>
+                      <li><a href="Index.html">Home 2 - All services</a></li>
+                      <li><a href="index-3.html">Home 3 - All services</a></li>
+                      <li><a href="index-4.html">Home 4 - All services</a></li>
+                      <li><a href="index-5.html">Home 5 - Tours</a></li>
+                      <li><a href="index-6.html">Home 6 - Activities</a></li>
+                      <li><a href="index-7.html">Home 7 - Destinations</a></li>
+                      <li><a href="index-8.html">Home 8 - Hotels</a></li>
+                      <li><a href="index-9.html">Home 9 - Rental Car</a></li>
+                      <li><a href="index-10.html">Home 10 - Rental Property</a></li>
+                      <li><a href="index-11.html">Home 11 - Tickets</a></li>-->
+                    </ul>
+                  </li>
+                  <li class=""><a href="tour-grid-3.html">Tours</a></li> noorxyz
+                  <li class=""><a href="destination.html">Destinations</a>
+                    <ul class="sub-menu">
+                      <li><a href="destination.html">Destinations list</a></li>
+                      <!--<li><a href="destination-2.html">Destinations list 2</a></li>
+                      <li><a href="destination-3.html">Destinations list 3</a></li>
+                      <li><a href="destination-4.html">Destinations Details 01</a></li>
+                      <li><a href="destination-5.html">Destinations Details 02</a></li>
+                      <li><a href="destination-6.html">Destinations Details 03</a></li>-->
+                    </ul>
+                  </li>
+                  <!--<li class="has-children"><a href="destination.html">Destinations</a>
+                    <ul class="sub-menu">
+                      <li><a href="destination.html">Destinations list 1</a></li>
+                      <li><a href="destination-2.html">Destinations list 2</a></li>
+                      <li><a href="destination-3.html">Destinations list 3</a></li>
+                      <li><a href="destination-4.html">Destinations Details 01</a></li>
+                      <li><a href="destination-5.html">Destinations Details 02</a></li>
+                      <li><a href="destination-6.html">Destinations Details 03</a></li>
+                    </ul>
+                  </li>-->
+                  <li class="has-children"><a href="activities.html">Activities</a>
+                    <ul class="sub-menu">
+                      <li><a href="activities.html">Activities List</a></li>
+                      <!--<li><a href="activities-2.html">Activities List - Sidebar Left Fillter</a></li>
+                      <li><a href="activities-3.html">Activities List - Sidebar Right Fillter</a></li>
+                      <li><a href="activities-detail-4.html">Activities Single 04</a></li>
+                       <li><a href="activities-detail-2.html">Activities Single 02 - Slideshow</a></li>
+                      <li><a href="activities-4.html">Activities List - Grid</a></li>
+                      <li><a href="activities-5.html">Activities List - List</a></li>-->
+                      <li><a href="activities-detail.html">Activities Single</a></li>
+                     
+                      <li><a href="activities-detail-3.html">Activities</a></li>
+                      
+                    </ul>
+                  </li>
+                  <!--<li class="has-children"> <a href="hotel-grid.html">Hotels</a>
+                    <ul class="sub-menu">
+                      <li><a href="hotel-grid.html">Hotel List 01</a></li>
+                      <li><a href="hotel-grid-2.html">Hotel List 02</a></li>
+                      <li><a href="hotel-grid-3.html">Hotel List 03</a></li>
+                      <li><a href="hotel-grid-4.html">Hotel List 04</a></li>
+                      <li><a href="hotel-grid-5.html">Hotel List 05</a></li>
+                      <li><a href="hotel-grid-6.html">Hotel List 06</a></li>
+                      <li><a href="hotel-detail.html">Hotel Details 01</a></li>
+                      <li><a href="hotel-detail-2.html">Hotel Details 02</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-children"> <a href="rental-car.html">Rental</a>
+                    <ul class="sub-menu">
+                      <li><a href="rental-car.html">Car Grid</a></li>
+                      <li><a href="rental-car-2.html">Car list</a></li>
+                      <li><a href="rental-car-3.html">Car Details</a></li>
+                      <li><a href="rental-proprty.html">Property Grid</a></li>
+                      <li><a href="rental-proprty-2.html">Property Grid</a></li>
+                      <li><a href="rental-proprty-3.html">Property List</a></li>
+                      <li><a href="rental-detail.html">Property Details</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-children"> <a href="tickets.html">Tickets</a>
+                    <ul class="sub-menu">
+                      <li><a href="tickets.html">Flight tickets</a></li>
+                      <li><a href="tickets-2.html">Train tickets</a></li>
+                      <li><a href="book-ticket.html">Ticket details</a></li>
+                    </ul>
+                  </li>-->
+                  <li class="has-children"> <a href="javascript:void(0)">Pages</a>
+                    <ul class="sub-menu">
+                      <li><a href="about.html">About</a></li>
+                      <li><a href="contact.html">Contact</a></li>
+                      <li><a href="faq.html">FAQs</a></li>
+                      <li><a href="help-center.html">Help center</a></li>
+                      <li><a href="become-expert.html">Become Expert</a></li>
+                      <li><a href="comming-soon.html">Coming soon                                    </a></li>
+                      <li><a href="checkout.html">Checkout</a></li>
+                      <li><a href="confirmation.html">Confirmationn</a></li>
+                      <li><a href="invoice.html">Invoice</a></li>
+                      <li><a href="term.html">Term</a></li>
+                      <li><a href="404.html">404</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-children"> <a href="blog-grid.html">Blog</a>
+                    <ul class="sub-menu">
+                      <li><a href="blog-grid.html">Grid Full</a></li>
+                      <li><a href="blog-grid-2.html">Grid Sidebar</a></li>
+                      <li><a href="blog-grid-3.html">List</a></li>
+                      <li><a href="blog-detail.html">Blog Details</a></li>
+                      <li><a href="blog-detail-2.html">Blog Details 2</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-canvas-wrapper perfect-scrollbar button-bg-2">
+      <div class="sidebar-canvas-container"> 
+        <div class="sidebar-canvas-head">
+          <div class="sidebar-canvas-logo"> <a class="d-flex" href="Index.html"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"></a></div>
+          <div class="sidebar-canvas-lang"> 
+            <div class="d-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-account icon-lang"><span class="text-14-medium arrow-down">EN</span></span>
+              <div class="dropdown-account">
+                <ul>
+                  <li><a class="text-sm-medium" href="#">English</a></li>
+                  <li><a class="text-sm-medium" href="#">French</a></li>
+                  <li><a class="text-sm-medium" href="#">Chinese</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="d-inline-block box-dropdown-cart align-middle mr-15"><span class="text-14-medium icon-list icon-cart"><span class="text-14-medium arrow-down">USD</span></span>
+              <div class="dropdown-cart">
+                <ul>
+                  <li><a class="text-sm-medium" href="#">USD</a></li>
+                  <li><a class="text-sm-medium" href="#">EUR</a></li>
+                  <li><a class="text-sm-medium" href="#">SGP</a></li>
+                </ul>
+              </div>
+            </div><a class="close-canvas" href="#"> <img alt="Travila" src="assets/imgs/template/icons/close.png"></a>
+          </div>
+        </div>
+        <div class="sidebar-canvas-content">
+          <div class="box-author-profile"> 
+            <div class="card-author"> 
+              <div class="card-image"> <img src="assets/imgs/page/homepage1/author2.png" alt="Travila"></div>
+              <div class="card-info"> 
+                <p class="text-md-bold neutral-1000">Person Xyz</p>
+                <p class="text-xs neutral-1000">London, England</p>
+              </div>
+            
+            </div><div class="btnprof">
+              <button class="btnview"><a href="../travi dash/my-profile.html">View Profile</a></button>
+             </div><a class="btn btn-black" href="#">Logout</a>
+          </div>
+          
+          <div class="box-quicklinks"> 
+            <h6 class="title-quicklinks neutral-1000">Quick Links</h6>
+            <div class="box-list-quicklinks"> 
+              <div class="item-quicklinks"> 
+                <div class="item-icon"> <img src="assets/imgs/template/icons/notify.svg" alt="Travila"></div>
+                <div class="item-info"> <a href="#"> 
+                    <h6 class="text-md-bold neutral-1000">Notifications</h6></a>
+                  <p class="text-xs neutral-500 online">2 new messages</p>
+                </div>
+              </div>
+              <div class="item-quicklinks"> 
+                <div class="item-icon"> <img src="assets/imgs/template/icons/bookmark.svg" alt="Travila"></div>
+                <div class="item-info"> <a href="#"> 
+                    <h6 class="text-md-bold neutral-1000">Bookmark</h6></a>
+                  <p class="text-xs neutral-500">7 tours, 2 rooms</p>
+                </div>
+              </div>
+              
+              
+              <div class="item-quicklinks"> 
+                <div class="item-icon"> <img src="assets/imgs/template/icons/friends.svg" alt="Travila"></div>
+                <div class="item-info"> <a href="#"> 
+                    <h6 class="text-md-bold neutral-1000">Friends</h6></a>
+                  <p class="text-xs neutral-500">Your team</p>
+                </div>
+              </div>
+              <div class="item-quicklinks"> 
+                <div class="item-icon"> <img src="assets/imgs/template/icons/tickets.svg" alt="Travila"></div>
+                <div class="item-info"> <a href="#"> 
+                    <h6 class="text-md-bold neutral-1000">Tickets</h6></a>
+                  <p class="text-xs neutral-500 resolved">3 resolved tickets</p>
+                </div>
+              </div>
+              <div class="item-quicklinks"> 
+                <div class="item-icon"> <img src="assets/imgs/template/icons/settings.svg" alt="Travila"></div>
+                <div class="item-info"> <a href="#"> 
+                    <h6 class="text-md-bold neutral-1000">Setting</h6></a>
+                  <p class="text-xs neutral-500">Your account</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        
+         
+          <div class="box-contactus">
+            <h6 class="title-contactus neutral-1000">Contact Us</h6>
+            <div class="contact-info"> 
+              <p class="address-2 text-md-medium neutral-1000">4517 Washington Ave. <br>Manchester, Kentucky 39495</p>
+              <p class="hour-work-2 text-md-medium neutral-1000">Hours: 8:00 - 17:00, Mon - Sat</p>
+              <p class="email-2 text-md-medium neutral-1000">support@travila.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main class="main">
+      <section class="box-section block-banner-tourlist" style="background-image:url(assets/imgs/page/tour/banner5.png)">
+        <div class="container"> 
+          <div class="text-center"> 
+            <h3>Journey with Travo - Begin Your Story!</h3>
+            <h6 class="heading-6-medium">Easily search for top tours offered by our AI and community</h6>
+          </div>
+          </div>
+      </section>
+
+            <div class="container-2025">
+              
+                 <input type="button" value="Create a new Trip" onclick="toggleSlide()" class="toggle-button" style="width:50%">
+                 <input type="button" onclick="launchApp()" value="Build a trip with AI"  style="width:49%; margin-left:1%; float:right;" href="../tourism-recommender 3/templates/index.html">
+                 <script>
+                    function launchApp() {
+                        fetch('/launch_app', {
+                            method: 'POST'
+                        })
+                        .then(response => response.text())
+                        .then(data => {
+                            console.log('App launched:', data);
+                            alert('Tourism recommender app launched!');
+                            window.location.href="../tourism-recommender 3/templates/index.html";
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error launching app');
+                        });
+                    }
+                </script>
+                    <div id="slideDiv" class="slide-content" style="background-color:white">
+                    <h5>Choose Trip Type:</h5>
+                    <div class="modal-buttons">
+                          <button class="modal-button public-button" onclick="openTravelModal()" style="width:50%">
+                            Public Trip
+                        </button><br><div style="padding: 10px;"></div>
+                        <button class="modal-button private-button" onclick="openModal()" style="width:50%;  float:left;">
+                            Private Trip
+                        </button>
+                    </div>
+                  </div>
+
+            
+                  <div id="travelModal" class="travel_modal_pub">
+                    <div class="travel_modal_pub_content">
+                        <span class="travel_modal_pub_close" onclick="closeTravelModal()">&times;</span>
+
+                    <div class="travel_stepper_pub_container">
+                      <div class="travel_progress_pub_bar">
+                          <div class="travel_progress_pub_line"></div>
+                          <div class="travel_progress_pub_step active">1</div>
+                          <div class="travel_progress_pub_step">2</div>
+                          <div class="travel_progress_pub_step">3</div>
+                      </div>
+                      <form id="travel_booking_form_pub_20250202">
+                        <!-- Step 1 -->
+                        <div class="travel_step_pub_panel active" id="travel_step1_panel_pub_20250202">
+                            <div class="travel_form_pub_group">
+                                <label for="travel_name_input_pub_20250202">Trip Name:</label>
+                                <input type="text" id="travel_name_input_pub_20250202" required>
+                                <div class="travel_error_pub_message" id="travel_name_error_pub_20250202">Please enter your name</div>
+                            </div>
+                            <div class="travel_form_pub_group">
+                                <label for="travel_destination_select_pub_20250202">Destination:</label>
+                                <select id="travel_destination_select_pub_20250202" required>
+                                    <option value="">Select a country</option>
+                                </select>
+                                <div class="travel_error_pub_message" id="travel_destination_error_pub_20250202">Please select a destination</div>
+                            </div>
+                            <div class="travel_button_pub_group">
+                                <button type="button" class="travel_next_pub_btn" onclick="travelNextStepPub(1)">Next</button>
+                            </div>
+                        </div>
+            
+                        <!-- Step 2 -->
+                        <div class="travel_step_pub_panel" id="travel_step2_panel_pub_20250202">
+                            
+                            <div class="travel_form_pub_group">
+                              <label for="travel_start_date_pub_20250202">Start Date:</label>
+                              <input type="date" id="travel_start_date_pub_20250202" required>
+                              <div class="travel_error_pub_message" id="travel_start_date_error_pub_20250202">Please select a start date</div>
+                          </div>
+                          <div class="travel_form_pub_group">
+                              <label for="travel_end_date_pub_20250202">End Date:</label>
+                              <input type="date" id="travel_end_date_pub_20250202" required>
+                              <div class="travel_error_pub_message" id="travel_end_date_error_pub_20250202">Please select an end date</div>
+                          </div>
+                          <div class="travel_form_pub_group">
+                              <label for="travel_days_calc_pub_20250202">Number of Days:</label>
+                              <input type="text" id="travel_days_calc_pub_20250202" readonly>
+                          </div>
+                          <div class="travel_form_pub_group">
+                            <label for="travel_budge_pub_20250202">Budget (Per Person):</label>
+                            <input type="number" id="trip-budget-input" class="trip-form-input" style="width: 100px;" required min="0" step="25">
+                            <select id="trip-currency-select" style="width: 50%; border-radius: 5px; border: 1px solid #ddd;">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                                <option value="JPY">JPY</option>
+                                <option value="INR">INR</option>
+                            </select>
+                            <div class="travel_error_pub_message" id="budget-error" style="display: none; color: red;">Invalid budget amount</div>
+                        </div>
+                        
+                          <div id="day-activities-container" class="form-group"></div>
+
+                          
+                            <div class="travel_button_pub_group">
+                                <button type="button" class="travel_prev_pub_btn" onclick="travelPrevStepPub(2)">Previous</button>
+                                <button type="button" class="travel_next_pub_btn" onclick="travelNextStepPub(2)">Next</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3 -->
+                        <div class="travel_step_pub_panel" id="travel_step3_panel_pub_20250202">
+                            <div class="travel_form_pub_group">
+                                <label for="travel_max_people_pub_20250202">Maximum Number of People:</label>
+                                <input type="number" id="travel_max_people_pub_20250202" min="1" required>
+                                <div class="travel_error_pub_message" id="travel_people_error_pub_20250202">Please enter number of people</div>
+                            </div>
+                            <div class="travel_form_pub_group">
+                                <label>Select Gender:</label>
+                                <div class="travel_gender_pub_group">
+                                    <div class="travel_gender_pub_option">
+                                        <input type="checkbox" id="travel_gender_male_pub_20250202">
+                                        <label for="travel_gender_male_pub_20250202">Male</label>
+                                    </div>
+                                    <div class="travel_gender_pub_option">
+                                        <input type="checkbox" id="travel_gender_female_pub_20250202">
+                                        <label for="travel_gender_female_pub_20250202">Female</label>
+                                    </div>
+                                    <div class="travel_gender_pub_option">
+                                        <input type="checkbox" id="travel_gender_other_pub_20250202">
+                                        <label for="travel_gender_other_pub_20250202">Other</label>
+                                    </div>
+                                </div>
+                                <div class="travel_error_pub_message" id="travel_gender_error_pub_20250202">Please select at least one gender</div>
+                            </div>
+                               <div class="travel_form_pub_group">
+                              <button class="pub-essen-toggle-btn" id="pub-essen-toggle-btn">Show/Hide Essentials</button>
+                              <div id="pub-essen-essentials-list" class="pub-essen-essentials-list">
+                                  <div id="pub-essen-essentials-container"></div>
+                                  <button class="pub-essen-save-btn" id="pub-essen-save-btn">Save Selected Items</button>
+                              </div>
+                              <div id="pub-essen-saved-items"></div>
+                          </div>
+
+                            <div class="travel_form_pub_group">
+                                <label for="travel_apply_date_pub_20250202">Last Apply by Date:</label>
+                                <input type="date" id="travel_apply_date_pub_20250202" required>
+                                <div class="travel_error_pub_message" id="travel_apply_date_error_pub_20250202">Please select last apply by date</div>
+                            </div>
+                            <div class="travel_button_pub_group">
+                                <button type="button" class="travel_prev_pub_btn" onclick="travelPrevStepPub(3)">Previous</button>
+                                <button type="button" class="travel_submit_pub_btn" onclick="publb">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+                <script type="module">
+                // Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCIIwPjnFskKiEvEIhSb5KXgevBNyduSDk",
+    authDomain: "ty-project-80ab7.firebaseapp.com",
+    projectId: "ty-project-80ab7",
+    storageBucket: "ty-project-80ab7.firebasestorage.app",
+    messagingSenderId: "491495110151",
+    appId: "1:491495110151:web:035795af4bc8eebff79ca2",
+    measurementId: "G-XFS1VYTHSM",
+    databaseURL: "https://ty-project-80ab7-default-rtdb.firebaseio.com/"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// Update the onclick handler for the submit button
+document.querySelector('.travel_submit_pub_btn').onclick = function() {
+    if (validateTravelStepPub(3)) {
+        saveToFirebase();
+    }
+};
+
+/*async function saveToFirebase() {
+    try {
+        // Get user email from local storage
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            alert('User email not found. Please login first.');
+            return;
+        }
+
+        // Get form data using the modified collection function
+        const formData = collectTravelFormData();
+
+        // Add additional fields
+        formData.userEmail = userEmail;
+        formData.timestamp = Date.now();
+
+        // Sanitize the email for use as a Firebase key
+        const sanitizedEmail = userEmail.replace(/\./g, ",");
+
+        // Save data under travel-bookings/userEmail/public-trips
+        const newBookingRef = push(ref(database, `travel-bookings/${sanitizedEmail}/public-trips`));
+        
+        await set(newBookingRef, formData);
+
+        // Success handling
+        console.log('Booking saved successfully with ID:', newBookingRef.key);
+        alert('Booking saved successfully!');
+
+        // Reset form and UI
+        document.getElementById('travel_booking_form_pub_20250202').reset();
+        if (document.getElementById('pub-essen-saved-items')) {
+            document.getElementById('pub-essen-saved-items').innerHTML = '';
+        }
+        if (document.getElementById('day-activities-container')) {
+            document.getElementById('day-activities-container').innerHTML = '';
+        }
+        currentTravelStepPub = 1;
+        showTravelStepPub(1);
+
+    } catch (error) {
+        console.error('Error saving booking:', error);
+        alert('Error saving booking: ' + error.message);
+    }
+}
+*/
+
+async function saveToFirebase() {
+    try {
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            alert('Please login first');
+            return;
+        }
+
+        const formData = collectTravelFormData();
+        
+        // Add timestamp and participants array
+        formData.timestamp = Date.now();
+        formData.participants = [userEmail]; // Creator is first participant
+        
+        const sanitizedEmail = userEmail.replace(/\./g, ',');
+        const newTripRef = push(ref(database, `travel-bookings/${sanitizedEmail}/public-trips`));
+        
+        await set(newTripRef, formData);
+        
+        alert('Trip saved successfully!');
+        retrieveAndDisplayTrips(); // Refresh the display
+        
+    } catch (error) {
+        console.error('Error saving trip:', error);
+        alert('Error saving trip: ' + error.message);
+    }
+}
+
+// Ensure the form doesn't submit normally
+document.getElementById('travel_booking_form_pub_20250202').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (validateTravelStepPub(3)) {
+        saveToFirebase();
+    }
+});
+
+
+
+// Function to validate and move to the next step
+function nextTripStep() {
+    const currentStep = document.querySelector('.trip-form-step.active');
+    const nextStep = currentStep.nextElementSibling;
+    
+    if (nextStep) {
+        currentStep.classList.remove('active');
+        nextStep.classList.add('active');
+    }
+}
+
+// Function to go back to the previous step
+function prevTripStep() {
+    const currentStep = document.querySelector('.trip-form-step.active');
+    const prevStep = currentStep.previousElementSibling;
+
+    if (prevStep) {
+        currentStep.classList.remove('active');
+        prevStep.classList.add('active');
+    }
+}
+
+// Function to reset form to specific step
+function resetToStep(stepNumber) {
+    const steps = document.querySelectorAll('.trip-form-step');
+    steps.forEach((step, index) => {
+        if (index + 1 === stepNumber) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
+        }
+    });
+}
+
+// Handle the form submission
+document.querySelector('#trip-submit-button').onclick = function(e) {
+    e.preventDefault();
+    if (validateTripForm()) {
+        saveTripToFirebase();
+    }
+};
+
+async function saveTripToFirebase() {
+    try {
+        // Get user email from local storage
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            alert('User email not found. Please login first.');
+            return;
+        }
+
+        // Collect form data
+        const formData = collectTripFormData();
+
+        // Add additional fields
+        formData.userEmail = userEmail;
+        formData.timestamp = Date.now();
+
+        // Sanitize the email for use as a Firebase key
+        const sanitizedEmail = userEmail.replace(/\./g, ",");
+
+        // Save data under trip-bookings-userEmail/public
+        const newTripRef = push(ref(database, `travel-bookings/${sanitizedEmail}/private-trips`));
+        
+        await set(newTripRef, formData);
+
+        // Success handling
+        console.log('Trip saved successfully with ID:', newTripRef.key);
+        alert('Trip saved successfully!');
+
+        // Reset form and UI
+        document.getElementById('trip-planning-form').reset();
+        resetToStep(1); // Reset to first step using the new function
+
+    } catch (error) {
+        console.error('Error saving trip:', error);
+        alert('Error saving trip: ' + error.message);
+    }
+}
+
+// Function to collect form data
+function collectTripFormData() {
+    return {
+        tripName: document.getElementById('trip-name-input').value,
+        destination: document.getElementById('trip-destination-select').value,
+        startDate: document.getElementById('trip-start-date').value,
+        endDate: document.getElementById('trip-end-date').value,
+        duration: document.getElementById('trip-duration-display').value,
+        activities: document.getElementById('trip-activities-input').value,
+        essentials: document.getElementById('trip-essentials-text').value,
+        budget: document.getElementById('trip-budget-input').value,
+        currency: document.getElementById('trip-currency-select').value
+    };
+}
+
+// Validate the form before submitting
+function validateTripForm() {
+    // Add custom validation for each step if needed
+    const currentStep = document.querySelector('.trip-form-step.active');
+    switch (currentStep.id) {
+        case 'trip-form-step-1':
+            if (!document.getElementById('trip-name-input').value || !document.getElementById('trip-destination-select').value) {
+                alert('Please complete step 1: Basic Info');
+                return false;
+            }
+            break;
+        case 'trip-form-step-2':
+            if (!document.getElementById('trip-start-date').value || !document.getElementById('trip-end-date').value) {
+                alert('Please complete step 2: Dates');
+                return false;
+            }
+            break;
+        case 'trip-form-step-3':
+            if (!document.getElementById('trip-activities-input').value) {
+                alert('Please complete step 3: Activities');
+                return false;
+            }
+            break;
+        case 'trip-form-step-4':
+            if (!document.getElementById('trip-budget-input').value || !document.getElementById('trip-currency-select').value) {
+                alert('Please complete step 4: Budget');
+                return false;
+            }
+            break;
+        default:
+            break;
+    }
+    return true;
+}
+
+// Ensure the form doesn't submit normally
+document.getElementById('trip-planning-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (validateTripForm()) {
+        saveTripToFirebase();
+    }
+});
+                </script>
+              
+              <script>
+                  /*public Form Script*/
+    /*public Form Script*/
+  function openTravelModal() {
+    document.getElementById('travelModal').style.display = 'block';
+  }
+
+  function closeTravelModal() {
+    document.getElementById('travelModal').style.display = 'none';
+  }
+
+  // Close modal when clicking outside of it
+  window.onclick = function(event) {
+    let modal = document.getElementById('travelModal');
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  const essentials = [
+    {
+      category: 'Documents',
+      items: [
+        'Passport', 'Visa', 'Travel Insurance', 
+        'Flight Tickets', 'Hotel Reservations', 
+        'Driver\'s License', 'Copies of Important Documents'
+      ]
+    },
+    {
+      category: 'Clothing',
+      items: [
+        'Underwear', 'Socks', 'T-Shirts', 'Pants/Shorts', 
+        'Jacket', 'Swimwear', 'Sleepwear', 'Comfortable Shoes'
+      ]
+    },
+    {
+      category: 'Electronics',
+      items: [
+        'Phone', 'Phone Charger', 'Power Bank', 
+        'Camera', 'Laptop', 'Universal Adapter', 
+        'Headphones', 'Kindle/Tablet'
+      ]
+    },
+    {
+      category: 'Toiletries',
+      items: [
+        'Toothbrush', 'Toothpaste', 'Deodorant', 'Shampoo', 
+        'Soap', 'Razor', 'Sunscreen', 'First Aid Kit', 
+        'Personal Medications', 'Hand Sanitizer'
+      ]
+    },
+    {
+      category: 'Accessories',
+      items: [
+        'Sunglasses', 'Hat', 'Scarf', 'Watch', 
+        'Water Bottle', 'Daypack', 'Money Belt', 
+        'Travel Pillow'
+      ]
+    },
+    {
+      category: 'Miscellaneous',
+      items: [
+        'Cash', 'Credit Cards', 'Snacks', 
+        'Travel Umbrella', 'Portable Charger', 
+        'Notebook', 'Pen', 'Travel Journal'
+      ]
+    }
+  ];
+
+  const toggleBtn = document.getElementById('pub-essen-toggle-btn');
+  const essentialsList = document.getElementById('pub-essen-essentials-list');
+  const essentialsContainer = document.getElementById('pub-essen-essentials-container');
+  const saveBtn = document.getElementById('pub-essen-save-btn');
+  const savedItems = document.getElementById('pub-essen-saved-items');
+
+  function renderEssentials() {
+    essentialsContainer.innerHTML = essentials.map(category => `
+      <div class="pub-essen-essentials-category">
+        <h3>${category.category}</h3>
+        ${category.items.map(item => `
+          <div class="pub-essen-essentials-item">
+            <input type="checkbox" id="pub-essen-${item.toLowerCase().replace(/\s+/g, '-')}" name="${item}">
+            <label for="pub-essen-${item.toLowerCase().replace(/\s+/g, '-')}">${item}</label>
+          </div>
+        `).join('')}
+      </div>
+    `).join('');
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    essentialsList.style.display = 
+      essentialsList.style.display === 'none' ? 'block' : 'none';
+  });
+
+  saveBtn.addEventListener('click', () => {
+    const selected = Array.from(
+      essentialsList.querySelectorAll('input:checked')
+    ).map(cb => cb.nextElementSibling.textContent);
+
+    savedItems.innerHTML = selected.length 
+      ? `<strong>Selected Items:</strong><br>${selected.join(', ')}` 
+      : 'No items selected';
+
+    essentialsList.style.display = 'none';
+  });
+
+  renderEssentials();
+
+  // Initialize countries dropdown
+  const travelCountriesPub = ["USA", "Canada", "UK", "France", "Germany", "Japan", "Australia", "India", "Brazil", "Spain"];
+  const travelDestinationSelectPub = document.getElementById('travel_destination_select_pub_20250202');
+  travelCountriesPub.forEach(country => {
+    const option = document.createElement('option');
+    option.value = country;
+    option.textContent = country;
+    travelDestinationSelectPub.appendChild(option);
+  });
+
+  const travelStartDatePub = document.getElementById('travel_start_date_pub_20250202');
+  const travelEndDatePub = document.getElementById('travel_end_date_pub_20250202');
+  const travelNumDaysPub = document.getElementById('travel_days_calc_pub_20250202');
+
+
+  function calculateTravelDaysPub() {
+    if (travelStartDatePub.value && travelEndDatePub.value) {
+      const start = new Date(travelStartDatePub.value);
+      const end = new Date(travelEndDatePub.value);
+      
+      // Validate end date is not before start date
+      if (end < start) {
+        alert('End date cannot be before start date');
+        travelEndDatePub.value = '';
+        travelNumDaysPub.value = '';
+        return;
+      }
+      
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Including both start and end days
+      travelNumDaysPub.value = diffDays;
+    }
+  }
+  document.getElementById("travel_start_date_pub_20250202").addEventListener("change", calculateDays);
+    document.getElementById("travel_end_date_pub_20250202").addEventListener("change", calculateDays);
+    ///new aditi code
+    function calculateDays() {
+        const startDate = new Date(document.getElementById("travel_start_date_pub_20250202").value);
+        const endDate = new Date(document.getElementById("travel_end_date_pub_20250202").value);
+        
+        if (!isNaN(startDate) && !isNaN(endDate) && endDate >= startDate) {
+            const timeDiff = endDate - startDate;
+            const numberOfDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1;
+            document.getElementById("travel_days_calc_pub_20250202").value = numberOfDays;
+            generateDayActivities(numberOfDays);
+        } else {
+            document.getElementById("travel_days_calc_pub_20250202").value = "";
+            document.getElementById("day-activities-container").innerHTML = "";
+        }
+    }
+    
+    function generateDayActivities(numberOfDays) {
+        const dayActivitiesContainer = document.getElementById("day-activities-container");
+        dayActivitiesContainer.innerHTML = "";
+        
+        for (let i = 1; i <= numberOfDays; i++) {
+            const dayActivityField = document.createElement("div");
+            dayActivityField.classList.add("form-group");
+            dayActivityField.innerHTML = `
+                <label for="day${i}-activities">Day ${i} Activities:</label>
+                <textarea id="day${i}-activities" rows="4" placeholder="Enter activities for Day ${i}"></textarea>
+            `;
+            dayActivitiesContainer.appendChild(dayActivityField);
+        }
+    }
+  function validateApplyByDate() {
+    const startDatePub = document.getElementById('travel_start_date_pub_20250202');
+    const applyDatePub = document.getElementById('travel_apply_date_pub_20250202');
+    const currentDate = new Date();
+
+    // Ensure apply by date is set
+    if (!applyDatePub.value) return false;
+
+    const startDate = new Date(startDatePub.value);
+    const applyDate = new Date(applyDatePub.value);
+
+    // Check if apply by date is after start date
+    if (applyDate >= startDate) {
+      alert('Last apply by date must be before the start date');
+      applyDatePub.value = ''; // Clear the invalid date
+      return false;
+    }
+
+    // Check if apply by date is in the past
+    if (applyDate < currentDate) {
+      alert('Last apply by date cannot be in the past');
+      applyDatePub.value = ''; // Clear the invalid date
+      return false;
+    }
+
+    return true;
+  }
+
+  travelStartDatePub.addEventListener('change', calculateTravelDaysPub);
+  travelEndDatePub.addEventListener('change', calculateTravelDaysPub);
+  document.getElementById('travel_apply_date_pub_20250202').addEventListener('change', validateApplyByDate);
+
+  // Form navigation
+  let currentTravelStepPub = 1;
+  const travelFormPub = document.getElementById('travel_booking_form_pub_20250202');
+
+  function showTravelStepPub(step) {
+    document.querySelectorAll('.travel_step_pub_panel').forEach(s => s.classList.remove('active'));
+    document.getElementById(`travel_step${step}_panel_pub_20250202`).classList.add('active');
+    
+    document.querySelectorAll('.travel_progress_pub_step').forEach((s, index) => {
+      if (index + 1 <= step) {
+        s.classList.add('active');
+      } else {
+        s.classList.remove('active');
+      }
+    });
+  }
+  document.querySelectorAll('input[type="date"]').forEach(input => {
+        input.addEventListener('click', () => {
+            input.showPicker(); // Opens the date picker
+        });
+    });
+
+  function validateTravelStepPub(step) {
+    const errors = [];
+    
+    if (step === 1) {
+      const name = document.getElementById('travel_name_input_pub_20250202').value;
+      const destination = document.getElementById('travel_destination_select_pub_20250202').value;
+      
+      if (!name) errors.push('travel_name');
+      if (!destination) errors.push('travel_destination');
+    }
+    else if (step === 2) {
+      const startDate = document.getElementById('travel_start_date_pub_20250202').value;
+      const endDate = document.getElementById('travel_end_date_pub_20250202').value;
+      
+      if (!startDate) errors.push('travel_start_date');
+      if (!endDate) errors.push('travel_end_date');
+
+    }
+    else if (step === 3) {
+      const maxPeople = document.getElementById('travel_max_people_pub_20250202').value;
+      const genders = [
+        document.getElementById('travel_gender_male_pub_20250202').checked,
+        document.getElementById('travel_gender_female_pub_20250202').checked,
+        document.getElementById('travel_gender_other_pub_20250202').checked
+      ];
+      const applyBy = document.getElementById('travel_apply_date_pub_20250202').value;
+      const startDate = document.getElementById('travel_start_date_pub_20250202').value;
+      
+      if (!maxPeople) errors.push('travel_people');
+      if (!genders.some(g => g)) errors.push('travel_gender');
+      if (!applyBy) errors.push('travel_apply_date');
+      
+      // Additional validation for apply by date
+      if (applyBy && startDate) {
+        const applyDate = new Date(applyBy);
+        const startDateObj = new Date(startDate);
+        const currentDate = new Date();
+        
+        if (applyDate >= startDateObj) {
+          errors.push('travel_apply_date');
+          alert('Last apply by date must be before the start date');
+        }
+        
+        if (applyDate < currentDate) {
+          errors.push('travel_apply_date');
+          alert('Last apply by date cannot be in the past');
+        }
+      }
+    }
+
+    document.querySelectorAll('.travel_error_pub_message').forEach(msg => msg.style.display = 'none');
+    errors.forEach(error => {
+      document.getElementById(`${error}_error_pub_20250202`).style.display = 'block';
+    });
+
+    return errors.length === 0;
+  }
+
+  function travelNextStepPub(step) {
+    if (validateTravelStepPub(step)) {
+      currentTravelStepPub++;
+      showTravelStepPub(currentTravelStepPub);
+    }
+  }
+
+  function travelPrevStepPub(step) {
+    currentTravelStepPub--;
+    showTravelStepPub(currentTravelStepPub);
+  }
+
+
+  travelFormPub.addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (validateTravelStepPub(3)) {
+    const travelFormData = {
+      travelerName: document.getElementById('travel_name_input_pub_20250202').value,
+      destination: document.getElementById('travel_destination_select_pub_20250202').value,
+      startDate: document.getElementById('travel_start_date_pub_20250202').value,
+      endDate: document.getElementById('travel_end_date_pub_20250202').value,
+      numDays: document.getElementById('travel_days_calc_pub_20250202').value,
+      maxPeople: document.getElementById('travel_max_people_pub_20250202').value,
+      gender: {
+      male: document.getElementById('travel_gender_male_pub_20250202').checked,
+      female: document.getElementById('travel_gender_female_pub_20250202').checked,
+      other: document.getElementById('travel_gender_other_pub_20250202').checked
+      },
+      applyBy: document.getElementById('travel_apply_date_pub_20250202').value,
+      essentials: document.getElementById('pub-essen-saved-items').textContent
+    };
+  }
+});
+  document.querySelector('.travel_submit_pub_btn').addEventListener('click', function() {
+    if (validateTravelStepPub(3)) {
+      alert('Travel Form submitted successfully!');
+    
+    }
+  });
+
+
+
+// Add submit event listener to the form
+document.getElementById('travel_booking_form_pub_20250202').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form submission
+    collectTravelFormData();
+});
+
+// Update the onclick handler for the submit button
+document.querySelector('.travel_submit_pub_btn').onclick = function() {
+    collectTravelFormData();
+};
+
+
+// Update the collectTravelFormData function to include day activities
+function collectTravelFormData() {
+    const formData = {
+        travelerName: document.getElementById('travel_name_input_pub_20250202').value,
+        destination: document.getElementById('travel_destination_select_pub_20250202').value,
+        startDate: document.getElementById('travel_start_date_pub_20250202').value,
+        endDate: document.getElementById('travel_end_date_pub_20250202').value,
+        numberOfDays: document.getElementById('travel_days_calc_pub_20250202').value,
+        maxPeople: document.getElementById('travel_max_people_pub_20250202').value,
+        gender: {
+            male: document.getElementById('travel_gender_male_pub_20250202').checked,
+            female: document.getElementById('travel_gender_female_pub_20250202').checked,
+            other: document.getElementById('travel_gender_other_pub_20250202').checked
+        },
+        savedEssentials: document.getElementById('pub-essen-saved-items') 
+            ? document.getElementById('pub-essen-saved-items').textContent 
+            : 'No essentials saved',
+        applyByDate: document.getElementById('travel_apply_date_pub_20250202').value,
+        
+        // Add day activities
+        dayActivities: {}
+    };
+
+    // Collect activities for each day
+    const numberOfDays = parseInt(document.getElementById('travel_days_calc_pub_20250202').value) || 0;
+    for (let i = 1; i <= numberOfDays; i++) {
+        const dayActivity = document.getElementById(`day${i}-activities`);
+        if (dayActivity && dayActivity.value.trim()) {
+            formData.dayActivities[`day${i}`] = dayActivity.value.trim();
+        }
+    }
+    
+    // Update the display card if needed
+    if (typeof updateTripCard === 'function') {
+        updateTripCard(formData);
+    }
+    
+    console.log('Travel Form Data:', formData);
+    return formData;
+}
+  
+  
+  </script>
+
+    <!--private form-->        
+    <div class="priv-modal-overlay" id="priv-modal-overlay"></div>
+    <div class="priv-modal-container" id="priv-modal-container">
+        <button class="priv-close-button" onclick="closeModal()">X</button>
+    <div class="trip-planner-container">
+        <div class="trip-progress-stepper">
+            <div class="trip-progress-step active" id="trip-step-indicator-1">1</div>
+            <div class="trip-progress-step" id="trip-step-indicator-2">2</div>
+            <div class="trip-progress-step" id="trip-step-indicator-3">3</div>
+            <div class="trip-progress-step" id="trip-step-indicator-4">4</div>
+        </div>
+
+        <form id="trip-planning-form">
+          <!-- Step 1: Basic Info -->
+          <div class="trip-form-step active" id="trip-form-step-1">
+              <div class="trip-form-group">
+                  <label class="trip-form-label" for="trip-name-input">Name Your Trip</label>
+                  <input type="text" id="trip-name-input" class="trip-form-input" required>
+              </div>
+              <div class="trip-form-group">
+                  <label class="trip-form-label" for="trip-destination-select">Destination(s)</label>
+                  <select id="trip-destination-select" class="trip-form-select" required>
+                      <option value="">Select a country</option>
+                  </select>
+              </div>
+              <div class="trip-form-navigation">
+                  <div></div>
+                  <button type="button" class="trip-form-button" id="trip-next-button-1" onclick="nextTripStep()">Next</button>
+              </div>
+          </div>
+
+          <!-- Step 2: Dates -->
+          <div class="trip-form-step" id="trip-form-step-2">
+              <div class="trip-form-group">
+                  <label class="trip-form-label">Trip Dates</label>
+                  <div class="trip-date-container">
+                      <input type="date" id="trip-start-date" class="trip-form-input" required>
+                      <input type="date" id="trip-end-date" class="trip-form-input" required>
+                  </div>
+              </div>
+              <div class="trip-form-group">
+                  <label class="trip-form-label">Trip Duration (days)</label>
+                  <input type="number" id="trip-duration-display" class="trip-form-input" readonly>
+              </div>
+              <div class="trip-form-navigation">
+                  <button type="button" class="trip-form-button" id="trip-prev-button-2" onclick="prevTripStep()">Previous</button>
+                  <button type="button" class="trip-form-button" id="trip-next-button-2" onclick="nextTripStep()">Next</button>
+              </div>
+          </div>
+
+          <!-- Step 3: Activities -->
+          <div class="trip-form-step" id="trip-form-step-3">
+              <div class="trip-form-group">
+  <label class="trip-form-label" for="trip-activities-input">Activities/Attractions</label>
+  <textarea id="trip-activities-input" class="trip-form-input" required></textarea>
+</div>
+              <div class="trip-essentials-area">
+                <h3>Travel Essentials</h3>
+                <textarea id="trip-essentials-text" placeholder="Enter your travel essentials here..."></textarea>
+            </div>
+              <div class="trip-form-navigation">
+                  <button type="button" class="trip-form-button" id="trip-prev-button-3" onclick="prevTripStep()">Previous</button>
+                  <button type="button" class="trip-form-button" id="trip-next-button-3" onclick="nextTripStep()">Next</button>
+              </div>
+          </div>
+
+          <!-- Step 4: Budget -->
+          <div class="trip-form-step" id="trip-form-step-4">
+              <div class="trip-form-group">
+                  <label class="trip-form-label">Trip Budget</label>
+                  <div class="trip-date-container">
+                      <input type="number" id="trip-budget-input" class="trip-form-input" required>
+                      <select id="trip-currency-select-pub" style="width:50%; border-radius:5px; border:1px solid #ddd;">
+                          <option value="USD">USD</option>
+                          <option value="EUR">EUR</option>
+                          <option value="GBP">GBP</option>
+                          <option value="JPY">JPY</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="trip-form-navigation">
+                  <button type="button" class="trip-form-button" id="trip-prev-button-4" onclick="prevTripStep()">Previous</button>
+                 <!-- <button type="submit" class="trip-form-button" id="trip-submit-button" onclick="privb">Submit</button>-->
+                  <button type="submit" class="trip-form-button" id="trip-submit-button" onclick="return validateTripForm()">Submit</button>
+              </div>
+          </div>
+      </form>
+    </div>
+
+</div>
+</div>
+
+<script>
+  function openModal() {
+           document.getElementById('priv-modal-container').style.display = 'block';
+           document.getElementById('priv-modal-overlay').style.display = 'block';
+       }
+       function closeModal() {
+           document.getElementById('priv-modal-container').style.display = 'none';
+           document.getElementById('priv-modal-overlay').style.display = 'none';
+       }
+
+       // Countries data
+       const tripDestinations = [
+           "United States", "Canada", "United Kingdom", "France", "Germany",
+           "Italy", "Spain", "Japan", "Australia", "Brazil", "India"
+       ];
+
+       // Populate countries dropdown
+       const tripDestinationSelect = document.getElementById('trip-destination-select');
+       tripDestinations.forEach(country => {
+           const option = document.createElement('option');
+           option.value = country;
+           option.textContent = country;
+           tripDestinationSelect.appendChild(option);
+       });
+
+       let currentTripStep = 1;
+       const totalTripSteps = 4;
+
+       function updateTripSteps() {
+           document.querySelectorAll('.trip-progress-step').forEach((step, index) => {
+               if (index + 1 <= currentTripStep) {
+                   step.classList.add('active');
+               } else {
+                   step.classList.remove('active');
+               }
+           });
+
+           document.querySelectorAll('.trip-form-step').forEach((step, index) => {
+               if (index + 1 === currentTripStep) {
+                   step.classList.add('active');
+               } else {
+                   step.classList.remove('active');
+               }
+           });
+       }
+
+       function nextTripStep() {
+           if (currentTripStep < totalTripSteps) {
+               currentTripStep++;
+               updateTripSteps();
+           }
+       }
+
+       function prevTripStep() {
+           if (currentTripStep > 1) {
+               currentTripStep--;
+               updateTripSteps();
+           }
+       }
+
+    document.getElementById('trip-start-date').addEventListener('change', validateDates);
+    document.getElementById('trip-end-date').addEventListener('change', validateDates);
+
+    function validateDates() {
+        const startDateInput = document.getElementById('trip-start-date');
+        const endDateInput = document.getElementById('trip-end-date');
+        const durationDisplay = document.getElementById('trip-duration-display');
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Reset time to avoid mismatches
+        
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+
+        // Check if start date is in the past or today
+        if (startDate <= today) {
+            alert('Start date must be a future date!');
+            startDateInput.value = ''; // Clear invalid date
+            durationDisplay.value = '';
+            return;
+        }
+
+        // Check if end date is before start date
+        if (endDate < startDate) {
+            alert('End date cannot be before the start date!');
+            endDateInput.value = ''; // Clear invalid date
+            durationDisplay.value = '';
+            return;
+        }
+
+        // Calculate trip duration
+        if (startDate && endDate) {
+            const duration = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+            durationDisplay.value = duration > 0 ? duration : 0;
+        }
+    }
+
+    document.querySelectorAll('.trip-form-input').forEach(input => {
+    input.addEventListener('click', () => {
+      input.showPicker(); // Opens the date picker
+    });
+  });
+
+       // Form submission
+      document.getElementById('trip-planning-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const tripFormData = {
+            tripName: document.getElementById('trip-name-input').value,
+            destination: document.getElementById('trip-destination-select').value,
+            startDate: document.getElementById('trip-start-date').value,
+            endDate: document.getElementById('trip-end-date').value,
+            duration: document.getElementById('trip-duration-display').value,
+            activities: document.getElementById('trip-activities-input').value,
+            essentials: document.getElementById('trip-essentials-text').value,
+            budget: document.getElementById('trip-budget-input').value,
+            currency: document.getElementById('trip-currency-select').value
+        };
+
+        document.getElementById('card-trip-name').textContent = tripFormData.tripName;
+        document.getElementById('priv-card-destination').textContent = tripFormData.destination;
+        document.getElementById('priv-card-start-date').textContent = tripFormData.startDate;
+        document.getElementById('priv-card-end-date').textContent = tripFormData.endDate;
+        document.getElementById('priv-card-duration').textContent = tripFormData.duration;
+        document.getElementById('card-activities').textContent = tripFormData.activities;
+        document.getElementById('priv-card-essentials').textContent = tripFormData.essentials;
+        document.getElementById('card-budget').textContent = tripFormData.budget;
+        document.getElementById('card-currency').textContent = tripFormData.currency;
+
+        document.getElementById('trip-card-container').style.display = 'block';
+    });
+
+
+    document.body.insertAdjacentHTML('beforeend', cardHTML);
+    function updateTripCard(formData) {
+    // Show the section
+    document.getElementById('public-trip-section').style.display = 'block';
+    
+    // Update all fields
+    document.getElementById('card-traveler-name').textContent = formData.travelerName;
+    document.getElementById('card-destination').textContent = formData.destination;
+    document.getElementById('card-start-date').textContent = formData.startDate;
+    document.getElementById('card-end-date').textContent = formData.endDate;
+    document.getElementById('card-duration').textContent = formData.numberOfDays;
+    document.getElementById('card-max-people').textContent = formData.maxPeople;
+    
+    // Format gender selections
+    const selectedGenders = [];
+    if (formData.gender.male) selectedGenders.push('Male');
+    if (formData.gender.female) selectedGenders.push('Female');
+    if (formData.gender.other) selectedGenders.push('Other');
+    document.getElementById('card-gender').textContent = selectedGenders.join(', ') || 'None selected';
+    
+    document.getElementById('card-essentials').textContent = formData.savedEssentials;
+    document.getElementById('card-apply-date').textContent = formData.applyByDate;
+}
+
+// Modify the existing collectTravelFormData function to update the card
+
+
+
+
+// Add CSS styles
+const styles = `
+    .section-1 {
+        margin: 20px;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+    }
+    
+    .trip-card {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .trip-card h4 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .trip-card p {
+        margin: 10px 0;
+        line-height: 1.5;
+    }
+    
+    .trip-card strong {
+        color: #555;
+        min-width: 150px;
+        display: inline-block;
+    }
+`;
+
+// Add the styles to the page
+const styleSheet = document.createElement('style');
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
+   </script>
+
+  <script>
+      function toggleSlide() {
+          var div = document.getElementById("slideDiv");
+          div.classList.toggle("show");
+      }
+  </script>
+
+<div class="container-2025">
+      <h1 class="h1-2025"> Created By You</h1>
+</div>
+              <!-- Navigation Bar -->
+    <nav class="navbar-1">
+
+<div class="nav-container-1 ">
+  <center>
+          <div class="nav-buttons-1">
+              <button class="nav-btn-1  active-1" id="publb" onclick="showSection1('public-section-1')">Public</button>
+              <button class="nav-btn-1" id="privb" onclick="showSection1('private-section-1')">Private</button>
+          </div>
+        </center>
+        </div>
+  </nav>
+
+  <!-- Content Sections -->
+
+  <section id="public-section-1" class="section-1 active-1">
+      <h2>Your Public Trips</h2>
+      <br>
+  
+<section id="public-trip-section" class="section-1" style="display: none;">
+  
+   <div id="public-trip-card" class="trip-card">
+        <p><strong>Trip Name:</strong> <span id="card-traveler-name"></span></p>
+        <p><strong>Destination:</strong> <span id="card-destination"></span></p>
+        <p><strong>Start Date:</strong> <span id="card-start-date"></span></p>
+        <p><strong>End Date:</strong> <span id="card-end-date"></span></p>
+        <p><strong>Duration (Days):</strong> <span id="card-duration"></span></p>
+        <p><strong>Maximum People:</strong> <span id="card-max-people"></span></p>
+        <p><strong>Gender Options:</strong> <span id="card-gender"></span></p>
+        <p><strong>Travel Essentials:</strong> <span id="card-essentials"></span></p>
+        <p><strong>Last Apply Date:</strong> <span id="card-apply-date"></span></p>
+        
+    </div>
+</section>
+<div class="slider-container">
+ 
+  <div id="trip-container"></div>
+</div>
+
+</section>
+<section id="private-section-1" class="section-1"> 
+    <h4>Private Trips</h4>
+    <div id="trip-card-container" class="trip-card" style="display:none;">
+      <h4>Your Trip Details</h4>
+      <p><strong>Trip Name:</strong> <span id="card-trip-name"></span></p>
+      <p><strong>Destination:</strong> <span id="priv-card-destination"></span></p>
+      <p><strong>Start Date:</strong> <span id="priv-card-start-date"></span></p>
+      <p><strong>End Date:</strong> <span id="priv-card-end-date"></span></p>
+      <p><strong>Duration (Days):</strong> <span id="priv-card-duration"></span></p>
+      <p><strong>Activities/Attractions:</strong> <span id="card-activities"></span></p>
+      <p><strong>Travel Essentials:</strong> <span id="priv-card-essentials"></span></p>
+      <p><strong>Budget:</strong> <span id="card-budget"></span></p>
+      <p><strong>Currency:</strong> <span id="card-currency"></span></p>
+  </div>
+  <div class="slider-container">
+    <div class="slider-container">
+ 
+      <div id="trip-container"></div>
+    </div>
+    <div id="trip-container1"></div>
+  </div>
+</section>
+
+<style>
+  /* Slider Container */
+  .slider-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 20px;
+  }
+
+  /* Scrollable Trip Container */
+  #trip-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 20px;
+      scroll-behavior: smooth;
+      white-space: nowrap;
+  }
+
+  /* Trip Card Styling */
+  .trip-card {
+      flex: 0 0 300px;
+      min-width: 250px;
+      max-width: 350px;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .trip-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .trip-card p {
+      margin: 8px 0;
+      line-height: 1.4;
+      word-wrap: break-word;
+  }
+
+  .trip-card strong {
+      color: #333;
+      display: inline-block;
+      margin-right: 5px;
+  }
+
+  .trip-card span {
+      color: #666;
+      display: inline-block;
+  }
+
+  .trip-card .essentials {
+      word-break: break-word;
+  }
+
+  /* Custom Scrollbar */
+  #trip-container::-webkit-scrollbar {
+      height: 8px;
+  }
+
+  #trip-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 5px;
+  }
+
+  #trip-container::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 5px;
+  }
+
+  #trip-container::-webkit-scrollbar-thumb:hover {
+      background: #555;
+  }
+
+  /* Navigation Buttons */
+  .slider-nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px auto;
+      width: 95%;
+  }
+
+  .nav-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+  }
+
+  .nav-btn:hover {
+      background: #0056b3;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+      #trip-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          padding: 10px;
+      }
+
+      .trip-card {
+          min-width: 250px;
+          max-width: 100%;
+          padding: 15px;
+      }
+  }
+</style>
+
+
+ 
+  
+  <script type="module" src="retrieve.js"></script>
+
+
+            
+
+          
+  
+   
+      <section class="box-section block-content-tourlist background-body">
+        <div class="container-2025"></div>
+</section>
+
+
+      <section class="section-box box-media background-body"> 
+        <div class="container-media wow fadeInUp"> <img src="assets/imgs/page/homepage5/media.png" alt="Travila"><img src="assets/imgs/page/homepage5/media2.png" alt="Travila"><img src="assets/imgs/page/homepage5/media3.png" alt="Travila"><img src="assets/imgs/page/homepage5/media4.png" alt="Travila"><img src="assets/imgs/page/homepage5/media5.png" alt="Travila"><img src="assets/imgs/page/homepage5/media6.png" alt="Travila"><img src="assets/imgs/page/homepage5/media7.png" alt="Travila"></div>
+      </section>
+    </main>
+    <footer class="footer footer-white background-body">
+      <div class="container-fluid">
+        <div class="container-footer">
+          <div class="row">
+            <div class="col-lg-3 col-sm-12">
+              <div class="mt-20 mb-20"><a class="d-inline-block mb-20" href="Index.html"><img class="dark-mode" alt="Travila" src="assets/imgs/template/logo-footernew.svg"><img class="light-mode" alt="Travila" src="assets/imgs/template/logonew.svg"></a>
+                <div class="box-info-contact mt-0">
+                  <p class="text-md neutral-1000">Dive into local recommendations for a truly authentic experience.</p>
+                </div>
+                <div class="box-need-help"> 
+                  <p class="need-help text-md-medium mb-5 neutral-1000">Need help? Call us</p><br><a class="heading-6 phone-support" href="tel:1-800-222-8888">1-800-222-8888</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row"> 
+                <div class="col-md-3 col-sm-6">
+                  <h6 class="neutral-1000">Company</h6>
+                  <ul class="menu-footer">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Community Blog</a></li>
+                    <li><a href="#">Jobs & Careers</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Our Awards</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <h6 class="neutral-1000">Services</h6>
+                  <ul class="menu-footer">
+                    <li><a href="#">Tour Guide</a></li>
+                    <li><a href="#">Tour Booking</a></li>
+                    <li><a href="#">Hotel Booking</a></li>
+                    <li><a href="#">Ticket Booking</a></li>
+                    <li><a href="#">Rental Services</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <h6 class="neutral-1000">Legal</h6>
+                  <ul class="menu-footer">
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookies Policy</a></li>
+                    <li><a href="#">Data Processing</a></li>
+                    <li><a href="#">Data Policy</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <h6 class="neutral-1000">Support</h6>
+                  <ul class="menu-footer">
+                    <li><a href="#">Forum support</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">How it works</a></li>
+                    <li><a href="#">Security</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3"> 
+              <p class="text-lg neutral-1000 mb-15">Newsletter</p>
+              <div class="d-flex align-items-center">
+                <form class="form-newsletter form-newsletter-2" action="#"> 
+                  <input class="form-control" type="text" placeholder="Enter your email">
+                  <input class="btn btn-brand-secondary" type="submit" value="Subscribe">
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom mt-50">
+            <div class="row align-items-center">
+              <div class="col-md-6 text-md-start text-center mb-20">
+                <p class="text-sm neutral-1000">© 2024 Travila Inc. All rights reserved.</p>
+              </div>
+              <div class="col-md-6 text-md-end text-center mb-20">
+                <div class="d-flex align-items-center justify-content-center justify-content-md-end box-socials-footer-cover">
+                  <p class="text-lg-bold neutral-1000 d-inline-block mr-10">Follow us</p>
+                  <div class="box-socials-footer d-inline-block"><a class="icon-socials icon-instagram" href="#">
+                      <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.4915 1.6665H6.50817C3.47484 1.6665 1.6665 3.47484 1.6665 6.50817V13.4832C1.6665 16.5248 3.47484 18.3332 6.50817 18.3332H13.4832C16.5165 18.3332 18.3248 16.5248 18.3248 13.4915V6.50817C18.3332 3.47484 16.5248 1.6665 13.4915 1.6665ZM9.99984 13.2332C8.2165 13.2332 6.7665 11.7832 6.7665 9.99984C6.7665 8.2165 8.2165 6.7665 9.99984 6.7665C11.7832 6.7665 13.2332 8.2165 13.2332 9.99984C13.2332 11.7832 11.7832 13.2332 9.99984 13.2332ZM14.9332 5.73317C14.8915 5.83317 14.8332 5.92484 14.7582 6.00817C14.6748 6.08317 14.5832 6.1415 14.4832 6.18317C14.3832 6.22484 14.2748 6.24984 14.1665 6.24984C13.9415 6.24984 13.7332 6.1665 13.5748 6.00817C13.4998 5.92484 13.4415 5.83317 13.3998 5.73317C13.3582 5.63317 13.3332 5.52484 13.3332 5.4165C13.3332 5.30817 13.3582 5.19984 13.3998 5.09984C13.4415 4.9915 13.4998 4.90817 13.5748 4.82484C13.7665 4.63317 14.0582 4.5415 14.3248 4.59984C14.3832 4.60817 14.4332 4.62484 14.4832 4.64984C14.5332 4.6665 14.5832 4.6915 14.6332 4.72484C14.6748 4.74984 14.7165 4.7915 14.7582 4.82484C14.8332 4.90817 14.8915 4.9915 14.9332 5.09984C14.9748 5.19984 14.9998 5.30817 14.9998 5.4165C14.9998 5.52484 14.9748 5.63317 14.9332 5.73317Z" fill=""></path>
+                      </svg></a><a class="icon-socials icon-facebook" href="#">
+                      <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.3334 13.4915C18.3334 16.5248 16.5251 18.3332 13.4917 18.3332H12.5001C12.0417 18.3332 11.6667 17.9582 11.6667 17.4998V12.6915C11.6667 12.4665 11.8501 12.2748 12.0751 12.2748L13.5417 12.2498C13.6584 12.2415 13.7584 12.1582 13.7834 12.0415L14.0751 10.4498C14.1001 10.2998 13.9834 10.1582 13.8251 10.1582L12.0501 10.1832C11.8167 10.1832 11.6334 9.99985 11.6251 9.77485L11.5918 7.73317C11.5918 7.59984 11.7001 7.48318 11.8417 7.48318L13.8417 7.44984C13.9834 7.44984 14.0918 7.34152 14.0918 7.19985L14.0584 5.19983C14.0584 5.05816 13.9501 4.94984 13.8084 4.94984L11.5584 4.98318C10.1751 5.00818 9.07509 6.1415 9.10009 7.52484L9.14175 9.8165C9.15008 10.0498 8.96676 10.2332 8.73342 10.2415L7.73341 10.2582C7.59175 10.2582 7.48342 10.3665 7.48342 10.5082L7.50842 12.0915C7.50842 12.2332 7.61675 12.3415 7.75841 12.3415L8.75842 12.3248C8.99176 12.3248 9.17507 12.5082 9.18341 12.7332L9.2584 17.4832C9.26674 17.9498 8.89174 18.3332 8.42507 18.3332H6.50841C3.47508 18.3332 1.66675 16.5248 1.66675 13.4832V6.50817C1.66675 3.47484 3.47508 1.6665 6.50841 1.6665H13.4917C16.5251 1.6665 18.3334 3.47484 18.3334 6.50817V13.4915V13.4915Z" fill=""></path>
+                      </svg></a><a class="icon-socials icon-twitter" href="#">
+                      <svg width="21" height="20" viewbox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.2845 8.46864L19.5698 0H17.8434L11.5176 7.3532L6.4651 0H0.637695L8.278 11.1193L0.637695 20H2.36419L9.04447 12.2348L14.3802 20H20.2076L12.284 8.46864H12.2845ZM9.9198 11.2173L9.14568 10.1101L2.98627 1.29967H5.63806L10.6088 8.40994L11.3829 9.51718L17.8442 18.7594H15.1925L9.9198 11.2177V11.2173Z" fill=""></path>
+                      </svg></a><a class="icon-socials icon-be" href="#">
+                      <svg width="21" height="15" viewbox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.82393 10.736L13.9225 7.78881L8.82393 4.84165V10.736ZM20.1803 3.04389C20.308 3.50561 20.3964 4.12451 20.4554 4.91042C20.5242 5.69633 20.5536 6.37418 20.5536 6.96361L20.6126 7.78881C20.6126 9.94024 20.4554 11.5219 20.1803 12.5337C19.9347 13.4179 19.3649 13.9877 18.4808 14.2333C18.0191 14.361 17.1742 14.4494 15.8775 14.5083C14.6004 14.5771 13.4313 14.6066 12.3507 14.6066L10.7887 14.6655C6.67251 14.6655 4.10848 14.5083 3.09662 14.2333C2.21247 13.9877 1.64269 13.4179 1.39709 12.5337C1.26938 12.072 1.18097 11.4531 1.12203 10.6672C1.05326 9.8813 1.02379 9.20345 1.02379 8.61402L0.964844 7.78881C0.964844 5.63739 1.12203 4.05575 1.39709 3.04389C1.64269 2.15974 2.21247 1.58996 3.09662 1.34436C3.55834 1.21665 4.4032 1.12823 5.69995 1.06929C6.97705 1.00052 8.14609 0.971052 9.22671 0.971052L10.7887 0.912109C14.9049 0.912109 17.4689 1.06929 18.4808 1.34436C19.3649 1.58996 19.9347 2.15974 20.1803 3.04389Z" fill=""></path>
+                      </svg></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <script>
+      const modal = document.getElementById('tripModal');
+        const createButton = document.querySelector('.create-button-2025');
+
+        createButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+    function showSection1(sectionId) {
+      // Hide all sections
+      const sections = document.querySelectorAll('.section-1');
+      sections.forEach(section => {
+          section.classList.remove('active-1');
+      });
+
+      // Show selected section
+      const selectedSection = document.getElementById(sectionId);
+      selectedSection.classList.add('active-1');
+
+      // Update button states
+      const buttons = document.querySelectorAll('.nav-btn-1');
+      buttons.forEach(button => {
+          button.classList.remove('active-1');
+          if (button.textContent.toLowerCase() === sectionId.split('-')[0]) {
+              button.classList.add('active-1');
+          }
+      });
+  }
+
+  // Add active class to "All" button on page load
+  document.addEventListener('DOMContentLoaded', () => {
+      const allButton = document.querySelector('.nav-btn-1');
+      allButton.classList.add('active-1');
+  });
+</script>
+    <!--Vendors Scripts-->
+    <script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <!--Other-->
+    <script src="assets/js/plugins/magnific-popup.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="assets/js/plugins/slick.js"></script>
+    <script src="assets/js/plugins/jquery.carouselTicker.js"></script>
+    <script src="assets/js/plugins/masonry.min.js"></script>
+    <script src="assets/js/plugins/scrollup.js"></script>
+    <script src="assets/js/plugins/wow.js"></script>
+    <script src="assets/js/plugins/waypoints.js"></script>
+    <script src="assets/js/plugins/counterup.js"></script>
+    <script src="assets/js/plugins/bootstrap-datepicker.js"></script>
+    <script src="assets/js/plugins/dark.js"></script>
+    <!-- Count down-->
+    <script src="assets/js/vendor/jquery.countdown.min.js"></script>
+    <script src="assets/js/plugins/noUISlider.js"></script>
+    <script src="assets/js/plugins/slider.js"></script>
+    <!--Custom script for this template-->
+    <script src="assets/js/main.js?v=1.0.0"></script>
+  </body>
+</html>
